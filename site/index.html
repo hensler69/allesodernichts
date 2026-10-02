@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@50justin_uz – Seite (Vorlage)</title>
+<style>
+  :root { --bg:#fafafa; --fg:#1b1b1f; --muted:#6b6b76; --card:#fff; --line:#e4e4ea; --accent:#4f46e5; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#111114; --fg:#f2f2f5; --muted:#9a9aa6; --card:#1a1a1f; --line:#2a2a31; --accent:#8b83ff; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font:16px/1.5 system-ui,sans-serif; background:var(--bg); color:var(--fg); }
+  .wrap { max-width:960px; margin:0 auto; padding:0 16px; }
+  header { padding:48px 0 24px; }
+  h1 { margin:0 0 4px; font-size:2rem; }
+  .muted { color:var(--muted); }
+  .notice { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 16px; margin:16px 0; font-size:.9rem; }
+  nav { display:flex; flex-wrap:wrap; gap:8px; margin:24px 0; }
+  nav button { border:1px solid var(--line); background:var(--card); color:var(--fg); border-radius:999px; padding:6px 14px; cursor:pointer; font:inherit; }
+  nav button[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; padding-bottom:48px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .thumb { aspect-ratio:1; background:var(--line); display:grid; place-items:center; color:var(--muted); font-size:.85rem; }
+  .card div.body { padding:12px; }
+  .tag { font-size:.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:.04em; }
+  footer { border-top:1px solid var(--line); padding:24px 0; font-size:.85rem; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>@50justin_uz</h1>
+    <p class="muted">Kurzbeschreibung hier eintragen.</p>
+    <p><a href="https://instagram.com/50justin_uz" rel="noopener">Zum Instagram-Profil</a></p>
+    <div class="notice">Dies ist eine Vorlage mit Platzhaltern. Alle Texte, Bilder und Kategorien müssen mit den echten Inhalten und mit Einverständnis der Person gefüllt werden.</div>
+  </header>
+
+  <nav id="filters" aria-label="Kategorien"></nav>
+  <main class="grid" id="grid"></main>
+
+  <footer class="muted">
+    Inoffizielle Seite · Kein Zusammenhang mit Instagram/Meta · Impressum und Datenschutz hier ergänzen.
+  </footer>
+</div>
+
+<script>
+  // Eintraege hier ersetzen. category: Thema, Format oder Ort – frei waehlbar.
+  const posts = [
+    { title:"Beitrag 1", category:"Fotos",  text:"Platzhalter" },
+    { title:"Beitrag 2", category:"Fotos",  text:"Platzhalter" },
+    { title:"Beitrag 3", category:"Videos", text:"Platzhalter" },
+    { title:"Beitrag 4", category:"Videos", text:"Platzhalter" },
+    { title:"Beitrag 5", category:"Unterwegs", text:"Platzhalter" },
+    { title:"Beitrag 6", category:"Alltag", text:"Platzhalter" }
+  ];
+  const cats = ["Alle", ...new Set(posts.map(p => p.category))];
+  const nav = document.getElementById("filters"), grid = document.getElementById("grid");
+  let active = "Alle";
+  function render() {
+    nav.innerHTML = "";
+    cats.forEach(c => {
+      const b = document.createElement("button");
+      b.textContent = c; b.setAttribute("aria-pressed", c === active);
+      b.onclick = () => { active = c; render(); };
+      nav.appendChild(b);
+    });
+    grid.innerHTML = "";
+    posts.filter(p => active === "Alle" || p.category === active).forEach(p => {
+      const el = document.createElement("article"); el.className = "card";
+      el.innerHTML = '<div class="thumb">Bild</div><div class="body"><div class="tag"></div><strong></strong><p class="muted"></p></div>';
+      el.querySelector(".tag").textContent = p.category;
+      el.querySelector("strong").textContent = p.title;
+      el.querySelector("p").textContent = p.text;
+      grid.appendChild(el);
+    });
+  }
+  render();
+</script>
+</body>
+</html>
