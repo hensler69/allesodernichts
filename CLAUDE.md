@@ -10,7 +10,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - Vor dem Start: `notes/` auf aktuelle Einträge prüfen.
 
 ## Entscheidungen
-- Website Manuel Hensel (Versicherungen, Leipzig): statische Seite im Wurzelverzeichnis des Projekts, Anrede "Sie", Farben Tannengrün/Sand/Terrakotta, Fraunces als Überschriftenschrift. Details in notes/2026-10-02.md.
+- Website Manuel Hensel (Versicherungen, Leipzig): statische Seite im Wurzelverzeichnis des Projekts, Anrede "Sie", Redesign im Apple-Stil (Nacht/Smaragd/Koralle/Honig/Sand), Fraunces als Überschriftenschrift. Details in notes/2026-10-02.md.
 <!-- Format: - YYYY-MM-DD: Entscheidung (Grund) -->
 
 ## Offene Themen
