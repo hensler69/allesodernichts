@@ -14,6 +14,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 <!-- Format: - YYYY-MM-DD: Entscheidung (Grund) -->
 
 ## Offene Themen
+- Dachdecker Wagler (kunden/dachdecker-wagler/): nur Entwurf mit erfundenen Angaben, keine Erlaubnis des Inhabers, nicht veröffentlichen (siehe notes/2026-10-02.md).
 - Echte Domain, Impressum-/Datenschutz-Platzhalter, Fotos/Logo, Textschrift Source Sans 3 (siehe notes/2026-10-02.md).
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
 
