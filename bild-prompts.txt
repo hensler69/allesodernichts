@@ -1,0 +1,41 @@
+BILD-PROMPTS FÜR DIE WEBSITE VON MANUEL HENSEL
+===============================================
+Diese Texte kopierst du in einen KI-Bildgenerator (zum Beispiel ChatGPT),
+speicherst die fertigen Bilder und ziehst sie hier in den Chat. Ich baue sie dann ein.
+Wenn du echte Fotos hast, sind die immer besser als KI-Bilder. Gib mir dann die echten.
+
+Einheitlicher Look für alle Bilder:
+Warm, ruhig, dokumentarisch. Weiches Tageslicht, geringe Schärfentiefe,
+Farbwelt: Tannengrün, Sandbeige, ein kleiner Akzent in Terrakotta (warmes Ziegelrot).
+Keine Schrift, keine Logos, keine erkennbaren Marken, keine Stockfoto-Posen.
+
+---------------------------------------------------------------
+1) Kopfbereich, Seitenverhältnis 4:5 (auf dem Handy wird nur der mittlere Teil als Querformat gezeigt, das Motiv gehört also in die Bildmitte)
+---------------------------------------------------------------
+Warm documentary photograph of a calm consultation at a wooden table: two coffee cups, a notebook with handwritten notes, a few paper documents, hands of two people in the soft background, a green plant in the corner. Soft natural window light, shallow depth of field, color palette of deep forest green, sand beige and a small terracotta accent, cozy and trustworthy mood, no text, no logos, aspect ratio 4:5, vertical composition.
+
+---------------------------------------------------------------
+2) Angebot: Vorsorge und Absicherung, Seitenverhältnis 3:2
+---------------------------------------------------------------
+Warm documentary photograph of a family walking in a green city park in autumn, seen from behind at a distance, soft golden daylight, shallow depth of field, color palette of forest green, sand beige and a small terracotta accent in one jacket, calm and secure mood, no text, no logos, aspect ratio 3:2, horizontal composition.
+
+---------------------------------------------------------------
+3) Angebot: Haus, Auto und Alltag, Seitenverhältnis 3:2
+---------------------------------------------------------------
+Warm documentary photograph of a renovated old apartment building facade in Leipzig with tall windows, a small car parked in front, soft overcast daylight, shallow depth of field, color palette of forest green, sand beige and a small terracotta accent on the front door, calm everyday mood, no text, no logos, no readable license plate, aspect ratio 3:2, horizontal composition.
+
+---------------------------------------------------------------
+4) Angebot: Beruf und Gewerbe, Seitenverhältnis 3:2
+---------------------------------------------------------------
+Warm documentary photograph of a small workshop or tidy small business desk with tools or a laptop, work gloves, a mug, a plant on the shelf, soft natural light from a side window, shallow depth of field, color palette of forest green, sand beige and a small terracotta accent, hardworking but friendly mood, no people in focus, no text, no logos, aspect ratio 3:2, horizontal composition.
+
+---------------------------------------------------------------
+5) Über mich, Seitenverhältnis 4:5
+---------------------------------------------------------------
+Warm documentary still life of a tidy desk of an insurance advisor: open notebook with a pen, a cup of coffee, a small potted plant, a closed laptop, a window with soft daylight in the background, no people, shallow depth of field, color palette of forest green, sand beige and a small terracotta accent, personal and calm mood, no text, no logos, aspect ratio 4:5, vertical composition.
+(Hier ist ein echtes Foto von dir die beste Wahl. Der Prompt ist nur ein Ersatz.)
+
+---------------------------------------------------------------
+Vorschaubild fürs Teilen in sozialen Netzwerken
+---------------------------------------------------------------
+Das habe ich schon selbst gestaltet (assets/og-image.jpg: dein Name in Tannengrün mit Schutzschild-Zeichen). Dafür brauchst du keinen Prompt. Später kann ich es durch dein Foto ersetzen.
