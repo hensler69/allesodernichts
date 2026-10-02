@@ -126,7 +126,7 @@
       modeBtn.setAttribute("aria-label", dark ? "Helle Darstellung einschalten" : "Dunkle Darstellung einschalten");
     }
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", dark ? "#101417" : "#efe3cf");
+    if (meta) meta.setAttribute("content", dark ? "#14171a" : "#d6c9b0");
   }
   syncMode();
   if (modeBtn) modeBtn.addEventListener("click", function () {
@@ -410,7 +410,7 @@
       { n: "Sparren und Dämmung", c: "#d9a93a", t: "Das tragende Gerüst", d: "Die Sparren tragen das Dach. Dazwischen sitzt die Dämmung, die Wärme im Haus hält.", works: ["Dachsanierung", "Dachfenster"] },
       { n: "Dampfbremse", c: "#8d99a2", t: "Dampfbremse und Innenausbau", d: "Die Dampfbremse hält feuchte Raumluft aus der Dämmung fern. Innen schließt die Verkleidung den Raum ab.", works: ["Dachsanierung", "Dachfenster"] }
     ];
-    var slabs = $$(".slab", layersSvg), ltabs = $$(".ltab"), panelEl = $("#roof-panel");
+    var slabs = $$(".slab", layersSvg), ltabs = $$("#dachaufbau .ltab"), panelEl = $("#roof-panel");
     var linkEl = $(".link", layersSvg), roofHint = $("#roof-hint");
     if (roofHint) roofHint.textContent = finePointer
       ? "Fahren Sie mit der Maus über eine Schicht. Dann sehen Sie, wofür sie da ist und welche Arbeiten dazugehören."
@@ -455,6 +455,65 @@
       s.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showLayer(i); } });
     });
     ltabs.forEach(function (t, i) { t.addEventListener("click", function () { showLayer(i); }); });
+  }
+
+  // ---------- Rund ums Haus (interaktive Szene) ----------
+  var hs = $("#hscene");
+  if (hs) {
+    var R = function (t, area, real) { return { t: t, area: area, real: real }; };
+    var hData = [
+      { n: "Dach", ax: 470, ay: 268, d: "Das Dach schützt das ganze Haus. Hier arbeiten wir am häufigsten.", s: [R("Neueindeckung", "Neueindeckung", true), R("Dachsanierung", "Dachsanierung", true), R("Reparatur", "Reparatur", true), R("Moosentfernung", "Reparatur", false)] },
+      { n: "Schornstein", ax: 447, ay: 214, d: "Die Anschlüsse am Schornstein sind eine häufige Schwachstelle für Wasser.", s: [R("Reparatur", "Reparatur", true), R("Schornsteinkopf neu einfassen", "Reparatur", false), R("Anschlussbleche erneuern", "Reparatur", false)] },
+      { n: "Dachgaube", ax: 253, ay: 266, d: "Gauben bringen Platz und Licht unters Dach, haben aber viele Anschlüsse.", s: [R("Dachsanierung", "Dachsanierung", true), R("Gaube neu eindecken", "Dachsanierung", false), R("Gaubenfenster austauschen", "Dachfenster", false)] },
+      { n: "Dachfenster", ax: 369, ay: 236, d: "Dachfenster holen Tageslicht in den Dachraum.", s: [R("Neues Dachfenster einbauen", "Dachfenster", true), R("Altes Fenster austauschen", "Dachfenster", true), R("Verdunkelung nachrüsten", "Dachfenster", false)] },
+      { n: "Dachrinne", ax: 520, ay: 304, d: "Rinne und Fallrohr leiten das Wasser vom Haus weg.", s: [R("Dachrinne montieren", "Reparatur", false), R("Fallrohr erneuern", "Reparatur", false), R("Rinne reinigen", "Reparatur", false)] },
+      { n: "Fassade", ax: 168, ay: 400, d: "Eine dichte Verbindung zwischen Wand und Dach hält Feuchtigkeit draußen.", s: [R("Anschluss Dach und Wand", "Dachsanierung", false), R("Fassadenbekleidung aus Schiefer", "Noch offen", false), R("Wetterschutz an der Giebelwand", "Noch offen", false)] },
+      { n: "Vordach und Tür", ax: 335, ay: 370, d: "Das Vordach schützt den Eingang vor Regen.", s: [R("Reparatur", "Reparatur", true), R("Vordach neu eindecken", "Neueindeckung", false), R("Anschluss am Mauerwerk abdichten", "Reparatur", false)] },
+      { n: "Flachdach am Anbau", ax: 640, ay: 366, d: "Bei Garagen und Anbauten kommt es auf die Abdichtung an.", s: [R("Flachdach abdichten", "Flachdach", true), R("Abdichtung erneuern", "Flachdach", true), R("Dachbegrünung", "Flachdach", false), R("Lichtkuppel einbauen", "Dachfenster", false)] }
+    ];
+    var hParts = ["dach", "kamin", "gaube", "fenster", "rinne", "fassade", "vordach", "flach"].map(function (k) { return $('.hs-part[data-part="' + k + '"]', hs); }), hTabs = $$("#htabs .ltab"), hPanel = $("#house-panel"), hLink = $(".link", hs), hHint = $("#house-hint");
+    if (hHint) hHint.textContent = finePointer
+      ? "Fahren Sie mit der Maus über ein Bauteil am Haus. Dann sehen Sie, welche Leistungen dazugehören."
+      : "Tippen Sie auf ein Bauteil am Haus. Dann sehen Sie, welche Leistungen dazugehören.";
+    var showPart = function (i) {
+      var d = hData[i];
+      hParts.forEach(function (s, k) { s.classList.toggle("is-active", k === i); s.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+      hTabs.forEach(function (t, k) { t.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+      hs.classList.add("has-active");
+      hPanel.innerHTML = "";
+      var box = document.createElement("div"); box.className = "swap";
+      var tag = document.createElement("span"); tag.className = "tag"; tag.textContent = "Bauteil " + (i + 1) + " von " + hData.length;
+      tag.style.setProperty("--c", "#9ad35f"); tag.style.setProperty("--t", "#14171a");
+      var h = document.createElement("h3"); h.textContent = d.n;
+      var p = document.createElement("p"); p.textContent = d.d;
+      var sm = document.createElement("p"); sm.className = "small"; sm.textContent = "Leistungen an diesem Bauteil";
+      var ul = document.createElement("ul"); ul.className = "works";
+      d.s.forEach(function (it, k) {
+        var li = document.createElement("li"), b = document.createElement("button");
+        b.type = "button"; b.className = "work"; b.style.setProperty("--c", it.real ? "#9ad35f" : "#c98b4a"); b.style.setProperty("--i", k);
+        b.innerHTML = "<span></span><span class=\"bd " + (it.real ? "bd--real" : "bd--ex") + "\">" + (it.real ? "Leistung" : "Beispiel") + "</span><svg class=\"icon\" aria-hidden=\"true\"><use href=\"#i-arrow\"/></svg>";
+        b.firstChild.textContent = it.t;
+        b.addEventListener("click", function () {
+          prefill(it.area, "Hallo,\nich interessiere mich für: " + it.t + " (" + d.n + ").\n");
+          var kk = $("#kontakt"); if (kk) kk.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+        });
+        li.appendChild(b); ul.appendChild(li);
+      });
+      [tag, h, p, sm, ul].forEach(function (x) { box.appendChild(x); });
+      hPanel.appendChild(box);
+      if (hLink) {
+        hLink.setAttribute("d", "M" + d.ax + " " + d.ay + " C" + (d.ax + 120) + " " + d.ay + " 640 60 760 60");
+        var len = Math.ceil(hLink.getTotalLength()) + 2;
+        hLink.style.setProperty("--len", len);
+        hLink.classList.remove("is-on"); void hLink.getBoundingClientRect(); hLink.classList.add("is-on");
+      }
+    };
+    hParts.forEach(function (s, i) {
+      s.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") showPart(i); });
+      s.addEventListener("click", function () { showPart(i); });
+      s.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showPart(i); } });
+    });
+    hTabs.forEach(function (t, i) { t.addEventListener("click", function () { showPart(i); }); });
   }
 
   // ---------- Referenzen: Filter und Großansicht ----------

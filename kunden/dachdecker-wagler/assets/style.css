@@ -598,3 +598,60 @@ button.float:hover { background: rgba(255, 255, 255, 0.24); }
 button.float:hover { background: rgba(20, 24, 28, 0.8); }
 .logo__name { white-space: nowrap; }
 @media (max-width: 480px) { .logo__name { font-size: 1rem; } .logo svg { width: 30px; height: 30px; } .site-header .wrap { gap: 8px; } }
+
+
+/* ---------- Farbwelt "Haus": Backstein, Putz, Schiefer, Holz und helles Grün (Logo) ---------- */
+:root {
+  --leaf: #9ad35f; --leaf-deep: #5f9a3a;
+  --night: #14171a; --night-2: #1f2428;
+  --emerald: #2f6b45; --emerald-deep: #1e4a2f; --mint: #9ad35f;
+  --coral: #b8452b; --coral-deep: #8a2f1d;
+  --honey: #c98b4a; --honey-soft: #e3b788;
+  --sand: #d6c9b0; --paper: #e5dbc7;
+  --ink-soft: #3f484f;
+  --link: #1e4a2f;
+  --grad-green: linear-gradient(145deg, #1e4a2f 0%, #2f6b45 100%);
+}
+:root[data-mode="dark"] {
+  --sand: #14171a; --paper: #1b1f22; --card: #252b2f;
+  --ink: #eee5d4; --ink-soft: #b6bec3; --line: rgba(238, 229, 212, 0.2);
+  --night: #0b0d0f; --night-2: #171b1e;
+  --glass: rgba(20, 23, 26, 0.72); --glass-strong: rgba(20, 23, 26, 0.9);
+  --accent-text: #ee8f6e; --link: #9ad35f;
+}
+.progress { background: linear-gradient(90deg, var(--leaf), var(--honey), var(--coral)); }
+.chip-eyebrow i { background: var(--leaf); box-shadow: 0 0 0 4px rgba(154, 211, 95, 0.25); }
+.offer .eyebrow, .contact .eyebrow { color: var(--leaf); }
+.offer::before { background: radial-gradient(900px circle at 85% -10%, rgba(154, 211, 95, 0.16), transparent 55%), radial-gradient(700px circle at 0% 100%, rgba(184, 69, 43, 0.22), transparent 55%); }
+.contact::before { background: radial-gradient(800px circle at 10% 0%, rgba(154, 211, 95, 0.2), transparent 55%), radial-gradient(700px circle at 100% 100%, rgba(201, 139, 74, 0.2), transparent 50%), radial-gradient(500px circle at 70% 10%, rgba(184, 69, 43, 0.2), transparent 50%); }
+.contact__facts strong { color: var(--leaf); }
+.contact__facts a:hover, .contact__facts .tel:hover { color: var(--leaf); }
+.field input:focus, .field select:focus, .field textarea:focus { box-shadow: 0 0 0 4px rgba(154, 211, 95, 0.3); border-color: var(--leaf-deep); }
+.step.is-active::before { background: var(--leaf); border-color: var(--leaf); }
+.sheet__list .icon { color: var(--leaf-deep); }
+:root[data-mode="dark"] .sheet__list .icon, :root[data-mode="dark"] .work .icon { color: var(--leaf); }
+.tile--green .tile__plus { background: var(--leaf); color: #14171a; }
+.theme-toggle:hover { background: rgba(154, 211, 95, 0.25); }
+.nav .nav__pill:hover, .nav .nav__pill.is-current { background: var(--emerald); color: #fff; }
+.logo svg { filter: drop-shadow(0 4px 10px rgba(154, 211, 95, 0.25)); }
+.house-sec { background: var(--sand); }
+.hnote { max-width: 46em; margin: 36px auto 0; text-align: center; color: var(--ink-soft); font-size: 0.92rem; }
+
+/* ---------- Interaktive Hausszene ---------- */
+.hscene { display: block; width: 100%; height: auto; overflow: visible; border-radius: 28px; box-shadow: 0 40px 70px -34px rgba(0, 0, 0, 0.7); }
+.hs-part { cursor: pointer; outline: none; transition: opacity 0.3s ease, filter 0.3s ease; }
+.hscene.has-active .hs-part:not(.is-active) { filter: brightness(0.55) saturate(0.7); }
+.hs-part:hover, .hs-part.is-active { filter: drop-shadow(0 0 7px rgba(154, 211, 95, 0.95)); }
+.hs-part:focus-visible .hs-pin circle:nth-child(2) { stroke: #fff; stroke-width: 4; }
+.hs-pin { transition: transform 0.4s var(--spring); }
+.hs-pin .ring { fill: none; stroke: #9ad35f; stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: pinring 2.6s ease-out infinite; }
+@keyframes pinring { 0% { transform: scale(0.8); opacity: 0.9; } 100% { transform: scale(2.4); opacity: 0; } }
+.hscene .link { fill: none; stroke: #9ad35f; stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: var(--len, 300); stroke-dashoffset: var(--len, 300); transition: stroke-dashoffset 0.9s var(--ease); filter: drop-shadow(0 0 5px #9ad35f); display: none; }
+.hscene .link.is-on { stroke-dashoffset: 0; }
+@media (min-width: 900px) { .hscene .link { display: block; } }
+.work .bd { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; }
+.bd--real { background: var(--leaf); color: #14171a; }
+.bd--ex { background: var(--soft-fill); color: var(--ink-soft); }
+@media (min-width: 1140px) { .nav__more { display: inline-block; } }
+@media (max-width: 1139px) { .nav__more { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hs-pin .ring { animation: none; } }
