@@ -106,6 +106,80 @@
     }, { passive: true });
   }
 
+  // ---------- Hinweis-Meldung ----------
+  var toastEl = $("#toast"), toastTimer = null;
+  function toast(text) {
+    if (!toastEl) return;
+    toastEl.textContent = text;
+    toastEl.classList.add("is-on");
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(function () { toastEl.classList.remove("is-on"); }, 2200);
+  }
+
+  // ---------- Hell und dunkel umschalten ----------
+  var modeBtn = $("#theme-toggle");
+  var rootEl = document.documentElement;
+  function syncMode() {
+    var dark = rootEl.getAttribute("data-mode") === "dark";
+    if (modeBtn) {
+      modeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+      modeBtn.setAttribute("aria-label", dark ? "Helle Darstellung einschalten" : "Dunkle Darstellung einschalten");
+    }
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", dark ? "#150e0a" : "#f4e6cf");
+  }
+  syncMode();
+  if (modeBtn) modeBtn.addEventListener("click", function () {
+    var dark = rootEl.getAttribute("data-mode") !== "dark";
+    rootEl.classList.add("mode-switching");
+    rootEl.setAttribute("data-mode", dark ? "dark" : "light");
+    try { localStorage.setItem("mode", dark ? "dark" : "light"); } catch (e) {}
+    syncMode();
+    window.setTimeout(function () { rootEl.classList.remove("mode-switching"); }, 600);
+  });
+
+  // ---------- Menü zeigt den aktuellen Abschnitt ----------
+  var navLinks = $$(".nav a[href^='#']");
+  if (navLinks.length && "IntersectionObserver" in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function (a) { a.classList.toggle("is-current", a.getAttribute("href") === "#" + en.target.id); });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    navLinks.forEach(function (a) { var s = document.getElementById(a.getAttribute("href").slice(1)); if (s) spy.observe(s); });
+    var heroEl = $(".hero");
+    if (heroEl) new IntersectionObserver(function (en) { if (en[0].isIntersecting) navLinks.forEach(function (a) { a.classList.remove("is-current"); }); }, { rootMargin: "-45% 0px -50% 0px" }).observe(heroEl);
+  }
+
+  // ---------- Nach oben ----------
+  var toTop = $("#to-top");
+  if (toTop) {
+    window.addEventListener("scroll", function () { toTop.classList.toggle("is-on", window.pageYOffset > 900); }, { passive: true });
+    toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); });
+  }
+
+  // ---------- Kopfbereich: Licht folgt dem Mauszeiger ----------
+  var heroEl2 = $(".hero");
+  if (heroEl2 && finePointer && !reduceMotion) {
+    heroEl2.addEventListener("pointermove", function (e) {
+      var r = heroEl2.getBoundingClientRect();
+      heroEl2.style.setProperty("--hx", (e.clientX - r.left) + "px");
+      heroEl2.style.setProperty("--hy", (e.clientY - r.top) + "px");
+      heroEl2.style.setProperty("--hglow", "1");
+    });
+    heroEl2.addEventListener("pointerleave", function () { heroEl2.style.setProperty("--hglow", "0"); });
+  }
+
+  // ---------- E-Mail-Adresse kopieren ----------
+  var copyBtn = $("#copy-mail");
+  if (copyBtn) copyBtn.addEventListener("click", function () {
+    var addr = copyBtn.getAttribute("data-copy");
+    var done = function () { toast("E-Mail-Adresse kopiert"); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(addr).then(done, function () { toast(addr); });
+    else toast(addr);
+  });
+
   // ---------- Formular vorbefüllen (von Check und Detail-Fenster) ----------
   var form = $("#kontaktformular");
   var lastAuto = "";
@@ -166,6 +240,7 @@
       resultEl.innerHTML = "";
       var chosen = topics.filter(function (t) { return selected.indexOf(t.id) !== -1; });
       if (goEl) goEl.hidden = chosen.length === 0;
+      var rb = $("#check-reset"); if (rb) rb.hidden = chosen.length === 0;
       if (!chosen.length) {
         var p = document.createElement("p");
         p.className = "check__hint";
@@ -190,6 +265,12 @@
     }
     renderResult();
 
+    var resetBtn = $("#check-reset");
+    if (resetBtn) resetBtn.addEventListener("click", function () {
+      selected = [];
+      $$(".chip", chipsEl).forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+      renderResult();
+    });
     var go = $("#check-cta");
     if (go) go.addEventListener("click", function () {
       var chosen = topics.filter(function (t) { return selected.indexOf(t.id) !== -1; });
@@ -314,11 +395,156 @@
     });
   }
 
+  // ---------- Versicherungsbaum (Wurzelprinzip) ----------
+  var tree = $("#tree");
+  if (tree) {
+    var logo = $("#tree-logo");
+    var stage = $(".tree__stage", tree);
+    var list = $(".tree__branches", tree);
+    var rootsSvg = $(".tree__roots", tree);
+    var branches = $$(".branch", tree);
+    var wide = window.matchMedia("(min-width: 1000px)");
+    var hintEl = $("#tree-hint");
+    var closeTimer = null;
+    var hoverTimer = null;
+    var NS = "http://www.w3.org/2000/svg";
+    if (hintEl) {
+      hintEl.textContent = finePointer
+        ? "Fahren Sie mit der Maus über das Logo. Dann wachsen die Sparten heraus, und unter jeder Sparte die einzelnen Versicherungen."
+        : "Tippen Sie auf das Logo. Dann wachsen die Sparten heraus, und unter jeder Sparte die einzelnen Versicherungen.";
+    }
+
+    function layoutRoots() {
+      rootsSvg.innerHTML = "";
+      if (!wide.matches) return;
+      var w = tree.offsetWidth, h = tree.offsetHeight;
+      rootsSvg.setAttribute("viewBox", "0 0 " + w + " " + h);
+      var x0 = logo.offsetLeft + logo.offsetWidth / 2;
+      var y0 = logo.offsetTop + logo.offsetHeight + 2;
+      branches.forEach(function (li, i) {
+        var x = stage.offsetLeft + list.offsetLeft + li.offsetLeft + li.offsetWidth / 2;
+        var y = stage.offsetTop + list.offsetTop + li.offsetTop;
+        var dy = y - y0;
+        var paths = [
+          { d: "M" + x0 + " " + y0 + " C" + x0 + " " + (y0 + dy * 0.6) + " " + x + " " + (y - dy * 0.55) + " " + x + " " + y, cls: "root" },
+          { d: "M" + (x0 + (i - 2.5) * 5) + " " + (y0 + 8) + " C" + (x0 + (x - x0) * 0.25) + " " + (y0 + dy * 0.45) + " " + (x + (i % 2 ? -18 : 18)) + " " + (y - dy * 0.3) + " " + x + " " + (y - 3), cls: "root root--thin" }
+        ];
+        paths.forEach(function (pd) {
+          var p = document.createElementNS(NS, "path");
+          p.setAttribute("d", pd.d);
+          p.setAttribute("class", pd.cls);
+          p.setAttribute("data-i", i);
+          p.style.setProperty("--i", i);
+          p.style.setProperty("--rc", window.getComputedStyle(li).getPropertyValue("--lc").trim());
+          rootsSvg.appendChild(p);
+          var len = Math.ceil(p.getTotalLength()) + 2;
+          p.style.setProperty("--len", len);
+        });
+        if (li.classList.contains("is-open")) markHot(i, true);
+      });
+    }
+    function markHot(i, on) {
+      $$('.root[data-i="' + i + '"]', rootsSvg).forEach(function (p) { p.classList.toggle("is-hot", on); });
+    }
+    function setBranch(li, on) {
+      li.classList.toggle("is-open", on);
+      $(".branch__head", li).setAttribute("aria-expanded", on ? "true" : "false");
+      markHot(branches.indexOf(li), on);
+    }
+    function openOnly(li) { branches.forEach(function (b) { setBranch(b, b === li); }); }
+    function setOpen(on) {
+      if (on === tree.classList.contains("is-open")) return;
+      tree.classList.toggle("is-open", on);
+      logo.setAttribute("aria-expanded", on ? "true" : "false");
+      if (on) {
+        layoutRoots();
+        void rootsSvg.getBoundingClientRect();
+        window.requestAnimationFrame(function () { rootsSvg.classList.add("is-drawn"); });
+      } else {
+        rootsSvg.classList.remove("is-drawn");
+        branches.forEach(function (b) { setBranch(b, false); });
+      }
+    }
+
+    logo.addEventListener("pointerenter", function (e) {
+      if (e.pointerType !== "mouse") return;
+      window.clearTimeout(closeTimer);
+      setOpen(true);
+    });
+    tree.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") window.clearTimeout(closeTimer); });
+    tree.addEventListener("pointerleave", function (e) {
+      if (e.pointerType !== "mouse") return;
+      window.clearTimeout(hoverTimer);
+      closeTimer = window.setTimeout(function () { setOpen(false); }, 800);
+    });
+    logo.addEventListener("click", function (e) {
+      if (e.pointerType === "mouse") setOpen(true);
+      else setOpen(!tree.classList.contains("is-open"));
+    });
+    branches.forEach(function (li) {
+      var head = $(".branch__head", li);
+      head.addEventListener("pointerenter", function (e) {
+        if (e.pointerType !== "mouse") return;
+        window.clearTimeout(hoverTimer);
+        hoverTimer = window.setTimeout(function () { openOnly(li); }, 90);
+      });
+      head.addEventListener("pointerleave", function () { window.clearTimeout(hoverTimer); });
+      head.addEventListener("click", function (e) {
+        if (e.pointerType === "mouse") { openOnly(li); return; }
+        if (li.classList.contains("is-open")) setBranch(li, false); else openOnly(li);
+      });
+      head.addEventListener("focus", function () { if (head.matches(":focus-visible")) openOnly(li); });
+    });
+    tree.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && tree.classList.contains("is-open")) { setOpen(false); logo.focus(); }
+    });
+    $$(".sub__item", tree).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        prefill(btn.getAttribute("data-area"), "Hallo,\nich interessiere mich für: " + btn.getAttribute("data-item") + " (" + btn.getAttribute("data-sparte") + ").\n");
+        var k = $("#kontakt");
+        if (k) k.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+      });
+    });
+    var relayout = function () { if (tree.classList.contains("is-open")) layoutRoots(); };
+    window.addEventListener("resize", relayout);
+    if (wide.addEventListener) wide.addEventListener("change", relayout);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
+  }
+
   // ---------- Kontaktformular: Senden ohne Seitenwechsel ----------
   if (form) {
     var status = $("#form-status");
     var button = $("button[type=submit]", form);
     var show = function (text, ok) { status.textContent = text; status.className = "form__status " + (ok ? "is-ok" : "is-error"); };
+    var msgEl = $("#nachricht"), countEl = $("#count");
+    var updateCount = function () { if (msgEl && countEl) countEl.textContent = msgEl.value.length + " / 4000"; };
+    if (msgEl) { msgEl.addEventListener("input", updateCount); updateCount(); }
+    var check = function (el, errId, ok, text) {
+      var err = $("#" + errId);
+      el.setAttribute("aria-invalid", ok ? "false" : "true");
+      if (err) { err.hidden = ok; err.textContent = ok ? "" : text; }
+      return ok;
+    };
+    var emailEl = $("#email"), nameEl = $("#name");
+    if (emailEl) emailEl.addEventListener("blur", function () { if (emailEl.value) check(emailEl, "err-email", emailEl.checkValidity(), "Bitte prüfen Sie die E-Mail-Adresse."); });
+    if (emailEl) emailEl.addEventListener("input", function () { if (emailEl.getAttribute("aria-invalid") === "true") check(emailEl, "err-email", emailEl.checkValidity(), "Bitte prüfen Sie die E-Mail-Adresse."); });
+    if (nameEl) nameEl.addEventListener("blur", function () { if (nameEl.value.trim() === "" && nameEl.dataset.touched) check(nameEl, "err-name", false, "Bitte tragen Sie Ihren Namen ein."); else if (nameEl.value.trim() !== "") check(nameEl, "err-name", true, ""); });
+    if (nameEl) nameEl.addEventListener("input", function () { nameEl.dataset.touched = "1"; });
+    var burst = function () {
+      var box = $(".confetti", form);
+      if (!box || reduceMotion) return;
+      box.innerHTML = "";
+      var colors = ["#ffad1f", "#ff5a2b", "#1f6a4a", "#ffd27a", "#b92f10"];
+      for (var n = 0; n < 34; n++) {
+        var p = document.createElement("i");
+        p.style.left = (Math.random() * 100).toFixed(1) + "%";
+        p.style.background = colors[n % colors.length];
+        p.style.setProperty("--x", ((Math.random() - 0.5) * 140).toFixed(0) + "px");
+        p.style.setProperty("--r", ((Math.random() - 0.5) * 900).toFixed(0) + "deg");
+        p.style.setProperty("--d", (Math.random() * 0.4).toFixed(2) + "s");
+        box.appendChild(p);
+      }
+    };
     var again = $("#sent-again");
     if (again) again.addEventListener("click", function () { form.classList.remove("is-sent"); status.textContent = ""; });
 
@@ -330,13 +556,17 @@
     form.addEventListener("submit", function (event) {
       if (!window.fetch) return; // alter Browser: normales Absenden
       event.preventDefault();
-      if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (!form.checkValidity()) {
+        if (emailEl && !emailEl.checkValidity()) check(emailEl, "err-email", false, "Bitte prüfen Sie die E-Mail-Adresse.");
+        if (nameEl && nameEl.value.trim() === "") check(nameEl, "err-name", false, "Bitte tragen Sie Ihren Namen ein.");
+        form.reportValidity(); return;
+      }
       button.disabled = true;
       show("Wird gesendet …", true);
       fetch(form.action, { method: "POST", body: new FormData(form), headers: { "X-Requested-With": "fetch", "Accept": "application/json" } })
         .then(function (res) { return res.json().then(function (data) { return { res: res, data: data }; }); })
         .then(function (r) {
-          if (r.res.ok && r.data.ok) { status.textContent = ""; form.reset(); lastAuto = ""; form.classList.add("is-sent"); }
+          if (r.res.ok && r.data.ok) { status.textContent = ""; form.reset(); lastAuto = ""; updateCount(); form.classList.add("is-sent"); burst(); }
           else if (r.res.status === 429) { show("Sie haben gerade schon Nachrichten gesendet. Bitte versuchen Sie es in ein paar Minuten noch einmal.", false); }
           else { show(r.data.fehler || "Das hat leider nicht geklappt. Bitte versuchen Sie es erneut.", false); }
         })

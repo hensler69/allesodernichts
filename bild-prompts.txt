@@ -1,5 +1,8 @@
 BILD-PROMPTS FÜR DIE WEBSITE VON MANUEL HENSEL
 ===============================================
+HINWEIS: Die Website zeigt inzwischen selbst gezeichnete Illustrationen (Ordner assets/img/).
+Diese Prompts brauchst du nur, wenn du die Zeichnungen durch KI-Bilder oder Fotos ersetzen willst.
+
 Diese Texte kopierst du in einen KI-Bildgenerator (zum Beispiel ChatGPT),
 speicherst die fertigen Bilder und ziehst sie hier in den Chat. Ich baue sie dann ein.
 Die Bilder liegen später hinter den Texten der Kacheln. Wenn du echte Fotos hast, sind die immer besser als KI-Bilder. Gib mir dann die echten.
