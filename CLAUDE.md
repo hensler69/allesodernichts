@@ -11,8 +11,10 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 
 ## Entscheidungen
 <!-- Format: - YYYY-MM-DD: Entscheidung (Grund) -->
+- 2026-10-03: Skills aus `vercel-labs/agent-skills` projektweit installiert und eingecheckt (`.agents/skills/`, `.claude/skills/`, `skills-lock.json`). `vercel-labs/agent` existiert nicht.
 
 ## Offene Themen
+- [ ] Installierte Skills vor der ersten Nutzung stichprobenartig prüfen, sie laufen mit vollen Agent-Rechten (seit 2026-10-03)
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
 
 ## Laufende Themen
