@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kasse | DÄMMER</title>
+<meta name="description" content="Ihre Bestellung bei DÄMMER prüfen und zahlungspflichtig abschicken.">
+<meta name="theme-color" content="#0a0d1c">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://www.daemmer.example/kasse">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="DÄMMER">
+<meta property="og:title" content="Kasse | DÄMMER">
+<meta property="og:description" content="Ihre Bestellung bei DÄMMER prüfen und zahlungspflichtig abschicken.">
+<meta property="og:url" content="https://www.daemmer.example/kasse">
+<meta property="og:image" content="https://www.daemmer.example/assets/og-image.jpg">
+<meta property="og:image:alt" content="Lichtwecker DÄMMER Eins mit warm leuchtendem Schirm vor einer nächtlichen Stadt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kasse | DÄMMER">
+<meta name="twitter:description" content="Ihre Bestellung bei DÄMMER prüfen und zahlungspflichtig abschicken.">
+<meta name="twitter:image" content="https://www.daemmer.example/assets/og-image.jpg">
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+<body>
+<a class="springen" href="#inhalt">Zum Inhalt springen</a>
+<div class="welt" aria-hidden="true">
+  <div class="welt__sonne"></div>
+  <div class="welt__aura welt__aura--a"></div>
+  <div class="welt__aura welt__aura--b"></div>
+  <div class="welt__stadt welt__stadt--fern"><img src="/assets/img/stadt-fern.svg" alt="" width="1600" height="520"></div>
+  <div class="welt__stadt welt__stadt--mitte"><img src="/assets/img/stadt-mitte.svg" alt="" width="1600" height="520"></div>
+  <span class="neon neon--1">LICHT 24H</span>
+  <span class="neon neon--2">SCHLAF.OS</span>
+  <span class="neon neon--3">RUHE</span>
+  <div class="welt__stadt welt__stadt--nah"><img src="/assets/img/stadt-nah.svg" alt="" width="1600" height="520"></div>
+  <div class="welt__nebel welt__nebel--2"></div>
+  <div class="welt__nebel"></div>
+  <canvas class="welt__regen"></canvas>
+  <div class="welt__schleier"></div>
+</div>
+<div class="entwurf" role="note">Entwurf: Alle Firmen-, Hersteller- und Technikangaben sind erfunden. Das Produktbild stammt aus fremder Quelle und muss vor einer Veröffentlichung ersetzt werden.</div>
+<header class="kopf kopf--schlicht">
+  <a class="logo" href="/" aria-label="Zur Startseite"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc27a"/><stop offset="1" stop-color="#ff7a59"/></linearGradient></defs><path d="M10 40a22 22 0 0 1 44 0Z" fill="url(#lg)"/><rect x="6" y="45" width="52" height="4" rx="2" fill="#59e3e0"/><rect x="16" y="53" width="32" height="4" rx="2" fill="#8f8aa8"/></svg><span>DÄMMER</span></a>
+  <a class="kopf__zurueck" href="/">Zurück zum Shop</a>
+</header>
+<main id="inhalt" class="kasse">
+<h1>Kasse</h1>
+<div class="leere-kasse glas" hidden><p><strong>Ihr Warenkorb ist leer.</strong></p><p><a class="knopf" href="/">Zurück zum Lichtwecker</a></p></div>
+<div class="kasse__raster" hidden>
+  <form id="kasse-form" class="glas kasse__form" action="/send.php" method="post" novalidate>
+    <input type="hidden" name="art" value="bestellung">
+    <input type="hidden" name="einzeln" value="0">
+    <input type="hidden" name="set" value="0">
+    <input type="hidden" name="gutschein" value="">
+    <div class="honig-feld" aria-hidden="true"><label>Bitte leer lassen<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <fieldset>
+      <legend>Lieferadresse</legend>
+      <div class="felder">
+        <div class="feldgruppe"><label for="vorname">Vorname</label><input class="feld" id="vorname" name="vorname" type="text" autocomplete="given-name" required data-fehler="Bitte Vornamen eingeben."><div class="fehlertext" aria-live="polite"></div></div>
+        <div class="feldgruppe"><label for="nachname">Nachname</label><input class="feld" id="nachname" name="nachname" type="text" autocomplete="family-name" required data-fehler="Bitte Nachnamen eingeben."><div class="fehlertext" aria-live="polite"></div></div>
+        <div class="feldgruppe voll"><label for="strasse">Straße und Hausnummer</label><input class="feld" id="strasse" name="strasse" type="text" autocomplete="street-address" required data-fehler="Bitte Straße und Hausnummer eingeben."><div class="fehlertext" aria-live="polite"></div></div>
+        <div class="feldgruppe"><label for="plz">Postleitzahl</label><input class="feld" id="plz" name="plz" type="text" autocomplete="postal-code" required data-fehler="Bitte eine fünfstellige Postleitzahl eingeben." inputmode="numeric" pattern="[0-9]{5}" maxlength="5"><div class="fehlertext" aria-live="polite"></div></div>
+        <div class="feldgruppe"><label for="ort">Ort</label><input class="feld" id="ort" name="ort" type="text" autocomplete="address-level2" required data-fehler="Bitte Ort eingeben."><div class="fehlertext" aria-live="polite"></div></div>
+        <div class="feldgruppe voll"><label for="land">Land</label><select class="feld" id="land" name="land"><option>Deutschland</option></select></div>
+        <div class="feldgruppe voll"><label for="email">E-Mail-Adresse für die Bestätigung</label><input class="feld" id="email" name="email" type="email" autocomplete="email" required data-fehler="Bitte eine gültige E-Mail-Adresse eingeben."><div class="fehlertext" aria-live="polite"></div></div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Zahlungsart</legend>
+      <div class="feldgruppe">
+        <div class="zahlart" role="radiogroup" aria-label="Zahlungsart">
+          <label class="option"><input type="radio" name="zahlart" value="PayPal" required data-fehler="Bitte eine Zahlungsart wählen."><span class="option__punkt"></span><span class="option__name">PayPal</span><span></span><span class="option__zusatz">Sie erhalten nach der Bestellung den Zahlungslink per E-Mail.</span></label>
+          <label class="option"><input type="radio" name="zahlart" value="Klarna" required data-fehler="Bitte eine Zahlungsart wählen."><span class="option__punkt"></span><span class="option__name">Klarna</span><span></span><span class="option__zusatz">Sie erhalten nach der Bestellung den Zahlungslink per E-Mail.</span></label>
+        </div>
+        <div class="fehlertext" aria-live="polite"></div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Zum Schluss</legend>
+      <div class="feldgruppe">
+        <label class="haken"><input type="checkbox" name="agb" value="ja" required data-fehler="Bitte bestätigen Sie die AGB und die Widerrufsbelehrung."><span>Ich habe die <a href="/agb" target="_blank" rel="noopener">AGB</a> und die <a href="/widerrufsbelehrung" target="_blank" rel="noopener">Widerrufsbelehrung</a> gelesen und bin einverstanden.</span></label>
+        <div class="fehlertext" aria-live="polite"></div>
+      </div>
+      <p class="rechtliches">Mit Ihrer Bestellung geben Sie ein verbindliches Angebot ab und verpflichten sich zur Zahlung. Wir verarbeiten Ihre Daten gemäß der <a href="/datenschutz">Datenschutzerklärung</a>.</p>
+    </fieldset>
+    <div class="summe"><span>Gesamtbetrag inkl. MwSt.</span><strong data-feld="gesamt-knopf">0,00 €</strong></div>
+    <button class="knopf knopf--gross knopf--breit" type="submit">zahlungspflichtig bestellen</button>
+    <p class="meldung" role="status" aria-live="polite"></p>
+  </form>
+  <aside class="glas kasse__seite" aria-label="Ihre Bestellung">
+    <h2>Ihre Bestellung</h2>
+    <div class="kasse__posten"></div>
+    <div class="gutschein">
+      <label class="sr" for="gutschein">Gutscheincode</label>
+      <input class="feld" id="gutschein" type="text" placeholder="Gutscheincode" autocomplete="off">
+      <button class="leise-knopf" type="button" data-gutschein>Einlösen</button>
+    </div>
+    <p class="meldung gutschein-meldung" role="status" aria-live="polite"></p>
+    <div class="zeile" data-feld="rabatt-zeile" hidden><span>Gutschein</span><span data-feld="rabatt"></span></div>
+    <div class="zeile"><span>Versand (DHL)</span><span data-feld="versand"></span></div>
+    <div class="zeile zeile--gesamt"><span>Gesamt</span><span data-feld="gesamt"></span></div>
+    <div class="zeile kleingedruckt"><span>darin 19 % MwSt.</span><span data-feld="mwst"></span></div>
+    <div class="merkmale"><strong>Entwurf:</strong> PayPal und Klarna sind noch nicht angeschlossen. Die Bestellung geht per E-Mail ein, der Zahlungslink folgt danach.</div>
+    <p class="kleingedruckt"><a href="/versand-und-zahlung">Versand und Zahlung</a></p>
+  </aside>
+</div>
+</main>
+<script src="/assets/script.js" defer></script>
+</body>
+</html>

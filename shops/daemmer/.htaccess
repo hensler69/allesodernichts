@@ -1,4 +1,4 @@
-# Einstellungen für den Webserver (Apache), wie sie auf günstigem Shared Hosting üblich sind
+# Einstellungen für den Webserver (Apache), wie auf günstigem Shared Hosting üblich
 
 DirectoryIndex index.html
 Options -Indexes
@@ -9,7 +9,7 @@ RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-# Saubere Adressen: /impressum statt /impressum.html
+# Saubere Adressen: /kasse statt /kasse.html
 RewriteCond %{THE_REQUEST} \s/index(\.html)?[\s?] [NC]
 RewriteRule ^ / [R=301,L]
 RewriteCond %{THE_REQUEST} \s/+([^\s?]+?)\.html[\s?] [NC]
@@ -19,26 +19,26 @@ RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^([^.]+)$ $1.html [L]
 
 # Interne Dateien nie ausliefern
-<FilesMatch "^(bild-prompts\.txt|CLAUDE\.md|\.gitignore)$">
+<FilesMatch "^(bild-prompts\.txt|\.gitignore)$">
   Require all denied
 </FilesMatch>
-RedirectMatch 404 ^/(notes|site|kunden|entwuerfe|shops|\.git)(/|$)
 
 # Sicherheits-Kopfzeilen
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 </IfModule>
 
-# Schneller laden: Komprimierung und Zwischenspeicher
+# Schneller laden
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
 </IfModule>
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType image/svg+xml "access plus 1 month"
-  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
   ExpiresByType font/woff2 "access plus 1 year"
   ExpiresByType text/css "access plus 1 week"
   ExpiresByType application/javascript "access plus 1 week"
