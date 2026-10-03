@@ -22,7 +22,7 @@ RewriteRule ^([^.]+)$ $1.html [L]
 <FilesMatch "^(bild-prompts\.txt|CLAUDE\.md|\.gitignore)$">
   Require all denied
 </FilesMatch>
-RedirectMatch 404 ^/(notes|site|\.git)(/|$)
+RedirectMatch 404 ^/(notes|site|kunden|entwuerfe|\.git)(/|$)
 
 # Sicherheits-Kopfzeilen
 <IfModule mod_headers.c>
