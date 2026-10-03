@@ -10,10 +10,12 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - Vor dem Start: `notes/` auf aktuelle Einträge prüfen.
 
 ## Entscheidungen
+- Beispielseiten und Szenen verwenden nur selbst gezeichnete, erfundene Personen, keine echten Fotos (siehe notes/2026-10-03.md).
 - Website Manuel Hensel (Versicherungen, Leipzig): statische Seite im Wurzelverzeichnis des Projekts, Anrede "Sie", Redesign im Apple-Stil (Espresso/Tannengrün/Koralle/Honig/Sand, dazu Dunkel-Modus), Fraunces als Überschriftenschrift. Details in notes/2026-10-02.md.
 <!-- Format: - YYYY-MM-DD: Entscheidung (Grund) -->
 
 ## Offene Themen
+- Musterschutz-Beispielseite (nur Artifact, Quelle nicht im Repo): 3D-Familienszene mit erfundenen Figuren, Details in notes/2026-10-03.md.
 - Dachdecker Wagler (kunden/dachdecker-wagler/): nur Entwurf mit erfundenen Angaben, keine Erlaubnis des Inhabers, nicht veröffentlichen (siehe notes/2026-10-02.md).
 - Echte Domain, Impressum-/Datenschutz-Platzhalter, Fotos/Logo, Textschrift Source Sans 3 (siehe notes/2026-10-02.md).
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
