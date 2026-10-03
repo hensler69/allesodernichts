@@ -13,6 +13,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 <!-- Format: - YYYY-MM-DD: Entscheidung (Grund) -->
 
 ## Offene Themen
+- Skills-Installation: `npx skills add vercel-labs/agent` schlägt fehl (Repo nicht erreichbar). Richtiges Quell-Repo klären, siehe `notes/2026-10-03.md`.
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
 
 ## Laufende Themen
