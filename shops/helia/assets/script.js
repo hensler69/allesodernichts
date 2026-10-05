@@ -239,6 +239,7 @@
   const kaufleiste = $('.kaufleiste');
   const heldKnopf = $('.held [data-hinzu]');
   const angebotTeil = $('#angebot');
+  const abschied = $('.abschied');
   let sonne = 0;
   const maus = { x: 0, y: 0 };
 
@@ -343,6 +344,7 @@
     const rWort = wortweise && !ruhig ? wortweise.getBoundingClientRect() : null;
     const hk = kaufleiste && heldKnopf ? heldKnopf.getBoundingClientRect() : null;
     const an = kaufleiste && angebotTeil ? angebotTeil.getBoundingClientRect() : null;
+    const rAb = abschied ? abschied.getBoundingClientRect() : null;
 
     // Sonnenstand für die ganze Seite: vor dem Abschnitt Nacht, darin die Simulation, danach leichte Dämmerung
     let s;
@@ -353,6 +355,12 @@
       const oben = r.top + y, unten = r.bottom + y;
       if (r.top > 0) s = 0.04 + 0.12 * klemmen(y / Math.max(1, oben));
       else s = 1 - 0.3 * klemmen((y - unten + innerHeight) / Math.max(1, hoehe - unten + innerHeight));
+    }
+    // Abschied: am Ende der Seite geht die Sonne unter und es wird Nacht
+    if (rAb) {
+      const unter = ruhig ? 0.6 : klemmen((innerHeight - rAb.top) / Math.max(1, rAb.height));
+      setzeWenn(abschied, '--unter', unter.toFixed(3));
+      if (!sim.sichtbar) s -= (s - 0.05) * klemmen(unter * 1.15);
     }
     himmelZiel(s);
 
@@ -440,6 +448,46 @@
       else { sim.angehalten = false; sim.haelt = false; simStart(); }
       knopfZeigen();
     });
+  }
+
+  /* ---------- Ihre Weckzeit: die Simulation und der Abschied rechnen mit Ihrer Uhrzeit ---------- */
+  const WECK_STD = 390, WECK_MIN = 270, WECK_MAX = 600; // 06:30, erlaubt 04:30 bis 10:00
+  const weckGespeichert = speicher.lesen('helia-weckzeit', null);
+  let weck = klemmen(Math.round((parseInt(weckGespeichert, 10) || WECK_STD) / 15) * 15, WECK_MIN, WECK_MAX);
+  const alsUhr = (m) => `${String(Math.floor(m / 60) % 24).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+  function weckZeigen(richtung = 0) {
+    $$('[data-weckzeit]').forEach((el) => {
+      el.textContent = alsUhr(weck);
+      // Die Ziffer rutscht in die Richtung, in die Sie gedrückt haben
+      if (richtung && el.tagName === 'OUTPUT' && !ruhig && el.animate) {
+        el.animate([{ opacity: 0.35, transform: `translateY(${richtung * 5}px)` }, { opacity: 1, transform: 'none' }], { duration: 180, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+      }
+    });
+    $$('[data-weck-start]').forEach((el) => { el.textContent = alsUhr(weck - 30); });
+    $$('[data-weck]').forEach((b) => { const s = Number(b.dataset.weck); b.disabled = s < 0 ? weck <= WECK_MIN : weck >= WECK_MAX; });
+    PHASEN[0].von = weck - 30; PHASEN[0].nach = weck; PHASEN[1].von = weck;
+    PHASEN[3].nach = 1440 + weck - 30;
+    if (aufgangKlebt) simZeichnen();
+  }
+  $$('[data-weck]').forEach((b) => b.addEventListener('click', () => {
+    const s = Number(b.dataset.weck);
+    const neu = klemmen(weck + s, WECK_MIN, WECK_MAX);
+    if (neu === weck) return;
+    weck = neu;
+    speicher.schreiben('helia-weckzeit', weck);
+    sim.pos = 0; // Ihr Morgen beginnt in der Simulation von vorn
+    weckZeigen(s > 0 ? -1 : 1);
+  }));
+  weckZeigen();
+
+  /* ---------- Begrüßung passend zur Tageszeit ---------- */
+  const gruss = $('[data-gruss]');
+  if (gruss) {
+    const h = new Date().getHours();
+    let text = h >= 5 && h < 11 ? 'Guten Morgen. Hier ist HELIA.' : h >= 11 && h < 17 ? 'Guten Tag. Hier ist HELIA.' : h >= 17 && h < 23 ? 'Guten Abend. Hier ist HELIA.' : 'Noch wach? Hier ist HELIA.';
+    if (weckGespeichert !== null) text = 'Schön, dass Sie wieder da sind.';
+    else if (korbAnzahl() > 0) text = 'Willkommen zurück.';
+    gruss.textContent = text;
   }
 
   // Regen auf einer Zeichenfläche
@@ -677,7 +725,15 @@
       if (sichtbar && !document.hidden) requestAnimationFrame(schritt);
     }
     function starten() { zuletzt = performance.now(); requestAnimationFrame(schritt); }
+    // Lampe ist ein Drehobjekt, kein Text: nichts markieren, nichts herausziehen
+    l3d.addEventListener('dragstart', (e) => e.preventDefault());
+    l3d.addEventListener('selectstart', (e) => e.preventDefault());
     l3d.addEventListener('pointerdown', (e) => {
+      if (zieht || (e.pointerType === 'mouse' && e.button !== 0)) return;
+      e.preventDefault();
+      const auswahl = window.getSelection && window.getSelection();
+      if (auswahl && !auswahl.isCollapsed) auswahl.removeAllRanges();
+      if (document.activeElement !== l3d && l3d.tabIndex >= 0) l3d.focus({ preventScroll: true });
       zieht = true; tempo = 0; letztesX = e.clientX; proben = [{ x: e.clientX, t: e.timeStamp }];
       l3d.setPointerCapture(e.pointerId); l3d.classList.add('zieht');
     });

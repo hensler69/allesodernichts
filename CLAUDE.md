@@ -24,4 +24,4 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 ## Laufende Themen
 - Website Manuel Hensel: Version mit Illustrationen, Versicherungsbaum und Dunkel-Modus gebaut, wartet auf Rückmeldung und Inhalte.
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
-- HELIA-Shop (shops/helia/): Glas-Layout mit 3D-Lampe und Bewertungsbereich fertig getestet. Die Bewertungen sind erfundene Beispiele und müssen vor dem Start raus. Offen: echtes Foto, echte Daten, Zahlungsanbieter, Markenprüfung.
+- HELIA-Shop (shops/helia/): Glas-Layout mit 3D-Lampe, Bewertungsbereich, persönlicher Weckzeit und Gute-Nacht-Abschluss fertig getestet. Die Bewertungen sind erfundene Beispiele und müssen vor dem Start raus. Offen: echtes Foto, echte Daten, Zahlungsanbieter, Markenprüfung.

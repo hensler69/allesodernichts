@@ -62,7 +62,7 @@
 
 <section class="held" aria-labelledby="titel">
   <div class="held__text">
-    <span class="marke held__an" style="--i:0">HELIA Lichtwecker</span>
+    <span class="marke held__an" style="--i:0" data-gruss>HELIA Lichtwecker</span>
     <h1 id="titel"><span class="held__an" style="--i:1">Draußen grau.</span> <span class="held__an" style="--i:2">Drinnen <span class="leucht">Sonne.</span></span></h1>
     <p class="held__unter held__an" style="--i:3">HELIA lässt in Ihrem Zimmer die Sonne aufgehen. Eine halbe Stunde vor dem Wecken wächst das Licht von Glut zu Gold.</p>
     <a class="held__sterne held__an" style="--i:4" href="#bewertungen" data-rez="kopf"><span class="sterne" data-rez="sterne-kopf"></span><span data-rez="kopf-text">Bewertungen ansehen</span></a>
@@ -110,11 +110,19 @@
       <p>Die Simulation läuft von selbst, sobald Sie hier sind. Ziehen Sie den Regler, um selbst durch den Tag zu gehen.</p>
       <div class="aufgang__uhr" aria-hidden="true">06:00</div>
       <ol class="phasen">
-        <li><span>06:00</span><span>Sonnenaufgang</span></li>
-        <li><span>06:30</span><span>Tag, volles Licht</span></li>
+        <li><span data-weck-start>06:00</span><span>Sonnenaufgang</span></li>
+        <li><span data-weckzeit>06:30</span><span>Weckzeit, volles Licht</span></li>
         <li><span>22:00</span><span>Sonnenuntergang</span></li>
         <li><span>22:30</span><span>Nacht, alles aus</span></li>
       </ol>
+      <div class="weckzeit">
+        <span id="wz-titel">Ihre Weckzeit</span>
+        <div class="stepper" role="group" aria-labelledby="wz-titel">
+          <button type="button" data-weck="-15" aria-label="15 Minuten früher">&minus;</button>
+          <output aria-live="polite" data-weckzeit>06:30</output>
+          <button type="button" data-weck="15" aria-label="15 Minuten später">+</button>
+        </div>
+      </div>
       <div class="regler">
         <div class="sim-steuerung">
           <label for="zeitregler">Uhrzeit der Simulation</label>
@@ -420,6 +428,15 @@
     <details class="frage"><summary>Wie schnell kommt das Paket?<i aria-hidden="true"></i></summary><div class="frage__antwort"><p>Wir versenden mit DHL. Die Lieferung dauert in Deutschland meist 2 bis 4 Werktage. Der Versand kostet 4,90 €, ab 59 € Bestellwert ist er kostenlos.</p></div></details>
     <details class="frage"><summary>Kann ich die Bestellung widerrufen?<i aria-hidden="true"></i></summary><div class="frage__antwort"><p>Als Verbraucher haben Sie ein gesetzliches Widerrufsrecht von 14 Tagen. Die Einzelheiten stehen in der <a href="/widerrufsbelehrung">Widerrufsbelehrung</a>. Den Widerruf können Sie auch online über die Seite <a href="/widerrufen">Vertrag widerrufen</a> erklären.</p></div></details>
     <details class="frage"><summary>Was gilt, wenn das Gerät nicht funktioniert?<i aria-hidden="true"></i></summary><div class="frage__antwort"><p>Es gelten die gesetzlichen Mängelrechte. Schreiben Sie uns an <a href="mailto:kontakt@helia.example">kontakt@helia.example</a>, wir kümmern uns darum.</p></div></details>
+  </div>
+</section>
+
+<section class="abschied" aria-labelledby="gn-titel">
+  <div class="abschied__himmel" aria-hidden="true"><i class="abschied__sonne"></i><i class="abschied__wasser"></i></div>
+  <div class="abschied__text">
+    <span class="marke">Bis morgen früh</span>
+    <h2 id="gn-titel">Schlafen Sie gut. <span class="leucht">Der Morgen kommt sanft.</span></h2>
+    <p>Klingelt Ihr Wecker um <b data-weckzeit>06:30</b>, wird es mit HELIA schon ab <b data-weck-start>06:00</b> langsam hell. Ganz ohne Schreck.</p>
   </div>
 </section>
 </main>
