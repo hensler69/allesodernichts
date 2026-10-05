@@ -22,7 +22,7 @@ den ganzen Unterbaum neu.
    ```js
    const held = ;
    if (held && feinZeiger && !ruhig) {
-     const karten = 3289('.held__chips .hinweis-chip').map((el) => ({ el, t: parseFloat(getComputedStyle(el).getPropertyValue('--t')) || 20 }));
+     const karten = $$('.held__chips .hinweis-chip').map((el) => ({ el, t: parseFloat(getComputedStyle(el).getPropertyValue('--t')) || 20 }));
      held.addEventListener('pointermove', (e) => {
        const px = e.clientX / innerWidth - 0.5, py = e.clientY / innerHeight - 0.5;
        karten.forEach((k) => { k.el.style.translate = `${(px * k.t).toFixed(1)}px ${(py * k.t).toFixed(1)}px`; });
@@ -41,7 +41,7 @@ den ganzen Unterbaum neu.
    (Falls Plan 001 schon umgesetzt ist, ist die `transition-delay` dort schon richtig.)
 4. script.js Zeilen 457–474 ersetzen:
    ```js
-   3289('[data-kipp]').forEach((k) => {
+   $$('[data-kipp]').forEach((k) => {
      const glanz = document.createElement('span');
      glanz.className = 'kipp-glanz';
      glanz.setAttribute('aria-hidden', 'true');

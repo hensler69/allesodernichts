@@ -13,7 +13,7 @@ Bei "weniger Bewegung": nur Aufblenden ohne Verschieben.
 ## Schritte
 In `angebotSumme()` die Zeile mit `data-feld="angebot-summe"` ersetzen durch:
 ```js
-const feld = ;
+const feld = $('[data-feld="angebot-summe"]', angebot);
 const neu = euro(menge * preis(id));
 if (feld.textContent !== neu) {
   feld.textContent = neu;
