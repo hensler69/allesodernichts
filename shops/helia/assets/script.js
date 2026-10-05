@@ -490,6 +490,30 @@
     }
   }
 
+  /* ---------- Technik: Kartenstapel ---------- */
+  const stapelKarten = $$('.stapel__karte');
+  if (stapelKarten.length > 1 && !ruhig) {
+    const breit = window.matchMedia('(min-width: 761px)');
+    let stapelWartet = false;
+    const stapelBild = () => {
+      stapelWartet = false;
+      if (!breit.matches) { stapelKarten.forEach((k) => { k.style.scale = ''; k.style.filter = ''; }); return; }
+      const rects = stapelKarten.map((k) => k.getBoundingClientRect());
+      stapelKarten.forEach((k, i) => {
+        const naechste = rects[i + 1];
+        if (!naechste) return;
+        const ziel = 80 + (i + 1) * 22;
+        const f = klemmen(1 - (naechste.top - ziel) / Math.max(1, rects[i].height));
+        k.style.scale = (1 - 0.05 * f).toFixed(4);
+        k.style.filter = f > 0.001 ? `brightness(${(1 - 0.4 * f).toFixed(3)})` : '';
+      });
+    };
+    const stapelPlanen = () => { if (!stapelWartet) { stapelWartet = true; requestAnimationFrame(stapelBild); } };
+    addEventListener('scroll', stapelPlanen, { passive: true });
+    addEventListener('resize', stapelPlanen);
+    stapelBild();
+  }
+
   /* ---------- Display zum Antippen ---------- */
   const DISPLAY = {
     wecker: ['Zwei Weckzeiten', 'Zum Beispiel eine für Werktage und eine fürs Wochenende. Ein Tipp oben auf das Gehäuse schenkt Ihnen 9 Minuten.'],
@@ -797,6 +821,36 @@
       mehr.hidden = r.length <= gezeigt;
     }
     $('[data-rez="mehr"]').addEventListener('click', () => { gezeigt += 4; liste(); });
+
+    // Zitat-Karussell: hebt die besten Bewertungen hervor, bedient mit Pfeilen oder Pfeiltasten
+    const zitate = $('[data-zitate]');
+    if (zitate) {
+      const auswahl = alle.filter((r) => r.sterne >= 4).sort((a, b) => b.hilfreich - a.hilfreich).slice(0, 5);
+      const buehne = $('.zitate__buehne', zitate), koepfe = $('.zitate__koepfe', zitate), zahl = $('.zitate__zahl', zitate);
+      let jetzt = 0;
+      koepfe.innerHTML = auswahl.map((r) => `<span>${(r.name || '?').trim().charAt(0).toUpperCase()}</span>`).join('');
+      function zeigen(richtung) {
+        const r = auswahl[jetzt];
+        if (!r) { zitate.hidden = true; return; }
+        const fig = document.createElement('figure');
+        fig.className = 'zitat';
+        fig.innerHTML = `<blockquote></blockquote><figcaption><span class="sterne" aria-label="${r.sterne} von 5 Sternen">${sterneHtml(r.sterne)}</span><span class="zitat__name"></span><span class="marke-klein ${r.beispiel ? 'marke-klein--beispiel">Beispiel' : 'marke-klein--echt">Geprüfter Kauf'}</span></figcaption>`;
+        $('blockquote', fig).textContent = r.text;
+        $('.zitat__name', fig).textContent = r.name;
+        buehne.replaceChildren(fig);
+        if (richtung && !ruhig && fig.animate) fig.animate([{ opacity: 0, transform: `translateX(${richtung * 18}px)` }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+        zahl.textContent = `${jetzt + 1} / ${auswahl.length}`;
+        $$('span', koepfe).forEach((k, i) => k.classList.toggle('ist-jetzt', i === jetzt));
+      }
+      const blaettern = (d) => { jetzt = (jetzt + d + auswahl.length) % auswahl.length; zeigen(d); };
+      $('[data-zurueck]', zitate).addEventListener('click', () => blaettern(-1));
+      $('[data-weiter]', zitate).addEventListener('click', () => blaettern(1));
+      zitate.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); blaettern(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); blaettern(1); }
+      });
+      zeigen(0);
+    }
     $('#rez-sort').addEventListener('change', (e) => { sortierung = e.target.value; liste(); });
     liste();
 
