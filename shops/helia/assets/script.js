@@ -5,6 +5,7 @@
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
   const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const feinZeiger = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const klemmen = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
   /* ---------- Preise (der Server rechnet in bestellung.php noch einmal selbst) ---------- */
@@ -188,8 +189,8 @@
   /* ---------- Himmel, Stadt, Regen und Sonnenaufgang ---------- */
   const root = document.documentElement;
   const HIMMEL = [
-    [0, '#04060e', '#0a0d1c', '#14132a'],
-    [0.3, '#090b20', '#22193c', '#3e2140'],
+    [0, '#03050d', '#080b1c', '#10142e'],
+    [0.3, '#070a20', '#1a1a40', '#33204a'],
     [0.62, '#15142f', '#4a2648', '#a24a3c'],
     [1, '#22203f', '#6e3a52', '#c8683f']
   ];
@@ -214,8 +215,8 @@
   const aufgang = $('.aufgang');
   const aufgangKlebt = aufgang && $('.aufgang__klebt', aufgang);
   const simUhr = aufgang && $('.aufgang__uhr', aufgang);
-  const simZeit = aufgang && $('.lampe .zeit', aufgang);
-  const simSonne = aufgang && $('.lampe .symbol--licht', aufgang);
+  const simZeit = aufgang && $('.zeit', aufgang);
+  const simSonne = aufgang && $('.symbol--licht', aufgang);
   const simPhasen = aufgang ? $$('.phasen li', aufgang) : [];
   const regler = aufgang && $('#zeitregler');
   const wortweise = $('.wortweise');
@@ -223,6 +224,7 @@
   const heldKnopf = $('.held [data-hinzu]');
   const angebotTeil = $('#angebot');
   let sonne = 0;
+  const maus = { x: 0, y: 0 };
 
   function aufgangFortschritt() {
     if (!aufgang) return { q: 0, r: null };
@@ -253,7 +255,7 @@
     root.style.setProperty('--sun', s.toFixed(3));
 
     // Stadt sinkt langsam, je weiter man scrollt: man steigt der Sonne entgegen
-    if (!ruhig) stadt.forEach((el, i) => { el.style.transform = `translate3d(0, ${(p * [3, 7, 12][i]).toFixed(2)}vh, 0)`; });
+    if (!ruhig) stadt.forEach((el, i) => { el.style.transform = `translate3d(${(maus.x * [-6, -14, -26][i]).toFixed(1)}px, ${(p * [3, 7, 12][i]).toFixed(2)}vh, 0)`; });
 
     // Sonnenaufgang im angehefteten Abschnitt
     if (aufgang && aufgangKlebt) {
@@ -317,6 +319,7 @@
   let wartet = false;
   const planen = () => { if (!wartet) { wartet = true; requestAnimationFrame(() => { wartet = false; bild(); }); } };
   addEventListener('scroll', planen, { passive: true });
+  if (feinZeiger && !ruhig) addEventListener('pointermove', (e) => { maus.x = e.clientX / innerWidth - 0.5; maus.y = e.clientY / innerHeight - 0.5; planen(); }, { passive: true });
   addEventListener('resize', planen);
   bild();
 
@@ -441,6 +444,220 @@
     } finally {
       knopf.disabled = false;
     }
+  }
+
+
+  /* ---------- 3D: Bühne und Karten kippen mit dem Zeiger ---------- */
+  if (feinZeiger && !ruhig) {
+    const raum = $('[data-raum]');
+    if (raum) {
+      raum.addEventListener('pointermove', (e) => {
+        const r = raum.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        raum.classList.add('kippt');
+        raum.style.setProperty('--by', (x * 10).toFixed(2) + 'deg');
+        raum.style.setProperty('--bx', (-y * 8).toFixed(2) + 'deg');
+      });
+      raum.addEventListener('pointerleave', () => {
+        raum.classList.remove('kippt');
+        raum.style.setProperty('--by', '0deg');
+        raum.style.setProperty('--bx', '0deg');
+      });
+    }
+    $$('[data-kipp]').forEach((k) => {
+      k.addEventListener('pointermove', (e) => {
+        const r = k.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        k.classList.add('kippt');
+        k.style.setProperty('--ky', ((x - 0.5) * 7).toFixed(2) + 'deg');
+        k.style.setProperty('--kx', ((0.5 - y) * 7).toFixed(2) + 'deg');
+        k.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+        k.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      });
+      k.addEventListener('pointerleave', () => {
+        k.classList.remove('kippt');
+        k.style.setProperty('--kx', '0deg');
+        k.style.setProperty('--ky', '0deg');
+      });
+    });
+  }
+
+  /* ---------- 3D-Lampe: ziehen, mit Schwung loslassen, Pfeiltasten ---------- */
+  const l3d = $('[data-dreh]');
+  if (l3d) {
+    const objekt = $('.l3d__objekt', l3d);
+    const flaechen = $$('.l3d__schirm, .l3d__sockel', l3d).map((el) => ({ el, k: Number(el.style.getPropertyValue('--k')), schirm: el.classList.contains('l3d__schirm') }));
+    let winkel = 24, tempo = 0, zieht = false, letztesX = 0, proben = [], sichtbar = false, zuletzt = performance.now();
+    const EIGEN = ruhig ? 0 : 7; // Grad pro Sekunde, langsames Eigendrehen
+    function zeichnen() {
+      objekt.style.transform = `rotateX(-14deg) rotateY(${winkel.toFixed(2)}deg)`;
+      flaechen.forEach((f) => {
+        const c = Math.cos(((winkel + f.k * 90) * Math.PI) / 180);
+        f.el.style.setProperty('--hell', (f.schirm ? 0.72 + 0.32 * Math.max(0, c) : 0.6 + 0.45 * Math.max(0, c)).toFixed(3));
+      });
+    }
+    function schritt(jetzt) {
+      const dt = Math.min(0.05, (jetzt - zuletzt) / 1000);
+      zuletzt = jetzt;
+      if (!zieht) {
+        tempo *= Math.pow(0.04, dt); // Schwung klingt weich aus
+        winkel += (tempo + EIGEN) * dt;
+        zeichnen();
+      }
+      if (sichtbar && !document.hidden) requestAnimationFrame(schritt);
+    }
+    function starten() { zuletzt = performance.now(); requestAnimationFrame(schritt); }
+    l3d.addEventListener('pointerdown', (e) => {
+      zieht = true; tempo = 0; letztesX = e.clientX; proben = [{ x: e.clientX, t: e.timeStamp }];
+      l3d.setPointerCapture(e.pointerId); l3d.classList.add('zieht');
+    });
+    l3d.addEventListener('pointermove', (e) => {
+      if (!zieht) return;
+      winkel += (e.clientX - letztesX) * 0.55;
+      letztesX = e.clientX;
+      proben.push({ x: e.clientX, t: e.timeStamp });
+      proben = proben.filter((p) => e.timeStamp - p.t < 100);
+      zeichnen();
+    });
+    const loslassen = (e) => {
+      if (!zieht) return;
+      zieht = false; l3d.classList.remove('zieht');
+      const a = proben[0], b = proben[proben.length - 1];
+      if (a && b && b.t > a.t) tempo = ((b.x - a.x) / (b.t - a.t)) * 1000 * 0.55; // Fingertempo wird zum Drehschwung
+      tempo = klemmen(tempo, -900, 900);
+      if (sichtbar) starten();
+    };
+    l3d.addEventListener('pointerup', loslassen);
+    l3d.addEventListener('pointercancel', loslassen);
+    l3d.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); winkel += e.key === 'ArrowLeft' ? -20 : 20; zeichnen(); }
+    });
+    zeichnen();
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((ein) => {
+        const vorher = sichtbar;
+        sichtbar = ein[0].isIntersecting;
+        if (sichtbar && !vorher) starten();
+      }).observe(l3d);
+    }
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && sichtbar) starten(); });
+  }
+
+  /* ---------- Bewertungen ---------- */
+  const rezDaten = $('#bewertungen-daten');
+  if (rezDaten) {
+    let alle = [];
+    try { alle = JSON.parse(rezDaten.textContent); } catch { alle = []; }
+    const geklickt = speicher.lesen('helia-hilfreich', []);
+    const STERN = '<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.6l2.5 5.2 5.7.8-4.1 4 1 5.6L10 14.5l-5.1 2.7 1-5.6-4.1-4 5.7-.8z"/></svg>';
+    const DAUMEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9zM7 11l4-7a2 2 0 0 1 2 2v4h5.5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 17.3 20H7"/></svg>';
+    const sterneHtml = (n) => {
+      let h = '';
+      for (let i = 1; i <= 5; i++) {
+        const voll = Math.min(1, Math.max(0, n - i + 1));
+        h += voll >= 0.75 ? STERN : voll >= 0.25
+          ? `<span style="position:relative;display:inline-block"><span class="leer">${STERN}</span><span style="position:absolute;inset:0;width:50%;overflow:hidden">${STERN}</span></span>`
+          : `<span class="leer">${STERN}</span>`;
+      }
+      return h;
+    };
+    const zahl = (n) => n.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    const datum = (d) => new Date(d + 'T12:00:00').toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const nurBeispiele = alle.length > 0 && alle.every((r) => r.beispiel);
+    const wort = nurBeispiele ? 'Beispielbewertung' : 'Bewertung';
+    const schnitt = alle.length ? alle.reduce((a, r) => a + r.sterne, 0) / alle.length : 0;
+    let filter = 0, sortierung = 'neu', gezeigt = 4;
+
+    // Zusammenfassung
+    $('[data-rez="schnitt"]').textContent = zahl(schnitt);
+    $('[data-rez="sterne"]').innerHTML = sterneHtml(schnitt);
+    $('[data-rez="sterne"]').setAttribute('aria-label', `${zahl(schnitt)} von 5 Sternen`);
+    $('[data-rez="anzahl"]').textContent = `aus ${alle.length} ${wort}${alle.length === 1 ? '' : 'en'}`;
+    const kopf = $('[data-rez="kopf"]');
+    if (kopf && alle.length) {
+      $('[data-rez="sterne-kopf"]').innerHTML = sterneHtml(schnitt);
+      $('[data-rez="kopf-text"]').textContent = `${zahl(schnitt)} · ${alle.length} ${wort}${alle.length === 1 ? '' : 'en'}`;
+    }
+    const vert = $('[data-rez="verteilung"]');
+    [5, 4, 3, 2, 1].forEach((n) => {
+      const anzahl = alle.filter((r) => r.sterne === n).length;
+      const li = document.createElement('li');
+      li.innerHTML = `<button type="button" aria-pressed="false"><span>${n} ★</span><span class="spur"><i style="--a:${alle.length ? (anzahl / alle.length).toFixed(3) : 0}"></i></span><span class="wert">${anzahl}</span></button>`;
+      const b = $('button', li);
+      b.setAttribute('aria-label', `${n} Sterne: ${anzahl}. Filtern`);
+      b.addEventListener('click', () => { filter = filter === n ? 0 : n; gezeigt = 4; liste(); });
+      vert.appendChild(li);
+    });
+
+    function liste() {
+      $$('button', vert).forEach((b, i) => b.setAttribute('aria-pressed', String(filter === 5 - i)));
+      let r = alle.filter((x) => !filter || x.sterne === filter);
+      const f = { neu: (a, b) => b.datum.localeCompare(a.datum), hilfreich: (a, b) => b.hilfreich - a.hilfreich, hoch: (a, b) => b.sterne - a.sterne || b.datum.localeCompare(a.datum), tief: (a, b) => a.sterne - b.sterne || b.datum.localeCompare(a.datum) };
+      r = r.slice().sort(f[sortierung]);
+      const info = $('[data-rez="info"]');
+      info.innerHTML = filter
+        ? `${r.length} mit ${filter} Sternen <button type="button">Filter aufheben</button>`
+        : `${alle.length} ${wort}${alle.length === 1 ? '' : 'en'}`;
+      const auf = $('button', info);
+      if (auf) auf.addEventListener('click', () => { filter = 0; liste(); });
+      const ul = $('[data-rez="liste"]');
+      ul.innerHTML = '';
+      if (!r.length) { ul.innerHTML = '<li class="rez__leer glas">Noch keine Bewertungen mit dieser Sternezahl.</li>'; }
+      r.slice(0, gezeigt).forEach((x, i) => {
+        const li = document.createElement('li');
+        li.className = 'rez__karte glas';
+        li.style.animationDelay = `${Math.min(i, 5) * 50}ms`;
+        const hat = geklickt.includes(x.id);
+        li.innerHTML = `<div class="rez__kopf"><span class="sterne" aria-label="${x.sterne} von 5 Sternen">${sterneHtml(x.sterne)}</span><span class="rez__datum"></span></div>
+          <h3 class="rez__titel"></h3><p class="rez__text"></p>
+          ${x.antwort ? '<div class="rez__antwort"><b>Antwort von HELIA</b><p></p></div>' : ''}
+          <div class="rez__fuss"><span class="rez__autor"><span class="rez__avatar" aria-hidden="true"></span><span class="rez__name"></span>
+            <span class="marke-klein ${x.beispiel ? 'marke-klein--beispiel">Beispiel' : 'marke-klein--echt">Geprüfter Kauf'}</span></span>
+            <button type="button" class="hilfreich" aria-pressed="${hat}">${DAUMEN}<span>Hilfreich (${x.hilfreich + (hat ? 1 : 0)})</span></button></div>`;
+        $('.rez__datum', li).textContent = datum(x.datum);
+        $('.rez__titel', li).textContent = x.titel;
+        $('.rez__text', li).textContent = x.text;
+        $('.rez__name', li).textContent = x.name;
+        $('.rez__avatar', li).textContent = (x.name || '?').trim().charAt(0).toUpperCase();
+        if (x.antwort) $('.rez__antwort p', li).textContent = x.antwort;
+        $('.hilfreich', li).addEventListener('click', (e) => {
+          const b = e.currentTarget, j = geklickt.indexOf(x.id);
+          if (j >= 0) geklickt.splice(j, 1); else geklickt.push(x.id);
+          speicher.schreiben('helia-hilfreich', geklickt);
+          const an = j < 0;
+          b.setAttribute('aria-pressed', String(an));
+          $('span', b).textContent = `Hilfreich (${x.hilfreich + (an ? 1 : 0)})`;
+        });
+        ul.appendChild(li);
+      });
+      const mehr = $('[data-rez="mehr"]');
+      mehr.hidden = r.length <= gezeigt;
+    }
+    $('[data-rez="mehr"]').addEventListener('click', () => { gezeigt += 4; liste(); });
+    $('#rez-sort').addEventListener('change', (e) => { sortierung = e.target.value; liste(); });
+    liste();
+
+    // Bewertung schreiben
+    const dlg = $('#bewerten'), form = $('#bewerten-form');
+    $$('[data-bewerten]').forEach((b) => b.addEventListener('click', () => { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); }));
+    $('[data-bewerten-zu]', dlg).addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const m = $('.meldung', form);
+      const falsch = $$('input[required], textarea[required]', form).find((f) => (f.type === 'radio' ? !$(`input[name="${f.name}"]:checked`, form) : !f.checkValidity()));
+      if (falsch) {
+        m.className = 'meldung fehler';
+        m.textContent = falsch.type === 'radio' ? 'Bitte wählen Sie 1 bis 5 Sterne.' : falsch.name === 'text' ? 'Bitte schreiben Sie mindestens 20 Zeichen.' : falsch.name === 'einwilligung' ? 'Bitte setzen Sie das Häkchen zur Veröffentlichung.' : 'Bitte füllen Sie alle Felder aus.';
+        falsch.focus();
+        return;
+      }
+      const d = await senden(form, 'send.php');
+      if (!d) return;
+      m.className = 'meldung ' + (d.ok ? 'ok' : 'fehler');
+      m.textContent = d.ok ? 'Danke. Wir prüfen Ihre Bewertung anhand der Bestellnummer und veröffentlichen sie danach.' : d.fehler;
+      if (d.ok) form.reset();
+    });
   }
 
   // Newsletter

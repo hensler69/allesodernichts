@@ -22,7 +22,7 @@ const EINFUEHRUNG_BIS = '2026-11-30 23:59:59';
 const VERSAND        = 490;
 const GRATIS_AB      = 5900;
 const MAX_MENGE      = 5;
-const LIMITS         = ['bestellung' => 5, 'newsletter' => 3, 'widerruf' => 3]; // pro Zeitfenster
+const LIMITS         = ['bestellung' => 5, 'newsletter' => 3, 'widerruf' => 3, 'bewertung' => 3]; // pro Zeitfenster
 const ZEITFENSTER    = 600;
 const LINK_GUELTIG   = 172800; // Bestätigungslink 48 Stunden
 
@@ -206,6 +206,33 @@ if ($art === 'newsletter') {
         . "Bitte bestätigen Sie die Anmeldung mit diesem Link (48 Stunden gültig):\n\n" . $link . "\n\n"
         . "Danach schicken wir Ihnen Ihren Gutschein. Wenn Sie sich nicht angemeldet haben, ignorieren Sie diese Mail einfach.\n");
     $ok ? antworten(200, true) : antworten(500, false, 'Die Mail konnte nicht gesendet werden. Bitte versuchen Sie es später noch einmal.');
+}
+
+// ---- Bewertung -----------------------------------------------------------
+// Bewertungen gehen nur zur Prüfung an den Shop. Veröffentlicht wird erst, wenn die Bestellnummer stimmt.
+
+if ($art === 'bewertung') {
+    $sterne = (int) ($_POST['sterne'] ?? 0);
+    $titel  = kopfzeile_bereinigen((string) ($_POST['titel'] ?? ''), 80);
+    $name   = kopfzeile_bereinigen((string) ($_POST['name'] ?? ''), 40);
+    $mail   = mailadresse((string) ($_POST['email'] ?? ''));
+    $nr     = strtoupper(kopfzeile_bereinigen((string) ($_POST['bestellnr'] ?? ''), 30));
+    $roh    = (string) ($_POST['text'] ?? '');
+    $text   = mb_check_encoding($roh, 'UTF-8') ? mb_substr(trim(preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/u', '', str_replace(["\r\n", "\r"], "\n", $roh)) ?? ''), 0, 1500) : '';
+    if ($sterne < 1 || $sterne > 5 || $titel === '' || $name === '' || $mail === '' || mb_strlen($text) < 20) {
+        antworten(422, false, 'Bitte füllen Sie alle Felder aus (mindestens 20 Zeichen Text).');
+    }
+    if (!preg_match('/^HL-[0-9]{8}-[0-9A-F]{6}$/', $nr)) {
+        antworten(422, false, 'Bitte geben Sie die Bestellnummer aus Ihrer Bestätigungsmail an, zum Beispiel HL-20261005-ABC123.');
+    }
+    if (($_POST['einwilligung'] ?? '') !== 'ja') {
+        antworten(422, false, 'Bitte setzen Sie das Häkchen zur Veröffentlichung.');
+    }
+    $ok = schicken(SHOP_MAIL, 'Neue Bewertung zur Prüfung: ' . $sterne . ' Sterne',
+        "NEUE BEWERTUNG (noch nicht veröffentlicht)\n\nSterne: $sterne von 5\nÜberschrift: $titel\nName: $name\nE-Mail: $mail\nBestellnummer: $nr\n"
+        . "Eingegangen am " . date('d.m.Y, H:i:s') . " Uhr\n\nText:\n$text\n\n"
+        . "Bitte Bestellnummer prüfen. Erst danach in index.html im Block bewertungen-daten eintragen (beispiel: false).\n", $mail);
+    $ok ? antworten(200, true) : antworten(500, false, 'Die Bewertung konnte nicht gesendet werden. Bitte versuchen Sie es später noch einmal.');
 }
 
 // ---- Widerruf ------------------------------------------------------------
