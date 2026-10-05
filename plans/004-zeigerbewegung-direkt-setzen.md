@@ -1,6 +1,6 @@
 # 004: Zeigerbewegung direkt am Element setzen statt über vererbte Variablen
 
-- Stand: Commit `79a6061` · Stärke: MITTEL · Bereich: Leistung · Status: OFFEN
+- Stand: Commit `79a6061` · Stärke: MITTEL · Bereich: Leistung · Status: ERLEDIGT
 - Dateien: `shops/helia/assets/script.js` (Zeilen 324–328 und 457–474), `shops/helia/assets/style.css` (Zeilen 202–207 und 640–645)
 
 ## Problem

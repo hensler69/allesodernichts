@@ -1,6 +1,6 @@
 # 001: 3D-Kippen der Kacheln ohne Einblend-Verzögerung
 
-- Stand: Commit `79a6061` · Stärke: HOCH · Bereich: Gefühl (Fehler) · Status: OFFEN
+- Stand: Commit `79a6061` · Stärke: HOCH · Bereich: Gefühl (Fehler) · Status: ERLEDIGT
 - Dateien: `shops/helia/assets/style.css` (Zeilen 165 und 642)
 
 ## Problem

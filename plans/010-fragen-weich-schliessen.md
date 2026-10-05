@@ -1,6 +1,6 @@
 # 010: Häufige Fragen weich öffnen und schließen
 
-- Stand: Commit `79a6061` · Stärke: Ergänzung · Bereich: Verpasste Gelegenheit · Status: OFFEN
+- Stand: Commit `79a6061` · Stärke: Ergänzung · Bereich: Verpasste Gelegenheit · Status: ERLEDIGT
 - Datei: `shops/helia/assets/style.css` (Abschnitt "Fragen", Zeilen etwa 360–373)
 
 ## Problem

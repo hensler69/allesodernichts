@@ -1,6 +1,6 @@
 # 002: Himmel und Stadt aktualisieren, ohne die ganze Seite neu zu berechnen
 
-- Stand: Commit `79a6061` · Stärke: HOCH · Bereich: Leistung · Status: OFFEN
+- Stand: Commit `79a6061` · Stärke: HOCH · Bereich: Leistung · Status: ERLEDIGT
 - Datei: `shops/helia/assets/script.js` (Funktion `bild()` ab Zeile 236, Maus-Listener Zeile 322)
 
 ## Problem

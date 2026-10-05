@@ -1,6 +1,6 @@
 # 007: Sanfterer Knopfdruck auf dem Display
 
-- Stand: Commit `79a6061` · Stärke: NIEDRIG · Bereich: Gefühl · Status: OFFEN
+- Stand: Commit `79a6061` · Stärke: NIEDRIG · Bereich: Gefühl · Status: ERLEDIGT
 - Datei: `shops/helia/assets/style.css` (Zeile 274)
 
 ## Problem

@@ -47,6 +47,16 @@
   }
 
   const dialog = $('#korb');
+  // Entfernte Artikel gleiten weg und die Lücke schließt sich weich, statt dass alles springt
+  async function wegAnimieren(li) {
+    li.style.pointerEvents = 'none';
+    if (ruhig || !li.animate) return;
+    const kurve = 'cubic-bezier(0.23, 1, 0.32, 1)';
+    const abstand = parseFloat(getComputedStyle(li.parentElement).rowGap) || 0;
+    await li.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(12px)' }], { duration: 180, easing: kurve, fill: 'forwards' }).finished;
+    await li.animate([{ height: li.offsetHeight + 'px', marginBottom: '0px', paddingTop: getComputedStyle(li).paddingTop, paddingBottom: getComputedStyle(li).paddingBottom },
+      { height: '0px', marginBottom: -abstand + 'px', paddingTop: '0px', paddingBottom: '0px' }], { duration: 160, easing: kurve, fill: 'forwards' }).finished;
+  }
   function korbZeigen() {
     $$('.korb-knopf__zahl').forEach((z) => { z.textContent = korbAnzahl(); });
     $$('.korb-knopf').forEach((b) => b.setAttribute('aria-label', `Warenkorb öffnen, ${korbAnzahl()} Artikel`));
@@ -73,10 +83,11 @@
       $('[data-schritt="-1"]', li).setAttribute('aria-label', 'Eins weniger');
       $('[data-schritt="1"]', li).setAttribute('aria-label', 'Eins mehr');
       $('.posten__preis', li).textContent = euro(korb[id] * preis(id));
-      li.addEventListener('click', (e) => {
+      li.addEventListener('click', async (e) => {
         const s = e.target.closest('[data-schritt]');
+        const weg = e.target.closest('.entfernen') || (s && korb[id] + Number(s.dataset.schritt) <= 0);
+        if (weg) { await wegAnimieren(li); korb[id] = 0; korbSpeichern(); return; }
         if (s) { korb[id] = klemmen(korb[id] + Number(s.dataset.schritt), 0, MAX_MENGE); korbSpeichern(); }
-        if (e.target.closest('.entfernen')) { korb[id] = 0; korbSpeichern(); }
       });
       liste.appendChild(li);
     });
@@ -126,7 +137,12 @@
     if (!angebot) return;
     const id = $('input[name="paket"]:checked', angebot).value;
     $('output', angebot).textContent = menge;
-    $('[data-feld="angebot-summe"]', angebot).textContent = euro(menge * preis(id));
+    const feld = $('[data-feld="angebot-summe"]', angebot);
+    const neu = euro(menge * preis(id));
+    if (feld.textContent !== neu) {
+      feld.textContent = neu;
+      if (feld.animate) feld.animate(ruhig ? [{ opacity: 0.4 }, { opacity: 1 }] : [{ opacity: 0.3, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 150, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    }
   }
   if (angebot) {
     angebot.addEventListener('change', angebotSumme);
@@ -233,11 +249,33 @@
     return { q: klemmen(-r.top / weg), r };
   }
 
+  // Himmel-Werte nur am Hintergrund (.welt) setzen und nur, wenn sie sich ändern.
+  // An <html> gesetzt würde jede Änderung die ganze Seite neu berechnen lassen.
+  const zuletzt = new Map();
+  function setzeWenn(el, name, wert) {
+    if (!el) return;
+    const k = el;
+    let m = zuletzt.get(k);
+    if (!m) { m = {}; zuletzt.set(k, m); }
+    if (m[name] === wert) return;
+    m[name] = wert;
+    el.style.setProperty(name, wert);
+  }
+  let stadtP = 0;
+  function stadtSetzen() {
+    if (ruhig) return;
+    stadt.forEach((el, i) => { el.style.transform = `translate3d(${(maus.x * [-6, -14, -26][i]).toFixed(1)}px, ${(stadtP * [3, 7, 12][i]).toFixed(2)}vh, 0)`; });
+  }
+
   function bild() {
     const y = scrollY;
     const hoehe = Math.max(1, document.documentElement.scrollHeight - innerHeight);
     const p = klemmen(y / hoehe);
     const a = aufgangFortschritt();
+    // Erst alles messen, dann alles schreiben (vermeidet erzwungene Zwischen-Layouts)
+    const rWort = wortweise && !ruhig ? wortweise.getBoundingClientRect() : null;
+    const hk = kaufleiste && heldKnopf ? heldKnopf.getBoundingClientRect() : null;
+    const an = kaufleiste && angebotTeil ? angebotTeil.getBoundingClientRect() : null;
 
     // Sonnenstand für die ganze Seite: vor dem Aufgang Nacht, darin Aufgang, danach leichte Dämmerung
     let s;
@@ -249,20 +287,21 @@
       else s = 1 - 0.3 * klemmen((y - ende) / Math.max(1, hoehe - ende));
     }
     sonne = s;
-    root.style.setProperty('--sky1', verlauf(HIMMEL, s, 1));
-    root.style.setProperty('--sky2', verlauf(HIMMEL, s, 2));
-    root.style.setProperty('--sky3', verlauf(HIMMEL, s, 3));
-    root.style.setProperty('--sun', s.toFixed(3));
+    setzeWenn(welt, '--sky1', verlauf(HIMMEL, s, 1));
+    setzeWenn(welt, '--sky2', verlauf(HIMMEL, s, 2));
+    setzeWenn(welt, '--sky3', verlauf(HIMMEL, s, 3));
+    setzeWenn(welt, '--sun', s.toFixed(2));
 
     // Stadt sinkt langsam, je weiter man scrollt: man steigt der Sonne entgegen
-    if (!ruhig) stadt.forEach((el, i) => { el.style.transform = `translate3d(${(maus.x * [-6, -14, -26][i]).toFixed(1)}px, ${(p * [3, 7, 12][i]).toFixed(2)}vh, 0)`; });
+    stadtP = p;
+    stadtSetzen();
 
     // Sonnenaufgang im angehefteten Abschnitt
     if (aufgang && aufgangKlebt) {
       const q = a.q;
-      aufgangKlebt.style.setProperty('--lamp', verlauf(LAMPE, q, 1));
-      aufgangKlebt.style.setProperty('--glow', (0.06 + 0.94 * klemmen(q / 0.6)).toFixed(3));
-      aufgangKlebt.style.setProperty('--p', q.toFixed(3));
+      setzeWenn(aufgangKlebt, '--lamp', verlauf(LAMPE, q, 1));
+      setzeWenn(aufgangKlebt, '--glow', (0.06 + 0.94 * klemmen(q / 0.6)).toFixed(3));
+      setzeWenn(aufgangKlebt, '--p', q.toFixed(3));
       const min = Math.round(q * 30);
       const t = `06:${String(min).padStart(2, '0')}`;
       if (simUhr.textContent !== t) {
@@ -277,18 +316,15 @@
     }
 
     // Geschichte: Wort für Wort heller
-    if (wortweise && !ruhig) {
-      const r = wortweise.getBoundingClientRect();
-      const anteil = klemmen((innerHeight * 0.85 - r.top) / (r.height + innerHeight * 0.35));
+    if (rWort) {
+      const anteil = klemmen((innerHeight * 0.85 - rWort.top) / (rWort.height + innerHeight * 0.35));
       const woerter = wortweise._w || (wortweise._w = $$('.w', wortweise));
       const n = Math.round(anteil * woerter.length);
       woerter.forEach((w, i) => w.classList.toggle('an', i < n));
     }
 
     // Kaufleiste am Handy: nur wenn der Knopf oben weg ist und das Angebot nicht zu sehen ist
-    if (kaufleiste && heldKnopf) {
-      const hk = heldKnopf.getBoundingClientRect();
-      const an = angebotTeil ? angebotTeil.getBoundingClientRect() : null;
+    if (hk) {
       const angebotSichtbar = an && an.top < innerHeight && an.bottom > 0;
       kaufleiste.classList.toggle('ist-da', hk.bottom < 0 && !angebotSichtbar);
     }
@@ -319,12 +355,20 @@
   let wartet = false;
   const planen = () => { if (!wartet) { wartet = true; requestAnimationFrame(() => { wartet = false; bild(); }); } };
   addEventListener('scroll', planen, { passive: true });
-  if (feinZeiger && !ruhig) addEventListener('pointermove', (e) => { maus.x = e.clientX / innerWidth - 0.5; maus.y = e.clientY / innerHeight - 0.5; planen(); }, { passive: true });
+  let mausWartet = false;
+  if (feinZeiger && !ruhig) addEventListener('pointermove', (e) => {
+    maus.x = e.clientX / innerWidth - 0.5; maus.y = e.clientY / innerHeight - 0.5;
+    if (!mausWartet) { mausWartet = true; requestAnimationFrame(() => { mausWartet = false; stadtSetzen(); }); }
+  }, { passive: true });
   const held = $('.held');
   if (held && feinZeiger && !ruhig) {
     // Kärtchen im Kopfbereich folgen dem Zeiger je nach Tiefe unterschiedlich stark
-    held.addEventListener('pointermove', (e) => { held.style.setProperty('--px', (e.clientX / innerWidth - 0.5).toFixed(3)); held.style.setProperty('--py', (e.clientY / innerHeight - 0.5).toFixed(3)); });
-    held.addEventListener('pointerleave', () => { held.style.setProperty('--px', '0'); held.style.setProperty('--py', '0'); });
+    const karten = $$('.held__chips .hinweis-chip').map((el) => ({ el, t: parseFloat(getComputedStyle(el).getPropertyValue('--t')) || 20 }));
+    held.addEventListener('pointermove', (e) => {
+      const px = e.clientX / innerWidth - 0.5, py = e.clientY / innerHeight - 0.5;
+      karten.forEach((k) => { k.el.style.translate = `${(px * k.t).toFixed(1)}px ${(py * k.t).toFixed(1)}px`; });
+    });
+    held.addEventListener('pointerleave', () => karten.forEach((k) => { k.el.style.translate = ''; }));
   }
   addEventListener('resize', planen);
   bild();
@@ -339,20 +383,21 @@
       b = innerWidth; h = innerHeight;
       leinwand.width = Math.round(b * dpr); leinwand.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const anzahl = Math.min(110, Math.round((b * h) / 15000));
+      const grob = window.matchMedia('(pointer: coarse)').matches;
+      const anzahl = Math.min(grob ? 55 : 110, Math.round((b * h) / (grob ? 30000 : 15000)));
       tropfen = Array.from({ length: anzahl }, () => neu(true));
     }
     function neu(irgendwo) {
       const tiefe = Math.random();
       return { x: Math.random() * (b + 200) - 100, y: irgendwo ? Math.random() * h : -30, l: 8 + tiefe * 18, v: 7 + tiefe * 11, a: 0.03 + tiefe * 0.09 };
     }
-    function malen(bewegen) {
+    function malen(bewegen, faktor = 1) {
       ctx.clearRect(0, 0, b, h);
       const staerke = 1 - sonne * 0.7;
       ctx.lineWidth = 1;
       ctx.lineCap = 'round';
       for (const t of tropfen) {
-        if (bewegen) { t.y += t.v; t.x += t.v * 0.16; if (t.y > h + 20) Object.assign(t, neu(false)); }
+        if (bewegen) { t.y += t.v * faktor; t.x += t.v * 0.16 * faktor; if (t.y > h + 20) Object.assign(t, neu(false)); }
         ctx.strokeStyle = `rgba(178,196,235,${(t.a * staerke).toFixed(3)})`;
         ctx.beginPath(); ctx.moveTo(t.x, t.y); ctx.lineTo(t.x - t.l * 0.16, t.y - t.l); ctx.stroke();
       }
@@ -361,7 +406,17 @@
     addEventListener('resize', groesse);
     if (ruhig) malen(false);
     else {
-      const schleife = () => { if (!document.hidden) malen(true); requestAnimationFrame(schleife); };
+      // 30 Bilder pro Sekunde genügen für Regen. Bei offenem Fenster (Warenkorb, Bewertung) steht er still,
+      // damit die Glasflächen nicht ständig neu weichgezeichnet werden müssen.
+      let letztes = 0;
+      const schleife = (jetzt) => {
+        if (!document.hidden && !document.querySelector('dialog[open]') && jetzt - letztes >= 33) {
+          const faktor = letztes ? Math.min(3, (jetzt - letztes) / 16.7) : 1;
+          letztes = jetzt;
+          malen(true, faktor);
+        }
+        requestAnimationFrame(schleife);
+      };
       requestAnimationFrame(schleife);
     }
   }
@@ -429,7 +484,12 @@
   teile.forEach((t) => {
     t.addEventListener('click', () => oeffnen(t));
     t.addEventListener('focus', () => oeffnen(t));
-    if (fein) t.addEventListener('mouseenter', () => oeffnen(t));
+    if (fein) {
+      // Erst nach kurzem Verweilen öffnen, damit Durchziehen der Maus nichts aufklappt
+      let warte;
+      t.addEventListener('mouseenter', () => { clearTimeout(warte); warte = setTimeout(() => oeffnen(t), 120); });
+      t.addEventListener('mouseleave', () => clearTimeout(warte));
+    }
   });
 
   /* ---------- Formulare an PHP schicken ---------- */
@@ -456,20 +516,19 @@
   /* ---------- 3D: Bühne und Karten kippen mit dem Zeiger ---------- */
   if (feinZeiger && !ruhig) {
     $$('[data-kipp]').forEach((k) => {
+      // Kippen direkt per transform, Lichtreflex als eigenes Element: keine vererbten Variablen pro Mausbewegung
+      const glanz = document.createElement('span');
+      glanz.className = 'kipp-glanz';
+      glanz.setAttribute('aria-hidden', 'true');
+      k.appendChild(glanz);
       k.addEventListener('pointermove', (e) => {
         const r = k.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
         k.classList.add('kippt');
-        k.style.setProperty('--ky', ((x - 0.5) * 7).toFixed(2) + 'deg');
-        k.style.setProperty('--kx', ((0.5 - y) * 7).toFixed(2) + 'deg');
-        k.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
-        k.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+        k.style.transform = `perspective(1000px) rotateX(${((0.5 - y) * 7).toFixed(2)}deg) rotateY(${((x - 0.5) * 7).toFixed(2)}deg)`;
+        glanz.style.transform = `translate(${(x * r.width).toFixed(0)}px, ${(y * r.height).toFixed(0)}px)`;
       });
-      k.addEventListener('pointerleave', () => {
-        k.classList.remove('kippt');
-        k.style.setProperty('--kx', '0deg');
-        k.style.setProperty('--ky', '0deg');
-      });
+      k.addEventListener('pointerleave', () => { k.classList.remove('kippt'); k.style.transform = ''; });
     });
   }
 

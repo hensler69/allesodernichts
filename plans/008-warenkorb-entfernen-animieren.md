@@ -1,6 +1,6 @@
 # 008: Entfernte Artikel im Warenkorb weich ausblenden
 
-- Stand: Commit `79a6061` · Stärke: Ergänzung · Bereich: Verpasste Gelegenheit · Status: OFFEN
+- Stand: Commit `79a6061` · Stärke: Ergänzung · Bereich: Verpasste Gelegenheit · Status: ERLEDIGT
 - Datei: `shops/helia/assets/script.js` (Funktion `korbZeigen()`, Klick-Handler im `li`, etwa Zeilen 72–76)
 
 ## Problem

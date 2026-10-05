@@ -1,6 +1,6 @@
 # 003: Regen hinter den Glasflächen entlasten
 
-- Stand: Commit `79a6061` · Stärke: HOCH (am echten Gerät fühlen) · Bereich: Leistung · Status: OFFEN
+- Stand: Commit `79a6061` · Stärke: HOCH (am echten Gerät fühlen) · Bereich: Leistung · Status: ERLEDIGT
 - Datei: `shops/helia/assets/script.js` (Regen ab Zeile 333, Schleife Zeile 364)
 
 ## Problem

@@ -1,6 +1,6 @@
 # 005: Glühen des Kaufknopfs ohne ständiges Neuzeichnen
 
-- Stand: Commit `79a6061` · Stärke: MITTEL · Bereich: Leistung · Status: OFFEN
+- Stand: Commit `79a6061` · Stärke: MITTEL · Bereich: Leistung · Status: ERLEDIGT
 - Datei: `shops/helia/assets/style.css` (Zeilen 153–154 und Block `prefers-reduced-motion`)
 
 ## Problem

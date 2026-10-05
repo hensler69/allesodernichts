@@ -1,6 +1,6 @@
 # 006: Zeitleiste "Vom Abend bis zum Morgen" erst nach kurzem Verweilen öffnen
 
-- Stand: Commit `79a6061` · Stärke: NIEDRIG · Bereich: Gefühl · Status: OFFEN
+- Stand: Commit `79a6061` · Stärke: NIEDRIG · Bereich: Gefühl · Status: ERLEDIGT
 - Datei: `shops/helia/assets/script.js` (Zeilen 424–433)
 
 ## Problem

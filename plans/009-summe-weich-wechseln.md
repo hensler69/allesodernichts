@@ -1,6 +1,6 @@
 # 009: Summe im Angebot beim Ändern weich wechseln
 
-- Stand: Commit `79a6061` · Stärke: Ergänzung · Bereich: Verpasste Gelegenheit · Status: OFFEN
+- Stand: Commit `79a6061` · Stärke: Ergänzung · Bereich: Verpasste Gelegenheit · Status: ERLEDIGT
 - Datei: `shops/helia/assets/script.js` (Funktion `angebotSumme()`)
 
 ## Problem
