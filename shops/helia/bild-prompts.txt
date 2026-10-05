@@ -3,7 +3,7 @@ BILD-PROMPTS FÜR HELIA (Englisch, für Bild-KIs oder Fotografen)
 WICHTIG: Das Produktfoto assets/img/produkt-entwurf.jpg stammt aus fremder Quelle (Amazon)
 und darf auf der echten Seite NICHT verwendet werden. Ersetzen durch ein eigenes Foto
 oder ein Foto, das der Lieferant schriftlich freigibt. Dateiname beibehalten oder in
-index.html (2 Stellen), og-Bild und das Bild neu erzeugen.
+index.html (1 Stelle im Angebot).
 
 1) Produktfoto, Hauptbild (Seitenverhältnis 2:3, Hochformat), ersetzt produkt-entwurf.jpg
    "Studio product photo of a tall tapered bedside sunrise alarm clock with a warm linen
@@ -27,5 +27,5 @@ index.html (2 Stellen), og-Bild und das Bild neu erzeugen.
    adapter with cable, a folded quick start guide, minimal packaging, soft top light."
 
 5) Vorschaubild für soziale Netzwerke
-   assets/og-image.jpg (1200 x 630) wurde aus Stadtgrafik, Überschrift und dem Produktbild
-   zusammengesetzt. Nach dem Austausch des Produktfotos neu erzeugen.
+   assets/og-image.jpg (1200 x 630) zeigt jetzt die gezeichnete 3D-Lampe aus dem Kopfbereich, kein Fremdfoto.
+   Es kann so bleiben. Das Produktfoto erscheint nur noch im Abschnitt "Angebot" (index.html, 1 Stelle).

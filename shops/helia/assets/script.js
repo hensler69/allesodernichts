@@ -177,7 +177,7 @@
   }
 
   /* ---------- Uhrzeit auf der Lampe im Kopfbereich ---------- */
-  const heldZeit = $('.held .lampe .zeit');
+  const heldZeit = $('.held .zeit');
   function uhr() {
     if (!heldZeit) return;
     const d = new Date();
@@ -320,6 +320,12 @@
   const planen = () => { if (!wartet) { wartet = true; requestAnimationFrame(() => { wartet = false; bild(); }); } };
   addEventListener('scroll', planen, { passive: true });
   if (feinZeiger && !ruhig) addEventListener('pointermove', (e) => { maus.x = e.clientX / innerWidth - 0.5; maus.y = e.clientY / innerHeight - 0.5; planen(); }, { passive: true });
+  const held = $('.held');
+  if (held && feinZeiger && !ruhig) {
+    // Kärtchen im Kopfbereich folgen dem Zeiger je nach Tiefe unterschiedlich stark
+    held.addEventListener('pointermove', (e) => { held.style.setProperty('--px', (e.clientX / innerWidth - 0.5).toFixed(3)); held.style.setProperty('--py', (e.clientY / innerHeight - 0.5).toFixed(3)); });
+    held.addEventListener('pointerleave', () => { held.style.setProperty('--px', '0'); held.style.setProperty('--py', '0'); });
+  }
   addEventListener('resize', planen);
   bild();
 
@@ -449,21 +455,6 @@
 
   /* ---------- 3D: Bühne und Karten kippen mit dem Zeiger ---------- */
   if (feinZeiger && !ruhig) {
-    const raum = $('[data-raum]');
-    if (raum) {
-      raum.addEventListener('pointermove', (e) => {
-        const r = raum.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-        raum.classList.add('kippt');
-        raum.style.setProperty('--by', (x * 10).toFixed(2) + 'deg');
-        raum.style.setProperty('--bx', (-y * 8).toFixed(2) + 'deg');
-      });
-      raum.addEventListener('pointerleave', () => {
-        raum.classList.remove('kippt');
-        raum.style.setProperty('--by', '0deg');
-        raum.style.setProperty('--bx', '0deg');
-      });
-    }
     $$('[data-kipp]').forEach((k) => {
       k.addEventListener('pointermove', (e) => {
         const r = k.getBoundingClientRect();
@@ -482,18 +473,25 @@
     });
   }
 
-  /* ---------- 3D-Lampe: ziehen, mit Schwung loslassen, Pfeiltasten ---------- */
-  const l3d = $('[data-dreh]');
-  if (l3d) {
+  /* ---------- 3D-Lampen: ziehen, mit Schwung loslassen, Pfeiltasten, kreisende Kärtchen ---------- */
+  $$('[data-dreh]').forEach((l3d, nr) => {
     const objekt = $('.l3d__objekt', l3d);
     const flaechen = $$('.l3d__schirm, .l3d__sockel', l3d).map((el) => ({ el, k: Number(el.style.getPropertyValue('--k')), schirm: el.classList.contains('l3d__schirm') }));
-    let winkel = 24, tempo = 0, zieht = false, letztesX = 0, proben = [], sichtbar = false, zuletzt = performance.now();
-    const EIGEN = ruhig ? 0 : 7; // Grad pro Sekunde, langsames Eigendrehen
+    const chips = $$('.l3d__chip', l3d).map((el) => ({ el, a: Number(el.dataset.winkel), h: Number(el.dataset.hoehe) }));
+    let winkel = nr === 0 ? -28 : 24, tempo = 0, zieht = false, letztesX = 0, proben = [], sichtbar = false, zuletzt = performance.now();
+    const EIGEN = ruhig ? 0 : (chips.length ? 9 : 7); // Grad pro Sekunde, langsames Eigendrehen
+    const RADIUS = 215;
     function zeichnen() {
       objekt.style.transform = `rotateX(-14deg) rotateY(${winkel.toFixed(2)}deg)`;
       flaechen.forEach((f) => {
         const c = Math.cos(((winkel + f.k * 90) * Math.PI) / 180);
         f.el.style.setProperty('--hell', (f.schirm ? 0.72 + 0.32 * Math.max(0, c) : 0.6 + 0.45 * Math.max(0, c)).toFixed(3));
+      });
+      chips.forEach((c) => {
+        // Kärtchen kreisen um die Lampe, schauen aber immer zum Betrachter
+        const vorn = Math.cos(((c.a + winkel) * Math.PI) / 180);
+        c.el.style.transform = `translateY(${-c.h}px) rotateY(${c.a}deg) translateZ(${RADIUS}px) rotateY(${-(c.a + winkel)}deg) rotateX(14deg)`;
+        c.el.style.opacity = (0.25 + 0.75 * Math.max(0, (vorn + 0.35) / 1.35)).toFixed(3);
       });
     }
     function schritt(jetzt) {
@@ -519,7 +517,7 @@
       proben = proben.filter((p) => e.timeStamp - p.t < 100);
       zeichnen();
     });
-    const loslassen = (e) => {
+    const loslassen = () => {
       if (!zieht) return;
       zieht = false; l3d.classList.remove('zieht');
       const a = proben[0], b = proben[proben.length - 1];
@@ -541,6 +539,43 @@
       }).observe(l3d);
     }
     document.addEventListener('visibilitychange', () => { if (!document.hidden && sichtbar) starten(); });
+  });
+
+  /* ---------- Kopfbereich: die Lampe geht beim Laden auf wie die Sonne ---------- */
+  const intro = $('[data-intro]');
+  if (intro) {
+    const ende = { lamp: '#ffb35c', glow: 0.92 };
+    if (ruhig) { intro.style.setProperty('--lamp', ende.lamp); intro.style.setProperty('--glow', ende.glow); }
+    else {
+      const dauer = 2600, start = performance.now() + 250;
+      const lauf = (jetzt) => {
+        const t = klemmen((jetzt - start) / dauer);
+        const e = 1 - Math.pow(1 - t, 3);
+        intro.style.setProperty('--lamp', verlauf(LAMPE, e * 0.8, 1));
+        intro.style.setProperty('--glow', (0.04 + 0.88 * e).toFixed(3));
+        if (t < 1) requestAnimationFrame(lauf);
+      };
+      intro.style.setProperty('--glow', '0.04');
+      requestAnimationFrame(lauf);
+    }
+  }
+
+  /* ---------- Zahlen zählen hoch, wenn sie ins Bild kommen ---------- */
+  if (!ruhig && 'IntersectionObserver' in window) {
+    const zio = new IntersectionObserver((ein) => {
+      ein.forEach((e) => {
+        if (!e.isIntersecting) return;
+        zio.unobserve(e.target);
+        const el = e.target, ziel = Number(el.dataset.zaehlen), t0 = performance.now();
+        const z = (jetzt) => {
+          const t = klemmen((jetzt - t0) / 1100);
+          el.textContent = String(Math.round(ziel * (1 - Math.pow(1 - t, 3))));
+          if (t < 1) requestAnimationFrame(z);
+        };
+        requestAnimationFrame(z);
+      });
+    }, { threshold: 0.6 });
+    $$('[data-zaehlen]').forEach((el) => zio.observe(el));
   }
 
   /* ---------- Bewertungen ---------- */

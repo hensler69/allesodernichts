@@ -188,34 +188,35 @@ p{margin:0 0 var(--s3)}
   mask-composite:intersect}
 
 /* ---------- Kopfbereich: zentriert, Bühne darunter ---------- */
-.held{position:relative;max-width:calc(var(--breite) + 2*var(--rand));margin:0 auto;padding:var(--s5) var(--rand) 0;text-align:center}
+.held{position:relative;max-width:calc(var(--breite) + 2*var(--rand));margin:0 auto;padding:var(--s4) var(--rand) 0;
+  display:grid;grid-template-columns:1fr 1.618fr;align-items:center;gap:var(--s4);min-height:min(calc(100svh - 130px),820px)}
+.held__text{position:relative;z-index:2}
 .held .marke{margin-bottom:var(--s3)}
-.held h1{font-size:clamp(2.6rem,5.2vw,4.8rem);margin:0 auto}
-.held__unter{color:var(--text-2);font-size:clamp(1.1rem,1.6vw,1.3rem);line-height:1.5;max-width:44rem;margin:var(--s3) auto 0}
-.held__kauf{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:var(--s3) var(--s4);margin-top:var(--s4)}
-.preis{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:.1rem}
-.preis__betrag{font:700 1.9rem/1 var(--f-sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.held h1{font-size:clamp(2.8rem,5vw,5.2rem);line-height:.98;letter-spacing:-.045em}
+.held h1 > span{display:block}
+.held__unter{color:var(--text-2);font-size:clamp(1.1rem,1.5vw,1.28rem);line-height:1.5;max-width:30rem;margin:var(--s4) 0 0}
+.held__kauf{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s4);margin-top:var(--s5)}
+.held .kleingedruckt{margin:var(--s3) 0 0;max-width:30rem}
+.preis{display:flex;flex-direction:column;gap:.15rem}
+.preis__betrag{font:700 2.1rem/1 var(--f-sans);letter-spacing:-.035em;font-variant-numeric:tabular-nums}
 .preis__info{font-size:.84rem;color:var(--honig)}
-.held .kleingedruckt{margin:var(--s2) auto 0;max-width:46rem}
-.buehne-raum{perspective:1400px;margin:var(--s4) auto 0;max-width:var(--breite)}
-.buehne{position:relative;aspect-ratio:1.618/1;max-height:78vh;width:100%;display:grid;place-items:center;
-  transform-style:preserve-3d;transform:rotateX(var(--bx,0deg)) rotateY(var(--by,0deg));transition:transform .7s var(--ease-out)}
-.buehne.kippt{transition:transform .12s linear}
-.buehne::before{content:"";position:absolute;inset:0;border-radius:var(--radius-gross);transform:translateZ(-1px);
-  background:radial-gradient(60% 70% at 50% 62%,rgba(255,170,100,.18),transparent 70%),linear-gradient(180deg,rgba(34,40,86,.6),rgba(12,15,36,.7));
-  border:1px solid var(--glas-kante);border-top-color:var(--glas-licht);box-shadow:var(--schatten)}
-.buehne::after{content:"";position:absolute;left:10%;right:10%;bottom:-6%;height:12%;border-radius:50%;transform:translateZ(-60px);
-  background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);filter:blur(8px)}
-.buehne > .lampe{transform:translateZ(70px)}
-.buehne > .hinweis-chip{transform:translateZ(120px)}
-.buehne .lampe{height:86%;width:auto;aspect-ratio:361/537}
-.hinweis-chip{position:absolute;display:grid;gap:.15rem;text-align:left;padding:.9rem 1.15rem;border-radius:20px;min-width:11rem;
-  background:var(--glas-stark);border:1px solid var(--glas-kante);border-top-color:var(--glas-licht);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);box-shadow:var(--schatten-klein)}
-.hinweis-chip b{font:700 1.5rem/1.05 var(--f-sans);letter-spacing:-.03em}
+.held__chips{position:absolute;inset:0;pointer-events:none}
+.held__chips .hinweis-chip{position:absolute;translate:calc(var(--px,0) * var(--t,20px)) calc(var(--py,0) * var(--t,20px));transition:translate .6s var(--ease-out);
+  animation:schweben 7s ease-in-out infinite;animation-delay:var(--v,0s)}
+.held__chips .hinweis-chip:nth-child(1){left:2%;top:20%;--t:34px}
+.held__chips .hinweis-chip:nth-child(2){right:0;top:42%;--t:22px;--v:-2.4s}
+.held__chips .hinweis-chip:nth-child(3){left:6%;bottom:22%;--t:44px;--v:-4.6s}
+@keyframes schweben{50%{transform:translateY(-10px)}}
+.held__an{animation:hoch 1s var(--ease-out) backwards;animation-delay:calc(var(--i) * 90ms + 150ms)}
+@keyframes hoch{from{opacity:0;translate:0 22px;filter:blur(6px)}}
+.held__lampe{position:relative;align-self:stretch;display:grid;align-content:center}
+.held__lampe::before{content:"";position:absolute;left:50%;top:48%;width:min(78vw,900px);aspect-ratio:1;translate:-50% -50%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(120,110,255,.10),transparent 70%)}
+.held__lampe .l3d{height:min(660px,74vh);--gr:1.42}
+.hinweis-chip{display:grid;gap:.15rem;text-align:left;padding:.9rem 1.15rem;border-radius:20px;
+  background:var(--glas-stark);border:1px solid var(--glas-kante);border-top-color:var(--glas-licht);box-shadow:var(--schatten-klein)}
+.hinweis-chip b{font:700 1.3rem/1.05 var(--f-sans);letter-spacing:-.03em}
 .hinweis-chip span{font-size:.84rem;color:var(--text-2)}
-.hinweis-chip--1{left:6%;top:18%}
-.hinweis-chip--2{right:6%;top:34%}
-.hinweis-chip--3{left:9%;bottom:16%}
 .chips-mobil{display:none}
 
 /* ---------- Auf einen Blick ---------- */
@@ -478,6 +479,7 @@ p{margin:0 0 var(--s3)}
 /* ---------- Tablet ---------- */
 @media (max-width:1020px){
   .kopf__nav a{padding:.45rem .55rem}
+  .held__chips{display:none}
   .blick{grid-template-columns:repeat(2,1fr)}
   .bento{grid-template-columns:repeat(2,1fr)}
   .kachel--display,.kachel--abend{grid-column:span 2}
@@ -488,7 +490,6 @@ p{margin:0 0 var(--s3)}
   .angebot__bild{min-height:0}
   .fuss__innen{grid-template-columns:1fr}
   .nacht{height:420px}
-  .hinweis-chip{min-width:0}
 }
 
 /* ---------- Handy: eigene Gestaltung ---------- */
@@ -508,19 +509,23 @@ p{margin:0 0 var(--s3)}
   .kapitel__kopf{margin-bottom:var(--s5)}
   .kapitel__kopf p{font-size:1.05rem}
 
-  .held{padding-top:var(--s5)}
-  .held h1{font-size:clamp(2.6rem,12vw,3.6rem)}
-  .held__kauf{flex-direction:column;gap:var(--s3)}
+  .held{grid-template-columns:1fr;min-height:0;padding-top:var(--s4);gap:0;text-align:center}
+  .held__text{display:contents}
+  .held .marke{order:1}
+  .held h1{order:2;font-size:clamp(2.6rem,12.5vw,3.8rem)}
+  .held__unter{order:3;margin:var(--s3) auto 0}
+  .held__lampe{order:4;margin-top:var(--s2)}
+  .held__lampe .l3d{height:290px;--gr:.76}
+  .held__chips{display:none}
+  .held__lampe .dreh-hinweis{display:none}
+  .held__sterne{order:5;justify-content:center;margin-top:0}
+  .held__kauf{order:6;flex-direction:column;gap:var(--s3);margin-top:var(--s3)}
   .preis{align-items:center;text-align:center}
   .held__kauf .knopf{width:100%}
-  .buehne-raum{margin-top:var(--s5)}
-  .buehne{aspect-ratio:auto;height:min(92vw,440px)}
-  .buehne::before{border-radius:var(--radius)}
-  .buehne .lampe{height:88%}
-  .hinweis-chip{display:none}
-  .chips-mobil{display:flex;gap:var(--s2);overflow-x:auto;scroll-snap-type:x mandatory;margin:var(--s3) calc(var(--rand) * -1) 0;padding:0 var(--rand) .3rem;scrollbar-width:none}
+  .held .kleingedruckt{order:7;margin:var(--s3) auto 0}
+  .chips-mobil{order:8;display:flex;gap:var(--s2);overflow-x:auto;scroll-snap-type:x mandatory;margin:var(--s4) calc(var(--rand) * -1) 0;padding:0 var(--rand) .3rem;scrollbar-width:none}
   .chips-mobil::-webkit-scrollbar{display:none}
-  .chips-mobil .hinweis-chip{display:grid;position:static;flex:none;scroll-snap-align:start;min-width:10.5rem}
+  .chips-mobil .hinweis-chip{flex:none;scroll-snap-align:start;min-width:10.5rem}
 
   .blick{gap:var(--s2)}
   .blick__kachel{padding:var(--s4)}
@@ -591,7 +596,7 @@ p{margin:0 0 var(--s3)}
   @starting-style{.korb[open]{opacity:0;transform:none}}
 }
 @media (prefers-reduced-transparency:reduce){
-  .glas,.kopf,.hinweis-chip,.kaufleiste,.korb,.fuss,.bewerten{background:#10142c;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .glas,.kopf,.hinweis-chip,.l3d__chip,.kaufleiste,.korb,.fuss,.bewerten{background:#10142c;-webkit-backdrop-filter:none;backdrop-filter:none}
 }
 @media (prefers-contrast:more){
   :root{--glas-kante:rgba(239,235,246,.4);--text-2:#e4e0ee;--text-3:#d0cbe0}
@@ -730,9 +735,18 @@ textarea.feld{min-height:8rem;resize:vertical;line-height:1.5}
 }
 @media (prefers-reduced-motion:reduce){
   .knopf--gross{animation:none}
-  [data-kipp],.buehne{transform:none!important}
+  [data-kipp]{transform:none!important}
+  .held__an,.held__chips .hinweis-chip{animation:none}
   .rez__karte{animation:none}
   .bewerten{transition:opacity .2s ease;scale:none}
 }
 .bewerten legend{font-size:.86rem;color:var(--text-2);margin-bottom:.35rem;padding:0}
 .bewerten form > .leise-knopf{justify-self:start}
+
+.l3d__pool{left:-300px;top:-300px;width:600px;height:600px;border-radius:50%;transform:translateY(92px) rotateX(90deg);backface-visibility:visible!important;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--lamp) calc(var(--glow) * 55%),transparent),color-mix(in srgb,var(--lamp) calc(var(--glow) * 14%),transparent) 45%,transparent 70%)}
+.l3d__chip{position:absolute;left:0;top:0;width:180px;margin-left:-90px;display:grid;gap:3px;padding:12px 14px;border-radius:16px;
+  font-size:calc(15px / var(--gr));text-align:left;pointer-events:none;will-change:transform,opacity;
+  background:rgba(11,14,34,.78);border:1px solid rgba(239,235,246,.14);border-top-color:rgba(255,255,255,.22);box-shadow:0 18px 40px -18px rgba(0,0,0,.7)}
+.l3d__chip b{font:700 calc(19px / var(--gr))/1.05 var(--f-sans);letter-spacing:-.02em;color:var(--text)}
+.l3d__chip span{color:var(--text-2)}
