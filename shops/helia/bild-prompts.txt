@@ -1,4 +1,4 @@
-BILD-PROMPTS FÜR DÄMMER (Englisch, für Bild-KIs oder Fotografen)
+BILD-PROMPTS FÜR HELIA (Englisch, für Bild-KIs oder Fotografen)
 
 WICHTIG: Das Produktfoto assets/img/produkt-entwurf.jpg stammt aus fremder Quelle (Amazon)
 und darf auf der echten Seite NICHT verwendet werden. Ersetzen durch ein eigenes Foto

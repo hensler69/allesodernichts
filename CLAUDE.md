@@ -14,7 +14,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - Website Manuel Hensel (Versicherungen, Leipzig): statische Seite im Wurzelverzeichnis des Projekts, Anrede "Sie", Redesign im Apple-Stil (Espresso/Tannengrün/Koralle/Honig/Sand, dazu Dunkel-Modus), Fraunces als Überschriftenschrift. Details in notes/2026-10-02.md.
 <!-- Format: - YYYY-MM-DD: Entscheidung (Grund) -->
 
-- E-Commerce-Entwurf DÄMMER (shops/daemmer/): Ein-Produkt-Shop für einen Lichtwecker, alle Firmenangaben erfunden, Produktfoto von Amazon nur im Entwurf. Details in notes/2026-10-03.md.
+- E-Commerce-Entwurf HELIA (shops/helia/, früher DÄMMER): Ein-Produkt-Shop für einen Lichtwecker im Apple-Layout mit Glasflächen, alle Firmenangaben erfunden, Produktfoto von Amazon nur im Entwurf. Details in notes/2026-10-03.md und notes/2026-10-05.md.
 ## Offene Themen
 - Musterschutz-Beispielseite (Quelle in entwuerfe/musterschutz.html, zusätzlich als Artifact): 3D-Familienszene mit erfundenen Figuren, Details in notes/2026-10-03.md.
 - Dachdecker Wagler (kunden/dachdecker-wagler/): nur Entwurf mit erfundenen Angaben, keine Erlaubnis des Inhabers, nicht veröffentlichen (siehe notes/2026-10-02.md).
@@ -24,4 +24,4 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 ## Laufende Themen
 - Website Manuel Hensel: Version mit Illustrationen, Versicherungsbaum und Dunkel-Modus gebaut, wartet auf Rückmeldung und Inhalte.
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
-- DÄMMER-Shop (shops/daemmer/): Entwurf fertig getestet, wartet auf Rückmeldung, echtes Foto, echte Daten und Zahlungsanbieter.
+- HELIA-Shop (shops/helia/): Glas-Layout fertig getestet, wartet auf Rückmeldung, echtes Foto, echte Daten, Zahlungsanbieter und Markenprüfung des Namens.

@@ -1,4 +1,4 @@
-/* DÄMMER: Bedienung, Warenkorb, Himmel und Kasse. Reines JavaScript ohne Bibliotheken. */
+/* HELIA: Bedienung, Warenkorb, Himmel und Kasse. Reines JavaScript ohne Bibliotheken. */
 (() => {
   'use strict';
 
@@ -11,8 +11,8 @@
   const EINFUEHRUNG_BIS = Date.UTC(2026, 10, 30, 22, 59, 59); // 30.11.2026, 23:59:59 Uhr deutscher Zeit
   const einfuehrung = Date.now() <= EINFUEHRUNG_BIS;
   const PRODUKTE = {
-    einzeln: { name: 'DÄMMER Eins', info: 'Lichtwecker, 1 Stück', einf: 4990, normal: 5990 },
-    set: { name: 'DÄMMER Eins, 2er-Set', info: '2 Lichtwecker, versandkostenfrei', einf: 8480, normal: 10180 }
+    einzeln: { name: 'HELIA', info: 'Lichtwecker, 1 Stück', einf: 4990, normal: 5990 },
+    set: { name: 'HELIA, 2er-Set', info: '2 Lichtwecker, versandkostenfrei', einf: 8480, normal: 10180 }
   };
   const VERSAND = 490, GRATIS_AB = 5900, MAX_MENGE = 5;
   // Prüfwert (SHA-256) des Newsletter-Codes, damit der Code nicht im Quelltext steht
@@ -31,7 +31,7 @@
   };
 
   /* ---------- Warenkorb ---------- */
-  let korb = speicher.lesen('daemmer-korb', { einzeln: 0, set: 0 });
+  let korb = speicher.lesen('helia-korb', { einzeln: 0, set: 0 });
   if (typeof korb !== 'object' || korb === null) korb = { einzeln: 0, set: 0 };
   ['einzeln', 'set'].forEach((k) => { korb[k] = klemmen(parseInt(korb[k], 10) || 0, 0, MAX_MENGE); });
 
@@ -40,7 +40,7 @@
   const versandFuer = (warenwert) => (warenwert === 0 || warenwert >= GRATIS_AB ? 0 : VERSAND);
 
   function korbSpeichern() {
-    speicher.schreiben('daemmer-korb', korb);
+    speicher.schreiben('helia-korb', korb);
     korbZeigen();
     document.dispatchEvent(new CustomEvent('korb-geaendert'));
   }
@@ -330,16 +330,16 @@
       b = innerWidth; h = innerHeight;
       leinwand.width = Math.round(b * dpr); leinwand.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const anzahl = Math.min(240, Math.round((b * h) / 7000));
+      const anzahl = Math.min(110, Math.round((b * h) / 15000));
       tropfen = Array.from({ length: anzahl }, () => neu(true));
     }
     function neu(irgendwo) {
       const tiefe = Math.random();
-      return { x: Math.random() * (b + 200) - 100, y: irgendwo ? Math.random() * h : -30, l: 8 + tiefe * 18, v: 7 + tiefe * 11, a: 0.05 + tiefe * 0.16 };
+      return { x: Math.random() * (b + 200) - 100, y: irgendwo ? Math.random() * h : -30, l: 8 + tiefe * 18, v: 7 + tiefe * 11, a: 0.03 + tiefe * 0.09 };
     }
     function malen(bewegen) {
       ctx.clearRect(0, 0, b, h);
-      const staerke = 1 - sonne * 0.6;
+      const staerke = 1 - sonne * 0.7;
       ctx.lineWidth = 1;
       ctx.lineCap = 'round';
       for (const t of tropfen) {
@@ -542,7 +542,7 @@
       if (!d) return;
       if (d.ok) {
         korb = { einzeln: 0, set: 0 };
-        speicher.schreiben('daemmer-korb', korb);
+        speicher.schreiben('helia-korb', korb);
         location.href = 'danke?nr=' + encodeURIComponent(d.nr);
       } else {
         const m = $('.meldung', kasse);
@@ -556,9 +556,9 @@
   const nrFeld = $('.bestellnr');
   if (nrFeld) {
     const nr = new URLSearchParams(location.search).get('nr') || '';
-    if (/^DM-[0-9A-Z-]{6,30}$/.test(nr)) nrFeld.textContent = nr; else nrFeld.parentElement.hidden = true;
+    if (/^HL-[0-9A-Z-]{6,30}$/.test(nr)) nrFeld.textContent = nr; else nrFeld.parentElement.hidden = true;
     korb = { einzeln: 0, set: 0 };
-    speicher.schreiben('daemmer-korb', korb);
+    speicher.schreiben('helia-korb', korb);
     korbZeigen();
   }
 

@@ -12,7 +12,7 @@ header('X-Content-Type-Options: nosniff');
 
 // ---- Einstellungen -------------------------------------------------------
 const SHOP_MAIL      = 'mh21manuel@icloud.com';  // Hierhin gehen Bestellungen, Widerrufe und Meldungen
-const SHOP_NAME      = 'DÄMMER';
+const SHOP_NAME      = 'HELIA';
 const GEHEIMNIS      = 'VOR-DER-VEROEFFENTLICHUNG-DURCH-EINEN-LANGEN-ZUFALLSTEXT-ERSETZEN'; // signiert Bestätigungslinks
 const GUTSCHEIN_CODE = 'SONNE10';
 const GUTSCHEIN_PROZ = 10;
@@ -185,7 +185,7 @@ if (!isset(LIMITS[$art])) {
 
 // Honeypot: Menschen sehen das Feld nicht, Spam-Programme füllen es aus. Dem Programm wird "alles gut" gemeldet.
 if (trim((string) ($_POST['website'] ?? '')) !== '') {
-    antworten(200, true, '', $art === 'bestellung' ? ['nr' => 'DM-00000000-000000'] : ['zeit' => date('d.m.Y, H:i:s') . ' Uhr']);
+    antworten(200, true, '', $art === 'bestellung' ? ['nr' => 'HL-00000000-000000'] : ['zeit' => date('d.m.Y, H:i:s') . ' Uhr']);
 }
 
 if (zu_viele_anfragen($art)) {
@@ -265,14 +265,14 @@ $versand = ($waren - $nachlass) >= GRATIS_AB ? 0 : VERSAND;
 $gesamt = $waren - $nachlass + $versand;
 $mwst = (int) round($gesamt - $gesamt / 1.19);
 
-$nr = 'DM-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(3)));
+$nr = 'HL-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(3)));
 
 $zeilen = '';
 if ($menge['einzeln'] > 0) {
-    $zeilen .= $menge['einzeln'] . ' x DÄMMER Eins (je ' . euro($preise['einzeln']) . ") = " . euro($menge['einzeln'] * $preise['einzeln']) . "\n";
+    $zeilen .= $menge['einzeln'] . ' x HELIA (je ' . euro($preise['einzeln']) . ") = " . euro($menge['einzeln'] * $preise['einzeln']) . "\n";
 }
 if ($menge['set'] > 0) {
-    $zeilen .= $menge['set'] . ' x DÄMMER Eins 2er-Set (je ' . euro($preise['set']) . ") = " . euro($menge['set'] * $preise['set']) . "\n";
+    $zeilen .= $menge['set'] . ' x HELIA 2er-Set (je ' . euro($preise['set']) . ") = " . euro($menge['set'] * $preise['set']) . "\n";
 }
 $summe  = $zeilen;
 $summe .= $nachlass > 0 ? 'Gutschein ' . GUTSCHEIN_CODE . ': -' . euro($nachlass) . "\n" : '';
