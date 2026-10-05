@@ -242,12 +242,6 @@
   let sonne = 0;
   const maus = { x: 0, y: 0 };
 
-  function aufgangFortschritt() {
-    if (!aufgang) return { q: 0, r: null };
-    const r = aufgang.getBoundingClientRect();
-    const weg = Math.max(1, r.height - innerHeight);
-    return { q: klemmen(-r.top / weg), r };
-  }
 
   // Himmel-Werte nur am Hintergrund (.welt) setzen und nur, wenn sie sich ändern.
   // An <html> gesetzt würde jede Änderung die ganze Seite neu berechnen lassen.
@@ -267,53 +261,103 @@
     stadt.forEach((el, i) => { el.style.transform = `translate3d(${(maus.x * [-6, -14, -26][i]).toFixed(1)}px, ${(stadtP * [3, 7, 12][i]).toFixed(2)}vh, 0)`; });
   }
 
+  // Himmel weich an einen Zielwert angleichen, damit Wechsel zwischen Simulation und Scrollen nicht springen
+  let himmelIst = 0.04, himmelSoll = 0.04, himmelLaeuft = false;
+  function himmelZeichnen() {
+    setzeWenn(welt, '--sky1', verlauf(HIMMEL, himmelIst, 1));
+    setzeWenn(welt, '--sky2', verlauf(HIMMEL, himmelIst, 2));
+    setzeWenn(welt, '--sky3', verlauf(HIMMEL, himmelIst, 3));
+    setzeWenn(welt, '--sun', himmelIst.toFixed(2));
+    sonne = himmelIst;
+  }
+  function himmelZiel(s) {
+    himmelSoll = s;
+    if (ruhig) { himmelIst = s; himmelZeichnen(); return; }
+    if (himmelLaeuft) return;
+    himmelLaeuft = true;
+    const schritt = () => {
+      himmelIst += (himmelSoll - himmelIst) * 0.1;
+      if (Math.abs(himmelSoll - himmelIst) < 0.002) himmelIst = himmelSoll;
+      himmelZeichnen();
+      if (himmelIst !== himmelSoll) requestAnimationFrame(schritt); else himmelLaeuft = false;
+    };
+    requestAnimationFrame(schritt);
+  }
+
+  // Tag-Nacht-Simulation: Schleife über 20 Sekunden, läuft nur, solange der Abschnitt sichtbar ist
+  const PHASEN = [
+    { bis: 6 / 20, von: 360, nach: 390, g0: 0, g1: 1, name: 'Sonnenaufgang' },
+    { bis: 10 / 20, von: 390, nach: 1320, g0: 1, g1: 1, name: 'Tag' },
+    { bis: 16 / 20, von: 1320, nach: 1350, g0: 1, g1: 0, name: 'Sonnenuntergang' },
+    { bis: 1, von: 1350, nach: 1800, g0: 0, g1: 0, name: 'Nacht' } // 1800 = 06:00 am nächsten Tag
+  ];
+  const sim = { pos: ruhig ? 0.3 : 0, sichtbar: false, laeuft: false, haelt: false, angehalten: false, himmel: 0.04, zuletzt: 0, tastenUhr: 0 };
+  function simZustand(pos) {
+    let start = 0;
+    for (let i = 0; i < PHASEN.length; i++) {
+      const ph = PHASEN[i];
+      if (pos <= ph.bis || i === PHASEN.length - 1) {
+        const t = klemmen((pos - start) / (ph.bis - start));
+        const minute = Math.round(ph.von + (ph.nach - ph.von) * t) % 1440;
+        return { phase: i, name: ph.name, g: ph.g0 + (ph.g1 - ph.g0) * t, zeit: `${String(Math.floor(minute / 60)).padStart(2, '0')}:${String(minute % 60).padStart(2, '0')}` };
+      }
+      start = ph.bis;
+    }
+  }
+  function simZeichnen() {
+    if (!aufgangKlebt) return;
+    const z = simZustand(sim.pos);
+    setzeWenn(aufgangKlebt, '--lamp', verlauf(LAMPE, z.g, 1));
+    setzeWenn(aufgangKlebt, '--glow', (0.06 + 0.94 * z.g).toFixed(3));
+    setzeWenn(aufgangKlebt, '--p', sim.pos.toFixed(3));
+    if (simUhr.textContent !== z.zeit) {
+      simUhr.textContent = z.zeit;
+      if (simZeit) simZeit.textContent = z.zeit;
+      regler.setAttribute('aria-valuetext', `${z.zeit} Uhr, ${z.name}`);
+    }
+    if (!sim.haelt) regler.value = String(Math.round(sim.pos * 1000));
+    simPhasen.forEach((li, i) => li.classList.toggle('ist-jetzt', i === z.phase));
+    if (simSonne) simSonne.classList.toggle('ist-an', z.g > 0.02);
+    sim.himmel = 0.05 + 0.95 * z.g;
+    if (sim.sichtbar) himmelZiel(sim.himmel);
+  }
+  function simSchritt(jetzt) {
+    if (!sim.laeuft) return;
+    const dt = sim.zuletzt ? Math.min(0.1, (jetzt - sim.zuletzt) / 1000) : 0;
+    sim.zuletzt = jetzt;
+    if (!sim.haelt && !document.hidden) { sim.pos = (sim.pos + dt / 20) % 1; simZeichnen(); }
+    requestAnimationFrame(simSchritt);
+  }
+  function simStart() {
+    if (sim.laeuft || sim.angehalten || !sim.sichtbar) return;
+    sim.laeuft = true; sim.zuletzt = 0;
+    requestAnimationFrame(simSchritt);
+  }
+  function simStopp() { sim.laeuft = false; }
+
   function bild() {
     const y = scrollY;
     const hoehe = Math.max(1, document.documentElement.scrollHeight - innerHeight);
     const p = klemmen(y / hoehe);
-    const a = aufgangFortschritt();
     // Erst alles messen, dann alles schreiben (vermeidet erzwungene Zwischen-Layouts)
     const rWort = wortweise && !ruhig ? wortweise.getBoundingClientRect() : null;
     const hk = kaufleiste && heldKnopf ? heldKnopf.getBoundingClientRect() : null;
     const an = kaufleiste && angebotTeil ? angebotTeil.getBoundingClientRect() : null;
 
-    // Sonnenstand für die ganze Seite: vor dem Aufgang Nacht, darin Aufgang, danach leichte Dämmerung
+    // Sonnenstand für die ganze Seite: vor dem Abschnitt Nacht, darin die Simulation, danach leichte Dämmerung
     let s;
     if (!aufgang) s = 0.12 + p * 0.5;
+    else if (sim.sichtbar) s = sim.himmel;
     else {
-      const start = a.r.top + y, ende = start + aufgang.offsetHeight - innerHeight;
-      if (y < start) s = 0.04 + 0.12 * klemmen(y / Math.max(1, start));
-      else if (y <= ende) s = 0.16 + 0.84 * a.q;
-      else s = 1 - 0.3 * klemmen((y - ende) / Math.max(1, hoehe - ende));
+      const r = aufgang.getBoundingClientRect();
+      const oben = r.top + y, unten = r.bottom + y;
+      if (r.top > 0) s = 0.04 + 0.12 * klemmen(y / Math.max(1, oben));
+      else s = 1 - 0.3 * klemmen((y - unten + innerHeight) / Math.max(1, hoehe - unten + innerHeight));
     }
-    sonne = s;
-    setzeWenn(welt, '--sky1', verlauf(HIMMEL, s, 1));
-    setzeWenn(welt, '--sky2', verlauf(HIMMEL, s, 2));
-    setzeWenn(welt, '--sky3', verlauf(HIMMEL, s, 3));
-    setzeWenn(welt, '--sun', s.toFixed(2));
+    himmelZiel(s);
 
-    // Stadt sinkt langsam, je weiter man scrollt: man steigt der Sonne entgegen
     stadtP = p;
     stadtSetzen();
-
-    // Sonnenaufgang im angehefteten Abschnitt
-    if (aufgang && aufgangKlebt) {
-      const q = a.q;
-      setzeWenn(aufgangKlebt, '--lamp', verlauf(LAMPE, q, 1));
-      setzeWenn(aufgangKlebt, '--glow', (0.06 + 0.94 * klemmen(q / 0.6)).toFixed(3));
-      setzeWenn(aufgangKlebt, '--p', q.toFixed(3));
-      const min = Math.round(q * 30);
-      const t = `06:${String(min).padStart(2, '0')}`;
-      if (simUhr.textContent !== t) {
-        simUhr.textContent = t;
-        if (simZeit) simZeit.textContent = t;
-        if (regler && document.activeElement !== regler) regler.value = String(min);
-        regler && regler.setAttribute('aria-valuetext', `${t} Uhr`);
-      }
-      const phase = q < 0.33 ? 0 : q < 0.66 ? 1 : q < 0.97 ? 2 : 3;
-      simPhasen.forEach((li, i) => li.classList.toggle('ist-jetzt', i === phase));
-      if (simSonne) simSonne.classList.toggle('ist-an', q > 0.02);
-    }
 
     // Geschichte: Wort für Wort heller
     if (rWort) {
@@ -343,14 +387,6 @@
     });
   }
 
-  // Zeitregler: spult den Sonnenaufgang vor, indem er an die passende Stelle scrollt
-  if (regler && aufgang) {
-    regler.addEventListener('input', () => {
-      const weg = aufgang.offsetHeight - innerHeight;
-      const oben = aufgang.getBoundingClientRect().top + scrollY;
-      window.scrollTo({ top: oben + (Number(regler.value) / 30) * weg, behavior: 'instant' });
-    });
-  }
 
   let wartet = false;
   const planen = () => { if (!wartet) { wartet = true; requestAnimationFrame(() => { wartet = false; bild(); }); } };
@@ -372,6 +408,39 @@
   }
   addEventListener('resize', planen);
   bild();
+
+  if (aufgang && regler) {
+    const knopf = $('#sim-knopf');
+    const knopfZeigen = () => { const an = sim.laeuft && !sim.haelt; knopf.textContent = an ? 'Anhalten' : 'Abspielen'; knopf.setAttribute('aria-pressed', String(!an)); };
+    if (ruhig) sim.angehalten = true; // kein Selbststart bei "weniger Bewegung"
+    simZeichnen(); knopfZeigen();
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((ein) => {
+        sim.sichtbar = ein[0].isIntersecting;
+        if (sim.sichtbar) { simStart(); himmelZiel(sim.himmel); } else { simStopp(); planen(); }
+        knopfZeigen();
+      }, { threshold: 0.35 }).observe(aufgang);
+    }
+    // Regler anfassen hält die Schleife an, Loslassen lässt sie an derselben Stelle weiterlaufen
+    const halten = () => { clearTimeout(sim.tastenUhr); sim.tastenUhr = 0; sim.haelt = true; knopfZeigen(); };
+    const loslassen = () => { sim.haelt = false; sim.zuletzt = 0; knopfZeigen(); };
+    regler.addEventListener('pointerdown', halten);
+    regler.addEventListener('pointerup', loslassen);
+    regler.addEventListener('pointercancel', loslassen);
+    regler.addEventListener('input', () => {
+      sim.pos = Number(regler.value) / 1000;
+      simZeichnen();
+      if (!sim.haelt || sim.tastenUhr) { // Tastatur: kein pointerdown, daher kurz halten und später weiterlaufen
+        sim.haelt = true; clearTimeout(sim.tastenUhr);
+        sim.tastenUhr = setTimeout(() => { sim.tastenUhr = 0; loslassen(); }, 1200);
+      }
+    });
+    knopf.addEventListener('click', () => {
+      if (sim.laeuft && !sim.haelt) { sim.angehalten = true; simStopp(); }
+      else { sim.angehalten = false; sim.haelt = false; simStart(); }
+      knopfZeigen();
+    });
+  }
 
   // Regen auf einer Zeichenfläche
   const leinwand = $('.welt__regen');

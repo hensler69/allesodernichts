@@ -1,6 +1,6 @@
 # 011: Tag-Nacht-Simulation als Schleife statt Scroll-Steuerung
 
-- Stand: Commit `98eb9a2` · Art: Neue Bewegung (Wunsch des Auftraggebers) · Status: OFFEN
+- Stand: Commit `98eb9a2` · Art: Neue Bewegung (Wunsch des Auftraggebers) · Status: ERLEDIGT
 - Dateien: `shops/helia/index.html` (Abschnitt `<section class="aufgang">`), `shops/helia/assets/script.js`, `shops/helia/assets/style.css`
 - Hinweis: `index.html` wird im Projekt mit einem Python-Generator erzeugt, der nicht im Repository liegt. Wer den Generator nutzt,
   muss die HTML-Änderung aus Schritt 1 dort ebenfalls eintragen, sonst wird sie beim nächsten Erzeugen überschrieben.

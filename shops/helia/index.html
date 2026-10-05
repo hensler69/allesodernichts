@@ -47,7 +47,7 @@
   <a class="logo" href="/" aria-label="Zur Startseite"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc27a"/><stop offset="1" stop-color="#ff7a59"/></linearGradient></defs><path d="M10 30a14 14 0 0 1 28 0Z" fill="url(#lg)"/><rect x="5" y="33" width="38" height="3" rx="1.5" fill="#59e3e0"/></svg><span>HELIA</span></a>
   <nav class="kopf__nav" id="hauptmenue" aria-label="Hauptmenü">
     <a href="#ueberblick">Überblick</a>
-    <a href="#aufgang">Sonnenaufgang</a>
+    <a href="#aufgang">Tag und Nacht</a>
     <a href="#funktionen">Funktionen</a>
     <a href="#technik">Technik</a>
     <a href="#bewertungen">Bewertungen</a>
@@ -106,19 +106,22 @@
 <section class="aufgang" id="aufgang" aria-labelledby="a-titel">
   <div class="aufgang__klebt">
     <div class="aufgang__text glas">
-      <span class="marke">Sonnenaufgang</span>
-      <h2 id="a-titel">Dreißig Minuten, <span class="leucht">vor Ihren Augen.</span></h2>
-      <p>Scrollen Sie weiter oder ziehen Sie den Regler. Die Lampe läuft hier in Sekunden durch, und die ganze Seite färbt sich mit.</p>
+      <span class="marke">Tag und Nacht</span>
+      <h2 id="a-titel">Ein ganzer Tag, <span class="leucht">in zwanzig Sekunden.</span></h2>
+      <p>Die Simulation läuft von selbst, sobald Sie hier sind. Ziehen Sie den Regler, um selbst durch den Tag zu gehen.</p>
       <div class="aufgang__uhr" aria-hidden="true">06:00</div>
       <ol class="phasen">
-        <li><span>06:00</span><span>Dunkelrot wie Glut</span></li>
-        <li><span>06:10</span><span>Warmes Orange</span></li>
-        <li><span>06:20</span><span>Weiches Gold</span></li>
-        <li><span>06:30</span><span>Helles Tageslicht</span></li>
+        <li><span>06:00</span><span>Sonnenaufgang</span></li>
+        <li><span>06:30</span><span>Tag, volles Licht</span></li>
+        <li><span>22:00</span><span>Sonnenuntergang</span></li>
+        <li><span>22:30</span><span>Nacht, alles aus</span></li>
       </ol>
       <div class="regler">
-        <label for="zeitregler">Zeit des Sonnenaufgangs</label>
-        <input id="zeitregler" type="range" min="0" max="30" step="1" value="0">
+        <div class="sim-steuerung">
+          <label for="zeitregler">Uhrzeit der Simulation</label>
+          <button class="leise-knopf sim-knopf" type="button" id="sim-knopf" aria-pressed="false">Anhalten</button>
+        </div>
+        <input id="zeitregler" type="range" min="0" max="1000" step="1" value="0" aria-valuetext="06:00 Uhr, Sonnenaufgang">
       </div>
       <p class="hinweis-bildschirm">Die Farben auf Ihrem Bildschirm können von der echten Lampe abweichen.</p>
     </div>
