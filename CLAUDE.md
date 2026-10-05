@@ -5,6 +5,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 
 ## Arbeitsweise
 - Sprache: Deutsch
+- Den Nutzer zu Beginn jeder Antwort mit "Manuel" ansprechen (Wunsch vom 05.10.2026, gilt für jeden Chat).
 - Am Ende einer Session: Zusammenfassung in `notes/YYYY-MM-DD.md` ablegen
   und wichtige Entscheidungen und offene Punkte unten ergänzen.
 - Vor dem Start: `notes/` auf aktuelle Einträge prüfen.

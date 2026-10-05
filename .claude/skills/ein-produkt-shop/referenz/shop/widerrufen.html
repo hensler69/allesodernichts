@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vertrag widerrufen | HELIA</title>
+<meta name="description" content="Online-Widerruf: Erklären Sie hier den Widerruf Ihres Vertrags mit HELIA.">
+<meta name="theme-color" content="#0a0d1c">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://www.helia.example/widerrufen">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/InstrumentSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="HELIA">
+<meta property="og:title" content="Vertrag widerrufen | HELIA">
+<meta property="og:description" content="Online-Widerruf: Erklären Sie hier den Widerruf Ihres Vertrags mit HELIA.">
+<meta property="og:url" content="https://www.helia.example/widerrufen">
+<meta property="og:image" content="https://www.helia.example/assets/og-image.jpg">
+<meta property="og:image:alt" content="Lichtwecker HELIA mit warm leuchtendem Schirm vor einer nächtlichen Stadt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vertrag widerrufen | HELIA">
+<meta name="twitter:description" content="Online-Widerruf: Erklären Sie hier den Widerruf Ihres Vertrags mit HELIA.">
+<meta name="twitter:image" content="https://www.helia.example/assets/og-image.jpg">
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+<body>
+<a class="springen" href="#inhalt">Zum Inhalt springen</a>
+<div class="welt" aria-hidden="true">
+  <div class="welt__sonne"></div>
+  <div class="welt__aura welt__aura--a"></div>
+  <div class="welt__aura welt__aura--b"></div>
+  <div class="welt__stadt welt__stadt--fern"><img src="/assets/img/stadt-fern.svg" alt="" width="1600" height="520"></div>
+  <div class="welt__aura welt__aura--c"></div>
+  <div class="welt__stadt welt__stadt--mitte"><img src="/assets/img/stadt-mitte.svg" alt="" width="1600" height="520"></div>
+  <div class="welt__stadt welt__stadt--nah"><img src="/assets/img/stadt-nah.svg" alt="" width="1600" height="520"></div>
+  <div class="welt__nebel welt__nebel--2"></div>
+  <div class="welt__nebel"></div>
+  <canvas class="welt__regen"></canvas>
+  <div class="welt__schleier"></div>
+</div>
+<div class="entwurf" role="note">Entwurf: Alle Firmen-, Hersteller- und Technikangaben sind erfunden. Das Produktbild stammt aus fremder Quelle und muss vor einer Veröffentlichung ersetzt werden.</div>
+<header class="kopf kopf--schlicht"><div class="kopf__innen">
+  <a class="logo" href="/" aria-label="Zur Startseite"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc27a"/><stop offset="1" stop-color="#ff7a59"/></linearGradient></defs><path d="M10 30a14 14 0 0 1 28 0Z" fill="url(#lg)"/><rect x="5" y="33" width="38" height="3" rx="1.5" fill="#59e3e0"/></svg><span>HELIA</span></a>
+  <span></span>
+  <div class="kopf__rechts"><a class="kopf__zurueck" href="/">Zurück zum Shop</a></div>
+</div></header>
+<main id="inhalt" class="textseite">
+<h1>Vertrag widerrufen</h1>
+
+<p>Verbraucher können Verträge mit uns innerhalb von 14 Tagen ohne Angabe von Gründen widerrufen. Füllen Sie das Formular aus und klicken Sie auf „Widerruf bestätigen“. Danach erhalten Sie sofort eine Bestätigung mit Datum und Uhrzeit per E-Mail.</p>
+<p>Die Einzelheiten stehen in der <a href="/widerrufsbelehrung">Widerrufsbelehrung</a>.</p>
+<form id="widerruf-form" class="glas formular" action="/send.php" method="post" novalidate>
+  <input type="hidden" name="art" value="widerruf">
+  <div class="honig-feld" aria-hidden="true"><label>Bitte leer lassen<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+  <div class="feldgruppe"><label for="w-name">Ihr Name</label><input class="feld" id="w-name" name="name" type="text" autocomplete="name" required></div>
+  <div class="feldgruppe"><label for="w-mail">Ihre E-Mail-Adresse</label><input class="feld" id="w-mail" name="email" type="email" autocomplete="email" required></div>
+  <div class="feldgruppe"><label for="w-nr">Bestellnummer (aus der Bestätigungsmail) oder Bestelldatum</label><input class="feld" id="w-nr" name="bestellnr" type="text" maxlength="60" required></div>
+  <div class="feldgruppe"><label for="w-art">Welche Ware betrifft der Widerruf? (freiwillig)</label><input class="feld" id="w-art" name="ware" type="text" maxlength="120" placeholder="Zum Beispiel: 1 × HELIA"></div>
+  <button class="knopf" type="submit">Widerruf bestätigen</button>
+  <p class="meldung" role="status" aria-live="polite"></p>
+</form>
+
+</main>
+<script src="/assets/script.js" defer></script>
+</body>
+</html>
