@@ -503,9 +503,11 @@ p{margin:0 0 var(--s3)}
   body{font-size:1rem}
   .kopf{height:52px}
   .kopf__innen{grid-template-columns:1fr auto}
-  .kopf__nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;padding:.4rem var(--rand) var(--s3);
+  .kopf__nav{display:none;opacity:0;translate:0 -8px;transition:opacity .22s var(--ease-out),translate .22s var(--ease-out),display .22s allow-discrete;
+    position:absolute;top:100%;left:0;right:0;flex-direction:column;padding:.4rem var(--rand) var(--s3);
     background:rgba(10,12,26,.92);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
-  .kopf__nav.ist-offen{display:flex}
+  .kopf__nav.ist-offen{display:flex;opacity:1;translate:none}
+  @starting-style{.kopf__nav.ist-offen{opacity:0;translate:0 -8px}}
   .kopf__nav a{padding:.85rem .2rem;font-size:1.05rem;border-radius:0;border-bottom:1px solid var(--glas-kante);color:var(--text)}
   .kopf__nav a[aria-current="true"]{background:none;color:var(--honig)}
   .menue-knopf{display:inline-grid;place-items:center}
@@ -834,4 +836,26 @@ textarea.feld{min-height:8rem;resize:vertical;line-height:1.5}
 }
 @media (prefers-reduced-motion:reduce){
   .laufband__spur{animation:none}
+}
+
+/* Menü-Symbol wird zum X (Plan 015) */
+.menue-knopf path{transform-origin:12px 12px;transition:transform .2s var(--ease-out)}
+.menue-knopf[aria-expanded="true"] .m1{transform:rotate(45deg) translateY(3px)}
+.menue-knopf[aria-expanded="true"] .m2{transform:rotate(-45deg) translateY(-3px)}
+
+/* Sende-Zustand der Formularknöpfe (Plan 013) */
+.sendet::before{content:"";width:1em;height:1em;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:drehen .7s linear infinite}
+.knopf.sendet,.leise-knopf.sendet{opacity:.85}
+@keyframes drehen{to{transform:rotate(360deg)}}
+
+/* Gutschein-Zeile gleitet ein (Plan 014) */
+[data-feld="rabatt-zeile"]{transition:opacity .2s var(--ease-out),translate .2s var(--ease-out)}
+@starting-style{[data-feld="rabatt-zeile"]{opacity:0;translate:0 -4px}}
+.kasse__seite [data-feld="gesamt"]{display:inline-block}
+
+@media (prefers-reduced-motion:reduce){
+  .sendet::before{display:none}
+  .kopf__nav{translate:none}
+  .menue-knopf path{transition:none}
+  [data-feld="rabatt-zeile"]{translate:none}
 }

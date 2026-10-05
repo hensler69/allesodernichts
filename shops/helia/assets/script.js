@@ -585,6 +585,22 @@
     }
   });
 
+  // Betrag nur bei Änderung setzen und dann kurz weich aufblenden (Plan 014)
+  function weichSetzen(el, text) {
+    if (el.textContent === text) return;
+    const vorher = el.textContent;
+    el.textContent = text;
+    if (vorher && el.animate) el.animate(ruhig ? [{ opacity: 0.4 }, { opacity: 1 }] : [{ opacity: 0.3, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 150, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+  }
+
+  // Neue Meldungen unter Formularen sanft einblenden, Fehler mit kurzem Zucken (Plan 016)
+  $$('.meldung').forEach((m) => new MutationObserver(() => {
+    if (!m.textContent.trim() || !m.animate) return;
+    const kurve = 'cubic-bezier(0.23, 1, 0.32, 1)';
+    m.animate(ruhig ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 180, easing: kurve });
+    if (!ruhig && m.classList.contains('fehler')) m.animate([{ translate: '0' }, { translate: '-3px' }, { translate: '3px' }, { translate: '-3px' }, { translate: '3px' }, { translate: '0' }], { duration: 240, easing: 'ease-in-out' });
+  }).observe(m, { childList: true, characterData: true, subtree: true }));
+
   /* ---------- Formulare an PHP schicken ---------- */
   async function senden(form, ziel) {
     const meldung = $('.meldung', form);
@@ -592,6 +608,8 @@
     meldung.className = 'meldung';
     meldung.textContent = '';
     knopf.disabled = true;
+    const knopfText = knopf.textContent;
+    const sendeUhr = setTimeout(() => { knopf.classList.add('sendet'); knopf.setAttribute('aria-busy', 'true'); knopf.textContent = 'Wird gesendet'; }, 150);
     try {
       const antwort = await fetch(ziel, { method: 'POST', body: new FormData(form), headers: { 'X-Requested-With': 'fetch' } });
       const daten = await antwort.json();
@@ -601,6 +619,8 @@
       meldung.textContent = 'Das klappt erst, wenn die Seite online auf einem Server mit PHP liegt.';
       return null;
     } finally {
+      clearTimeout(sendeUhr);
+      if (knopf.classList.contains('sendet')) { knopf.classList.remove('sendet'); knopf.removeAttribute('aria-busy'); knopf.textContent = knopfText; }
       knopf.disabled = false;
     }
   }
@@ -699,7 +719,7 @@
     const ende = { lamp: '#ffb35c', glow: 0.92 };
     if (ruhig) { intro.style.setProperty('--lamp', ende.lamp); intro.style.setProperty('--glow', ende.glow); }
     else {
-      const dauer = 2600, start = performance.now() + 250;
+      const dauer = Number(intro.dataset.intro) || 2600, start = performance.now() + 250;
       const lauf = (jetzt) => {
         const t = klemmen((jetzt - start) / dauer);
         const e = 1 - Math.pow(1 - t, 3);
@@ -932,7 +952,7 @@
       $('[data-feld="rabatt-zeile"]', seite).hidden = !rabatt;
       $('[data-feld="rabatt"]', seite).textContent = '− ' + euro(nachlass);
       $('[data-feld="versand"]', seite).textContent = versand ? euro(versand) : 'kostenlos';
-      $('[data-feld="gesamt"]', seite).textContent = euro(gesamt);
+      weichSetzen($('[data-feld="gesamt"]', seite), euro(gesamt));
       $('[data-feld="mwst"]', seite).textContent = euro(Math.round(gesamt - gesamt / 1.19));
       $('[data-feld="gesamt-knopf"]').textContent = euro(gesamt);
       $('input[name="einzeln"]', kasse).value = korb.einzeln;

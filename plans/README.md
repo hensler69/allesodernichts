@@ -21,6 +21,11 @@ in der `.htaccess` der Wurzel zur Sperrliste (`RedirectMatch 404 ^/(notes|site|k
 | 9 | [009 Summe weich wechseln](009-summe-weich-wechseln.md) | Ergänzung | keine | ERLEDIGT |
 | 10 | [010 Fragen weich schließen](010-fragen-weich-schliessen.md) | Ergänzung | keine | ERLEDIGT |
 | 11 | [011 Tag-Nacht-Schleife](011-tag-nacht-schleife.md) | Wunsch | nach 002 (nutzt setzeWenn) | ERLEDIGT |
+| 12 | [012 Danke-Seite: Lampe geht an](012-danke-lampe-geht-an.md) | Gelegenheit | Plan 011 (Intro-Code) | ERLEDIGT |
+| 13 | [013 Sende-Zustand](013-sende-zustand.md) | Gelegenheit | keine | ERLEDIGT |
+| 14 | [014 Gutschein-Zeile](014-gutschein-zeile.md) | Gelegenheit | keine | ERLEDIGT |
+| 15 | [015 Handy-Menü](015-handymenue.md) | Gelegenheit | keine | ERLEDIGT |
+| 16 | [016 Meldungen einblenden](016-meldungen-einblenden.md) | Gelegenheit | nach 013 | ERLEDIGT |
 
 Nach der Umsetzung: Vorschau neu bauen (Python-Skript build_preview_shop.py im Arbeitsordner), alle Seiten auf PC, Tablet und Handy
 prüfen, Status hier auf ERLEDIGT setzen.
