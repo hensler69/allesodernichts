@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice">
-<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0ae24"/><stop offset="1" stop-color="#c27d00"/></linearGradient><radialGradient id="h" cx="0.5" cy="0.4" r="0.55"><stop offset="0" stop-color="#fff" stop-opacity="0.45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
-<rect width="600" height="450" fill="url(#b)"/><circle cx="300" cy="200" r="230" fill="url(#h)"/><circle cx="300" cy="190" r="86" fill="#fff7e8" opacity=".92"/>
-<ellipse cx="300" cy="372" rx="190" ry="26" fill="#1a110d" opacity=".3"/>
-<path d="M120 372 Q300 270 480 372Z" fill="#6b4a2b"/><path d="M150 372 Q300 296 450 372Z" fill="#4a3320"/>
-<path d="M300 330 V210" stroke="#1f6a4a" stroke-width="12" stroke-linecap="round"/>
-<path d="M300 250 C240 250 214 214 216 170 C262 168 298 196 300 250Z" fill="#1f6a4a"/><path d="M300 224 C356 224 386 188 386 146 C340 144 304 172 300 224Z" fill="#8ad6a0"/>
-<g fill="#ffd27a" stroke="#1a110d" stroke-opacity=".35" stroke-width="3"><ellipse cx="170" cy="352" rx="38" ry="12"/><ellipse cx="170" cy="338" rx="38" ry="12"/><ellipse cx="170" cy="324" rx="38" ry="12"/><ellipse cx="430" cy="352" rx="38" ry="12"/><ellipse cx="430" cy="338" rx="38" ry="12"/></g>
-</svg>

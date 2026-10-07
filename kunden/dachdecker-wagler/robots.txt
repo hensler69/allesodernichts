@@ -1,6 +1,0 @@
-User-agent: *
-Disallow: /
-
-# Entwurf: nicht indexieren lassen, bis die Seite echte Angaben hat.
-# Zum Veröffentlichen "Disallow: /" durch "Allow: /" ersetzen.
-Sitemap: https://www.dachdecker-wagler.example/sitemap.xml

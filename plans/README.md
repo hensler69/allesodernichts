@@ -3,8 +3,7 @@
 Erstellt nach einer Prüfung aller Animationen in `shops/helia/` (Stand Commit `79a6061`).
 Jeder Plan ist in sich vollständig und kann ohne Vorwissen umgesetzt werden.
 
-Hinweis: Dieser Ordner ist interne Arbeitsgrundlage. Er ist in der `.htaccess` der Wurzel gesperrt (erledigt). Zuvor musste `plans`
-in der `.htaccess` der Wurzel zur Sperrliste (`RedirectMatch 404 ^/(notes|site|kunden|entwuerfe|shops|\.git)(/|$)`) hinzugefügt werden.
+Hinweis: Dieser Ordner ist interne Arbeitsgrundlage und gehört nicht auf einen Webserver.
 
 ## Empfohlene Reihenfolge
 

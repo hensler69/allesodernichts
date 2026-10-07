@@ -1,3 +1,0 @@
-# Entwurf: Suchmaschinen bleiben draußen, bis echte Angaben eingetragen sind.
-User-agent: *
-Disallow: /

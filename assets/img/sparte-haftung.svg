@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice">
-<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a4326"/><stop offset="1" stop-color="#5e2614"/></linearGradient><radialGradient id="h" cx="0.5" cy="0.4" r="0.55"><stop offset="0" stop-color="#fff" stop-opacity="0.45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
-<rect width="600" height="450" fill="url(#b)"/><circle cx="300" cy="200" r="230" fill="url(#h)"/><path d="M300 110 V380" stroke="#ffad1f" stroke-width="12" stroke-linecap="round"/><rect x="214" y="372" width="172" height="22" rx="11" fill="#ffad1f"/>
-<path d="M130 150 H470" stroke="#ffad1f" stroke-width="12" stroke-linecap="round"/><circle cx="300" cy="110" r="20" fill="#ffd27a"/>
-<g stroke="#ffd27a" stroke-width="4" stroke-linecap="round"><path d="M130 150 L84 260 M130 150 L176 260"/><path d="M470 150 L424 240 M470 150 L516 240"/></g>
-<path d="M62 260 H198 a68 40 0 0 1 -136 0Z" fill="#fff7e8"/><path d="M402 240 H538 a68 40 0 0 1 -136 0Z" fill="#fff7e8"/>
-<g transform="translate(130 222) scale(0.7)"><path d="M0 -34 L28 -23 V3 C28 22 14 34 0 42 C-14 34 -28 22 -28 3 V-23 Z" fill="#ff5a2b"/><path d="M-11 4 L-3 12 L13 -7" fill="none" stroke="#fff7e8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g><circle cx="470" cy="206" r="16" fill="#ffad1f"/>
-</svg>

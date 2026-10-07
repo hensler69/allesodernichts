@@ -9,23 +9,14 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - Am Ende einer Session: Zusammenfassung in `notes/YYYY-MM-DD.md` ablegen
   und wichtige Entscheidungen und offene Punkte unten ergänzen.
 - Vor dem Start: `notes/` auf aktuelle Einträge prüfen.
+- Das Projekt enthält nur noch den HELIA-Shop (Aufräumen am 07.10.2026: alles andere entfernt, steht noch in der Git-Versionsgeschichte).
 
 ## Entscheidungen
-- Beispielseiten und Szenen verwenden nur selbst gezeichnete, erfundene Personen, keine echten Fotos (siehe notes/2026-10-03.md).
-- Website Manuel Hensel (Versicherungen, Leipzig): statische Seite im Wurzelverzeichnis des Projekts, Anrede "Sie", Redesign im Apple-Stil (Espresso/Tannengrün/Koralle/Honig/Sand, dazu Dunkel-Modus), Fraunces als Überschriftenschrift. Details in notes/2026-10-02.md.
-<!-- Format: - YYYY-MM-DD: Entscheidung (Grund) -->
-
 - E-Commerce-Entwurf HELIA (shops/helia/, früher DÄMMER): Ein-Produkt-Shop für einen Lichtwecker im Apple-Layout mit Glasflächen, alle Firmenangaben erfunden, Produktfoto von Amazon nur im Entwurf. Details in notes/2026-10-03.md und notes/2026-10-05.md.
-- Skill `ein-produkt-shop` (.claude/skills/ein-produkt-shop/): kompletter Ablauf für neue Ein-Produkt-Shops mit HELIA als Referenz, für jeden neuen Shop verwenden. Details in notes/2026-10-07.md.
-- Claude-Code-Mods (mods/, Katalog manuel-mods): limit-cockpit, schutzschild, pruefer, spar-modus (Experiment, aus). Zeichnen nur lokal (Terminal/Desktop), nicht in Cloud-Sitzungen. Details in notes/2026-10-07.md und mods/README.md.
-## Offene Themen
-- Musterschutz-Beispielseite (Quelle in entwuerfe/musterschutz.html, zusätzlich als Artifact): 3D-Familienszene mit erfundenen Figuren, Details in notes/2026-10-03.md.
-- Dachdecker Wagler (kunden/dachdecker-wagler/): nur Entwurf mit erfundenen Angaben, keine Erlaubnis des Inhabers, nicht veröffentlichen (siehe notes/2026-10-02.md).
-- Echte Domain, Impressum-/Datenschutz-Platzhalter, Fotos/Logo, Textschrift Source Sans 3 (siehe notes/2026-10-02.md).
-<!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
+- Szenen und Bilder verwenden nur selbst gezeichnete, erfundene Personen, keine echten Fotos.
 
-- Mein Fischer seit 1832 (kunden/mein-fischer/): One-Pager mit selbst gerendertem Stoff-Video, nur Entwurf ohne Freigabe des Inhabers, nicht veröffentlichen (siehe notes/2026-10-07.md).
+## Offene Themen
+- HELIA vor einem echten Start: echtes Produktfoto, echte Firmendaten, Zahlungsanbieter (PayPal, Klarna), Markenprüfung, Beispiel-Bewertungen löschen, GEHEIMNIS in send.php ersetzen, noindex entfernen.
+
 ## Laufende Themen
-- Website Manuel Hensel: Version mit Illustrationen, Versicherungsbaum und Dunkel-Modus gebaut, wartet auf Rückmeldung und Inhalte.
-<!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
-- HELIA-Shop (shops/helia/): Glas-Layout mit 3D-Lampe, Bewertungsbereich, persönlicher Weckzeit und Gute-Nacht-Abschluss fertig getestet. Die Bewertungen sind erfundene Beispiele und müssen vor dem Start raus. Offen: echtes Foto, echte Daten, Zahlungsanbieter, Markenprüfung.
+- HELIA-Shop (shops/helia/): Glas-Layout mit 3D-Lampe, Bewertungsbereich, persönlicher Weckzeit und Gute-Nacht-Abschluss fertig getestet. Die Bewertungen sind erfundene Beispiele und müssen vor dem Start raus.

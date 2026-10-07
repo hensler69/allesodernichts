@@ -1,7 +1,0 @@
-{
-  "name": "schutzschild",
-  "version": "0.1.0",
-  "description": "Hält riskante Schritte an (Löschen, git push --force, git reset --hard, Datenbanken leeren, .env und Passwörter überschreiben, Dateien außerhalb des Projekts ändern), erklärt sie in einfachen Worten und fragt nach. Leiste mit Tageszähler, /schutzschild schaltet an und aus.",
-  "author": { "name": "Manuel" },
-  "types": "./types/index.d.ts"
-}

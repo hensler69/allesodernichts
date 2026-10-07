@@ -1,7 +1,0 @@
-{
-  "name": "limit-cockpit",
-  "version": "0.1.0",
-  "description": "Leiste über dem Eingabefeld mit 5-Stunden-Limit, Rücksetzzeit, Kontext-Füllstand und Wochenlimit-Warnung, nach jeder Antwort die größten Token-Treiber, und /handoff für eine Übergabe in einen neuen Chat.",
-  "author": { "name": "Manuel" },
-  "types": "./types/index.d.ts"
-}
