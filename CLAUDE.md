@@ -16,6 +16,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 <!-- Format: - YYYY-MM-DD: Entscheidung (Grund) -->
 
 - E-Commerce-Entwurf HELIA (shops/helia/, früher DÄMMER): Ein-Produkt-Shop für einen Lichtwecker im Apple-Layout mit Glasflächen, alle Firmenangaben erfunden, Produktfoto von Amazon nur im Entwurf. Details in notes/2026-10-03.md und notes/2026-10-05.md.
+- Skill `ein-produkt-shop` (.claude/skills/ein-produkt-shop/): kompletter Ablauf für neue Ein-Produkt-Shops mit HELIA als Referenz, für jeden neuen Shop verwenden. Details in notes/2026-10-07.md.
 ## Offene Themen
 - Musterschutz-Beispielseite (Quelle in entwuerfe/musterschutz.html, zusätzlich als Artifact): 3D-Familienszene mit erfundenen Figuren, Details in notes/2026-10-03.md.
 - Dachdecker Wagler (kunden/dachdecker-wagler/): nur Entwurf mit erfundenen Angaben, keine Erlaubnis des Inhabers, nicht veröffentlichen (siehe notes/2026-10-02.md).
