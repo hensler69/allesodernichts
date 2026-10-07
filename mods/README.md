@@ -19,10 +19,10 @@ Vorher die Einstellungen sichern:
 cp ~/.claude/settings.json ~/.claude/settings.backup-$(date +%F).json
 ```
 
-Dann im Terminal:
+Dann im Terminal. Solange die Mods nur auf dem Arbeitszweig liegen, steht hinter `#` der Zweigname; nach dem Zusammenführen in den Hauptzweig fällt er weg:
 
 ```bash
-claude plugin marketplace add hensler69/allesodernichts
+claude plugin marketplace add hensler69/allesodernichts#claude/nifty-galileo-0inx6h
 claude plugin install limit-cockpit@manuel-mods
 claude plugin install schutzschild@manuel-mods
 claude plugin install pruefer@manuel-mods
