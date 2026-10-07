@@ -24,6 +24,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - Echte Domain, Impressum-/Datenschutz-Platzhalter, Fotos/Logo, Textschrift Source Sans 3 (siehe notes/2026-10-02.md).
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
 
+- Mein Fischer seit 1832 (kunden/mein-fischer/): One-Pager mit selbst gerendertem Stoff-Video, nur Entwurf ohne Freigabe des Inhabers, nicht veröffentlichen (siehe notes/2026-10-07.md).
 ## Laufende Themen
 - Website Manuel Hensel: Version mit Illustrationen, Versicherungsbaum und Dunkel-Modus gebaut, wartet auf Rückmeldung und Inhalte.
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->

@@ -76,8 +76,7 @@
   function bild() {
     geplant = false;
     const y = scrollY;
-    if (kopf) kopf.classList.toggle('ist-unten', y > 40);
-    if (ruhig.matches) return;
+    if (ruhig.matches) { if (kopf) kopf.classList.toggle('ist-unten', y > 40); return; }
     const hoeheHeld = held ? held.offsetHeight : innerHeight;
     // Erst messen, dann schreiben
     const messungen = ebenen.map((eb) => {
@@ -87,6 +86,7 @@
       const mitte = r.top + r.height / 2 - innerHeight / 2;
       return -mitte * eb.tiefe * staerke;
     });
+    if (kopf) kopf.classList.toggle('ist-unten', y > 40);
     ebenen.forEach((eb, n) => {
       const v = messungen[n];
       if (v === null) return;
