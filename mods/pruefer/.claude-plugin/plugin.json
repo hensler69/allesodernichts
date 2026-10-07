@@ -1,0 +1,7 @@
+{
+  "name": "pruefer",
+  "version": "0.1.0",
+  "description": "Sorgt dafür, dass fertig wirklich fertig heißt: beobachtet geänderte Dateien und gelaufene Checks, hält eine Abgabe ohne Beleg an (höchstens zweimal), speichert Learnings pro Projekt und zeigt alles live im Seitenpanel. /pruefer schaltet an und aus.",
+  "author": { "name": "Manuel" },
+  "types": "./types/index.d.ts"
+}

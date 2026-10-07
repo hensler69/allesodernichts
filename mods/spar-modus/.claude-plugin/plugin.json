@@ -1,0 +1,7 @@
+{
+  "name": "spar-modus",
+  "version": "0.1.0",
+  "description": "EXPERIMENT, standardmäßig aus: schickt leichte Zwischenschritte (nach reinem Lesen oder Suchen) an Haiku und alles andere an das große Modell. Zeigt neben dem Ladesymbol gemessene Tokens, geschätzte API-Kosten und Mehrkosten. /sparmodus schaltet an und aus.",
+  "author": { "name": "Manuel" },
+  "types": "./types/index.d.ts"
+}
