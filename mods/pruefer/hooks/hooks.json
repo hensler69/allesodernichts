@@ -1,0 +1,1 @@
+{ "description": "pruefer: Hooks-Modul", "modules": ["./register.tsx"] }
