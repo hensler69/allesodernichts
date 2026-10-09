@@ -23,6 +23,11 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
   werden nicht automatisch übernommen, bei Bedarf neu importieren (seit 2026-10-09)
 - [ ] Repo ist öffentlich, damit sind auch die Fremd-Skills öffentlich
   sichtbar (seit 2026-10-09)
+- [ ] Shop: echte Produktdaten vom AliExpress-Angebot 1005012986125766 eintragen,
+  die Seite war aus der Cloud-Umgebung nicht erreichbar (seit 2026-10-09)
 
 ## Laufende Themen
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
+- Ein-Produkt-Shop für einen elektrischen Gemüseschneider in `shop/index.html`
+  (seit 2026-10-09). Produktdaten, Preis, Fotos, Kassen-Link und Rechtstexte
+  fehlen noch und werden im `SHOP`-Block oben in der Datei eingetragen.

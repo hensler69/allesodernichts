@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elektrischer Gemüseschneider – Schnittig</title>
+<meta name="description" content="Gemüse schneiden auf Knopfdruck: der elektrische Gemüseschneider für Gurke, Möhre und Zwiebel.">
+<meta name="theme-color" content="#f3ede2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16130f" media="(prefers-color-scheme: dark)">
+<style>
+  /* Schriften kommen bewusst vom System, nicht von Google Fonts (DSGVO). */
+  :root {
+    --paper: #f3ede2;
+    --paper-2: #ebe3d4;
+    --ink: #1f1b16;
+    --ink-2: #5d554a;
+    --line: #d9cfbd;
+    --tomato: #c8401f;
+    --tomato-ink: #fff8f2;
+    --leaf: #3d6b35;
+    --board: #e3cfa9;
+    --board-edge: #c9ae80;
+    --banner: #fff3c9;
+    --banner-ink: #5a4500;
+    --serif: "Iowan Old Style", Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --wrap: 1120px;
+    --gutter: 20px;
+    --ease-out: cubic-bezier(.2, .8, .2, 1);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #16130f;
+      --paper-2: #1f1b16;
+      --ink: #f3ede2;
+      --ink-2: #b3a895;
+      --line: #3a332a;
+      --tomato: #e8603c;
+      --tomato-ink: #1a0d07;
+      --leaf: #8fbf7f;
+      --board: #4a3b28;
+      --board-edge: #5e4b33;
+      --banner: #3a3010;
+      --banner-ink: #f5dc85;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 17px/1.55 var(--sans);
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 max(var(--gutter), env(safe-area-inset-left)); }
+  .serif { font-family: var(--serif); }
+  .muted { color: var(--ink-2); }
+  .todo { color: var(--ink-2); font-style: italic; }
+  :focus-visible { outline: 3px solid var(--tomato); outline-offset: 3px; border-radius: 6px; }
+
+  /* Vorlagen-Hinweis: verschwindet, sobald alles im SHOP-Block ausgefüllt ist */
+  .banner { background: var(--banner); color: var(--banner-ink); font-size: .9rem; padding: 10px 0; }
+  .banner strong { font-weight: 650; }
+
+  /* Kopf */
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; }
+  .brand { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; letter-spacing: -.01em; text-decoration: none; }
+  .brand span { color: var(--tomato); }
+  .top-note { font-size: .875rem; color: var(--ink-2); text-align: right; }
+
+  /* Hero */
+  .hero {
+    display: grid; gap: 20px; padding: 16px 0 64px;
+    grid-template-areas: "copy" "visual" "buy";
+  }
+  @media (min-width: 880px) {
+    .hero {
+      grid-template-columns: 1.05fr 1fr; column-gap: 64px; row-gap: 32px;
+      grid-template-areas: "copy visual" "buy visual"; align-items: start; padding: 48px 0 96px;
+    }
+    .hero .buy { align-self: start; }
+  }
+  .hero .copy { grid-area: copy; }
+  .hero .visual { grid-area: visual; }
+  .hero .buy { grid-area: buy; }
+  .eyebrow { font-size: .8rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; color: var(--leaf); margin: 0 0 14px; }
+  h1 {
+    font-family: var(--serif); font-weight: 700; letter-spacing: -.025em;
+    font-size: clamp(2.6rem, 8.5vw, 5.2rem); line-height: .98; margin: 0 0 20px;
+  }
+  .lede { font-size: 1.15rem; max-width: 34ch; margin: 0; color: var(--ink-2); }
+
+  .price-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 18px; }
+  .price { font-family: var(--serif); font-size: 2.6rem; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums lining-nums; }
+  .price-note { font-size: .875rem; color: var(--ink-2); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 56px; padding: 0 30px; border-radius: 999px; border: 0;
+    background: var(--tomato); color: var(--tomato-ink);
+    font: 650 1.05rem/1 var(--sans); text-decoration: none; cursor: pointer;
+    transition: transform .16s var(--ease-out), box-shadow .16s var(--ease-out);
+    user-select: none; -webkit-user-select: none; touch-action: manipulation;
+  }
+  .btn svg { width: 18px; height: 18px; transition: transform .2s var(--ease-out); }
+  @media (hover: hover) {
+    .btn:hover { box-shadow: 0 8px 24px -10px var(--tomato); }
+    .btn:hover svg { transform: translateX(3px); }
+  }
+  .btn:active { transform: scale(.97); }
+  .buy .btn { width: 100%; }
+  @media (min-width: 520px) { .buy .btn { width: auto; } }
+  .assurances { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 8px; font-size: .925rem; color: var(--ink-2); }
+  .assurances li { display: flex; gap: 10px; align-items: baseline; }
+  .assurances li::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--leaf); transform: translateY(-1px); }
+  .status { min-height: 1.4em; margin: 10px 0 0; font-size: .9rem; color: var(--tomato); }
+
+  /* Bildbereich */
+  .visual { position: relative; }
+  .art { width: 100%; max-width: min(520px, 78vw); margin: 0 auto; aspect-ratio: 1; }
+  @media (min-width: 880px) { .art { max-width: 520px; } }
+  .art svg { width: 100%; height: 100%; overflow: visible; }
+  .slice { transform-box: fill-box; transform-origin: center; animation: drop .55s var(--ease-out) both; animation-delay: calc(var(--i) * 70ms + 120ms); }
+  @keyframes drop { from { opacity: 0; transform: translateY(-18px) rotate(-8deg); } }
+  @media (prefers-reduced-motion: reduce) { .slice { animation: none; } }
+  .photo-main { border-radius: 24px; overflow: hidden; background: var(--paper-2); aspect-ratio: 1; }
+  .photo-main img { width: 100%; height: 100%; object-fit: cover; }
+  .thumbs { display: flex; gap: 10px; margin-top: 12px; overflow-x: auto; overscroll-behavior-x: contain; padding-bottom: 4px; }
+  .thumbs button { flex: none; width: 68px; height: 68px; border-radius: 12px; overflow: hidden; padding: 0; border: 2px solid transparent; background: var(--paper-2); cursor: pointer; }
+  .thumbs button[aria-current="true"] { border-color: var(--ink); }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Abschnitte */
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  @media (min-width: 880px) { section { padding: 104px 0; } }
+  h2 { font-family: var(--serif); font-weight: 700; letter-spacing: -.02em; font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.04; margin: 0 0 40px; max-width: 18ch; }
+  h3 { font-size: 1.1rem; margin: 0 0 6px; }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; counter-reset: step; }
+  @media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
+  .steps li { counter-increment: step; }
+  .steps li::before {
+    content: counter(step); display: block; font-family: var(--serif); font-weight: 700;
+    font-size: 3.4rem; line-height: 1; color: var(--tomato); margin-bottom: 10px; font-variant-numeric: lining-nums;
+  }
+  .steps p { margin: 0; color: var(--ink-2); max-width: 30ch; }
+
+  .benefits { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+  @media (min-width: 760px) { .benefits { grid-template-columns: 1fr 1fr; } }
+  .benefit { background: var(--paper); padding: 28px; }
+  @media (min-width: 760px) { .benefit { padding: 40px; } }
+  .benefit p { margin: 0; color: var(--ink-2); max-width: 38ch; }
+
+  .facts { display: grid; gap: 48px; }
+  @media (min-width: 880px) { .facts { grid-template-columns: 1.3fr 1fr; gap: 80px; } }
+  .specs { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .specs th, .specs td { text-align: left; padding: 14px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .specs th { font-weight: 500; color: var(--ink-2); width: 42%; padding-right: 16px; }
+  .inbox { margin: 0; padding: 0; list-style: none; }
+  .inbox li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .facts h3 { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 8px; }
+
+  .faq { max-width: 760px; }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    list-style: none; cursor: pointer; padding: 20px 40px 20px 0; position: relative;
+    font-weight: 600; font-size: 1.08rem;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: ""; position: absolute; right: 6px; top: 50%; width: 12px; height: 12px; margin-top: -8px;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+    transform: rotate(45deg); transition: transform .2s var(--ease-out);
+  }
+  .faq details[open] summary::after { transform: rotate(225deg); margin-top: -2px; }
+  .faq details p { margin: 0 0 22px; color: var(--ink-2); max-width: 60ch; }
+
+  .closing { text-align: left; }
+  .closing h2 { max-width: 14ch; }
+  .closing .price-row { margin-top: -12px; }
+
+  footer { border-top: 1px solid var(--line); padding: 40px 0 calc(40px + env(safe-area-inset-bottom)); font-size: .9rem; color: var(--ink-2); }
+  footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 18px; }
+  footer nav a { text-decoration: none; }
+  @media (hover: hover) { footer nav a:hover { text-decoration: underline; } }
+
+  /* Kaufleiste unten auf dem Handy */
+  .sticky {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line);
+    padding: 10px max(16px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    transform: translateY(105%); visibility: hidden;
+    transition: transform .28s var(--ease-out), visibility 0s linear .28s;
+  }
+  .sticky.show { transform: none; visibility: visible; transition: transform .28s var(--ease-out); }
+  .sticky .price { font-size: 1.5rem; }
+  .sticky .btn { min-height: 48px; padding: 0 22px; }
+  .sticky small { display: block; font-size: .75rem; color: var(--ink-2); }
+  @media (min-width: 880px) { .sticky { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .sticky { transition: none; } }
+</style>
+</head>
+<body>
+
+<script>
+  /* ================================================================
+     SHOP – hier alles ausfüllen. Sonst muss nichts geändert werden.
+     null oder "" = fehlt noch (wird auf der Seite als Hinweis gezeigt).
+     ================================================================ */
+  const SHOP = {
+    brand: "Schnittig",                       // Name deines Shops
+    product: "Elektrischer Gemüseschneider",  // Produktname
+    price: null,                              // z. B. 39.90
+    currency: "EUR",
+    priceNote: "inkl. MwSt., zzgl. Versandkosten", // Kleinunternehmer: "Gemäß § 19 UStG keine Umsatzsteuer"
+    shipping: null,                           // z. B. "4,90 €" oder "kostenlos"
+    delivery: null,                           // z. B. "5–8 Werktage"
+    payments: null,                           // z. B. "PayPal, Kreditkarte, Apple Pay"
+    checkoutUrl: "",                          // Link zur Kasse (Stripe Payment Link, Shopify, PayPal …)
+    images: [],                               // eigene Produktfotos, z. B. ["bilder/1.jpg", "bilder/2.jpg"]
+    specs: [                                  // [Bezeichnung, Wert] – Werte aus dem Datenblatt übernehmen
+      ["Leistung", null],
+      ["Akku / Stromversorgung", null],
+      ["Ladezeit", null],
+      ["Aufsätze", null],
+      ["Material", null],
+      ["Maße", null],
+      ["Gewicht", null]
+    ],
+    inBox: [],                                // Lieferumfang, z. B. ["Grundgerät", "4 Schneideaufsätze", "USB-C-Kabel"]
+    legal: {                                  // Pflicht in Deutschland, vor dem Verkauf eintragen
+      impressum: "", datenschutz: "", agb: "", widerruf: "", versand: ""
+    }
+  };
+</script>
+
+<div class="banner" id="banner" hidden>
+  <div class="wrap"><strong>Vorlage, noch nicht verkaufsbereit.</strong> Es fehlt: <span id="missing"></span>. Alles steht im Block <code>SHOP</code> in <code>shop/index.html</code>.</div>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#" data-bind="brand"></a>
+    <div class="top-note">Lieferung in <span data-bind="delivery"></span></div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="copy">
+        <p class="eyebrow" data-bind="product"></p>
+        <h1>Schnippeln war gestern.</h1>
+        <p class="lede">Gurke, Möhre, Zwiebel: Du legst das Gemüse ein und drückst den Knopf. Das Gerät schneidet, du hast die Hände frei.</p>
+      </div>
+
+      <div class="visual" id="visual">
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 400 400" role="img">
+            <defs>
+              <g id="cuke">
+                <circle r="46" fill="#4f7d2f"/>
+                <circle r="41" fill="#cfe4a6"/>
+                <circle r="23" fill="#e6f1cf"/>
+                <g fill="#b5cf86">
+                  <ellipse cy="-14" rx="2.6" ry="5.4"/>
+                  <ellipse cy="-14" rx="2.6" ry="5.4" transform="rotate(45)"/>
+                  <ellipse cy="-14" rx="2.6" ry="5.4" transform="rotate(90)"/>
+                  <ellipse cy="-14" rx="2.6" ry="5.4" transform="rotate(135)"/>
+                  <ellipse cy="-14" rx="2.6" ry="5.4" transform="rotate(180)"/>
+                  <ellipse cy="-14" rx="2.6" ry="5.4" transform="rotate(225)"/>
+                  <ellipse cy="-14" rx="2.6" ry="5.4" transform="rotate(270)"/>
+                  <ellipse cy="-14" rx="2.6" ry="5.4" transform="rotate(315)"/>
+                </g>
+              </g>
+              <g id="carrot">
+                <circle r="34" fill="#d5601d"/>
+                <circle r="28" fill="#ee8a3a"/>
+                <circle r="12" fill="#f6b062"/>
+              </g>
+              <g id="onion">
+                <circle r="40" fill="none" stroke="#9b3b6a" stroke-width="5"/>
+                <circle r="31" fill="none" stroke="#c77aa0" stroke-width="4"/>
+                <circle r="22" fill="none" stroke="#9b3b6a" stroke-width="4"/>
+              </g>
+            </defs>
+            <g transform="rotate(-7 200 210)">
+              <rect x="44" y="34" width="312" height="346" rx="40" fill="var(--board)" stroke="var(--board-edge)" stroke-width="3"/>
+              <circle cx="200" cy="70" r="13" fill="var(--paper)" stroke="var(--board-edge)" stroke-width="3"/>
+              <path d="M78 120 Q200 106 322 120 M78 330 Q200 344 322 330" stroke="var(--board-edge)" stroke-width="1.5" fill="none" opacity=".5"/>
+            </g>
+            <use href="#onion"  class="slice" style="--i:0" x="290" y="300"/>
+            <use href="#cuke"   class="slice" style="--i:1" x="118" y="150"/>
+            <use href="#cuke"   class="slice" style="--i:2" x="166" y="134"/>
+            <use href="#cuke"   class="slice" style="--i:3" x="216" y="128"/>
+            <use href="#cuke"   class="slice" style="--i:4" x="266" y="138"/>
+            <use href="#carrot" class="slice" style="--i:5" x="118" y="246"/>
+            <use href="#carrot" class="slice" style="--i:6" x="160" y="262"/>
+            <use href="#carrot" class="slice" style="--i:7" x="204" y="270"/>
+            <use href="#carrot" class="slice" style="--i:8" x="248" y="266"/>
+            <use href="#cuke"   class="slice" style="--i:9" x="300" y="218"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="buy">
+        <div class="price-row">
+          <span class="price" data-bind="price"></span>
+          <span class="price-note"><span data-bind="priceNote"></span><br>Versand: <span data-bind="shipping"></span></span>
+        </div>
+        <a class="btn" href="#" data-checkout>Jetzt kaufen
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+        </a>
+        <p class="status" role="status" aria-live="polite"></p>
+        <ul class="assurances">
+          <li>14 Tage Widerrufsrecht ab Erhalt</li>
+          <li>2 Jahre gesetzliche Gewährleistung</li>
+          <li>Bezahlen mit <span data-bind="payments"></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <section aria-labelledby="h-how">
+      <h2 id="h-how">So geht’s.</h2>
+      <ol class="steps">
+        <li><h3>Aufsatz wählen</h3><p>Scheiben, Streifen oder Raspel: passenden Aufsatz aufstecken.</p></li>
+        <li><h3>Gemüse einlegen</h3><p>Grob vorschneiden, was nicht passt. Den Rest erledigt das Gerät.</p></li>
+        <li><h3>Knopf drücken</h3><p>Ein paar Sekunden später liegt alles gleichmäßig geschnitten in der Schüssel.</p></li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="h-why">
+      <h2 id="h-why">Weniger Arbeit, mehr Salat.</h2>
+      <div class="benefits">
+        <div class="benefit"><h3>Schneller als mit dem Messer</h3><p>Eine ganze Gurke ist geschnitten, bevor du das Brett abgewischt hättest. Gut für Rohkost, Salat und Meal-Prep.</p></div>
+        <div class="benefit"><h3>Jede Scheibe gleich dick</h3><p>Alles gart gleich schnell und sieht auf dem Teller ordentlich aus.</p></div>
+        <div class="benefit"><h3>Finger weg von der Klinge</h3><p>Die Klingen sitzen im Gerät. Du schiebst nur das Gemüse nach.</p></div>
+        <div class="benefit"><h3>Schnell wieder sauber</h3><p>Aufsätze abnehmen, abspülen, trocknen lassen. Fertig.</p></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-facts">
+      <h2 id="h-facts">Alle Daten auf einen Blick.</h2>
+      <div class="facts">
+        <div>
+          <h3>Technische Daten</h3>
+          <table class="specs"><tbody id="specs"></tbody></table>
+        </div>
+        <div>
+          <h3>Im Karton</h3>
+          <ul class="inbox" id="inbox"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-faq">
+      <h2 id="h-faq">Fragen und Antworten.</h2>
+      <div class="faq">
+        <details><summary>Wie lange dauert die Lieferung?</summary><p>Die Lieferzeit beträgt <span data-bind="delivery"></span>. Die Versandkosten betragen <span data-bind="shipping"></span>.</p></details>
+        <details><summary>Kann ich das Gerät zurückschicken?</summary><p>Ja. Du kannst den Kauf innerhalb von 14 Tagen nach Erhalt ohne Angabe von Gründen widerrufen. Alles Weitere steht in der <a data-legal="widerruf" href="#">Widerrufsbelehrung</a>.</p></details>
+        <details><summary>Gibt es eine Garantie?</summary><p>Es gilt die gesetzliche Gewährleistung von zwei Jahren ab Lieferung.</p></details>
+        <details><summary>Wie reinige ich den Gemüseschneider?</summary><p>Aufsätze abnehmen und mit warmem Spülwasser reinigen. Das Motorteil nur mit einem feuchten Tuch abwischen und nie ins Wasser tauchen.</p></details>
+        <details><summary>Wie kann ich bezahlen?</summary><p>Über „Jetzt kaufen“ kommst du zur Kasse. Dort kannst du mit <span data-bind="payments"></span> bezahlen.</p></details>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="h-end">
+      <h2 id="h-end">Weniger schneiden, mehr kochen.</h2>
+      <div class="price-row">
+        <span class="price" data-bind="price"></span>
+        <span class="price-note" data-bind="priceNote"></span>
+      </div>
+      <a class="btn" href="#" data-checkout id="cta-end">Jetzt kaufen
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+      </a>
+      <p class="status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <nav aria-label="Rechtliches">
+      <a data-legal="impressum" href="#">Impressum</a>
+      <a data-legal="datenschutz" href="#">Datenschutz</a>
+      <a data-legal="agb" href="#">AGB</a>
+      <a data-legal="widerruf" href="#">Widerrufsbelehrung</a>
+      <a data-legal="versand" href="#">Versand und Zahlung</a>
+    </nav>
+    <p>© <span id="year"></span> <span data-bind="brand"></span></p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <div><span class="price" data-bind="price"></span><small data-bind="priceNote"></small></div>
+  <a class="btn" href="#" data-checkout tabindex="-1">Kaufen</a>
+</div>
+
+<script>
+(() => {
+  const fmt = new Intl.NumberFormat("de-DE", { style: "currency", currency: SHOP.currency });
+  const has = v => v !== null && v !== undefined && String(v).trim() !== "";
+  const todo = "noch eintragen";
+
+  const values = {
+    brand: SHOP.brand,
+    product: SHOP.product,
+    price: has(SHOP.price) ? fmt.format(SHOP.price) : fmt.format(0).replace(/0,00/, "–,––"),
+    priceNote: SHOP.priceNote,
+    shipping: SHOP.shipping,
+    delivery: SHOP.delivery,
+    payments: SHOP.payments
+  };
+  document.querySelectorAll("[data-bind]").forEach(el => {
+    const v = values[el.dataset.bind];
+    if (has(v)) el.textContent = v;
+    else { el.textContent = todo; el.classList.add("todo"); }
+  });
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Technische Daten und Lieferumfang
+  const specs = document.getElementById("specs");
+  SHOP.specs.forEach(([k, v]) => {
+    const tr = document.createElement("tr");
+    const th = document.createElement("th"); th.scope = "row"; th.textContent = k;
+    const td = document.createElement("td");
+    if (has(v)) td.textContent = v; else { td.textContent = todo; td.className = "todo"; }
+    tr.append(th, td); specs.append(tr);
+  });
+  const inbox = document.getElementById("inbox");
+  (SHOP.inBox.length ? SHOP.inBox : [null]).forEach(item => {
+    const li = document.createElement("li");
+    if (has(item)) li.textContent = item; else { li.textContent = todo; li.className = "todo"; }
+    inbox.append(li);
+  });
+
+  // Rechtliche Links
+  document.querySelectorAll("[data-legal]").forEach(a => {
+    const url = SHOP.legal[a.dataset.legal];
+    if (has(url)) a.href = url; else a.classList.add("todo");
+  });
+
+  // Produktfotos ersetzen die Illustration, sobald vorhanden
+  if (SHOP.images.length) {
+    const visual = document.getElementById("visual");
+    const main = document.createElement("div"); main.className = "photo-main";
+    const img = document.createElement("img");
+    img.src = SHOP.images[0]; img.alt = `${SHOP.product}, Bild 1`; img.decoding = "async";
+    img.width = 1000; img.height = 1000;
+    main.append(img);
+    visual.replaceChildren(main);
+    if (SHOP.images.length > 1) {
+      const thumbs = document.createElement("div"); thumbs.className = "thumbs";
+      SHOP.images.forEach((src, i) => {
+        const b = document.createElement("button"); b.type = "button";
+        b.setAttribute("aria-label", `Bild ${i + 1} anzeigen`);
+        if (i === 0) b.setAttribute("aria-current", "true");
+        const t = document.createElement("img"); t.src = src; t.alt = ""; t.loading = "lazy";
+        b.append(t);
+        b.addEventListener("click", () => {
+          img.src = src; img.alt = `${SHOP.product}, Bild ${i + 1}`;
+          thumbs.querySelectorAll("button").forEach(x => x.removeAttribute("aria-current"));
+          b.setAttribute("aria-current", "true");
+        });
+        thumbs.append(b);
+      });
+      visual.append(thumbs);
+    }
+  }
+
+  // Kasse
+  document.querySelectorAll("[data-checkout]").forEach(a => {
+    if (has(SHOP.checkoutUrl)) { a.href = SHOP.checkoutUrl; a.rel = "noopener"; return; }
+    a.addEventListener("click", e => {
+      e.preventDefault();
+      const status = a.parentElement.querySelector(".status") || document.querySelector(".buy .status");
+      status.textContent = "Der Link zur Kasse fehlt noch (checkoutUrl im SHOP-Block).";
+      if (a.closest(".sticky")) status.scrollIntoView({ block: "center" });
+    });
+  });
+
+  // Vorlagen-Hinweis
+  const missing = [];
+  if (!has(SHOP.price)) missing.push("Preis");
+  if (!has(SHOP.checkoutUrl)) missing.push("Kassen-Link");
+  if (!SHOP.images.length) missing.push("Produktfotos");
+  if (!has(SHOP.delivery) || !has(SHOP.shipping)) missing.push("Lieferzeit und Versandkosten");
+  if (!has(SHOP.payments)) missing.push("Zahlarten");
+  if (SHOP.specs.some(([, v]) => !has(v)) || !SHOP.inBox.length) missing.push("technische Daten und Lieferumfang");
+  if (Object.values(SHOP.legal).some(v => !has(v))) missing.push("Impressum, Datenschutz, AGB, Widerruf");
+  if (missing.length) {
+    document.getElementById("missing").textContent = missing.join(", ");
+    document.getElementById("banner").hidden = false;
+  } else {
+    // Strukturierte Produktdaten für Suchmaschinen
+    const ld = document.createElement("script"); ld.type = "application/ld+json";
+    ld.textContent = JSON.stringify({
+      "@context": "https://schema.org", "@type": "Product", name: SHOP.product,
+      image: SHOP.images.map(s => new URL(s, location.href).href),
+      brand: { "@type": "Brand", name: SHOP.brand },
+      offers: { "@type": "Offer", price: SHOP.price, priceCurrency: SHOP.currency,
+        availability: "https://schema.org/InStock", url: location.href }
+    });
+    document.head.append(ld);
+  }
+
+  // Kaufleiste: zeigen, solange kein anderer Kauf-Button sichtbar ist
+  const sticky = document.getElementById("sticky");
+  const targets = [document.querySelector(".hero .buy"), document.getElementById("cta-end")];
+  const visible = new Set();
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => en.isIntersecting ? visible.add(en.target) : visible.delete(en.target));
+    const past = window.scrollY > 200;
+    sticky.classList.toggle("show", past && visible.size === 0);
+  });
+  targets.forEach(t => io.observe(t));
+  addEventListener("scroll", () => {
+    if (window.scrollY <= 200) sticky.classList.remove("show");
+    else if (visible.size === 0) sticky.classList.add("show");
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
