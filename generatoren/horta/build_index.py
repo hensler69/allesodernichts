@@ -17,7 +17,7 @@ html += f'''
 <section class="held" aria-labelledby="titel">
   <div class="held__text">
     <span class="marke held__an" style="--i:0" data-gruss>HORTA Gemüseschneider</span>
-    <h1 id="titel"><span class="held__an" style="--i:1">Weniger schnippeln.</span> <span class="held__an" style="--i:2">Mehr <span class="leucht">Salat.</span></span></h1>
+    <h1 id="titel"><span class="held__an" style="--i:1">Weniger <span class="leucht">schnippeln.</span></span> <span class="held__an" style="--i:2">Mehr <span class="leucht leucht--gruen">Salat.</span></span></h1>
     <p class="held__unter held__an" style="--i:3">HORTA schneidet, raspelt und reibt auf Knopfdruck. Fünf Einsätze aus Edelstahl, ein breiter Schacht, und alles fällt direkt in Ihre Schüssel.</p>
     <a class="held__sterne held__an" style="--i:4" href="#bewertungen" data-rez="kopf"><span class="sterne" data-rez="sterne-kopf"></span><span data-rez="kopf-text">Bewertungen ansehen</span></a>
     <div class="held__kauf held__an" style="--i:5">
@@ -139,11 +139,11 @@ html += f'''
 
 # ---------- Verlangen: Vom Markt bis auf den Teller ----------
 SCHRITTE = [
-    ("Waschen", "Gemüse waschen, Enden abschneiden, Großes wie Kohl grob teilen.", "linear-gradient(160deg,#eef5e6,#c9dfb6)", ICON["sauber"]),
-    ("Einsatz wählen", "Kegel aufstecken, Trommel ansetzen und mit einer Drehung einrasten.", "linear-gradient(160deg,#f3f1ea,#d3d9d5)", kegel_icon("grob")),
-    ("Einfüllen", "Gemüse in den Schacht legen und den Stopfer aufsetzen.", "linear-gradient(160deg,#fcefdf,#f3c38f)", ICON["schacht"]),
-    ("Drücken", "Oben auf den Knopf drücken und mit dem Stopfer leicht nachschieben. Alles fällt in die Schüssel.", "linear-gradient(160deg,#fbeae4,#eeb39c)", ICON["knopf"]),
-    ("Abspülen", "Stecker ziehen, Teile abnehmen, kurz abspülen. Das Gehäuse nur feucht abwischen.", "linear-gradient(160deg,#f1f6ec,#d3e4c6)", ICON["funkeln"]),
+    ("Waschen", "Gemüse waschen, Enden abschneiden, Großes wie Kohl grob teilen.", "#dff3a6", ICON["sauber"]),
+    ("Einsatz wählen", "Kegel aufstecken, Trommel ansetzen und mit einer Drehung einrasten.", "#fffef6", kegel_icon("grob")),
+    ("Einfüllen", "Gemüse in den Schacht legen und den Stopfer aufsetzen.", "#ffd23f", ICON["schacht"]),
+    ("Drücken", "Oben auf den Knopf drücken und mit dem Stopfer leicht nachschieben. Alles fällt in die Schüssel.", "#ff5236", ICON["knopf"]),
+    ("Abspülen", "Stecker ziehen, Teile abnehmen, kurz abspülen. Das Gehäuse nur feucht abwischen.", "#b79cff", ICON["funkeln"]),
 ]
 html += '''
 <section class="kapitel" aria-labelledby="n-titel">
@@ -381,13 +381,13 @@ html += '  </div>\n</section>\n'
 # ---------- Abschied: der Tisch ist gedeckt ----------
 html += f'''
 <section class="abschied" aria-labelledby="gn-titel">
-  <div class="abschied__szene" aria-hidden="true"><i class="abschied__licht"></i><i class="abschied__tisch"></i>
-    <div class="abschied__schale">{schale_svg("a", "Glasschüssel mit Salat")}</div>
-  </div>
-  <div class="abschied__text">
-    <span class="marke">Bis zum nächsten Salat</span>
-    <h2 id="gn-titel">Der Tisch ist gedeckt. <span class="leucht">Guten Appetit.</span></h2>
-    <p data-salat-satz>Ein Salat aus <b>Gurke, Karotte und Rotkohl</b> ist mit HORTA schnell geschnitten. Jetzt fehlt nur noch das Dressing.</p>
+  <div class="abschied__in">
+    <div class="abschied__text">
+      <span class="marke">Bis zum nächsten Salat</span>
+      <h2 id="gn-titel">Der Tisch ist gedeckt. Guten Appetit.</h2>
+      <p data-salat-satz>Ein Salat aus <b>Gurke, Karotte und Rotkohl</b> ist mit HORTA schnell geschnitten. Jetzt fehlt nur noch das Dressing.</p>
+    </div>
+    <div class="abschied__schale" aria-hidden="true">{schale_svg("a", "Glasschüssel mit Salat")}</div>
   </div>
 </section>
 </main>

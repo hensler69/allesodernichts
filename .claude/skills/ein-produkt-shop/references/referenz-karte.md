@@ -78,3 +78,6 @@ Schwelle `59 €`/`5900`. Danach `grep -ri helia <neuer-ordner>` muss leer sein.
 - 3D-Modell eines Kegelstumpfs aus 16 Flächen mit Glanzstreifen, waagerechte Trommel als Zylinder um die X-Achse
   (`rotateX(k*36deg) translateZ(r)`). Teile, die ineinander stecken, leicht auseinanderrücken, sonst entstehen helle Splitter.
 - Generatoren immer ins Projekt legen (`generatoren/<name>/`), der Scratchpad ist nach der Sitzung weg.
+- Seit 09.10.2026 trägt HORTA den Look Neo-Brutalism (dicke Konturen, harte Schatten, flache Farben). Aufbau, Haken und
+  Tests blieben gleich, nur CSS, Schriften, Logo, Favicon, Vorschaubild und wenige Stellen in den Generatoren wurden
+  getauscht. Alle Looks mit Anleitung zum Wechseln stehen im Skill `design-vorlagen`.

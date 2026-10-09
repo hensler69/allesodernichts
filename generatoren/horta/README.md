@@ -6,10 +6,11 @@ nicht in den HTML-Dateien (sonst überschreibt der nächste Lauf sie). Dieser Or
 ```bash
 cd generatoren/horta
 SHOP_ZIEL=../../shops/horta python3 build_index.py && SHOP_ZIEL=../../shops/horta python3 build_rest.py
-SHOP_ZIEL=../../shops/horta python3 beet.py        # Hintergrundgrafiken und Favicon (nur bei Änderungen)
+SHOP_ZIEL=../../shops/horta python3 favicon.py     # Favicon (nur bei Änderungen)
 SHOP_ZIEL=../../shops/horta python3 og_bild.py     # Vorschaubild: danach og.js mit Playwright ausführen
 ```
 
+- Look: Neo-Brutalism (siehe Skill design-vorlagen). Farben und Schatten stehen in `shops/horta/assets/style.css`.
 - `bausteine.py`: Name, Firma, Mail, Lieferzeit, Logo, 3D-Gerät (`geraet_3d`), Seitenansicht mit Schüssel (`geraet_svg`), Kopf- und Fußzeile
 - `build_index.py`: Startseite mit allen Texten, Probierstand, Datenblatt, GPSR-Angaben, 36 Beispielbewertungen (vor dem Start löschen)
 - `build_rest.py`: Kasse, Danke, Widerruf und Rechtsseiten

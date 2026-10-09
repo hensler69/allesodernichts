@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>HORTA Kasse Neo-Brutalism</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: gleiche Blocksprache wie die Startseite. Links drei Formularblöcke, rechts die klebende Bestellübersicht. */
+body{margin:0}
+.nb{--sh:6px;--accent:#ff5236;--ground:#dff3a6;--ink:#121212;--paper:#fffef6;--green:#43d36b;--sun:#ffd23f;--violet:#b79cff;
+  font:500 17px/1.55 'Archivo',system-ui,sans-serif;color:var(--ink);background:var(--ground);overflow-x:clip}
+.nb *,.nb *::before,.nb *::after{box-sizing:border-box}
+.nb h1,.nb h2,.nb h3,.nb p,.nb fieldset{margin:0}
+.nb a{color:inherit}
+.nb a:hover{color:inherit}
+.nb :focus-visible{outline:4px solid #3d6bff;outline-offset:3px}
+.disp{font-family:'Archivo Black','Archivo',system-ui,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-.015em;line-height:.96}
+.wrap{max-width:1280px;margin:0 auto}
+.box{background:var(--paper);border:3px solid var(--ink);box-shadow:var(--sh) var(--sh) 0 var(--ink)}
+.hl{display:inline-block;padding:.02em .14em .06em;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);transform:rotate(-1.6deg);background:var(--sun)}
+.lbl{font:700 13px/1 'Space Mono',ui-monospace,monospace;text-transform:uppercase;letter-spacing:.1em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:12px 24px;border:3px solid var(--ink);background:var(--accent);color:var(--ink);
+  font:400 18px/1 'Archivo Black',system-ui,sans-serif;text-transform:uppercase;text-decoration:none;cursor:pointer;box-shadow:var(--sh) var(--sh) 0 var(--ink);transition:transform .08s ease,box-shadow .08s ease}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:calc(var(--sh) + 2px) calc(var(--sh) + 2px) 0 var(--ink)}
+.btn:active{transform:translate(var(--sh),var(--sh));box-shadow:0 0 0 var(--ink)}
+.btn--ink{background:var(--ink);color:var(--sun)}
+.btn--xl{font-size:clamp(18px,2vw,24px);padding:18px 32px;min-height:64px;width:100%}
+@media (prefers-reduced-motion:reduce){ .btn{transition:none} }
+
+.tick{background:var(--ink);color:var(--sun);font:400 13px/1.5 'Space Mono',ui-monospace,monospace;padding:10px clamp(16px,4vw,56px);text-align:center}
+.hdr{background:var(--paper);border-bottom:3px solid var(--ink)}
+.hdr__in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:12px clamp(16px,4vw,56px)}
+.logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font:400 28px/1 'Archivo Black',system-ui,sans-serif;letter-spacing:.06em}
+.logo svg{width:40px;height:40px;flex:none}
+.back{font-weight:700;padding:8px 14px;border:3px solid var(--ink);background:#fff;text-decoration:none}
+.back:hover{background:var(--sun)}
+
+.page{padding:clamp(40px,6vw,88px) clamp(16px,4vw,56px) clamp(64px,8vw,120px)}
+.h1{font-size:clamp(2.6rem,6.6vw,6rem)}
+.grid{display:flex;flex-wrap:wrap;gap:32px;margin-top:clamp(28px,4vw,56px);align-items:flex-start}
+.form{flex:1 1 560px;min-width:0;display:grid;gap:32px}
+.block{padding:clamp(20px,3vw,36px);display:grid;gap:18px}
+.block legend,.block h2{font:400 clamp(22px,2.4vw,30px)/1.05 'Archivo Black',sans-serif;text-transform:uppercase;padding:0;margin-bottom:6px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.f{display:grid;gap:6px}
+.f--wide{grid-column:1/-1}
+.f label{font:700 13px/1.2 'Space Mono',ui-monospace,monospace;text-transform:uppercase;letter-spacing:.06em}
+.fld{width:100%;min-height:52px;padding:12px 14px;border:3px solid var(--ink);background:#fff;font:500 17px/1.2 'Archivo',sans-serif;color:var(--ink);border-radius:0}
+.pay{display:grid;grid-template-columns:28px 1fr;gap:4px 14px;align-items:center;padding:16px 18px;border:3px solid var(--ink);background:#fff;cursor:pointer;box-shadow:4px 4px 0 var(--ink)}
+.pay + .pay{margin-top:16px}
+.pay:has(input:checked){background:var(--green)}
+.pay input{width:24px;height:24px;margin:0;accent-color:var(--ink)}
+.pay b{font:400 18px/1.1 'Archivo Black',sans-serif;text-transform:uppercase}
+.pay span{grid-column:2;font-size:14px}
+.chk{display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:15px;line-height:1.5;cursor:pointer}
+.chk input{width:24px;height:24px;margin:0;accent-color:var(--ink)}
+.chk a{font-weight:700}
+.small{font-size:14px;line-height:1.5}
+.sum{border-top:3px solid var(--ink);padding-top:16px;display:grid;gap:6px}
+.sum div{display:flex;justify-content:space-between;gap:16px;font-weight:700}
+.sum .tot{font:400 clamp(22px,2.6vw,30px)/1.1 'Archivo Black',sans-serif;text-transform:uppercase}
+
+.side{flex:1 1 340px;min-width:0;position:sticky;top:24px;padding:clamp(20px,3vw,32px);display:grid;gap:18px;background:var(--sun)}
+.side h2{font:400 clamp(22px,2.4vw,30px)/1.05 'Archivo Black',sans-serif;text-transform:uppercase}
+.row{display:flex;justify-content:space-between;gap:16px;font-weight:700}
+.coupon{display:flex;flex-wrap:wrap;gap:12px}
+.coupon .fld{flex:1 1 160px;width:auto}
+.note{padding:14px 16px;background:var(--paper);border:3px solid var(--ink);font-size:14px;line-height:1.5}
+.note b{font-family:'Space Mono',monospace;text-transform:uppercase}
+@media (max-width:760px){ .side{position:static;order:-1} }
+</style>
+</helmet>
+
+<div class="nb">
+
+<div class="tick">ENTWURF: Alle Firmen-, Hersteller- und Technikangaben sowie alle Bewertungen sind erfunden. Das Produktfoto muss vor einer Veröffentlichung ersetzt werden.</div>
+
+<header class="hdr">
+  <div class="hdr__in">
+    <a class="logo" href="Main.dc.html" aria-label="HORTA, zur Startseite">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="#43d36b" stroke="#121212" stroke-width="4"/><circle cx="24" cy="24" r="14" fill="#fffef6" stroke="#121212" stroke-width="3"/><circle cx="24" cy="24" r="5" fill="#dff3a6" stroke="#121212" stroke-width="2.5"/><path d="M24 12v5M24 31v5M12 24h5M31 24h5" stroke="#121212" stroke-width="3" stroke-linecap="round"/></svg>
+      HORTA
+    </a>
+    <a class="back" href="Main.dc.html">Zurück zum Shop</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <h1 class="disp h1">Die <span class="hl">Kasse.</span></h1>
+    <div class="grid">
+      <div class="form" role="group" aria-label="Bestelldaten">
+        <fieldset class="box block" style="min-width:0">
+          <legend>Lieferadresse</legend>
+          <div class="fields">
+            <div class="f"><label for="k-vor">Vorname</label><input class="fld" id="k-vor" type="text" autocomplete="given-name"></div>
+            <div class="f"><label for="k-nach">Nachname</label><input class="fld" id="k-nach" type="text" autocomplete="family-name"></div>
+            <div class="f f--wide"><label for="k-str">Straße und Hausnummer</label><input class="fld" id="k-str" type="text" autocomplete="street-address"></div>
+            <div class="f"><label for="k-plz">Postleitzahl</label><input class="fld" id="k-plz" type="text" inputmode="numeric" maxlength="5" autocomplete="postal-code"></div>
+            <div class="f"><label for="k-ort">Ort</label><input class="fld" id="k-ort" type="text" autocomplete="address-level2"></div>
+            <div class="f f--wide"><label for="k-land">Land</label><select class="fld" id="k-land"><option>Deutschland</option></select></div>
+            <div class="f f--wide"><label for="k-mail">E-Mail-Adresse für die Bestätigung</label><input class="fld" id="k-mail" type="email" autocomplete="email"></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="box block" style="min-width:0">
+          <legend>Zahlungsart</legend>
+          <div>
+            <label class="pay" for="pay-paypal"><input type="radio" name="zahlart" id="pay-paypal"><b>PayPal</b><span>Sie erhalten nach der Bestellung den Zahlungslink per E-Mail.</span></label>
+            <label class="pay" for="pay-klarna"><input type="radio" name="zahlart" id="pay-klarna"><b>Klarna</b><span>Sie erhalten nach der Bestellung den Zahlungslink per E-Mail.</span></label>
+          </div>
+        </fieldset>
+
+        <div class="box block">
+          <h2>Zum Schluss</h2>
+          <label class="chk" for="k-agb"><input type="checkbox" id="k-agb"><span>Ich habe die <a href="#">AGB</a> und die <a href="#">Widerrufsbelehrung</a> gelesen und bin einverstanden.</span></label>
+          <p class="small">Mit Ihrer Bestellung geben Sie ein verbindliches Angebot ab und verpflichten sich zur Zahlung. Wir verarbeiten Ihre Daten gemäß der <a href="#">Datenschutzerklärung</a>.</p>
+          <p class="small"><b>Sie bestellen:</b> 1 × HORTA Gemüseschneider HT-5. Elektrischer Gemüseschneider, 800 W laut Hersteller, 5 Einsätze aus Edelstahl, Euro-Stecker.</p>
+          <p class="small"><b>Lieferzeit:</b> 8 bis 15 Werktage ab Zahlungseingang, Versand direkt aus China. Zoll und Einfuhrabgaben sind enthalten.</p>
+          <div class="sum"><div class="tot"><span>Gesamtbetrag inkl. MwSt.</span><span>49,80 €</span></div></div>
+          <button type="button" class="btn btn--xl">Zahlungspflichtig bestellen</button>
+        </div>
+      </div>
+
+      <aside class="box side" aria-label="Ihre Bestellung">
+        <h2>Ihre Bestellung</h2>
+        <div class="row"><span>1 × HORTA</span><span>44,90 €</span></div>
+        <div class="coupon">
+          <label class="lbl" for="k-code" style="flex:1 1 100%">Gutscheincode</label>
+          <input class="fld" id="k-code" type="text" placeholder="Gutscheincode" autocomplete="off">
+          <button type="button" class="btn btn--ink" style="min-height:52px;padding:12px 18px;font-size:15px">Einlösen</button>
+        </div>
+        <div class="sum">
+          <div><span>Versand</span><span>4,90 €</span></div>
+          <div class="tot"><span>Gesamt</span><span>49,80 €</span></div>
+          <div style="font-weight:500;font-size:14px"><span>darin 19 % MwSt.</span><span>7,95 €</span></div>
+        </div>
+        <p class="note"><b>Entwurf:</b> PayPal und Klarna sind noch nicht angeschlossen. Die Bestellung geht per E-Mail ein, der Zahlungslink folgt danach.</p>
+        <p class="small"><a href="#">Versand und Zahlung</a></p>
+      </aside>
+    </div>
+  </div>
+</main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

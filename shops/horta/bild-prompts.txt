@@ -3,7 +3,7 @@ BILD-PROMPTS FÜR HORTA (Englisch, für Bild-KIs oder Fotografen)
 WICHTIG: Das Produktfoto assets/img/produkt-entwurf.jpg stammt vom Lieferanten (AliExpress)
 und darf auf der echten Seite NUR mit schriftlicher Freigabe des Lieferanten verwendet werden.
 Besser: eigenes Foto des gelieferten Geräts. Dateiname beibehalten (1 Stelle im Abschnitt "Angebot").
-Alle Bilder im selben Look: helles Morgenlicht, cremefarbener Grund, frisches Grün, kein Text im Bild.
+Alle Bilder im selben Look: helles Morgenlicht, heller Grund, frisches Grün, kein Text im Bild. Die Seite selbst ist ein Neo-Brutalism-Entwurf (dicke schwarze Konturen, flache Farben).
 
 1) Produktfoto, Hauptbild (Seitenverhältnis 5:6, Hochformat), ersetzt produkt-entwurf.jpg
    "Studio product photo of an electric salad maker with a tapered brushed stainless steel body,

@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>HORTA im KI-Vorlagen-Look</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* Layout: der bekannte Vorlagen-Aufbau, absichtlich vollständig. Dunkler Grund mit Farbverlauf und Körnung, mittige Hero mit Badge,
+   Karten mit farbigem Rand, Lucide-Symbole an jeder Stelle, ein Lichtkegel am Cursor. Die Abstände sind mit Absicht ungleich.
+   Schrift: Geist (Text) mit Instrument Serif Kursiv als Akzent. */
+body{margin:0}
+.ai{--bg:#07070c;--ink:#f4f4f8;--mute:rgba(244,244,248,.68);--faint:rgba(244,244,248,.52);
+  --violet:167 139 250;--sky:125 211 252;--emerald:52 211 153;--amber:251 191 36;--pink:244 114 182;--rose:251 113 133;--mx:720px;--my:360px;
+  position:relative;overflow:clip;background:var(--bg);color:var(--ink);font:400 16px/1.6 'Geist',system-ui,sans-serif}
+.ai *,.ai *::before,.ai *::after{box-sizing:border-box}
+.ai h1,.ai h2,.ai h3,.ai p,.ai ul{margin:0}
+.ai ul{padding:0;list-style:none}
+.ai a{color:inherit;text-decoration:none}
+.ai :focus-visible{outline:2px solid rgb(var(--sky));outline-offset:3px;border-radius:8px}
+.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ic--s{width:16px;height:16px}
+.ic--l{width:24px;height:24px}
+.it{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.01em;font-size:1.1em}
+.grad{background:linear-gradient(90deg,#c4b5fd,#7dd3fc 55%,#f9a8d4);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.06em}
+
+/* Lichtkegel am Cursor */
+.beam{position:absolute;left:0;top:0;width:680px;height:680px;border-radius:50%;pointer-events:none;z-index:30;
+  background:radial-gradient(circle,rgba(139,92,246,.34) 0%,rgba(56,189,248,.14) 42%,transparent 68%);
+  mix-blend-mode:screen;transform:translate(calc(var(--mx) - 340px),calc(var(--my) - 340px));will-change:transform}
+.grain{position:absolute;inset:0;width:100%;height:100%;opacity:.4;mix-blend-mode:overlay;pointer-events:none;z-index:1}
+
+/* Knöpfe blenden beim Überfahren aus */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 22px;border-radius:12px;border:1px solid transparent;font:500 15px/1 'Geist',system-ui,sans-serif;cursor:pointer;
+  transition:opacity .25s ease,background-color .25s ease}
+.btn--p{background:#fff;color:#07070c}
+.btn--p:hover{opacity:.78}
+.btn--g{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16);color:var(--ink)}
+.btn--g:hover{opacity:.7;background:rgba(255,255,255,.1)}
+.btn--s{padding:10px 16px;font-size:14px}
+
+/* Navigation */
+.nav{position:sticky;top:0;z-index:20;background:rgba(7,7,12,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav__in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:28px;padding:14px 24px}
+.logo{display:inline-flex;align-items:center;gap:10px;font:600 18px/1 'Geist',sans-serif;letter-spacing:-.02em}
+.logo .lg{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,rgb(var(--violet)),rgb(var(--sky)));color:#07070c}
+.nav__l{display:flex;gap:26px;margin-left:auto;color:var(--mute);font-size:14.5px}
+.nav__l a{display:inline-flex;align-items:center;gap:7px;transition:opacity .25s ease}
+.nav__l a:hover{opacity:.6}
+.nav__r{display:flex;align-items:center;gap:10px}
+@media (max-width:860px){ .nav__l{display:none} .nav__r{margin-left:auto} }
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:72px 24px 148px;
+  background:radial-gradient(60% 55% at 18% 8%,rgba(139,92,246,.55),transparent 62%),radial-gradient(50% 50% at 86% 18%,rgba(56,189,248,.42),transparent 62%),radial-gradient(70% 60% at 50% 105%,rgba(244,114,182,.38),transparent 62%),var(--bg)}
+.hero__in{position:relative;z-index:2;max-width:920px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);border-radius:999px;font-size:13.5px;color:rgba(244,244,248,.88)}
+.badge .ic{color:rgb(var(--violet))}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:rgb(var(--emerald));animation:pulse 2.4s ease-out infinite}
+.h1{margin-top:26px;font:600 clamp(2.5rem,6.4vw,5.6rem)/1.03 'Geist',sans-serif;letter-spacing:-.04em;text-wrap:balance}
+.sub{margin-top:23px;max-width:640px;font-size:clamp(17px,1.6vw,20px);color:var(--mute)}
+.row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:37px}
+.glass{margin-top:68px;display:flex;flex-wrap:wrap;gap:14px 36px;justify-content:center;padding:18px 30px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.glass span{display:inline-flex;align-items:center;gap:10px;font-size:14.5px;color:rgba(244,244,248,.86)}
+.glass .ic{color:rgb(var(--sky))}
+
+/* Vertrauensreihe */
+.trust{padding:34px 24px 0}
+.trust p{text-align:center;font-size:13px;color:var(--faint);letter-spacing:.04em}
+.trust ul{max-width:1080px;margin:19px auto 0;display:flex;flex-wrap:wrap;gap:14px 44px;justify-content:center;color:var(--faint);font-size:15px}
+.trust li{display:inline-flex;align-items:center;gap:9px}
+
+/* Abschnittsköpfe */
+.sec{padding:0 24px}
+.sh{max-width:720px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
+.sh h2{margin-top:18px;font:600 clamp(2rem,4.4vw,3.6rem)/1.08 'Geist',sans-serif;letter-spacing:-.035em;text-wrap:balance}
+.sh p{margin-top:15px;color:var(--mute);max-width:560px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 13px 6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);font-size:13px;color:rgba(244,244,248,.86)}
+.pill .ic{color:rgb(var(--violet))}
+
+/* Karten mit farbigem Rand */
+.grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.card{--c:167 139 250;border:1px solid rgb(var(--c) / .45);border-radius:20px;background:linear-gradient(180deg,rgb(var(--c) / .08),rgba(255,255,255,.02));transition:border-color .3s ease}
+.card:hover{border-color:rgb(var(--c) / .9)}
+.chip{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgb(var(--c) / .16);color:rgb(var(--c));border:1px solid rgb(var(--c) / .32)}
+.card h3{margin:18px 0 8px;font:600 20px/1.25 'Geist',sans-serif;letter-spacing:-.02em}
+.card p{color:var(--mute);font-size:15.5px}
+.num{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:54px;line-height:1;color:rgb(var(--c))}
+.stars{display:flex;gap:3px;color:rgb(var(--amber))}
+.stars .ic{fill:currentColor;stroke-width:1.5;width:18px;height:18px}
+.who{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;font-size:14px;color:var(--faint)}
+.tagx{padding:3px 9px;border-radius:999px;border:1px solid rgb(var(--c) / .5);color:rgb(var(--c));font-size:12px}
+.steps{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap}
+.steps .card{flex:1 1 280px;min-width:0}
+
+/* Abschlussblock */
+.cta{position:relative;overflow:hidden;max-width:1180px;margin:0 auto;border-radius:28px;border:1px solid rgb(var(--pink) / .55);
+  background:radial-gradient(70% 90% at 12% 0%,rgba(139,92,246,.5),transparent 62%),radial-gradient(60% 80% at 100% 100%,rgba(244,114,182,.42),transparent 62%),#0d0b16}
+.cta__in{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center}
+.cta h2{margin-top:18px;font:600 clamp(2.2rem,5vw,4.2rem)/1.05 'Geist',sans-serif;letter-spacing:-.04em;text-wrap:balance}
+.price{margin-top:30px;font:600 clamp(2.4rem,4vw,3.4rem)/1 'Geist',sans-serif;letter-spacing:-.03em}
+.price small{display:block;margin-top:10px;max-width:420px;font:400 14px/1.5 'Geist',sans-serif;letter-spacing:0;color:var(--mute)}
+.checks{margin-top:27px;display:grid;gap:11px;text-align:left}
+.checks li{display:flex;align-items:center;gap:11px;color:rgba(244,244,248,.88)}
+.checks .ic{color:rgb(var(--emerald))}
+
+/* Fuß */
+.foot{margin-top:126px;border-top:1px solid rgba(255,255,255,.08);padding:52px 24px 36px}
+.foot__in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:34px 61px}
+.foot__a{flex:1 1 280px;min-width:0;color:var(--mute);font-size:15px}
+.foot__a .logo{color:var(--ink);margin-bottom:14px}
+.foot__c{flex:0 1 200px;min-width:0;display:grid;gap:12px;align-content:start;font-size:14.5px;color:var(--mute)}
+.foot__c b{font-weight:500;color:var(--ink);margin-bottom:2px}
+.foot__c a{display:inline-flex;align-items:center;gap:8px;transition:opacity .25s ease}
+.foot__c a:hover{opacity:.6}
+.foot__u{max-width:1180px;margin:46px auto 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:13px;color:var(--faint)}
+
+/* Einblenden beim Scrollen */
+@keyframes rv { from{opacity:.14;transform:translateY(30px)} to{opacity:1;transform:none} }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(52,211,153,.55)} 70%{box-shadow:0 0 0 7px rgba(52,211,153,0)} }
+@supports (animation-timeline:view()) {
+  @media (prefers-reduced-motion:no-preference) {
+    .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .badge .dot{animation:none}
+  .btn,.card,.nav__l a,.foot__c a{transition:none}
+}
+</style>
+</helmet>
+
+<div class="ai" onMouseMove="{{ move }}">
+
+<div class="beam" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav__in">
+    <a class="logo" href="#" aria-label="HORTA, zur Startseite">
+      <span class="lg"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span>
+      HORTA
+    </a>
+    <nav class="nav__l" aria-label="Hauptmenü">
+      <a href="#funktionen"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>Funktionen</a>
+      <a href="#ablauf"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>So funktioniert's</a>
+      <a href="#stimmen"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>Stimmen</a>
+      <a href="#preis"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>Preis</a>
+    </nav>
+    <div class="nav__r">
+      <a class="btn btn--g btn--s" href="#preis" aria-label="Warenkorb"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>Warenkorb</a>
+      <a class="btn btn--p btn--s" href="#preis">Jetzt starten</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <svg class="grain" aria-hidden="true"><filter id="gr1" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gr1)"/></svg>
+  <div class="hero__in">
+    <a class="badge" href="#funktionen">
+      <span class="dot" aria-hidden="true"></span>
+      <svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+      Neu: Das Küchenerlebnis der Zukunft
+      <svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+    <h1 class="h1">Revolutionieren Sie Ihr <span class="it grad">Küchenerlebnis.</span> Nahtlos, intelligent und <span class="it grad">einzigartig.</span></h1>
+    <p class="sub">HORTA ist die innovative All-in-One-Lösung für maßgeschneiderte Salate. Entfesseln Sie Ihr volles Potenzial, skalieren Sie Ihre Rezepte und heben Sie jede Mahlzeit auf das nächste Level.</p>
+    <div class="row">
+      <a class="btn btn--p" href="#preis">Jetzt starten<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      <a class="btn btn--g" href="#ablauf"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>Demo ansehen</a>
+    </div>
+    <div class="glass">
+      <span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>5 Einsätze aus Edelstahl</span>
+      <span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>800 W laut Hersteller</span>
+      <span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>Lieferung in 8 bis 15 Werktagen</span>
+    </div>
+  </div>
+</section>
+
+<section class="trust rv">
+  <p>Entwickelt für alle, die mehr erwarten</p>
+  <ul>
+    <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>Nachhaltig gedacht</li>
+    <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Zukunftssicher</li>
+    <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>Blitzschnell</li>
+    <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Mit Leidenschaft gemacht</li>
+    <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Bereit für morgen</li>
+  </ul>
+</section>
+
+<section class="sec" id="funktionen" style="padding-top:112px" aria-labelledby="t-fun">
+  <div class="sh rv">
+    <span class="pill"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>Funktionen</span>
+    <h2 id="t-fun">Alles, was Sie für <span class="it grad">grenzenlose</span> Möglichkeiten brauchen</h2>
+    <p>Ein ganzheitlicher Ansatz, der Ihren Workflow nahtlos transformiert.</p>
+  </div>
+  <div class="grid" style="margin-top:58px;gap:22px 31px">
+    <article class="card rv" style="--c:167 139 250;padding:26px">
+      <div class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></div>
+      <h3>Maximale Performance</h3>
+      <p>Heben Sie Ihre Effizienz auf das nächste Level, mit modernster Technologie und 800 W Motorleistung laut Hersteller.</p>
+    </article>
+    <article class="card rv" style="--c:125 211 252;padding:22px 30px 34px">
+      <div class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg></div>
+      <h3>Fünf Einsätze, endlose Möglichkeiten</h3>
+      <p>Scheiben, Raspeln, Reiben: ein Gerät, unzählige Rezepte.</p>
+    </article>
+    <article class="card rv" style="--c:52 211 153;padding:34px 24px 28px">
+      <div class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <h3>Sicher und zukunftssicher</h3>
+      <p>Gehäuse aus Edelstahl, durchdacht bis ins kleinste Detail.</p>
+    </article>
+    <article class="card rv" style="--c:251 191 36;padding:28px 28px 24px 34px">
+      <div class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v10"/><path d="M18.4 6.6a9 9 0 1 1-12.77.04"/></svg></div>
+      <h3>Intuitive Bedienung</h3>
+      <p>Ein Knopf. Keine Lernkurve. Maximale Benutzerfreundlichkeit für alle.</p>
+    </article>
+    <article class="card rv" style="--c:244 114 182;padding:24px 32px 30px 26px">
+      <div class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
+      <h3>Skalieren Sie Ihre Rezepte</h3>
+      <p>Vom Single-Haushalt bis zum Grillfest. HORTA wächst mit Ihren Ansprüchen.</p>
+    </article>
+    <article class="card rv" style="--c:251 113 133;padding:31px 27px">
+      <div class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
+      <h3>Mit Leidenschaft entwickelt</h3>
+      <p>Weil große Küchenmomente kleine Details brauchen.</p>
+    </article>
+  </div>
+</section>
+
+<section class="sec" id="ablauf" style="padding-top:64px" aria-labelledby="t-ab">
+  <div class="sh rv" style="margin-top:0">
+    <span class="pill"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>So funktioniert's</span>
+    <h2 id="t-ab">In <span class="it grad">drei</span> einfachen Schritten zum Erfolg</h2>
+    <p>Einfach. Schnell. Effektiv.</p>
+  </div>
+  <div class="steps" style="margin-top:49px;gap:28px 19px">
+    <article class="card rv" style="--c:167 139 250;padding:28px 26px 32px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start"><span class="num">01</span><div class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg></div></div>
+      <h3>Einsatz wählen</h3>
+      <p>Wählen Sie den passenden Einsatz für Ihre Vision.</p>
+    </article>
+    <article class="card rv" style="--c:125 211 252;padding:22px 30px 26px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start"><span class="num">02</span><div class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></div></div>
+      <h3>Einfüllen</h3>
+      <p>Zutaten rein, Stopfer drauf. Der Rest läuft von allein.</p>
+    </article>
+    <article class="card rv" style="--c:52 211 153;padding:34px 24px 28px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start"><span class="num">03</span><div class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/></svg></div></div>
+      <h3>Genießen</h3>
+      <p>Lehnen Sie sich zurück und genießen Sie das Ergebnis.</p>
+    </article>
+  </div>
+</section>
+
+<section class="sec" id="stimmen" style="padding-top:126px" aria-labelledby="t-st">
+  <div class="sh rv">
+    <span class="pill"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>Stimmen</span>
+    <h2 id="t-st">Das sagen unsere <span class="it grad">begeisterten</span> Kunden</h2>
+    <p>Beispielstimmen, erfunden. Vor dem Start durch echte Bewertungen ersetzen.</p>
+  </div>
+  <div class="grid" style="margin-top:71px;gap:27px 20px">
+    <article class="card rv" style="--c:52 211 153;padding:27px 29px">
+      <div class="stars" role="img" aria-label="5 von 5 Sternen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></div>
+      <h3>Absolut game-changing!</h3>
+      <p>Meine Küche wurde komplett transformiert. Ich bin restlos begeistert.</p>
+      <div class="who"><span>Lena M., Hobbykoch</span><span class="tagx">Beispiel</span></div>
+    </article>
+    <article class="card rv" style="--c:125 211 252;padding:33px 25px 22px">
+      <div class="stars" role="img" aria-label="5 von 5 Sternen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></div>
+      <h3>Nahtlose Integration</h3>
+      <p>HORTA fügt sich perfekt in meinen Alltag ein. Eine ganzheitliche Erfahrung.</p>
+      <div class="who"><span>Jonas B., Meal-Prep-Fan</span><span class="tagx">Beispiel</span></div>
+    </article>
+    <article class="card rv" style="--c:244 114 182;padding:24px 31px 29px">
+      <div class="stars" role="img" aria-label="5 von 5 Sternen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></div>
+      <h3>Ein Quantensprung</h3>
+      <p>Für jeden Salat ein Gewinn. Uneingeschränkt empfehlenswert.</p>
+      <div class="who"><span>Sofia R., Foodie</span><span class="tagx">Beispiel</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="sec" id="preis" style="padding-top:84px" aria-labelledby="t-cta">
+  <div class="cta rv" style="padding:68px 28px 59px">
+    <svg class="grain" aria-hidden="true"><filter id="gr2" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#gr2)"/></svg>
+    <div class="cta__in">
+      <span class="pill"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Jetzt loslegen</span>
+      <h2 id="t-cta">Bereit für das <span class="it grad">nächste Level?</span></h2>
+      <p style="margin-top:17px;max-width:520px;color:var(--mute)">Schließen Sie sich der Bewegung an und entdecken Sie, was in Ihrer Küche möglich ist.</p>
+      <p class="price">44,90 €<small>Einführungspreis bis 30.11.2026, danach 54,90 €. Inkl. 19 % MwSt., zzgl. 4,90 € Versand.</small></p>
+      <ul class="checks">
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>5 Einsätze aus Edelstahl</li>
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Lieferung aus China in 8 bis 15 Werktagen</li>
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Zoll und Einfuhrabgaben inklusive</li>
+        <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>14 Tage Widerrufsrecht</li>
+      </ul>
+      <div class="row" style="margin-top:36px">
+        <a class="btn btn--p" href="#">Jetzt starten<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a class="btn btn--g" href="#"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>Fragen? Schreiben Sie uns</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__a">
+      <a class="logo" href="#" aria-label="HORTA, zur Startseite"><span class="lg"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span>HORTA</a>
+      <p>Der elektrische Gemüseschneider für alle, die mehr aus ihrer Küche machen wollen.</p>
+    </div>
+    <div class="foot__c">
+      <b>Produkt</b>
+      <a href="#funktionen"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>Funktionen</a>
+      <a href="#ablauf"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>So funktioniert's</a>
+      <a href="#stimmen"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>Stimmen</a>
+    </div>
+    <div class="foot__c">
+      <b>Rechtliches</b>
+      <a href="#"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>Impressum</a>
+      <a href="#"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Datenschutz</a>
+      <a href="#"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>AGB und Widerrufsbelehrung</a>
+      <a href="#"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>Vertrag widerrufen</a>
+    </div>
+    <div class="foot__c">
+      <b>Kontakt</b>
+      <a href="#"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>kontakt@horta.example</a>
+      <a href="#"><svg class="ic ic--s" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>Versand aus China</a>
+    </div>
+  </div>
+  <div class="foot__u">
+    <p>© 2026 Horta Küche GmbH (fiktiv)</p>
+    <p>Entwurf: Alle Angaben und Stimmen sind erfunden.</p>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      move: (e) => {
+        const el = e.currentTarget;
+        if (!el || !el.getBoundingClientRect) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

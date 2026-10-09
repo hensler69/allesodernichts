@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>HORTA Startseite Neo-Brutalism</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: ein Stapel schwerer Blöcke auf Limettengrund. Dicke Tintenkonturen, harte Versatzschatten ohne Weichzeichner,
+   leicht gekippte Sticker, ein Laufband, Farbe nur als flache Fläche. Schrift: Archivo Black (Display), Archivo (Text), Space Mono (Etiketten). */
+body{margin:0}
+.nb{--sh:6px;--accent:#ff5236;--ground:#dff3a6;--ink:#121212;--paper:#fffef6;--green:#43d36b;--sun:#ffd23f;--violet:#b79cff;
+  font:500 17px/1.55 'Archivo',system-ui,sans-serif;color:var(--ink);background:var(--ground);overflow-x:clip}
+.nb *,.nb *::before,.nb *::after{box-sizing:border-box}
+.nb h1,.nb h2,.nb h3,.nb p,.nb dl,.nb dd,.nb ul,.nb figure{margin:0}
+.nb ul{padding:0;list-style:none}
+.nb a{color:inherit}
+.nb a:hover{color:inherit}
+.nb :focus-visible{outline:4px solid #3d6bff;outline-offset:3px}
+.disp{font-family:'Archivo Black','Archivo',system-ui,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-.015em;line-height:.96}
+.mono{font-family:'Space Mono',ui-monospace,Menlo,monospace}
+.wrap{max-width:1280px;margin:0 auto}
+.sec{padding:clamp(56px,8vw,120px) clamp(16px,4vw,56px) 0}
+.h2{font-size:clamp(2rem,4.8vw,4.2rem)}
+.lbl{font:700 13px/1 'Space Mono',ui-monospace,monospace;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.box{background:var(--paper);border:3px solid var(--ink);box-shadow:var(--sh) var(--sh) 0 var(--ink)}
+.hl{display:inline-block;padding:.02em .14em .06em;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);transform:rotate(-1.6deg);background:var(--sun);margin:.04em 0}
+.hl--green{background:var(--green);transform:rotate(1.4deg)}
+.hl--accent{background:var(--accent)}
+.ph{background:repeating-linear-gradient(135deg,rgba(18,18,18,.14) 0 6px,transparent 6px 12px);border:2px dashed var(--ink);padding:1px 6px}
+
+/* Knöpfe: drücken sich in den Schatten */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:12px 24px;border:3px solid var(--ink);background:var(--accent);color:var(--ink);
+  font:400 18px/1 'Archivo Black',system-ui,sans-serif;text-transform:uppercase;text-decoration:none;cursor:pointer;box-shadow:var(--sh) var(--sh) 0 var(--ink);transition:transform .08s ease,box-shadow .08s ease}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:calc(var(--sh) + 2px) calc(var(--sh) + 2px) 0 var(--ink)}
+.btn:active{transform:translate(var(--sh),var(--sh));box-shadow:0 0 0 var(--ink)}
+.btn--xl{font-size:clamp(18px,2vw,24px);padding:18px 32px;min-height:64px}
+.btn--ink{background:var(--ink);color:var(--sun)}
+.btn--full{width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.link{border:0;background:none;padding:10px 4px;font:700 15px/1 'Archivo',system-ui,sans-serif;text-decoration:underline;text-underline-offset:4px;cursor:pointer;color:var(--ink)}
+
+/* Kopf */
+.tick{background:var(--ink);color:var(--sun);font:400 13px/1.5 'Space Mono',ui-monospace,monospace;padding:10px clamp(16px,4vw,56px);text-align:center}
+.hdr{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:3px solid var(--ink)}
+.hdr__in{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:12px clamp(16px,4vw,56px)}
+.logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font:400 28px/1 'Archivo Black',system-ui,sans-serif;letter-spacing:.06em}
+.logo svg{width:40px;height:40px;flex:none}
+.nav{display:flex;gap:4px;margin-inline:auto}
+.nav a{padding:8px 14px;border:3px solid transparent;font-weight:700;text-decoration:none;white-space:nowrap}
+.nav a:hover{border-color:var(--ink);background:var(--sun)}
+.cart{min-height:48px;padding:8px 16px;font-size:15px}
+.cnt{display:inline-grid;place-items:center;min-width:26px;height:26px;border:3px solid var(--ink);background:var(--sun);font:700 13px/1 'Space Mono',monospace}
+@media (max-width:900px){ .nav{order:3;flex:1 1 100%;margin:0;overflow-x:auto;padding-bottom:4px} .hdr__in .cart{margin-left:auto} }
+
+/* Held */
+.hero__in{display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,64px);align-items:center}
+.hero__txt{flex:1 1 540px;min-width:0}
+.hero__img{flex:1 1 400px;min-width:0;position:relative;padding:8px}
+.tag{display:inline-block;background:var(--ink);color:var(--sun);font:700 13px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;padding:10px 12px;margin-bottom:24px}
+.h1{font-size:clamp(2.5rem,6.6vw,6rem);line-height:.98}
+.lead{font-size:clamp(18px,1.7vw,22px);line-height:1.5;max-width:34em;margin-top:28px;font-weight:500}
+.stars{display:inline-flex;align-items:center;gap:12px;margin-top:24px;font-weight:700;text-decoration:none}
+.stars .st{display:inline-block;padding:6px 10px;border:3px solid var(--ink);background:var(--sun);letter-spacing:.12em;font-size:16px;line-height:1}
+.buy{display:flex;flex-wrap:wrap;align-items:stretch;gap:24px;margin-top:32px}
+.price{padding:14px 20px;display:grid;gap:4px;max-width:360px}
+.price__n{font-size:clamp(2rem,3.4vw,2.8rem)}
+.price__t{font:700 14px/1.3 'Space Mono',monospace}
+.price__k{font-size:13px;line-height:1.4}
+.product{background:var(--green);padding:clamp(16px,3vw,32px)}
+.product svg{display:block;width:100%;height:auto}
+.badge{position:absolute;top:-30px;left:-14px;width:124px;height:124px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);display:grid;place-items:center;text-align:center;transform:rotate(-12deg);font:400 20px/1 'Archivo Black',sans-serif;text-transform:uppercase}
+.badge b{display:block;font-size:44px;line-height:1}
+.sticker{position:absolute;right:-6px;bottom:-18px;border:3px solid var(--ink);background:var(--accent);padding:12px 16px;font:400 16px/1.1 'Archivo Black',sans-serif;text-transform:uppercase;box-shadow:5px 5px 0 var(--ink);transform:rotate(-4deg)}
+
+/* Laufband */
+.marq{overflow:hidden;background:var(--ink);color:var(--sun);border-block:3px solid var(--ink);margin:clamp(56px,8vw,112px) -2% 0;width:104%;transform:rotate(-1.2deg)}
+.marq__track{display:flex;width:max-content;animation:mq 45s linear infinite}
+.marq__grp{display:flex;align-items:center}
+.marq__w{font:400 clamp(24px,3vw,40px)/1 'Archivo Black',sans-serif;text-transform:uppercase;padding:18px 0;white-space:nowrap}
+.sq{flex:none;width:16px;height:16px;background:var(--accent);border:3px solid var(--sun);margin:0 30px}
+@keyframes mq{ to{transform:translateX(-50%)} }
+@media (prefers-reduced-motion:reduce){ .marq__track{animation:none} .btn,.chip{transition:none} }
+
+/* Blick */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:28px;margin-top:clamp(28px,4vw,56px)}
+.fact{padding:24px;display:grid;gap:10px;align-content:start}
+.fact:nth-child(odd){transform:rotate(-1deg)}
+.fact:nth-child(even){transform:rotate(1deg)}
+.fact__n{font-size:clamp(3rem,6vw,5.2rem);line-height:.9}
+.fact__n small{font-size:.4em;margin-left:.1em}
+.fact p{font-weight:700}
+
+/* Probierstand */
+.probe{display:flex;flex-wrap:wrap;gap:32px;margin-top:clamp(28px,4vw,56px);align-items:stretch}
+.probe__ctrl{flex:1 1 440px;min-width:0;padding:clamp(20px,3vw,36px)}
+.probe__vis{flex:1 1 360px;min-width:0;padding:clamp(20px,3vw,36px);background:var(--sun);display:grid;gap:20px;align-content:center;justify-items:center;
+  background-image:repeating-linear-gradient(135deg,rgba(18,18,18,.07) 0 8px,transparent 8px 16px)}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:3px solid var(--ink);background:#fff;color:var(--ink);font:700 15px/1 'Archivo',sans-serif;cursor:pointer;
+  box-shadow:3px 3px 0 var(--ink);transition:transform .08s ease,box-shadow .08s ease}
+.chip:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.chip i{display:inline-block;width:14px;height:14px;border:2px solid var(--ink)}
+.probe__act{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:4px}
+.tipp{margin-top:24px;min-height:3.2em}
+.mini{margin-top:8px;font:700 14px/1.4 'Space Mono',monospace}
+.bowl{width:min(100%,320px);height:250px;border:4px solid var(--ink);border-radius:0 0 160px 160px/0 0 130px 130px;overflow:hidden;background:#fff;display:flex;flex-direction:column-reverse;box-shadow:var(--sh) var(--sh) 0 var(--ink)}
+.bowl__leer{margin:auto;padding:16px 28px;text-align:center;font:700 14px/1.4 'Space Mono',monospace}
+
+/* Einsätze */
+.cones{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:24px;margin-top:clamp(28px,4vw,56px)}
+.cone{padding:22px;display:grid;gap:12px;align-content:start}
+.cone svg{width:84px;height:auto}
+.cone h3{font:400 22px/1.05 'Archivo Black',sans-serif;text-transform:uppercase}
+.cone p{font-size:16px}
+.cone .pass{font:700 13px/1.4 'Space Mono',monospace;border-top:3px solid var(--ink);padding-top:10px;margin-top:4px}
+
+/* Schritte */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:24px;margin-top:clamp(28px,4vw,56px)}
+.step{padding:22px;display:grid;gap:10px;align-content:start}
+.step__n{font:400 92px/.9 'Archivo Black',sans-serif;color:transparent;-webkit-text-stroke:3px var(--ink)}
+.step h3{font:400 21px/1.05 'Archivo Black',sans-serif;text-transform:uppercase}
+.step p{font-size:16px}
+
+/* Technik */
+.note{margin-top:16px;font:700 14px/1.4 'Space Mono',monospace}
+.tech{display:flex;flex-wrap:wrap;gap:28px;margin-top:clamp(28px,4vw,48px);align-items:flex-start}
+.spec{flex:1 1 100%;padding:clamp(18px,3vw,36px)}
+.spec dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));column-gap:48px}
+.spec__r{display:grid;grid-template-columns:minmax(7rem,.45fr) 1fr;gap:16px;padding:14px 0;border-bottom:3px solid var(--ink)}
+.spec dt{font:700 13px/1.5 'Space Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
+.spec dd{font-weight:700}
+.tech__c{flex:1 1 360px;min-width:0;padding:clamp(18px,3vw,32px)}
+.tech__c h3{font:400 24px/1.05 'Archivo Black',sans-serif;text-transform:uppercase;margin-bottom:16px}
+.tech__c li{display:grid;grid-template-columns:20px 1fr;gap:10px;padding:6px 0}
+.tech__c li::before{content:'';width:12px;height:12px;margin-top:.5em;background:var(--green);border:3px solid var(--ink)}
+.tech__c p{margin-bottom:10px;font-size:16px}
+.warn{margin-top:18px;padding:16px 18px;background:var(--sun);border:3px solid var(--ink)}
+.warn b{font:400 16px/1.2 'Archivo Black',sans-serif;text-transform:uppercase}
+
+/* Bewertungen */
+.alert{margin-top:28px;padding:14px 18px;background:var(--sun);border:3px solid var(--ink);box-shadow:var(--sh) var(--sh) 0 var(--ink);font-weight:700}
+.rez{display:flex;flex-wrap:wrap;gap:28px;margin-top:32px;align-items:flex-start}
+.rez__sum{flex:1 1 300px;min-width:0;padding:28px;display:grid;gap:18px;background:var(--violet)}
+.rez__zahl{font-size:clamp(4rem,7vw,6rem)}
+.rez__bar{display:grid;grid-template-columns:5.4rem 1fr 2rem;gap:10px;align-items:center;font:700 14px/1 'Space Mono',monospace}
+.rez__bar span:last-child{text-align:right}
+.rez__track{height:20px;border:3px solid var(--ink);background:#fff}
+.rez__fill{height:100%;background:var(--ink)}
+.rez__list{flex:2 1 480px;min-width:0;display:grid;gap:28px}
+.rev{padding:24px;position:relative;display:grid;gap:10px}
+.rev:nth-child(2){transform:rotate(.5deg)}
+.rev__flag{position:absolute;top:-16px;right:20px;background:var(--sun);border:3px solid var(--ink);padding:6px 10px;font:700 12px/1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;transform:rotate(3deg)}
+.rev h3{font:400 22px/1.1 'Archivo Black',sans-serif;text-transform:uppercase}
+.rev__by{font:700 14px/1.4 'Space Mono',monospace}
+.rev__ans{margin-top:6px;padding:14px 16px;background:var(--green);border:3px solid var(--ink);font-size:15px}
+.rev__ans b{display:block;font:700 13px/1 'Space Mono',monospace;text-transform:uppercase;margin-bottom:6px}
+
+/* Angebot */
+.offer{margin-top:clamp(56px,8vw,120px);background:var(--sun);border-block:3px solid var(--ink);padding:clamp(48px,7vw,96px) clamp(16px,4vw,56px)}
+.offer__in{display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,64px);align-items:flex-start}
+.offer__l{flex:1 1 420px;min-width:0}
+.offer__r{flex:1 1 440px;min-width:0;padding:clamp(20px,3vw,36px)}
+.facts3{display:grid;gap:16px;margin-top:32px}
+.facts3 div{background:var(--paper);border:3px solid var(--ink);padding:14px 18px;box-shadow:4px 4px 0 var(--ink)}
+.facts3 b{display:block;font:700 13px/1 'Space Mono',monospace;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.pack{display:grid;grid-template-columns:28px 1fr auto;gap:6px 14px;align-items:center;width:100%;text-align:left;padding:16px 18px;border:3px solid var(--ink);cursor:pointer;color:var(--ink);font:500 16px/1.3 'Archivo',sans-serif;
+  box-shadow:4px 4px 0 var(--ink);transition:transform .08s ease,box-shadow .08s ease}
+.pack:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}
+.pack + .pack{margin-top:16px}
+.pack__i{width:24px;height:24px;border:3px solid var(--ink)}
+.pack__n{font:400 18px/1.1 'Archivo Black',sans-serif;text-transform:uppercase}
+.pack__p{font:400 22px/1 'Archivo Black',sans-serif}
+.pack__z{grid-column:2/4;font-size:14px}
+.qty{display:flex;align-items:center;gap:16px;margin:24px 0}
+.qty__c{display:inline-flex;border:3px solid var(--ink);background:#fff}
+.qty__c button{width:48px;height:48px;border:0;background:#fff;font:400 24px/1 'Archivo Black',sans-serif;cursor:pointer;color:var(--ink)}
+.qty__c button:hover{background:var(--sun)}
+.qty__c button[disabled]{opacity:.3;cursor:not-allowed;background:#fff}
+.qty__c output{display:grid;place-items:center;min-width:56px;border-inline:3px solid var(--ink);font:700 18px/1 'Space Mono',monospace}
+.sum{border-top:3px solid var(--ink);padding-top:16px;margin-bottom:24px;display:grid;gap:6px}
+.sum div{display:flex;justify-content:space-between;gap:16px;font-weight:700}
+.sum .tot{font:400 clamp(22px,2.6vw,30px)/1.1 'Archivo Black',sans-serif;text-transform:uppercase;margin-top:6px}
+.small{font-size:13px;line-height:1.5;margin-top:16px}
+
+/* Fragen */
+.qs{margin-top:clamp(28px,4vw,56px);max-width:56rem}
+.q{border:3px solid var(--ink);background:var(--paper);box-shadow:var(--sh) var(--sh) 0 var(--ink)}
+.q + .q{margin-top:22px}
+.q summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;font:400 clamp(17px,2vw,22px)/1.2 'Archivo Black',sans-serif;text-transform:uppercase}
+.q summary::-webkit-details-marker{display:none}
+.q summary::after{content:'+';flex:none;width:42px;height:42px;display:grid;place-items:center;border:3px solid var(--ink);background:var(--sun);font:400 26px/1 'Archivo Black',sans-serif}
+.q[open] summary::after{content:'\2212';background:var(--accent)}
+.q__a{padding:0 22px 22px;max-width:62ch}
+
+/* Abschied */
+.bye{margin-top:clamp(56px,8vw,120px);background:var(--ink);color:var(--paper);padding:clamp(48px,7vw,96px) clamp(16px,4vw,56px);border-top:3px solid var(--ink)}
+.bye__in{display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,64px);align-items:center;justify-content:space-between}
+.bye__t{flex:1 1 420px;min-width:0}
+.bye__t h2{font-size:clamp(2.2rem,5.4vw,4.8rem);color:var(--sun)}
+.bye__t p{margin-top:24px;font-size:clamp(18px,1.8vw,22px);max-width:30em}
+.bye__s{flex:0 1 380px;min-width:0;width:100%}
+.bye__s svg{display:block;width:100%;height:auto}
+
+/* Fuß */
+.foot{padding:clamp(48px,7vw,96px) clamp(16px,4vw,56px) 32px;background:var(--ground)}
+.foot__in{display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,56px)}
+.news{flex:1 1 440px;min-width:0;padding:clamp(20px,3vw,36px);background:var(--violet)}
+.news h2{font-size:clamp(1.8rem,3.2vw,2.8rem)}
+.news p{margin-top:14px}
+.news label{display:block}
+.fld{width:100%;min-height:52px;padding:12px 14px;border:3px solid var(--ink);background:#fff;font:500 17px/1.2 'Archivo',sans-serif;color:var(--ink);margin-top:20px}
+.chk{display:grid;grid-template-columns:28px 1fr;gap:12px;margin-top:16px;font-size:14px;line-height:1.5;cursor:pointer}
+.chk input{width:24px;height:24px;margin:0;accent-color:var(--ink)}
+.flinks{flex:1 1 280px;min-width:0;display:grid;gap:10px;align-content:start}
+.flinks a{font-weight:700;text-underline-offset:4px}
+.foot__u{max-width:1280px;margin:40px auto 0;padding-top:20px;border-top:3px solid var(--ink);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px}
+.foot__u p{max-width:46em}
+</style>
+</helmet>
+
+<div class="nb" style="{{ rootStyle }}">
+
+<div class="tick">ENTWURF: Alle Firmen-, Hersteller- und Technikangaben sowie alle Bewertungen sind erfunden. Das Produktfoto muss vor einer Veröffentlichung ersetzt werden.</div>
+
+<header class="hdr">
+  <div class="hdr__in">
+    <a class="logo" href="#" aria-label="HORTA, zur Startseite">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="#43d36b" stroke="#121212" stroke-width="4"/><circle cx="24" cy="24" r="14" fill="#fffef6" stroke="#121212" stroke-width="3"/><circle cx="24" cy="24" r="5" fill="#dff3a6" stroke="#121212" stroke-width="2.5"/><path d="M24 12v5M24 31v5M12 24h5M31 24h5" stroke="#121212" stroke-width="3" stroke-linecap="round"/></svg>
+      HORTA
+    </a>
+    <nav class="nav" aria-label="Hauptmenü">
+      <a href="#ueberblick">Überblick</a>
+      <a href="#probieren">Probieren</a>
+      <a href="#funktionen">Funktionen</a>
+      <a href="#technik">Technik</a>
+      <a href="#bewertungen">Bewertungen</a>
+      <a href="#fragen">Fragen</a>
+    </nav>
+    <a class="btn cart" href="Kasse.dc.html" aria-label="Warenkorb öffnen, 1 Artikel">Warenkorb <span class="cnt">1</span></a>
+  </div>
+</header>
+
+<main>
+
+<section class="sec" style="padding-top:clamp(40px,6vw,88px)">
+  <div class="wrap hero__in">
+    <div class="hero__txt">
+      <p class="tag">Guten Tag. Hier ist HORTA.</p>
+      <h1 class="disp h1">Weniger <span class="hl">schnippeln.</span><br>Mehr <span class="hl hl--green">Salat.</span></h1>
+      <p class="lead">HORTA schneidet, raspelt und reibt auf Knopfdruck. Fünf Einsätze aus Edelstahl, ein breiter Schacht, und alles fällt direkt in Ihre Schüssel.</p>
+      <a class="stars" href="#bewertungen"><span class="st" aria-hidden="true">★★★★★</span> 4,6 · 36 Beispielbewertungen</a>
+      <div class="buy">
+        <div class="box price">
+          <span class="disp price__n">44,90 €</span>
+          <span class="price__t">Einführungspreis bis 30.11.2026, danach 54,90 €</span>
+          <span class="price__k">inkl. 19 % MwSt., zzgl. 4,90 € Versand · Lieferzeit 8 bis 15 Werktage</span>
+        </div>
+        <a class="btn btn--xl" href="Kasse.dc.html">In den Warenkorb</a>
+      </div>
+    </div>
+    <div class="hero__img">
+      <div class="box product">
+        <svg viewBox="0 0 520 520" role="img" aria-label="Zeichnung: HORTA, der elektrische Gemüseschneider aus Edelstahl, daneben eine Glasschüssel mit bunt geschichtetem Salat" stroke-linejoin="round" stroke-linecap="round">
+          <defs><clipPath id="bowlA"><path d="M26 410H274Q266 500 150 500Q34 500 26 410Z"/></clipPath></defs>
+          <path d="M334 486L354 170Q356 150 376 150H456Q476 150 478 170L498 486Q498 500 484 500H348Q334 500 334 486Z" fill="#d9dedb" stroke="#121212" stroke-width="6"/>
+          <path d="M354 170Q356 150 376 150H456Q476 150 478 170L479.1 188H352.9Z" fill="#121212"/>
+          <path d="M335 470H497L498 486Q498 500 484 500H348Q334 500 334 486Z" fill="#121212"/>
+          <path d="M376 204L362 440" stroke="#fff" stroke-width="10" opacity=".8" fill="none"/>
+          <rect x="398" y="134" width="34" height="18" rx="8" fill="#ff5236" stroke="#121212" stroke-width="5"/>
+          <rect x="168" y="212" width="176" height="108" rx="24" fill="#fff" stroke="#121212" stroke-width="6"/>
+          <path d="M182 232L332 224V308L182 300Z" fill="#c9d0cd" stroke="#121212" stroke-width="5"/>
+          <g fill="#121212"><circle cx="200" cy="246" r="3"/><circle cx="224" cy="245" r="3"/><circle cx="248" cy="244" r="3"/><circle cx="272" cy="243" r="3"/><circle cx="296" cy="242" r="3"/><circle cx="212" cy="264" r="3"/><circle cx="236" cy="263" r="3"/><circle cx="260" cy="262" r="3"/><circle cx="284" cy="261" r="3"/><circle cx="308" cy="260" r="3"/><circle cx="200" cy="282" r="3"/><circle cx="224" cy="281" r="3"/><circle cx="248" cy="280" r="3"/><circle cx="272" cy="279" r="3"/><circle cx="296" cy="278" r="3"/></g>
+          <rect x="330" y="206" width="22" height="120" rx="8" fill="#121212"/>
+          <path d="M176 316L120 364L158 378L214 324Z" fill="#fff" stroke="#121212" stroke-width="5"/>
+          <rect x="198" y="56" width="70" height="160" fill="#fff"/>
+          <rect x="212" y="134" width="42" height="82" rx="10" fill="#43d36b" stroke="#121212" stroke-width="5"/>
+          <rect x="198" y="56" width="70" height="160" fill="none" stroke="#121212" stroke-width="6"/>
+          <rect x="210" y="34" width="46" height="96" rx="4" fill="#ffd23f" stroke="#121212" stroke-width="5"/>
+          <rect x="194" y="22" width="78" height="16" rx="6" fill="#ff5236" stroke="#121212" stroke-width="5"/>
+          <g clip-path="url(#bowlA)">
+            <path d="M20 410H280V430Q215 422 150 432T20 430Z" fill="#b7e36a"/>
+            <path d="M20 430Q85 420 150 430T280 430V450Q215 442 150 452T20 450Z" fill="#9b5de5"/>
+            <path d="M20 450Q85 440 150 450T280 450V474Q215 466 150 476T20 474Z" fill="#ff9a2e"/>
+            <path d="M20 474Q85 464 150 474T280 474V520H20Z" fill="#43d36b"/>
+          </g>
+          <path d="M26 410H274Q266 500 150 500Q34 500 26 410Z" fill="none" stroke="#121212" stroke-width="6"/>
+          <path d="M44 436Q50 478 84 492" fill="none" stroke="#fff" stroke-width="6" opacity=".85"/>
+          <path d="M32 412Q42 384 92 388Q150 372 208 388Q258 384 268 412Z" fill="#ffd23f" stroke="#121212" stroke-width="5"/>
+          <g stroke="#121212" stroke-width="2.5"><rect x="124" y="384" width="12" height="5" rx="2" fill="#43d36b" transform="rotate(-24 130 386)"/><rect x="148" y="392" width="12" height="5" rx="2" fill="#ff9a2e" transform="rotate(18 154 394)"/><rect x="108" y="396" width="10" height="5" rx="2" fill="#9b5de5" transform="rotate(32 113 398)"/></g>
+        </svg>
+      </div>
+      <div class="badge" aria-hidden="true"><span><b>5</b>Einsätze</span></div>
+      <div class="sticker">Direkt in die Schüssel</div>
+    </div>
+  </div>
+</section>
+
+<div class="marq" aria-hidden="true">
+  <div class="marq__track">
+    <div class="marq__grp">
+      <span class="marq__w">Gurkensalat</span><i class="sq"></i><span class="marq__w">Möhrenrohkost</span><i class="sq"></i><span class="marq__w">Krautsalat</span><i class="sq"></i><span class="marq__w">Rösti</span><i class="sq"></i><span class="marq__w">Kartoffelgratin</span><i class="sq"></i><span class="marq__w">Parmesan</span><i class="sq"></i><span class="marq__w">Zucchinipuffer</span><i class="sq"></i><span class="marq__w">Rotkohlsalat</span><i class="sq"></i>
+    </div>
+    <div class="marq__grp">
+      <span class="marq__w">Gurkensalat</span><i class="sq"></i><span class="marq__w">Möhrenrohkost</span><i class="sq"></i><span class="marq__w">Krautsalat</span><i class="sq"></i><span class="marq__w">Rösti</span><i class="sq"></i><span class="marq__w">Kartoffelgratin</span><i class="sq"></i><span class="marq__w">Parmesan</span><i class="sq"></i><span class="marq__w">Zucchinipuffer</span><i class="sq"></i><span class="marq__w">Rotkohlsalat</span><i class="sq"></i>
+    </div>
+  </div>
+</div>
+
+<section class="sec" id="ueberblick" aria-labelledby="t-ueb">
+  <div class="wrap">
+    <h2 class="disp h2" id="t-ueb">Alles, was ein <span class="hl">Salat</span> braucht.</h2>
+    <div class="facts">
+      <div class="box fact" style="background:#43d36b"><span class="disp fact__n">5</span><p>Einsätze für Scheiben, Raspeln und feines Reiben</p></div>
+      <div class="box fact" style="background:#ffd23f"><span class="disp fact__n">800<small>W</small></span><p>Motorleistung laut Hersteller</p></div>
+      <div class="box fact" style="background:#b79cff"><span class="disp fact__n">5<small>cm</small></span><p>breiter Einfüllschacht mit Stopfer</p></div>
+      <div class="box fact" style="background:var(--accent)"><span class="disp fact__n">27<small>cm</small></span><p>hoch mit Schacht, Standfläche 17,5 cm</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="probieren" aria-labelledby="t-pro">
+  <div class="wrap">
+    <h2 class="disp h2" id="t-pro">Probieren Sie es aus. <span class="hl hl--green">Ganz ohne Abwasch.</span></h2>
+    <div class="probe">
+      <div class="box probe__ctrl">
+        <p class="lbl" id="l-zutat">Zutat</p>
+        <div class="chips" role="group" aria-labelledby="l-zutat">
+          <sc-for list="{{ zutaten }}" as="z" hint-placeholder-count="6">
+            <button type="button" class="chip" style="{{ z.sel }}" aria-pressed="{{ z.on }}" onClick="{{ z.pick }}"><i style="background: {{ z.c }}"></i>{{ z.name }}</button>
+          </sc-for>
+        </div>
+        <p class="lbl" id="l-einsatz">Einsatz</p>
+        <div class="chips" role="group" aria-labelledby="l-einsatz">
+          <sc-for list="{{ einsaetze }}" as="e" hint-placeholder-count="5">
+            <button type="button" class="chip" style="{{ e.sel }}" aria-pressed="{{ e.on }}" onClick="{{ e.pick }}">{{ e.name }}</button>
+          </sc-for>
+        </div>
+        <div class="probe__act">
+          <button type="button" class="btn btn--ink" disabled="{{ voll }}" onClick="{{ schneiden }}">Schneiden</button>
+          <button type="button" class="link" onClick="{{ leeren }}">Schüssel leeren</button>
+        </div>
+        <p class="tipp" aria-live="polite"><b>{{ tippTitel }}</b> {{ tipp }}</p>
+        <p class="mini">In Ihrer Schüssel: {{ liste }}</p>
+      </div>
+      <div class="box probe__vis">
+        <p class="lbl" style="margin:0">Ihre Schüssel · {{ schichten }}</p>
+        <div class="bowl" role="img" aria-label="Glasschüssel mit den geschnittenen Zutaten in Schichten">
+          <sc-if value="{{ leer }}" hint-placeholder-val="{{ false }}">
+            <p class="bowl__leer">Noch leer. Wählen Sie eine Zutat und drücken Sie auf Schneiden.</p>
+          </sc-if>
+          <sc-for list="{{ lagen }}" as="l" hint-placeholder-count="3">
+            <div style="{{ l.style }}"></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="funktionen" aria-labelledby="t-fun">
+  <div class="wrap">
+    <h2 class="disp h2" id="t-fun">Fünf Einsätze. <span class="hl">Ein Handgriff.</span></h2>
+    <div class="cones">
+      <article class="box cone" style="background:#ffd23f">
+        <svg viewBox="0 0 64 56" aria-hidden="true"><path d="M16 6h32l8 34H8z" fill="#d9dedb" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><path d="M4 40h56v10H4z" fill="#121212"/><path d="M22 16h20" stroke="#121212" stroke-width="3" stroke-linecap="round"/></svg>
+        <h3>Dünne Scheiben</h3>
+        <p>Für Gurkensalat, Radieschen und Kartoffelchips aus dem Ofen.</p>
+        <p class="pass">Passt zu: Gurke, Radieschen, Kartoffel</p>
+      </article>
+      <article class="box cone" style="background:#43d36b">
+        <svg viewBox="0 0 64 56" aria-hidden="true"><path d="M16 6h32l8 34H8z" fill="#d9dedb" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><path d="M4 40h56v10H4z" fill="#121212"/><path d="M20 17h24" stroke="#121212" stroke-width="7" stroke-linecap="round"/></svg>
+        <h3>Dicke Scheiben</h3>
+        <p>Für Gratin, Bratkartoffeln und Gemüse aus der Pfanne.</p>
+        <p class="pass">Passt zu: Kartoffel, Zucchini, Karotte</p>
+      </article>
+      <article class="box cone" style="background:#b79cff">
+        <svg viewBox="0 0 64 56" aria-hidden="true"><path d="M16 6h32l8 34H8z" fill="#d9dedb" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><path d="M4 40h56v10H4z" fill="#121212"/><g fill="#121212"><circle cx="24" cy="14" r="2.6"/><circle cx="32" cy="14" r="2.6"/><circle cx="40" cy="14" r="2.6"/><circle cx="28" cy="23" r="2.6"/><circle cx="36" cy="23" r="2.6"/><circle cx="24" cy="32" r="2.6"/><circle cx="32" cy="32" r="2.6"/><circle cx="40" cy="32" r="2.6"/></g></svg>
+        <h3>Grob raspeln</h3>
+        <p>Für Möhrensalat, Rösti und geriebenen Gouda.</p>
+        <p class="pass">Passt zu: Karotte, Kartoffel, Gouda</p>
+      </article>
+      <article class="box cone">
+        <svg viewBox="0 0 64 56" aria-hidden="true"><path d="M16 6h32l8 34H8z" fill="#d9dedb" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><path d="M4 40h56v10H4z" fill="#121212"/><g fill="#121212"><circle cx="24" cy="13" r="1.7"/><circle cx="30" cy="13" r="1.7"/><circle cx="36" cy="13" r="1.7"/><circle cx="42" cy="13" r="1.7"/><circle cx="21" cy="21" r="1.7"/><circle cx="27" cy="21" r="1.7"/><circle cx="33" cy="21" r="1.7"/><circle cx="39" cy="21" r="1.7"/><circle cx="45" cy="21" r="1.7"/><circle cx="24" cy="29" r="1.7"/><circle cx="30" cy="29" r="1.7"/><circle cx="36" cy="29" r="1.7"/><circle cx="42" cy="29" r="1.7"/></g></svg>
+        <h3>Fein raspeln</h3>
+        <p>Für Krautsalat, Rotkohl und Rohkost für Kinder.</p>
+        <p class="pass">Passt zu: Weißkohl, Rotkohl, Karotte</p>
+      </article>
+      <article class="box cone" style="background:var(--accent)">
+        <svg viewBox="0 0 64 56" aria-hidden="true"><path d="M16 6h32l8 34H8z" fill="#d9dedb" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><path d="M4 40h56v10H4z" fill="#121212"/><g fill="#121212"><circle cx="24" cy="12" r="1.1"/><circle cx="29" cy="12" r="1.1"/><circle cx="34" cy="12" r="1.1"/><circle cx="39" cy="12" r="1.1"/><circle cx="21" cy="18" r="1.1"/><circle cx="26" cy="18" r="1.1"/><circle cx="31" cy="18" r="1.1"/><circle cx="36" cy="18" r="1.1"/><circle cx="41" cy="18" r="1.1"/><circle cx="24" cy="24" r="1.1"/><circle cx="29" cy="24" r="1.1"/><circle cx="34" cy="24" r="1.1"/><circle cx="39" cy="24" r="1.1"/><circle cx="21" cy="30" r="1.1"/><circle cx="26" cy="30" r="1.1"/><circle cx="31" cy="30" r="1.1"/><circle cx="36" cy="30" r="1.1"/><circle cx="41" cy="30" r="1.1"/></g></svg>
+        <h3>Feine Reibe</h3>
+        <p>Für Parmesan, Nüsse und Schokolade.</p>
+        <p class="pass">Passt zu: Parmesan, Walnüsse, Schokolade</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="t-ablauf">
+  <div class="wrap">
+    <h2 class="disp h2" id="t-ablauf">Vom Markt <span class="hl hl--green">bis auf den Teller.</span></h2>
+    <div class="steps">
+      <article class="box step" style="background:#dff3a6"><span class="step__n" aria-hidden="true">1</span><h3>Waschen</h3><p>Gemüse waschen, Enden abschneiden, Großes wie Kohl grob teilen.</p></article>
+      <article class="box step" style="background:#fffef6"><span class="step__n" aria-hidden="true">2</span><h3>Einsatz wählen</h3><p>Kegel aufstecken, Trommel ansetzen und mit einer Drehung einrasten.</p></article>
+      <article class="box step" style="background:#ffd23f"><span class="step__n" aria-hidden="true">3</span><h3>Einfüllen</h3><p>Gemüse in den Schacht legen und den Stopfer aufsetzen.</p></article>
+      <article class="box step" style="background:var(--accent)"><span class="step__n" aria-hidden="true">4</span><h3>Drücken</h3><p>Oben auf den Knopf drücken und mit dem Stopfer leicht nachschieben. Alles fällt in die Schüssel.</p></article>
+      <article class="box step" style="background:#b79cff"><span class="step__n" aria-hidden="true">5</span><h3>Abspülen</h3><p>Stecker ziehen, Teile abnehmen, kurz abspülen. Das Gehäuse nur feucht abwischen.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="technik" aria-labelledby="t-tech">
+  <div class="wrap">
+    <h2 class="disp h2" id="t-tech">Die Zahlen <span class="hl">zum Gerät.</span></h2>
+    <p class="note">Alle Angaben sind Platzhalter, bis der Lieferant sie bestätigt hat.</p>
+    <div class="tech">
+      <div class="box spec">
+        <dl>
+          <div class="spec__r"><dt>Modell</dt><dd>HORTA, HT-5</dd></div>
+          <div class="spec__r"><dt>Leistung</dt><dd>800 W laut Hersteller</dd></div>
+          <div class="spec__r"><dt>Strom</dt><dd>230 V, 50 Hz, Euro-Stecker</dd></div>
+          <div class="spec__r"><dt>Höhe</dt><dd>ca. 27 cm mit Schacht, Gehäuse 18,5 cm</dd></div>
+          <div class="spec__r"><dt>Standfläche</dt><dd>ca. 17,5 cm Durchmesser</dd></div>
+          <div class="spec__r"><dt>Schacht</dt><dd>ca. 5 cm breit, mit Stopfer</dd></div>
+          <div class="spec__r"><dt>Einsätze</dt><dd>5 Kegel, Klingen aus Edelstahl</dd></div>
+          <div class="spec__r"><dt>Gehäuse</dt><dd>Edelstahl</dd></div>
+          <div class="spec__r"><dt>Trommel</dt><dd>Kunststoff, durchsichtig</dd></div>
+          <div class="spec__r"><dt>Bedienung</dt><dd>Druckknopf auf dem Deckel</dd></div>
+        </dl>
+      </div>
+      <div class="box tech__c" style="background:#43d36b">
+        <h3>Im Karton</h3>
+        <ul>
+          <li>HORTA Grundgerät mit Motor</li>
+          <li>5 Kegel-Einsätze aus Edelstahl</li>
+          <li>Trommel mit Einfüllschacht</li>
+          <li>Stopfer</li>
+          <li>Bedienungsanleitung auf Deutsch</li>
+          <li>Sicherheitshinweise</li>
+        </ul>
+      </div>
+      <div class="box tech__c" style="flex:2 1 460px">
+        <h3>Produktsicherheit</h3>
+        <p><b>Hersteller:</b> <span class="ph">Beispiel Küchengeräte (Ningbo) Co., Ltd., Beispielstraße 8, Ningbo, China (fiktiv)</span></p>
+        <p><b>Verantwortliche Person in der EU:</b> <span class="ph">Horta Küche GmbH, Beispielstraße 1, 00000 Musterstadt (fiktiv)</span></p>
+        <p><b>Lebensmittelkontakt:</b> <span class="ph">Nachweis nach Verordnung (EG) Nr. 1935/2004 vor dem Start vom Hersteller anfordern.</span></p>
+        <div class="warn">
+          <b>Sicherheitshinweise</b>
+          <ul style="margin-top:8px">
+            <li>Die Klingen sind sehr scharf. Einsätze nur am Rand anfassen.</li>
+            <li>Gemüse nur mit dem Stopfer nachschieben, nie mit den Fingern.</li>
+            <li>Vor dem Wechseln der Einsätze und vor dem Reinigen den Netzstecker ziehen.</li>
+            <li>Nicht für Kinder bestimmt. Gerät und Kabel außer Reichweite von Kindern aufbewahren.</li>
+            <li>Das Gehäuse mit dem Motor nie in Wasser tauchen.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="bewertungen" aria-labelledby="t-rez">
+  <div class="wrap">
+    <h2 class="disp h2" id="t-rez">Was Käufer über <span class="hl hl--green">HORTA</span> sagen.</h2>
+    <p class="alert"><b>Entwurf:</b> Die Bewertungen sind erfundene Beispiele und zeigen nur die Gestaltung. Vor dem Start löschen. Echte Bewertungen kommen über das Formular „Bewertung schreiben“.</p>
+    <div class="rez">
+      <aside class="box rez__sum" aria-label="Zusammenfassung der Bewertungen">
+        <div>
+          <span class="disp rez__zahl">4,6</span>
+          <p style="font-weight:700;margin-top:6px">aus 36 Beispielbewertungen</p>
+        </div>
+        <div style="display:grid;gap:10px">
+          <div class="rez__bar"><span>5 Sterne</span><div class="rez__track"><div class="rez__fill" style="width:66.7%"></div></div><span>24</span></div>
+          <div class="rez__bar"><span>4 Sterne</span><div class="rez__track"><div class="rez__fill" style="width:25%"></div></div><span>9</span></div>
+          <div class="rez__bar"><span>3 Sterne</span><div class="rez__track"><div class="rez__fill" style="width:8.3%"></div></div><span>3</span></div>
+          <div class="rez__bar"><span>2 Sterne</span><div class="rez__track"><div class="rez__fill" style="width:0%"></div></div><span>0</span></div>
+          <div class="rez__bar"><span>1 Stern</span><div class="rez__track"><div class="rez__fill" style="width:0%"></div></div><span>0</span></div>
+        </div>
+        <button type="button" class="btn btn--ink" style="justify-self:start;font-size:15px">Bewertung schreiben</button>
+        <p style="font-size:14px"><b>So prüfen wir Bewertungen:</b> Wir veröffentlichen nur Bewertungen mit gültiger Bestellnummer. Gute und schlechte erscheinen gleichermaßen. Wir ändern keine Texte.</p>
+      </aside>
+      <div class="rez__list">
+        <article class="box rev">
+          <span class="rev__flag">Beispiel</span>
+          <span class="st" aria-label="5 von 5 Sternen" style="font-size:18px;letter-spacing:.1em">★★★★★</span>
+          <h3>Möhrensalat ohne orange Finger</h3>
+          <p>Früher habe ich Karotten mit der Handreibe geraspelt und mir regelmäßig die Fingerknöchel gleich mit. Jetzt kommen die Karotten oben rein und unten kommt Möhrensalat raus. Meine Kinder essen ihn plötzlich freiwillig.</p>
+          <p class="rev__by">Sandra P. · 06.10.2026</p>
+        </article>
+        <article class="box rev">
+          <span class="rev__flag">Beispiel</span>
+          <span class="st" aria-label="5 von 5 Sternen" style="font-size:18px;letter-spacing:.1em">★★★★★</span>
+          <h3>Krautsalat wie beim Griechen</h3>
+          <p>Mit dem feinen Raspeleinsatz wird der Weißkohl so fein, wie ich es von Hand nie hinbekomme. Den Kohl muss man vorher in Viertel schneiden, dann passt er gut in den Schacht.</p>
+          <p class="rev__by">Murat Y. · 03.10.2026</p>
+        </article>
+        <article class="box rev">
+          <span class="rev__flag">Beispiel</span>
+          <span class="st" aria-label="3 von 5 Sternen" style="font-size:18px;letter-spacing:.1em">★★★<span style="opacity:.25">★★</span></span>
+          <h3>Lieferzeit war mir zu lang</h3>
+          <p>Das Gerät ist gut, aber 14 Tage Lieferzeit sind mir zu lang. Ich hätte es gern zum Wochenende gehabt.</p>
+          <p class="rev__by">Kerstin B. · 25.09.2026</p>
+          <div class="rev__ans"><b>Antwort von HORTA</b>Danke für Ihre ehrliche Rückmeldung. Wir versenden direkt aus China und nennen die Lieferzeit deshalb schon vor dem Kauf.</div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="offer" id="angebot" aria-labelledby="t-off">
+  <div class="wrap offer__in">
+    <div class="offer__l">
+      <h2 class="disp h2" id="t-off">Ihr Salat <span class="hl hl--accent">wartet schon.</span></h2>
+      <div class="facts3">
+        <div><b>Versand</b>Direkt aus China, 8 bis 15 Werktage, Zoll inklusive</div>
+        <div><b>Zahlung</b>PayPal oder Klarna</div>
+        <div><b>Ab 49 €</b>Versand kostenlos</div>
+      </div>
+    </div>
+    <div class="box offer__r">
+      <p class="lbl">Paket</p>
+      <sc-for list="{{ packs }}" as="p" hint-placeholder-count="2">
+        <button type="button" class="pack" style="{{ p.style }}" aria-pressed="{{ p.on }}" onClick="{{ p.pick }}">
+          <span class="pack__i" style="{{ p.ind }}"></span>
+          <span class="pack__n">{{ p.name }}</span>
+          <span class="pack__p">{{ p.preis }}</span>
+          <span class="pack__z">{{ p.zusatz }}</span>
+        </button>
+      </sc-for>
+      <div class="qty">
+        <span class="lbl" style="margin:0" id="l-menge">Menge</span>
+        <div class="qty__c" role="group" aria-labelledby="l-menge">
+          <button type="button" aria-label="Eins weniger" disabled="{{ minusAus }}" onClick="{{ minus }}">−</button>
+          <output aria-live="polite">{{ menge }}</output>
+          <button type="button" aria-label="Eins mehr" disabled="{{ plusAus }}" onClick="{{ plus }}">+</button>
+        </div>
+      </div>
+      <div class="sum">
+        <div><span>Zwischensumme</span><span>{{ waren }}</span></div>
+        <div><span>Versand</span><span>{{ versand }}</span></div>
+        <div class="tot"><span>Gesamt inkl. MwSt.</span><span>{{ gesamt }}</span></div>
+      </div>
+      <a class="btn btn--xl btn--full" href="Kasse.dc.html">In den Warenkorb</a>
+      <p class="small">Einführungspreis bis 30.11.2026, danach 54,90 € je Gerät (Set: 92,90 €). Preise inkl. 19 % MwSt. Zoll und Einfuhrabgaben sind enthalten. Mehr zum Widerruf in der Widerrufsbelehrung.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="fragen" aria-labelledby="t-fragen">
+  <div class="wrap">
+    <h2 class="disp h2" id="t-fragen">Was Sie vor dem Kauf <span class="hl">wissen möchten.</span></h2>
+    <div class="qs">
+      <details class="q" open>
+        <summary>Was kann ich mit HORTA schneiden?</summary>
+        <p class="q__a">Alles, was fest ist: Gurke, Karotte, Zucchini, Kartoffel, Rote Bete, Kohl, Kohlrabi und Apfel, dazu Hartkäse, Nüsse und Schokolade. Weiches wie Tomaten oder reife Bananen und auch Fleisch sind nicht geeignet.</p>
+      </details>
+      <details class="q">
+        <summary>Muss ich das Gemüse vorher klein schneiden?</summary>
+        <p class="q__a">Der Einfüllschacht ist etwa 5 cm breit. Gurke, Karotte und Zucchini passen meist im Ganzen oder halbiert hinein. Kohl, große Kartoffeln und Rote Bete teilen Sie vorher in passende Stücke.</p>
+      </details>
+      <details class="q">
+        <summary>Wie reinige ich das Gerät?</summary>
+        <p class="q__a">Ziehen Sie zuerst den Netzstecker. Einsatz, Trommel, Schacht und Stopfer lassen sich abnehmen und unter fließendem Wasser mit einer Spülbürste reinigen. Das Gehäuse mit dem Motor nur feucht abwischen und nie in Wasser tauchen.</p>
+      </details>
+      <details class="q">
+        <summary>Passt der Stecker in deutsche Steckdosen?</summary>
+        <p class="q__a">Ja. HORTA hat einen Euro-Stecker und läuft mit 230 Volt.</p>
+      </details>
+      <details class="q">
+        <summary>Wie lange dauert die Lieferung?</summary>
+        <p class="q__a">Wir versenden direkt aus China. Die Lieferung dauert in der Regel 8 bis 15 Werktage. Zoll und Einfuhrabgaben sind im Preis enthalten, an der Haustür zahlen Sie nichts extra. Der Versand kostet 4,90 €, ab 49 € Bestellwert ist er kostenlos.</p>
+      </details>
+      <details class="q">
+        <summary>Kann ich die Bestellung widerrufen?</summary>
+        <p class="q__a">Als Verbraucher haben Sie ein gesetzliches Widerrufsrecht von 14 Tagen. Die Rücksendung geht an eine Adresse in Deutschland, nicht nach China. Den Widerruf können Sie auch online über die Seite „Vertrag widerrufen“ erklären.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<section class="bye" aria-labelledby="t-bye">
+  <div class="wrap bye__in">
+    <div class="bye__t">
+      <h2 class="disp" id="t-bye">Der Tisch ist gedeckt. Guten Appetit.</h2>
+      <p>Ein Salat aus Gurke, Karotte und Rotkohl ist mit HORTA schnell geschnitten. Jetzt fehlt nur noch das Dressing.</p>
+    </div>
+    <div class="bye__s">
+      <svg viewBox="0 0 300 200" role="img" aria-label="Glasschüssel mit bunt geschichtetem Salat" stroke-linejoin="round" stroke-linecap="round">
+        <defs><clipPath id="bowlB"><path d="M10 90H290Q280 190 150 190Q20 190 10 90Z"/></clipPath></defs>
+        <path d="M10 90H290Q280 190 150 190Q20 190 10 90Z" fill="#fffef6"/>
+        <g clip-path="url(#bowlB)">
+          <path d="M0 90H300V110Q225 102 150 112T0 110Z" fill="#b7e36a"/>
+          <path d="M0 110Q75 100 150 110T300 110V132Q225 124 150 134T0 132Z" fill="#9b5de5"/>
+          <path d="M0 132Q75 122 150 132T300 132V156Q225 148 150 158T0 156Z" fill="#ff9a2e"/>
+          <path d="M0 156Q75 146 150 156T300 156V200H0Z" fill="#43d36b"/>
+        </g>
+        <path d="M10 90H290Q280 190 150 190Q20 190 10 90Z" fill="none" stroke="#fffef6" stroke-width="6"/>
+        <path d="M18 92Q30 52 90 58Q150 36 210 58Q270 52 282 92Z" fill="#ffd23f" stroke="#fffef6" stroke-width="5"/>
+        <path d="M40 120Q46 166 84 180" fill="none" stroke="#fff" stroke-width="6" opacity=".7"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="box news">
+      <h2 class="disp">Ein Rezept, frisch geschnitten.</h2>
+      <p>Alle paar Wochen eine kurze Mail mit einem Rezept für Gemüse der Saison. Als Dank für die Anmeldung gibt es 10 % Gutschein auf Ihre Bestellung.</p>
+      <label for="nl-mail" class="lbl" style="margin:20px 0 0">E-Mail-Adresse</label>
+      <input class="fld" style="margin-top:8px" id="nl-mail" type="email" placeholder="ihre@adresse.de" autocomplete="email">
+      <label class="chk" for="nl-ok"><input id="nl-ok" type="checkbox"><span>Ich möchte den Newsletter erhalten. Ich bekomme zuerst eine Mail, in der ich meine Adresse bestätige. Abmelden kann ich mich jederzeit.</span></label>
+      <button type="button" class="btn btn--ink" style="margin-top:20px">Anmelden</button>
+    </div>
+    <div class="flinks">
+      <p class="lbl">Rechtliches</p>
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">AGB</a>
+      <a href="#">Widerrufsbelehrung</a>
+      <a href="#">Versand und Zahlung</a>
+      <p class="lbl" style="margin-top:20px">Hilfe</p>
+      <a href="#fragen">Häufige Fragen</a>
+      <a href="#">kontakt@horta.example</a>
+      <a class="btn" style="background:#fffef6;justify-self:start;margin-top:12px;font-size:15px;min-height:48px" href="#">Vertrag widerrufen</a>
+    </div>
+  </div>
+  <div class="foot__u">
+    <p>Alle Preise in Euro inkl. 19 % Mehrwertsteuer, zzgl. Versandkosten, soweit nicht anders angegeben. Elektrogeräte gehören nicht in den Hausmüll. Altgeräte geben Sie bei einer Sammelstelle oder beim Händler ab.</p>
+    <p>© 2026 Horta Küche GmbH (fiktiv)</p>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"shadow":{"editor":"range","default":6,"min":0,"max":12,"step":1,"unit":"px"},"accent":{"editor":"color","default":"#ff5236","options":["#ff5236","#ff3d8b","#3d6bff","#ff9a2e"]},"ground":{"editor":"color","default":"#dff3a6","options":["#dff3a6","#ffe45e","#ffc9e3","#c8e0ff"]},"$preview":{"width":1440,"height":7700}}'>
+class Component extends DCLogic {
+  state = { z: 'gurke', e: 'duenn', layers: [], pack: 'einzeln', qty: 1 };
+
+  renderVals() {
+    const s = this.state;
+    const shadow = this.props.shadow ?? 6;
+    const accent = this.props.accent ?? '#ff5236';
+    const ground = this.props.ground ?? '#dff3a6';
+    const MAX = 6;
+
+    const ZUTATEN = [
+      { id: 'gurke', name: 'Gurke', c: '#43d36b' },
+      { id: 'karotte', name: 'Karotte', c: '#ff9a2e' },
+      { id: 'kartoffel', name: 'Kartoffel', c: '#f1d98a' },
+      { id: 'rotkohl', name: 'Rotkohl', c: '#9b5de5' },
+      { id: 'kaese', name: 'Käse', c: '#ffd23f' },
+      { id: 'nuss', name: 'Nüsse', c: '#a8714a' }
+    ];
+    const EINSAETZE = [
+      { id: 'duenn', name: 'Dünne Scheiben', pat: 'scheibe' },
+      { id: 'dick', name: 'Dicke Scheiben', pat: 'scheibe' },
+      { id: 'grob', name: 'Grob raspeln', pat: 'streifen' },
+      { id: 'fein', name: 'Fein raspeln', pat: 'streifen' },
+      { id: 'reibe', name: 'Feine Reibe', pat: 'krumen' }
+    ];
+    const TIPPS = {
+      'gurke-duenn': 'Gurkensalat mit Dill und Joghurt.',
+      'gurke-dick': 'Gurkenscheiben für die Rohkostplatte.',
+      'gurke-grob': 'Tzatziki: Gurke raspeln, ausdrücken, mit Joghurt und Knoblauch mischen.',
+      'gurke-fein': 'Fein geraspelt für ein kühles Tzatziki.',
+      'gurke-reibe': 'Für Gurke ist die feine Reibe zu fein. Besser: dünne Scheiben.',
+      'karotte-duenn': 'Karottenscheiben für Suppe oder Gemüsepfanne.',
+      'karotte-dick': 'Dicke Scheiben zum Dünsten mit etwas Butter.',
+      'karotte-grob': 'Möhrensalat mit Apfel und Zitrone.',
+      'karotte-fein': 'Fein geraspelt für Karottenkuchen.',
+      'karotte-reibe': 'Für Karotten ist die feine Reibe zu fein. Besser: grob raspeln.',
+      'kartoffel-duenn': 'Hauchdünne Kartoffelchips aus dem Ofen.',
+      'kartoffel-dick': 'Kartoffelgratin mit Sahne und Muskat.',
+      'kartoffel-grob': 'Rösti: raspeln, ausdrücken, goldbraun braten.',
+      'kartoffel-fein': 'Reibekuchen mit einer Zwiebel und etwas Ei.',
+      'kartoffel-reibe': 'Für Kartoffeln ist die feine Reibe zu fein. Besser: fein raspeln.',
+      'rotkohl-duenn': 'Dünne Streifen für einen bunten Wintersalat.',
+      'rotkohl-dick': 'Grobe Stücke zum Schmoren mit Apfel.',
+      'rotkohl-grob': 'Rotkohlsalat mit Walnüssen und Orange.',
+      'rotkohl-fein': 'Feiner Krautsalat mit Essig und Öl.',
+      'rotkohl-reibe': 'Für Kohl ist die feine Reibe zu fein. Besser: fein raspeln.',
+      'kaese-duenn': 'Käsescheiben fürs Abendbrot, am besten aus festem Käse.',
+      'kaese-dick': 'Dicke Käsescheiben zum Überbacken.',
+      'kaese-grob': 'Geriebener Gouda für Auflauf und Pizza.',
+      'kaese-fein': 'Feiner Käse für Pasta und Suppe.',
+      'kaese-reibe': 'Frischer Parmesan über die Pasta.',
+      'nuss-duenn': 'Für Nüsse passt die feine Reibe besser.',
+      'nuss-dick': 'Für Nüsse passt die feine Reibe besser.',
+      'nuss-grob': 'Grob geraspelte Nüsse für Müsli und Salat.',
+      'nuss-fein': 'Fein geraspelte Nüsse für den Kuchenteig.',
+      'nuss-reibe': 'Gemahlene Walnüsse für Kuchen und Plätzchen.'
+    };
+    const PAT = {
+      scheibe: 'radial-gradient(ellipse 13px 5px at 12px 9px, rgba(255,255,255,.6) 0 60%, transparent 64%), radial-gradient(ellipse 13px 5px at 32px 21px, rgba(0,0,0,.2) 0 60%, transparent 64%)',
+      streifen: 'repeating-linear-gradient(115deg, rgba(255,255,255,.5) 0 3px, transparent 3px 12px)',
+      krumen: 'radial-gradient(circle, rgba(255,255,255,.6) 0 2px, transparent 2.5px)'
+    };
+    const SIZE = { scheibe: '44px 28px', streifen: 'auto', krumen: '12px 12px' };
+    const AN = 'background:#121212;color:#ffd23f;transform:translate(2px,2px);box-shadow:1px 1px 0 #121212;';
+
+    const zutaten = ZUTATEN.map((z) => ({
+      id: z.id, name: z.name, c: z.c, on: s.z === z.id, sel: s.z === z.id ? AN : '',
+      pick: () => this.setState({ z: z.id })
+    }));
+    const einsaetze = EINSAETZE.map((e) => ({
+      id: e.id, name: e.name, on: s.e === e.id, sel: s.e === e.id ? AN : '',
+      pick: () => this.setState({ e: e.id })
+    }));
+    const zNow = ZUTATEN.find((z) => z.id === s.z);
+    const eNow = EINSAETZE.find((e) => e.id === s.e);
+    const voll = s.layers.length >= MAX;
+
+    const lagen = s.layers.map((l) => {
+      const zz = ZUTATEN.find((z) => z.id === l.z);
+      const ee = EINSAETZE.find((e) => e.id === l.e);
+      return { style: 'height:36px;flex:none;border-top:3px solid #121212;background-color:' + zz.c + ';background-image:' + PAT[ee.pat] + ';background-size:' + SIZE[ee.pat] + ';' };
+    });
+    const namen = s.layers.map((l) => ZUTATEN.find((z) => z.id === l.z).name).filter((n, i, a) => a.indexOf(n) === i);
+    const liste = namen.length === 0 ? 'noch nichts' : (namen.length === 1 ? namen[0] : namen.slice(0, -1).join(', ') + ' und ' + namen[namen.length - 1]);
+
+    // Angebot
+    const PREIS = { einzeln: 4490, set: 7590 };
+    const eur = (c) => (c / 100).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+    const waren = PREIS[s.pack] * s.qty;
+    const versand = waren >= 4900 ? 0 : 490;
+    const PAKETE = [
+      { id: 'einzeln', name: 'Ein HORTA', zusatz: 'Plus 4,90 € Versand' },
+      { id: 'set', name: '2er-Set', zusatz: '15 % günstiger als zwei einzeln. Eins für Sie, eins zum Verschenken. Versand kostenlos.' }
+    ];
+    const packs = PAKETE.map((p) => {
+      const on = s.pack === p.id;
+      return {
+        name: p.name, zusatz: p.zusatz, preis: eur(PREIS[p.id]), on,
+        style: on ? 'background:#43d36b;' : 'background:#fff;',
+        ind: on ? 'background:#121212;' : 'background:#fff;',
+        pick: () => this.setState({ pack: p.id })
+      };
+    });
+
+    return {
+      rootStyle: '--sh:' + shadow + 'px;--accent:' + accent + ';--ground:' + ground + ';',
+      zutaten, einsaetze, lagen, voll,
+      leer: s.layers.length === 0,
+      schichten: s.layers.length + ' von ' + MAX + ' Schichten',
+      liste,
+      tippTitel: zNow.name + ', ' + eNow.name.toLowerCase() + ':',
+      tipp: voll ? 'Die Schüssel ist voll. Zeit für das Dressing.' : TIPPS[s.z + '-' + s.e],
+      schneiden: () => { if (this.state.layers.length < MAX) this.setState({ layers: this.state.layers.concat([{ z: this.state.z, e: this.state.e }]) }); },
+      leeren: () => this.setState({ layers: [] }),
+      packs,
+      menge: s.qty,
+      minusAus: s.qty <= 1,
+      plusAus: s.qty >= 5,
+      minus: () => this.setState({ qty: Math.max(1, this.state.qty - 1) }),
+      plus: () => this.setState({ qty: Math.min(5, this.state.qty + 1) }),
+      waren: eur(waren),
+      versand: versand === 0 ? 'kostenlos' : eur(versand),
+      gesamt: eur(waren + versand)
+    };
+  }
+}
+</script>
+</body>
+</html>

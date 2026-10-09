@@ -78,6 +78,8 @@ Unterseiten: Kasse, Danke, Vertrag widerrufen, Impressum, Datenschutz, AGB, Wide
 Versand und Zahlung, Newsletter bestätigt.
 
 ### Phase 5: Bauen aus der Referenz
+Wähle zuerst den Look mit dem Skill `design-vorlagen` (Glas dunkel, Neo-Brutalism hell oder ein Entwurf); dessen
+`vorlagen/<look>/shop/style.css` ist der Startpunkt für `assets/style.css`.
 Lies `references/referenz-karte.md`. Dort steht, welche Teile allgemein sind, welche produktabhängig
 sind und in welcher Reihenfolge du anpasst. Kurz:
 1. `referenz/shop/` in den neuen Ordner kopieren (zum Beispiel `shops/<name>/`), die Generator-Dateien aus
@@ -101,6 +103,7 @@ stehen als Regeln in den Referenzen, setz sie direkt um:
 - Farben für Aufmerksamkeit (impeccable): `references/gestaltung.md`, Abschnitt Farbe
 - Bewegung (improve-animations, find-animation-opportunities, emil-design-eng, animate): `references/bewegung.md`
 - Besuchergefühl (emil-design-eng): `references/besuchergefuehl.md`
+Danach läuft der Skill-Verbund aus `design-vorlagen/references/verbund.md` (gilt für jedes Layout).
 Wenn der Nutzer später einen dieser Skills ausdrücklich aufruft, nimm ihn zusätzlich dazu. Bei Konflikten
 gehen seine Grundregeln vor (Beispiel: gpt-taste will zwei Knöpfe im Kopfbereich, die Regel sagt einer).
 

@@ -70,11 +70,10 @@ def geraet_3d(hinweis=True, label="3D-Modell des Gemüseschneiders HORTA. Zum Dr
     return html
 
 
-# Logo: eine Gurkenscheibe von oben
-LOGO_MARK = ('<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="#3a7a3a"/><circle cx="24" cy="24" r="17.5" fill="#dcebbf"/>'
-             '<circle cx="24" cy="24" r="9.5" fill="#eef5dc"/>'
-             + "".join(f'<ellipse cx="24" cy="18.2" rx="1.5" ry="2.6" fill="#9fc27e" transform="rotate({w} 24 24)"/>' for w in range(0, 360, 60)) +
-             '</svg>')
+# Logo: eine Gurkenscheibe von oben, dick umrandet
+LOGO_MARK = ('<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="#43d36b" stroke="#121212" stroke-width="4"/>'
+             '<circle cx="24" cy="24" r="14" fill="#fffef6" stroke="#121212" stroke-width="3"/><circle cx="24" cy="24" r="5" fill="#dff3a6" stroke="#121212" stroke-width="2.5"/>'
+             '<path d="M24 12v5M24 31v5M12 24h5M31 24h5" stroke="#121212" stroke-width="3" stroke-linecap="round"/></svg>')
 
 
 MUSTER_DEFS = """<linearGradient id="{p}-glas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".62"/><stop offset=".5" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity=".38"/></linearGradient>
@@ -174,11 +173,11 @@ def head(titel, beschreibung, pfad="/", ld=""):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{titel}</title>
 <meta name="description" content="{beschreibung}">
-<meta name="theme-color" content="#f6f2e8">
+<meta name="theme-color" content="#dff3a6">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="{DOMAIN}{pfad}">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="/assets/fonts/Fraunces-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/ArchivoBlack-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <meta property="og:site_name" content="{NAME}">
@@ -199,16 +198,7 @@ def head(titel, beschreibung, pfad="/", ld=""):
 '''
 
 
-WELT = '''<div class="welt" aria-hidden="true">
-  <div class="welt__sonne"></div>
-  <div class="welt__aura welt__aura--a"></div>
-  <div class="welt__aura welt__aura--b"></div>
-  <div class="welt__blatt"><img src="/assets/img/blattschatten.svg" alt="" width="900" height="760"></div>
-  <div class="welt__beet welt__beet--fern"><img src="/assets/img/beet-fern.svg" alt="" width="1600" height="420"></div>
-  <div class="welt__beet welt__beet--mitte"><img src="/assets/img/beet-mitte.svg" alt="" width="1600" height="420"></div>
-  <div class="welt__beet welt__beet--nah"><img src="/assets/img/beet-nah.svg" alt="" width="1600" height="420"></div>
-  <div class="welt__schleier"></div>
-</div>
+WELT = '''<div class="welt" aria-hidden="true"></div>
 '''
 
 ENTWURF = '<div class="entwurf" role="note">Entwurf: Alle Firmen-, Hersteller- und Technikangaben sowie alle Bewertungen sind erfunden. Das Produktfoto stammt vom Lieferanten und muss vor einer Veröffentlichung ersetzt oder schriftlich freigegeben werden.</div>\n'
