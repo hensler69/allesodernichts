@@ -1,0 +1,913 @@
+/* ==========================================================================
+   Look: Glassmorphism (helles, buntes Milchglas)
+   Farbige weiche Kugeln (Orbs) schweben hinter Milchglas-Karten.
+   Reines CSS, eine Schriftfamilie (Plus Jakarta Sans), keine Bibliothek.
+   ========================================================================== */
+
+/* ---------- Schriften (nur lokal) ---------- */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("../../design-vorlagen/fonts/PlusJakartaSans-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("../../design-vorlagen/fonts/PlusJakartaSans-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("../../design-vorlagen/fonts/PlusJakartaSans-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Farben und Maße (jede Farbe hat genau eine Rolle) ---------- */
+:root {
+  color-scheme: light;
+
+  /* Text */
+  --tinte: #0d2b25;          /* Haupttext, Linien, Zeichen auf Glas */
+  --tinte-2: #29463f;        /* Zweittext (kleine Hinweise) */
+  --weiss: #ffffff;
+
+  /* Grund der Seite (Aqua-Grün) */
+  --grund-a: #e6fbf2;
+  --grund-b: #d8f2f8;
+  --grund-c: #e9f8ea;
+
+  /* Orbs: nur Dekoration hinter dem Glas, nie Träger von Text */
+  --orb-gruen: #7be0a3;
+  --orb-tuerkis: #5fd3e8;
+  --orb-gelb: #ffe27a;
+  --orb-violett: #b69cff;
+  /* dunklere Schattierungen derselben Farben, nur für den Rand der Glas-Kugeln */
+  --orb-gruen-d: #3fbf79;
+  --orb-tuerkis-d: #2fb3cf;
+  --orb-gelb-d: #f2c230;
+  --orb-violett-d: #8a6ff0;
+
+  /* Signalfarbe: ausschließlich der Kaufknopf */
+  --signal: #ff7a3d;
+  --signal-hell: #ffa070;
+
+  /* Glas */
+  --glas-rand: rgba(255, 255, 255, .72);
+  --glas-schatten: 0 26px 60px -22px rgba(13, 43, 37, .28), 0 6px 16px -8px rgba(13, 43, 37, .14);
+  --blur: 18px;
+
+  /* Rundungen */
+  --r-s: 16px;
+  --r-m: 28px;
+  --r-l: 44px;
+
+  /* Abstandsstufen (Verhältnis ca. 1,6) */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 40px;
+  --s5: 64px;
+  --s6: 104px;
+
+  /* Bewegung */
+  --ease: cubic-bezier(.23, 1, .32, 1);
+  --ease-sanft: cubic-bezier(.37, 0, .63, 1);
+}
+
+/* ---------- Grundlagen ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 104px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--tinte);
+  background-color: var(--grund-a);
+  background-image: linear-gradient(165deg, var(--grund-a) 0%, var(--grund-b) 42%, var(--grund-c) 100%);
+  background-attachment: scroll;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul, ol, figure, blockquote, dl, dd { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; cursor: pointer; }
+a { color: inherit; }
+
+h1, h2, h3 { font-weight: 800; line-height: 1.08; letter-spacing: -.02em; text-wrap: balance; }
+
+:focus-visible {
+  outline: 3px solid var(--tinte);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .95);
+}
+
+.nur-lesen {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sprung {
+  position: absolute;
+  left: 16px; top: -80px;
+  z-index: 100;
+  padding: 12px 20px;
+  min-height: 44px;
+  border-radius: 999px;
+  background: var(--tinte);
+  color: var(--weiss);
+  font-weight: 600;
+  text-decoration: none;
+}
+.sprung:focus-visible { top: 12px; }
+.sprung:active { transform: scale(.97); }
+
+/* ---------- Die Seite und die Orbs dahinter ---------- */
+.seite {
+  position: relative;
+  isolation: isolate;
+}
+
+.orbs {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.orb {
+  /* Verlauf mit weichem Rand statt filter: blur(60px). Sieht fast gleich aus, kostet aber keinen Filter. */
+  position: absolute;
+  width: calc(var(--d) * 1.3);
+  aspect-ratio: 1;
+  margin: calc(var(--d) * -.15) 0 0 calc(var(--d) * -.15);
+  border-radius: 50%;
+  background: radial-gradient(closest-side,
+    rgb(var(--cr) / 1) 0%,
+    rgb(var(--cr) / .95) 36%,
+    rgb(var(--cr) / .6) 62%,
+    rgb(var(--cr) / .2) 84%,
+    rgb(var(--cr) / 0) 100%);
+  opacity: .86;
+  will-change: transform;
+  animation: treibe var(--t, 36s) var(--ease-sanft) var(--v, 0s) infinite alternate;
+}
+.orb--gruen   { --cr: 123 224 163; }
+.orb--tuerkis { --cr: 95 211 232; }
+.orb--gelb    { --cr: 255 226 122; }
+.orb--violett { --cr: 182 156 255; }
+.orb.ist-aus  { animation-play-state: paused; }
+
+/* Platzierung (PC). Hero: zwei große Orbs hinter der Glaskarte. */
+.o1 { --d: 460px; right: -4%;  top: 20px;   --dx: -50px; --dy: 40px;  --t: 38s; }
+.o2 { --d: 540px; left: -9%;   top: 380px;  --dx: 70px;  --dy: -30px; --t: 44s; --v: -9s; }
+.o3 { --d: 380px; right: 16%;  top: 560px;  --dx: -40px; --dy: -50px; --t: 34s; --v: -5s; }
+.o4 { --d: 240px; left: 40%;   top: 60px;   --dx: 30px;  --dy: 40px;  --t: 40s; --v: -14s; }
+.o5 { --d: 420px; left: 4%;    top: 1280px; --dx: 60px;  --dy: 50px;  --t: 46s; --v: -3s; }
+.o6 { --d: 460px; right: -2%;  top: 1760px; --dx: -70px; --dy: -40px; --t: 42s; --v: -20s; }
+.o7 { --d: 500px; left: 18%;   top: 2300px; --dx: 50px;  --dy: -60px; --t: 48s; --v: -11s; }
+.o8 { --d: 400px; right: 2%;   top: 2780px; --dx: -50px; --dy: 40px;  --t: 39s; --v: -7s; }
+
+@keyframes treibe {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(var(--dx, 40px), var(--dy, 30px), 0) scale(1.07); }
+}
+
+/* ---------- Das Glas ---------- */
+.glas {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .34) 0%, rgba(255, 255, 255, .20) 55%, rgba(255, 255, 255, .28) 100%),
+    rgb(var(--tint, 255 255 255) / var(--tint-a, 0));
+  border: 1px solid var(--glas-rand);
+  border-radius: var(--r-m);
+  box-shadow:
+    inset 1.5px 1.5px 0 rgba(255, 255, 255, .9),
+    inset -1px -1px 0 rgba(255, 255, 255, .35),
+    var(--glas-schatten);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(1.4);
+  backdrop-filter: blur(var(--blur)) saturate(1.4);
+}
+/* Glanz oben links */
+.glas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(90% 70% at 0% 0%, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0) 56%);
+}
+.glas--dicht {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .52) 0%, rgba(255, 255, 255, .36) 100%),
+    rgb(var(--tint, 255 255 255) / var(--tint-a, 0));
+}
+/* Kugelfarben (Farbverlauf der Glas-Kugeln: --k1 hell, --k2 dunkel) */
+.k-gruen          { --k1: var(--orb-gruen);   --k2: var(--orb-gruen-d); }
+.k-tuerkis        { --k1: var(--orb-tuerkis); --k2: var(--orb-tuerkis-d); }
+.k-gelb           { --k1: var(--orb-gelb);    --k2: var(--orb-gelb-d); }
+.k-violett        { --k1: var(--orb-violett); --k2: var(--orb-violett-d); }
+.k-gruen-tuerkis  { --k1: var(--orb-gruen);   --k2: var(--orb-tuerkis); }
+.k-gelb-gruen     { --k1: var(--orb-gelb);    --k2: var(--orb-gruen); }
+.k-violett-tuerkis{ --k1: var(--orb-violett); --k2: var(--orb-tuerkis); }
+.k-tuerkis-gruen  { --k1: var(--orb-tuerkis); --k2: var(--orb-gruen); }
+
+.t-gruen   { --tint: 123 224 163; --tint-a: .30; }
+.t-tuerkis { --tint: 95 211 232;  --tint-a: .28; }
+.t-gelb    { --tint: 255 226 122; --tint-a: .34; }
+.t-violett { --tint: 182 156 255; --tint-a: .28; }
+
+/* Ohne Weichzeichner: deckender Grund, damit der Text lesbar bleibt */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .glas,
+  .glas--dicht {
+    background: linear-gradient(135deg, #f7fdfa, #eaf8f4);
+  }
+  .glas.t-gruen   { background: linear-gradient(135deg, #eaf9f0, #d9f3e5); }
+  .glas.t-tuerkis { background: linear-gradient(135deg, #e6f7fa, #d3eff5); }
+  .glas.t-gelb    { background: linear-gradient(135deg, #fdf8e2, #f8efc2); }
+  .glas.t-violett { background: linear-gradient(135deg, #f1ecfd, #e4dcfa); }
+}
+
+/* Wer weniger Transparenz will: feste Flächen */
+@media (prefers-reduced-transparency: reduce) {
+  .glas,
+  .glas--dicht,
+  .glas.t-gruen, .glas.t-tuerkis, .glas.t-gelb, .glas.t-violett {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: #f6fcf9;
+  }
+  .glas::before { display: none; }
+  .orb { opacity: .55; }
+}
+
+/* Wer mehr Kontrast will: feste, klar umrandete Flächen, keine Orbs */
+@media (prefers-contrast: more) {
+  :root { --tinte-2: #0d2b25; --glas-rand: #0d2b25; }
+  body { background: #ffffff; }
+  .orbs { display: none; }
+  .glas,
+  .glas--dicht,
+  .glas.t-gruen, .glas.t-tuerkis, .glas.t-gelb, .glas.t-violett {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: #ffffff;
+    border: 2px solid #0d2b25;
+    box-shadow: none;
+  }
+  .glas::before { display: none; }
+  .nav a, .korb, .eyebrow, .preis { border: 2px solid #0d2b25; }
+  .eyebrow { background: #fff; }
+  .cta { border: 2px solid #0d2b25; }
+}
+
+/* ---------- Kopfzeile ---------- */
+.kopf {
+  position: sticky;
+  top: 12px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  width: min(1232px, 100% - 24px);
+  margin: 12px auto 0;
+  padding: 8px 10px 8px 22px;
+  border-radius: 999px;
+  --blur: 16px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: .08em;
+  border-radius: 999px;
+  transition: transform .16s var(--ease);
+}
+.logo svg { width: 34px; height: 34px; flex: none; }
+.logo:active { transform: scale(.97); }
+
+.nav {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+.nav a,
+.korb,
+.menue-knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  position: relative;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .9375rem;
+  background: transparent;
+  transition: transform .16s var(--ease), background-color .16s var(--ease);
+}
+.nav a[aria-current] { background: rgba(255, 255, 255, .85); }
+.nav a[aria-current]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: var(--tinte);
+}
+.nav a:active,
+.korb:active,
+.menue-knopf:active { transform: scale(.97); }
+
+.korb {
+  background: rgba(255, 255, 255, .62);
+  border-color: rgba(255, 255, 255, .9);
+  padding-right: 8px;
+}
+.korb svg { width: 20px; height: 20px; }
+.korb__zahl {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--tinte);
+  color: var(--weiss);
+  font-size: .875rem;
+  font-weight: 800;
+}
+
+.menue-knopf { display: none; }
+
+/* ---------- Seitenaufbau ---------- */
+.huelle {
+  width: min(1232px, 100% - 48px);
+  margin-inline: auto;
+}
+.abschnitt { padding-block: var(--s6) 0; }
+.abschnitt__kopf { margin-bottom: var(--s4); }
+.abschnitt__kopf h2 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: clamp(2.1rem, 1.3rem + 2.6vw, 3.4rem);
+}
+.kugel {
+  flex: none;
+  width: .62em;
+  height: .62em;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #fff 0 12%, var(--k1, var(--orb-gruen)) 40%, var(--k2, var(--orb-tuerkis)) 100%);
+  box-shadow: 0 6px 14px -4px rgba(13, 43, 37, .35), inset 0 -3px 5px rgba(13, 43, 37, .12);
+}
+
+/* ---------- Hero ---------- */
+.hero { padding-top: var(--s4); }
+
+.hero__karte {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+  gap: var(--s4);
+  align-items: center;
+  padding: var(--s5);
+  border-radius: var(--r-l);
+  --blur: 20px;
+}
+/* Glanz, der dem Zeiger folgt: eigenes Element, nur transform wird gesetzt (siehe script.js) */
+.glanz {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.glanz i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 560px;
+  height: 460px;
+  margin: -230px 0 0 -280px;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+  transform: translate3d(220px, 130px, 0);
+  will-change: transform;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 18px 0 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .6);
+  border: 1px solid rgba(255, 255, 255, .95);
+  font-weight: 600;
+  font-size: .9375rem;
+  letter-spacing: .01em;
+}
+.eyebrow .kugel { width: 16px; height: 16px; }
+
+.hero__text { container-type: inline-size; }
+.hero h1 {
+  margin-top: var(--s3);
+  font-size: clamp(2.3rem, .9rem + 3.4vw, 3.5rem);   /* Rückfall ohne Container-Einheiten */
+  font-size: clamp(2.2rem, 10cqi, 3.7rem);          /* 10 % der Spaltenbreite: "Weniger schnippeln." bleibt in einer Zeile */
+  letter-spacing: -.03em;
+}
+.hero h1 .zeile { display: block; }
+.hero h1 .marker {
+  background: linear-gradient(transparent 60%, rgba(123, 224, 163, .75) 60% 92%, transparent 92%);
+  padding-inline: 4px;
+  margin-inline: -4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.untertitel {
+  margin-top: var(--s3);
+  max-width: 34em;
+  font-size: 1.125rem;
+}
+
+.bewertung {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-top: var(--s3);
+  font-weight: 600;
+  font-size: .9375rem;
+}
+.sterne { display: inline-flex; gap: 2px; }
+.sterne svg { width: 22px; height: 22px; }
+
+.preis {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 20px;
+  margin-top: var(--s3);
+  padding: var(--s3);
+  border-radius: var(--r-m);
+  background: rgba(255, 255, 255, .58);
+  border: 1px solid rgba(255, 255, 255, .95);
+  box-shadow: inset 1px 1px 0 #fff, 0 12px 28px -16px rgba(13, 43, 37, .3);
+}
+.preis__zahl {
+  font-weight: 800;
+  font-size: clamp(2.5rem, 2rem + 1.6vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -.03em;
+  white-space: nowrap;
+}
+.preis__aktion { font-weight: 600; font-size: .9375rem; line-height: 1.35; }
+.preis__klein {
+  grid-column: 1 / -1;
+  font-size: .875rem;
+  line-height: 1.45;
+  color: var(--tinte-2);
+}
+
+/* DER Kaufknopf: die einzige Signalfarbe der Seite */
+.cta {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  margin-top: 14px;
+  padding: 0 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .85);
+  background: linear-gradient(180deg, var(--signal-hell) 0%, var(--signal) 55%, #ff6a2c 100%);
+  color: var(--tinte);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.1875rem;
+  letter-spacing: .005em;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, .7),
+    inset 0 -4px 0 rgba(13, 43, 37, .14),
+    0 16px 30px -10px rgba(255, 122, 61, .75),
+    0 4px 10px rgba(13, 43, 37, .2);
+  transition: transform .16s var(--ease), box-shadow .2s var(--ease);
+}
+.cta svg { width: 24px; height: 24px; flex: none; }
+.cta:active { transform: scale(.97); }
+
+.hero__bild {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  margin: -28px -44px -36px -20px;
+}
+.geraet {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  overflow: visible;
+}
+.schwebt { animation: schweben 7s var(--ease-sanft) infinite alternate; }
+@keyframes schweben {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -8px, 0); }
+}
+.fall { animation: fallen 3.6s linear infinite; transform-box: fill-box; transform-origin: center; }
+.fall--2 { animation-delay: -.8s; }
+.fall--3 { animation-delay: -1.6s; }
+.fall--4 { animation-delay: -2.2s; }
+.fall--5 { animation-delay: -2.9s; }
+@keyframes fallen {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+  12%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translate3d(var(--fx, 6px), 76px, 0) rotate(var(--fr, 120deg)); opacity: 0; }
+}
+
+/* ---------- Zahlenleiste ---------- */
+.zahlen-abschnitt { padding-top: var(--s5); }
+.zahlen {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 12px 0;
+  border-radius: var(--r-l);
+}
+.zahlen li {
+  position: relative;
+  padding: var(--s3);
+  border-left: 1px solid rgba(255, 255, 255, .85);
+}
+.zahlen li:first-child { border-left: 0; }
+.zahlen strong {
+  position: relative;
+  display: block;
+  font-weight: 800;
+  font-size: clamp(2.1rem, 1.2rem + 2.2vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+}
+.zahlen strong::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #fff 0 12%, var(--k1) 46%, var(--k2) 100%);
+  box-shadow: 0 6px 12px -4px rgba(13, 43, 37, .4), inset 0 -2px 4px rgba(13, 43, 37, .14);
+}
+.zahlen span { display: block; margin-top: 6px; font-size: 1rem; line-height: 1.4; }
+
+/* ---------- Funktionen ---------- */
+.karten {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s3);
+}
+.karte { padding: var(--s3); }
+.karte h3 { margin-top: var(--s3); font-size: 1.375rem; }
+.karte p { margin-top: 10px; }
+.symbol {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 24%, #fff 0 9%, var(--k1) 46%, var(--k2) 100%);
+  box-shadow: 0 10px 18px -8px rgba(13, 43, 37, .45), inset 0 -4px 7px rgba(13, 43, 37, .12), inset 0 2px 0 rgba(255, 255, 255, .8);
+}
+.symbol svg { width: 34px; height: 34px; }
+
+/* ---------- Ablauf ---------- */
+.schritte {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s3);
+  counter-reset: schritt;
+}
+.schritt { padding: var(--s3); }
+.schritt__nr {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 24%, #fff 0 8%, var(--k1) 46%, var(--k2) 100%);
+  box-shadow: 0 10px 18px -8px rgba(13, 43, 37, .45), inset 0 -4px 7px rgba(13, 43, 37, .12), inset 0 2px 0 rgba(255, 255, 255, .8);
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+.schritt h3 { margin-top: var(--s3); font-size: 1.375rem; }
+.schritt p { margin-top: 10px; }
+/* Verbindung zwischen den Schritten */
+.schritt:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 54px;
+  left: calc(var(--s3) + 60px + 12px);
+  right: calc(var(--s3) * -1 - 4px);
+  height: 0;
+  border-top: 3px dotted rgba(13, 43, 37, .45);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ---------- Bewertungen ---------- */
+.stimmen {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s3);
+}
+.stimme {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding: var(--s3);
+}
+.stimme__marke {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--tinte);
+  color: var(--weiss);
+  font-weight: 600;
+  font-size: .8125rem;
+  letter-spacing: .04em;
+}
+.stimme blockquote { font-size: 1.1875rem; line-height: 1.5; font-weight: 600; flex: 1; }
+.stimme__fuss { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 600; }
+.stimme__fuss .sterne svg { width: 20px; height: 20px; }
+
+/* ---------- Hinweisblock China ---------- */
+.hinweis {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--s4);
+  padding: var(--s5);
+  border-radius: var(--r-l);
+}
+.hinweis__bild { width: 148px; height: 148px; flex: none; }
+.hinweis h2 { font-size: clamp(1.9rem, 1.2rem + 2vw, 2.75rem); }
+.hinweis p { margin-top: var(--s2); font-size: 1.1875rem; max-width: 40em; }
+
+/* ---------- Fußzeile ---------- */
+.fuss {
+  margin-top: var(--s6);
+  padding: var(--s4) 0 var(--s5);
+  border-top: 1px solid rgba(13, 43, 37, .18);
+}
+.fuss__reihe {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+}
+.fuss__marke { font-weight: 800; letter-spacing: .08em; margin-right: 10px; }
+.fuss a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: transform .16s var(--ease);
+}
+.fuss a:active { transform: scale(.97); }
+.fuss__entwurf { margin-top: var(--s2); font-size: .9375rem; color: var(--tinte-2); }
+
+/* ---------- Einblenden beim Scrollen (nur mit JS und ohne reduzierte Bewegung) ---------- */
+/* Als Keyframes mit Verzögerung: so bleibt die Hover-Bewegung der Karten danach ohne Verzögerung. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .zeigen:not(.ist-da) { opacity: 0; }
+  .js .zeigen.ist-da { animation: einblenden .28s var(--ease) calc(var(--i, 0) * 50ms) backwards; }
+}
+@keyframes einblenden {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+}
+
+/* ---------- Hover nur mit Maus ---------- */
+@media (hover: hover) and (pointer: fine) {
+  .nav a:hover { background: rgba(255, 255, 255, .6); }
+  .korb:hover { background: rgba(255, 255, 255, .85); }
+  .fuss a:hover { background: rgba(255, 255, 255, .6); }
+  .cta:hover {
+    transform: translate3d(0, -2px, 0);
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, .7),
+      inset 0 -4px 0 rgba(13, 43, 37, .14),
+      0 22px 36px -10px rgba(255, 122, 61, .8),
+      0 4px 10px rgba(13, 43, 37, .2);
+  }
+  .cta:hover:active { transform: scale(.97); }
+  .karte, .schritt, .stimme { transition: transform .26s var(--ease); }
+  .karte:hover, .schritt:hover, .stimme:hover { transform: translate3d(0, -4px, 0); }
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1100px) {
+  .nav a { padding: 0 12px; }
+  .hero__karte { padding: var(--s4); gap: var(--s3); }
+  .karten { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .zahlen { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .zahlen li:nth-child(odd) { border-left: 0; }
+  .zahlen li:nth-child(n + 3) { border-top: 1px solid rgba(255, 255, 255, .85); }
+  .stimmen { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+  .stimme blockquote { font-size: 1.0625rem; }
+}
+
+@media (max-width: 960px) {
+  .kopf { gap: 8px; }
+  .nav a { padding: 0 9px; }
+}
+
+@media (max-width: 900px) {
+  .hero__karte { grid-template-columns: minmax(0, 1fr); }
+  .hero__bild { order: -1; max-height: 340px; margin: 0 0 -8px; }
+  .geraet { max-width: 360px; }
+  .schritte { grid-template-columns: minmax(0, 1fr); }
+  .schritt:not(:last-child)::after { display: none; }
+  .stimmen { grid-template-columns: minmax(0, 1fr); }
+  .hinweis { grid-template-columns: minmax(0, 1fr); padding: var(--s4); gap: var(--s3); }
+  .hinweis__bild { width: 112px; height: 112px; }
+}
+
+/* ---------- Kopfzeile mit Menü-Knopf (ab 800 px abwärts, sonst passen die fünf Links nicht neben Logo und Warenkorb) ---------- */
+@media (max-width: 800px) {
+  .kopf { padding: 6px 6px 6px 16px; gap: 6px; top: 8px; margin-top: 8px; width: calc(100% - 16px); }
+  .logo { font-size: 1.125rem; margin-right: auto; }
+  .logo svg { width: 30px; height: 30px; }
+  .nav { margin-left: 0; }
+  .korb { padding: 0 6px 0 12px; }
+  .js .menue-knopf { display: inline-flex; }
+  .js .nav {
+    display: none;
+    position: absolute;
+    left: 0; right: 0;
+    top: calc(100% + 8px);
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px;
+    border-radius: var(--r-m);
+    background: rgba(255, 255, 255, .96);
+    border: 1px solid #fff;
+    box-shadow: var(--glas-schatten);
+  }
+  .js .nav.ist-offen { display: flex; }
+  .js .nav a { justify-content: flex-start; min-height: 52px; padding: 0 18px; font-size: 1.0625rem; }
+  .js .nav a[aria-current]::after { left: auto; right: 20px; top: 50%; bottom: auto; margin: -2.5px 0 0; }
+  /* ohne JS: Navigation umbricht unter die Zeile */
+  html:not(.js) .kopf { flex-wrap: wrap; border-radius: var(--r-m); }
+  html:not(.js) .nav { order: 5; width: 100%; flex-wrap: wrap; }
+
+}
+
+/* ---------- Handy: eigener Entwurf ---------- */
+@media (max-width: 700px) {
+  /* eigene Abstandsstufen fürs Handy (kleiner, gleiches Verhältnis) */
+  :root { --blur: 12px; --r-m: 24px; --r-l: 32px; --s3: 20px; --s4: 32px; --s5: 48px; --s6: 72px; }
+  body { font-size: 1rem; }
+  .huelle { width: min(1232px, 100% - 32px); }
+  .abschnitt { padding-block: var(--s5) 0; }
+  .abschnitt__kopf { margin-bottom: var(--s3); }
+
+  /* weniger und kleinere Orbs */
+  .o3, .o4, .o7 { display: none; }
+  .o1 { --d: 260px; right: -22%; top: 10px; }
+  .o2 { --d: 300px; left: -26%; top: 520px; }
+  .o5 { --d: 260px; left: -18%; top: 1500px; }
+  .o6 { --d: 280px; right: -24%; top: 2200px; }
+  .o8 { --d: 260px; right: -20%; top: 2900px; }
+
+  /* Hero: Reihenfolge Eyebrow, Überschrift, Bild, Text, Sterne, Preis */
+  .hero { padding-top: var(--s3); }
+  .hero__karte { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: var(--s3); }
+  .hero__text { display: contents; }
+  .eyebrow { order: 1; align-self: flex-start; min-height: 36px; font-size: .875rem; }
+  .hero h1 { order: 2; margin-top: 14px; font-size: clamp(1.6rem, 8.2vw, 2.25rem); }
+  .hero__bild { order: 3; margin: 6px 0 0; height: 196px; max-height: none; display: flex; }
+  .geraet { max-width: 100%; height: 100%; width: auto; }
+  .untertitel { order: 4; margin-top: 12px; font-size: 1rem; line-height: 1.55; }
+  .bewertung { order: 5; margin-top: var(--s2); }
+  .preis { order: 6; margin-top: var(--s2); padding: var(--s2); gap: 4px 14px; }
+  .preis__zahl { font-size: 2.25rem; }
+  .preis__aktion { font-size: .875rem; }
+  .cta { min-height: 60px; margin-top: var(--s2); }
+
+  .zahlen-abschnitt { padding-top: var(--s4); }
+  .zahlen { padding: 4px 0; }
+  .zahlen li { padding: var(--s3) var(--s2); }
+  .zahlen strong { font-size: 1.9rem; }
+  .zahlen span { font-size: .9375rem; }
+
+  /* Funktionen als waagerechte Karten: Symbol links, Text rechts */
+  .karten { grid-template-columns: minmax(0, 1fr); gap: var(--s2); }
+  .karte {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    column-gap: 16px;
+    align-items: start;
+    padding: var(--s3);
+  }
+  .karte .symbol { grid-row: 1 / span 2; width: 56px; height: 56px; }
+  .karte .symbol svg { width: 28px; height: 28px; }
+  .karte h3 { margin-top: 2px; font-size: 1.25rem; }
+  .karte p { margin-top: 6px; }
+
+  .schritte { gap: var(--s2); }
+  .schritt {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    column-gap: 16px;
+    padding: var(--s3);
+  }
+  .schritt__nr { grid-row: 1 / span 2; width: 52px; height: 52px; font-size: 1.25rem; }
+  .schritt h3 { margin-top: 2px; font-size: 1.25rem; }
+  .schritt p { margin-top: 6px; }
+
+  .stimmen { gap: var(--s2); }
+  .stimme blockquote { font-size: 1.0625rem; }
+
+  .hinweis { padding: var(--s3); }
+  .hinweis p { font-size: 1.0625rem; }
+
+  .fuss { margin-top: var(--s5); }
+  .fuss__reihe a { min-height: 48px; }
+}
+
+@media (max-width: 380px) {
+  .korb { font-size: .875rem; }
+  .preis { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ganz schmale Telefone (320 px): Kopfzeile verkleinern */
+@media (max-width: 360px) {
+  .kopf { padding-left: 12px; }
+  .logo { font-size: 1rem; letter-spacing: .05em; gap: 8px; }
+  .logo svg { width: 26px; height: 26px; }
+  .korb { gap: 6px; padding: 0 5px 0 10px; font-size: .8125rem; }
+  .korb svg { display: none; }
+  .menue-knopf { padding: 0 10px; }
+}
+
+/* ---------- Reduzierte Bewegung: Standbild ---------- */
+/* Keine Bewegung (Verschieben, Drehen, Fallen), nur kurze Farb- und Deckkraft-Übergänge bleiben. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-property: background-color, border-color, color, opacity !important;
+    transition-duration: .15s !important;
+    transition-delay: 0s !important;
+  }
+  .fall { opacity: 1; transform: translate3d(0, var(--sy, 30px), 0) rotate(var(--sr, 20deg)); }
+}

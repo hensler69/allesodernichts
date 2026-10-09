@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HORTA Gemüseschneider HT-5, Look Glassmorphism</title>
+<meta name="description" content="Demo-Startseite im Look Glassmorphism: helles, buntes Milchglas vor farbigen Kugeln. Entwurf, alle Angaben und Bewertungen sind erfunden.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#e6fbf2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%237be0a3'/%3E%3Ccircle cx='12' cy='11' r='5' fill='%23fff' fill-opacity='.7'/%3E%3C/svg%3E">
+<link rel="preload" href="../../design-vorlagen/fonts/PlusJakartaSans-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../design-vorlagen/fonts/PlusJakartaSans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="sprung" href="#ueberblick">Zum Inhalt springen</a>
+
+<!-- Zeichen für Sterne, einmal definiert und mehrfach benutzt -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="stern" d="M12 2.6l2.8 6 6.5.8-4.8 4.5 1.3 6.5L12 17.2l-5.8 3.2 1.3-6.5-4.8-4.5 6.5-.8z"/>
+    <linearGradient id="stern-teil" x1="0" x2="1" y1="0" y2="0">
+      <stop offset=".6" stop-color="#ffe27a"/>
+      <stop offset=".6" stop-color="#ffffff" stop-opacity=".55"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="seite">
+
+  <div class="orbs" aria-hidden="true">
+    <i class="orb orb--violett o1"></i>
+    <i class="orb orb--gruen o2"></i>
+    <i class="orb orb--tuerkis o3"></i>
+    <i class="orb orb--gelb o4"></i>
+    <i class="orb orb--gelb o5"></i>
+    <i class="orb orb--violett o6"></i>
+    <i class="orb orb--gruen o7"></i>
+    <i class="orb orb--tuerkis o8"></i>
+  </div>
+
+  <header class="kopf glas">
+    <a class="logo" href="#ueberblick" aria-label="HORTA, zur Startseite">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <defs>
+          <radialGradient id="logo-kugel" cx=".32" cy=".26" r=".9">
+            <stop offset="0" stop-color="#fff"/>
+            <stop offset=".35" stop-color="#7be0a3"/>
+            <stop offset="1" stop-color="#5fd3e8"/>
+          </radialGradient>
+        </defs>
+        <circle cx="20" cy="20" r="18.5" fill="url(#logo-kugel)" stroke="#fff" stroke-width="1.5"/>
+        <path d="M13 24.5l14-9.5v9.5a7 7 0 0 1-14 0z" fill="#fff" fill-opacity=".55" stroke="#0d2b25" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M17 24.5h6" stroke="#0d2b25" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>HORTA</span>
+    </a>
+    <nav class="nav" id="hauptmenue" aria-label="Hauptnavigation">
+      <a href="#ueberblick">Überblick</a>
+      <a href="#funktionen">Funktionen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#bewertungen">Bewertungen</a>
+      <a href="#fragen">Fragen</a>
+    </nav>
+    <a class="korb" href="#warenkorb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      Warenkorb <span class="korb__zahl" data-zaehler>0</span><span class="nur-lesen"> Artikel</span>
+    </a>
+    <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="hauptmenue">Menü</button>
+  </header>
+
+  <main>
+
+    <!-- ===================== Hero ===================== -->
+    <section class="hero huelle" id="ueberblick" aria-labelledby="titel">
+      <div class="hero__karte glas" data-glanz>
+        <div class="glanz" aria-hidden="true"><i></i></div>
+        <div class="hero__text">
+          <p class="eyebrow"><i class="kugel" aria-hidden="true"></i>Elektrischer Gemüseschneider</p>
+          <h1 id="titel"><span class="zeile">Weniger schnippeln.</span> <span class="zeile"><span class="marker">Mehr Salat.</span></span></h1>
+          <p class="untertitel">HORTA schneidet, raspelt und reibt auf Knopfdruck. Fünf Einsätze aus Edelstahl, ein breiter Schacht, und alles fällt direkt in Ihre Schüssel.</p>
+          <p class="bewertung">
+            <span class="sterne" role="img" aria-label="4,6 von 5 Sternen">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="url(#stern-teil)" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </span>
+            <span>4,6 von 5 · 36 Beispielbewertungen</span>
+          </p>
+          <div class="preis">
+            <p class="preis__zahl">44,90 €</p>
+            <p class="preis__aktion">Einführungspreis bis 30.11.2026, danach 54,90 €</p>
+            <p class="preis__klein">inkl. 19 % MwSt., zzgl. 4,90 € Versand, Lieferzeit 8 bis 15 Werktage</p>
+            <button class="cta" type="button" data-kaufen>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+              In den Warenkorb
+            </button>
+            <p class="nur-lesen" role="status" data-status></p>
+          </div>
+        </div>
+
+        <div class="hero__bild">
+          <svg class="geraet" viewBox="0 0 560 540" role="img" aria-label="Zeichnung: HORTA mit eingesetztem Kegel, darunter eine Glasschüssel mit Gemüsestücken" focusable="false">
+            <defs>
+              <linearGradient id="gl-weiss" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fff" stop-opacity=".95"/>
+                <stop offset=".5" stop-color="#fff" stop-opacity=".34"/>
+                <stop offset="1" stop-color="#fff" stop-opacity=".62"/>
+              </linearGradient>
+              <linearGradient id="gl-tuerkis" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fff" stop-opacity=".9"/>
+                <stop offset=".55" stop-color="#5fd3e8" stop-opacity=".38"/>
+                <stop offset="1" stop-color="#fff" stop-opacity=".6"/>
+              </linearGradient>
+              <linearGradient id="gl-gruen" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fff" stop-opacity=".92"/>
+                <stop offset=".55" stop-color="#7be0a3" stop-opacity=".48"/>
+                <stop offset="1" stop-color="#fff" stop-opacity=".6"/>
+              </linearGradient>
+              <linearGradient id="gl-violett" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fff" stop-opacity=".9"/>
+                <stop offset=".6" stop-color="#b69cff" stop-opacity=".4"/>
+                <stop offset="1" stop-color="#fff" stop-opacity=".55"/>
+              </linearGradient>
+              <linearGradient id="stahl" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffffff"/>
+                <stop offset=".3" stop-color="#cdeee6"/>
+                <stop offset=".52" stop-color="#ffffff"/>
+                <stop offset=".8" stop-color="#9fd8ca"/>
+                <stop offset="1" stop-color="#e2f7f1"/>
+              </linearGradient>
+              <linearGradient id="gurke" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#2e9f62"/>
+                <stop offset=".42" stop-color="#8ae6ac"/>
+                <stop offset="1" stop-color="#34b06c"/>
+              </linearGradient>
+              <radialGradient id="bodenschatten" cx=".5" cy=".5" r=".5">
+                <stop offset="0" stop-color="#0d2b25" stop-opacity=".26"/>
+                <stop offset="1" stop-color="#0d2b25" stop-opacity="0"/>
+              </radialGradient>
+              <!-- Gemüsestücke, mehrfach benutzt -->
+              <g id="s-gurke">
+                <circle r="15" fill="#c9f4db" stroke="#2e9f62" stroke-width="2.5"/>
+                <circle r="9" fill="none" stroke="#7be0a3" stroke-width="2.5"/>
+                <circle r="2.2" fill="#2e9f62"/>
+              </g>
+              <g id="s-gelb">
+                <circle r="12" fill="#ffe27a" stroke="#c99600" stroke-width="2.5"/>
+                <circle r="5" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="2"/>
+              </g>
+              <path id="s-kohl" d="M-14 0c4-9 9 9 14 0s9 9 14 0" fill="none" stroke="#8a64f0" stroke-width="5.5" stroke-linecap="round"/>
+              <clipPath id="schale-oben"><rect x="0" y="0" width="560" height="442"/></clipPath>
+            </defs>
+
+            <!-- Boden -->
+            <ellipse cx="300" cy="512" rx="262" ry="20" fill="url(#bodenschatten)"/>
+
+            <g class="schwebt">
+              <!-- Gehäuse (Turm) -->
+              <rect x="92" y="176" width="152" height="232" rx="48" fill="url(#gl-tuerkis)" stroke="#fff" stroke-opacity=".95" stroke-width="2.5"/>
+              <path d="M110 232c0-16 8-26 20-30" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-opacity=".95"/>
+
+              <!-- Stopfer im Schacht -->
+              <rect x="134" y="26" width="68" height="74" rx="26" fill="url(#gl-gruen)" stroke="#fff" stroke-opacity=".95" stroke-width="2.5"/>
+              <path d="M146 62h44" stroke="#0d2b25" stroke-opacity=".55" stroke-width="3" stroke-linecap="round"/>
+
+              <!-- Gurke im Schacht, sichtbar durch das Glas -->
+              <g transform="rotate(7 168 150)">
+                <rect x="146" y="92" width="44" height="124" rx="22" fill="url(#gurke)"/>
+                <path d="M156 110v90M178 108v92" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+              </g>
+
+              <!-- Schacht (Glas) -->
+              <rect x="112" y="78" width="112" height="146" rx="32" fill="url(#gl-weiss)" stroke="#fff" stroke-opacity=".95" stroke-width="2.5"/>
+              <path d="M124 124c0-18 6-30 18-36" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+              <path d="M120 70h96" stroke="#fff" stroke-opacity=".6" stroke-width="2" stroke-linecap="round"/>
+
+              <!-- Sockel -->
+              <rect x="62" y="372" width="236" height="126" rx="48" fill="url(#gl-gruen)" stroke="#fff" stroke-opacity=".95" stroke-width="2.5"/>
+              <path d="M82 410c0-14 6-24 18-28" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="116" cy="440" r="21" fill="#fff" fill-opacity=".6" stroke="#fff" stroke-width="2"/>
+              <circle cx="116" cy="440" r="10" fill="#0d2b25"/>
+              <circle cx="116" cy="440" r="3" fill="#7be0a3"/>
+              <text x="172" y="448" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="24" letter-spacing="3" fill="#0d2b25">HT-5</text>
+
+              <!-- Kegel-Einsatz -->
+              <rect x="226" y="222" width="28" height="136" rx="14" fill="url(#gl-weiss)" stroke="#fff" stroke-opacity=".95" stroke-width="2.5"/>
+              <path d="M248 236L350 266Q366 270 366 290Q366 310 350 314L248 344Z" fill="url(#stahl)" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+              <g fill="#0d2b25" fill-opacity=".55">
+                <circle cx="270" cy="258" r="3.4"/><circle cx="270" cy="274" r="3.4"/><circle cx="270" cy="290" r="3.4"/><circle cx="270" cy="306" r="3.4"/><circle cx="270" cy="322" r="3.4"/>
+                <circle cx="292" cy="262" r="3"/><circle cx="292" cy="276" r="3"/><circle cx="292" cy="290" r="3"/><circle cx="292" cy="304" r="3"/><circle cx="292" cy="318" r="3"/>
+                <circle cx="314" cy="266" r="2.7"/><circle cx="314" cy="278" r="2.7"/><circle cx="314" cy="290" r="2.7"/><circle cx="314" cy="302" r="2.7"/><circle cx="314" cy="314" r="2.7"/>
+                <circle cx="336" cy="270" r="2.4"/><circle cx="336" cy="280" r="2.4"/><circle cx="336" cy="290" r="2.4"/><circle cx="336" cy="300" r="2.4"/><circle cx="336" cy="310" r="2.4"/>
+              </g>
+              <path d="M256 244L346 270" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+
+              <!-- fallende Gemüsestücke -->
+              <g transform="translate(346 332)"><g class="fall fall--1" style="--fx:8px;--fr:150deg;--sy:34px;--sr:40deg"><use href="#s-gurke" transform="scale(.78)"/></g></g>
+              <g transform="translate(332 330)"><g class="fall fall--2" style="--fx:-6px;--fr:-120deg;--sy:8px;--sr:-20deg"><use href="#s-gelb" transform="scale(.8)"/></g></g>
+              <g transform="translate(358 334)"><g class="fall fall--3" style="--fx:10px;--fr:110deg;--sy:56px;--sr:60deg"><use href="#s-kohl" transform="scale(.7)"/></g></g>
+              <g transform="translate(340 332)"><g class="fall fall--4" style="--fx:-10px;--fr:-160deg;--sy:46px;--sr:-50deg"><use href="#s-gurke" transform="scale(.6)"/></g></g>
+              <g transform="translate(352 334)"><g class="fall fall--5" style="--fx:4px;--fr:90deg;--sy:22px;--sr:15deg"><use href="#s-gelb" transform="scale(.62)"/></g></g>
+
+              <!-- Schüssel: Rückwand, Inhalt, Vorderwand -->
+              <ellipse cx="410" cy="420" rx="134" ry="25" fill="url(#gl-violett)" stroke="#fff" stroke-opacity=".95" stroke-width="2.5"/>
+              <g>
+                <use href="#s-kohl" x="346" y="410"/>
+                <use href="#s-kohl" x="392" y="404" transform="rotate(-8 392 404)"/>
+                <use href="#s-kohl" x="438" y="412"/>
+                <use href="#s-gurke" x="336" y="420"/>
+                <use href="#s-gurke" x="372" y="398"/>
+                <use href="#s-gelb" x="410" y="416"/>
+                <use href="#s-gurke" x="446" y="400" transform="rotate(20 446 400)"/>
+                <use href="#s-gelb" x="474" y="418"/>
+                <use href="#s-gelb" x="356" y="434"/>
+                <use href="#s-kohl" x="480" y="402" transform="rotate(10 480 402)"/>
+                <use href="#s-gurke" x="418" y="438"/>
+                <use href="#s-gurke" x="394" y="388" transform="scale(.85) translate(70 70)"/>
+              </g>
+              <path d="M276 420A134 25 0 0 0 544 420C544 490 486 522 410 522C334 522 276 490 276 420Z" fill="url(#gl-weiss)" stroke="#fff" stroke-opacity=".95" stroke-width="2.5"/>
+              <path d="M294 452c10 24 36 40 66 46" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-opacity=".9"/>
+              <ellipse cx="410" cy="420" rx="134" ry="25" fill="none" stroke="#fff" stroke-width="3" stroke-opacity=".95"/>
+
+              <!-- Glitzer -->
+              <path d="M470 330l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="#fff"/>
+              <path d="M52 330l2.4 7 7 2.4-7 2.4-2.4 7-2.4-7-7-2.4 7-2.4z" fill="#fff"/>
+              <path d="M258 70l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#fff"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Zahlenleiste ===================== -->
+    <section class="zahlen-abschnitt huelle" aria-labelledby="zahlen-titel">
+      <h2 class="nur-lesen" id="zahlen-titel">Die Eckdaten im Überblick</h2>
+      <ul class="zahlen glas glas--dicht zeigen">
+        <li class="k-gruen-tuerkis"><strong>5</strong><span>Einsätze aus Edelstahl</span></li>
+        <li class="k-gelb-gruen"><strong>800 W</strong><span>laut Hersteller</span></li>
+        <li class="k-violett-tuerkis"><strong>27 cm</strong><span>Höhe, passt unter den Hängeschrank</span></li>
+        <li class="k-tuerkis-gruen"><strong>8 bis 15</strong><span>Werktage Lieferung, Zoll inklusive</span></li>
+      </ul>
+    </section>
+
+    <!-- ===================== Funktionen ===================== -->
+    <section class="abschnitt huelle" id="funktionen" aria-labelledby="funktionen-titel">
+      <div class="abschnitt__kopf zeigen">
+        <h2 id="funktionen-titel"><i class="kugel k-gruen-tuerkis" aria-hidden="true"></i>Funktionen</h2>
+      </div>
+      <ul class="karten">
+        <li class="karte glas t-gruen zeigen k-gruen" style="--i:0">
+          <span class="symbol"><svg viewBox="0 0 24 24" fill="none" stroke="#0d2b25" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6.5" rx="7" ry="2.6"/><ellipse cx="12" cy="12" rx="7" ry="2.6"/><ellipse cx="12" cy="17.5" rx="7" ry="2.6"/></svg></span>
+          <h3>Schneiden</h3>
+          <p>Gleichmäßige Scheiben, auch bei weichen Tomaten.</p>
+        </li>
+        <li class="karte glas t-tuerkis zeigen k-tuerkis" style="--i:1">
+          <span class="symbol"><svg viewBox="0 0 24 24" fill="none" stroke="#0d2b25" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5c2.4 3.4-2.4 5.6 0 9s-1.2 5.4 0 8M12 3.5c2.4 3.4-2.4 5.6 0 9s-1.2 5.4 0 8M17.5 3.5c2.4 3.4-2.4 5.6 0 9s-1.2 5.4 0 8"/></svg></span>
+          <h3>Raspeln</h3>
+          <p>Karotten und Zucchini fein oder grob in Sekunden.</p>
+        </li>
+        <li class="karte glas t-gelb zeigen k-gelb" style="--i:2">
+          <span class="symbol"><svg viewBox="0 0 24 24" fill="none" stroke="#0d2b25" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="3.5"/><g fill="#0d2b25" stroke="none"><circle cx="10" cy="8" r="1.1"/><circle cx="14" cy="8" r="1.1"/><circle cx="10" cy="12" r="1.1"/><circle cx="14" cy="12" r="1.1"/><circle cx="10" cy="16" r="1.1"/><circle cx="14" cy="16" r="1.1"/></g></svg></span>
+          <h3>Reiben</h3>
+          <p>Käse und Kohl fallen locker in die Schüssel.</p>
+        </li>
+        <li class="karte glas t-violett zeigen k-violett" style="--i:3">
+          <span class="symbol"><svg viewBox="0 0 24 24" fill="none" stroke="#0d2b25" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="12" rx="3.5"/><path d="M7 10h10M9.5 7.5L7 10l2.5 2.5M14.5 7.5L17 10l-2.5 2.5M12 16v4.5M9.5 18.5L12 21l2.5-2.5"/></svg></span>
+          <h3>Breiter Schacht</h3>
+          <p>Ganze Gurken und Paprika passen ohne Vorschneiden hinein (Schacht 5 cm).</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== Ablauf ===================== -->
+    <section class="abschnitt huelle" id="ablauf" aria-labelledby="ablauf-titel">
+      <div class="abschnitt__kopf zeigen">
+        <h2 id="ablauf-titel"><i class="kugel k-gelb-gruen" aria-hidden="true"></i>Ablauf</h2>
+      </div>
+      <ol class="schritte">
+        <li class="schritt glas zeigen k-gruen" style="--i:0">
+          <span class="schritt__nr" aria-hidden="true">1</span>
+          <h3>Einsatz wählen</h3>
+          <p>Kegel einsetzen, bis er einrastet.</p>
+        </li>
+        <li class="schritt glas zeigen k-tuerkis" style="--i:1">
+          <span class="schritt__nr" aria-hidden="true">2</span>
+          <h3>Gemüse einlegen</h3>
+          <p>In den Schacht legen, Deckel zu.</p>
+        </li>
+        <li class="schritt glas zeigen k-violett" style="--i:2">
+          <span class="schritt__nr" aria-hidden="true">3</span>
+          <h3>Knopf drücken</h3>
+          <p>Alles fällt direkt in die Schüssel.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===================== Bewertungen ===================== -->
+    <section class="abschnitt huelle" id="bewertungen" aria-labelledby="bewertungen-titel">
+      <div class="abschnitt__kopf zeigen">
+        <h2 id="bewertungen-titel"><i class="kugel k-violett-tuerkis" aria-hidden="true"></i>Bewertungen</h2>
+      </div>
+      <ul class="stimmen">
+        <li class="stimme glas glas--dicht zeigen" style="--i:0">
+          <span class="stimme__marke">Beispiel</span>
+          <figure>
+            <blockquote><p>Endlich Salat ohne Schnippelei. Zehn Minuten sind jetzt zwei.</p></blockquote>
+            <figcaption class="stimme__fuss" style="margin-top:16px">
+              <span>Anna K.</span>
+              <span class="sterne" role="img" aria-label="5 von 5 Sternen">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              </span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="stimme glas glas--dicht zeigen" style="--i:1">
+          <span class="stimme__marke">Beispiel</span>
+          <figure>
+            <blockquote><p>Der breite Schacht ist wirklich praktisch. Zucchini ohne Vorschneiden.</p></blockquote>
+            <figcaption class="stimme__fuss" style="margin-top:16px">
+              <span>Jens M.</span>
+              <span class="sterne" role="img" aria-label="4 von 5 Sternen">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#fff" fill-opacity=".55" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              </span>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="stimme glas glas--dicht zeigen" style="--i:2">
+          <span class="stimme__marke">Beispiel</span>
+          <figure>
+            <blockquote><p>Reinigen geht schnell, die Einsätze sind stabil.</p></blockquote>
+            <figcaption class="stimme__fuss" style="margin-top:16px">
+              <span>Sabine R.</span>
+              <span class="sterne" role="img" aria-label="5 von 5 Sternen">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#stern" fill="#ffe27a" stroke="#0d2b25" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              </span>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== Hinweisblock China ===================== -->
+    <section class="abschnitt huelle" id="fragen" aria-labelledby="china-titel">
+      <aside class="hinweis glas glas--dicht t-gelb zeigen">
+        <svg class="hinweis__bild" viewBox="0 0 148 148" aria-hidden="true" focusable="false">
+          <defs>
+            <radialGradient id="erdkugel" cx=".32" cy=".26" r=".85">
+              <stop offset="0" stop-color="#fff"/>
+              <stop offset=".4" stop-color="#5fd3e8"/>
+              <stop offset="1" stop-color="#2fb3cf"/>
+            </radialGradient>
+          </defs>
+          <circle cx="68" cy="70" r="56" fill="url(#erdkugel)" stroke="#fff" stroke-width="3"/>
+          <g fill="none" stroke="#0d2b25" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round">
+            <ellipse cx="68" cy="70" rx="24" ry="56"/>
+            <path d="M12 70h112M20 44h96M20 96h96"/>
+          </g>
+          <path d="M34 28c10-6 22-8 32-4" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <g transform="translate(86 80)">
+            <path d="M0 18l30-12 34 12v34L30 66 0 52z" fill="#ffe27a" stroke="#0d2b25" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M0 18l30 12 34-12M30 30v36" fill="none" stroke="#0d2b25" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M14 12l32 12" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <div>
+          <h2 id="china-titel">Lieferung aus China</h2>
+          <p>Dieses Produkt wird direkt aus China versendet. Lieferzeit 8 bis 15 Werktage, Zoll und Einfuhrsteuern sind im Preis enthalten, es kommen keine Zusatzkosten hinzu.</p>
+        </div>
+      </aside>
+    </section>
+
+  </main>
+
+  <footer class="fuss huelle">
+    <div class="fuss__reihe">
+      <span class="fuss__marke">HORTA</span>
+      <span aria-hidden="true">·</span>
+      <a href="#">Impressum</a><span aria-hidden="true">·</span>
+      <a href="#">Datenschutz</a><span aria-hidden="true">·</span>
+      <a href="#">AGB</a><span aria-hidden="true">·</span>
+      <a href="#">Vertrag widerrufen</a>
+    </div>
+    <p class="fuss__entwurf">Entwurf: Alle Angaben und Bewertungen sind erfunden.</p>
+  </footer>
+
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
