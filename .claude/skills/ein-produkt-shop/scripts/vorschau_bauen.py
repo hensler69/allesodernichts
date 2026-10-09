@@ -86,7 +86,8 @@ umschalter = """
     if (ziel) ziel.scrollIntoView(); else scrollTo(0, 0);
     dispatchEvent(new Event('scroll'));
   }
-  addEventListener('hashchange', zeigen);
+  // Ein Link aus dem Warenkorb (zum Beispiel "Zur Kasse") wechselt nur die Ansicht: offene Dialoge schließen
+  addEventListener('hashchange', () => { document.querySelectorAll('dialog[open]').forEach((d) => d.close()); zeigen(); });
   zeigen();
 })();
 """ % repr(ansichten)

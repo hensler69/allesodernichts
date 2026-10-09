@@ -72,6 +72,13 @@ auch so sagen. Wenn etwas unsicher wirkt oder neuer als Juni 2026 sein könnte: 
   In der Referenz: Karte "Produktsicherheit" im Technik-Stapel.
 - Elektrogeräte: Registrierung bei der Stiftung EAR (WEEE-Nummer), Rücknahme-Hinweise, CE-Kennzeichnung, Anleitung auf Deutsch.
   Batterien und Akkus: Hinweise nach Batterierecht.
+- Ware direkt aus China (zum Beispiel AliExpress, Dropshipping): Wer in die EU einführt, gilt als Hersteller (ElektroG,
+  Batterierecht, Verpackung). Lieferzeit ehrlich nennen (Kopfbereich, Warenkorb, Kasse über dem Knopf, Bestellmail,
+  Versandseite, AGB). Seit 01.07.2026 gilt auf Kleinsendungen aus Drittstaaten eine Zollpauschale von 3 €
+  (Verordnung (EU) 2026/382): Zoll und Einfuhrumsatzsteuer selbst tragen und "an der Haustür nichts extra" sagen.
+  Datenschutz: Weitergabe der Lieferadresse an den Lieferanten im Drittland nach Art. 49 Abs. 1 lit. b DSGVO nennen.
+  Rücksendeadresse in Deutschland angeben. Lebensmittelkontakt (VO (EG) 1935/2004) und EU-Stecker vom Lieferanten
+  schriftlich bestätigen lassen. Leistungsangaben wie "800 W" nur als "laut Hersteller", bis sie geprüft sind.
 - Verpackungen: Registrierung im Verpackungsregister LUCID und Beteiligung an einem dualen System VOR dem ersten Verkauf.
 - Branchen mit eigenen Regeln prüfen: Kosmetik (Inhaltsstoffe, verantwortliche Person), Lebensmittel (LMIV), Textil (Faserangaben),
   Spielzeug (Warnhinweise), Medizinprodukte (nicht ohne Fachberatung).

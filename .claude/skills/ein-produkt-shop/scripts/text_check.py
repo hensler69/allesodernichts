@@ -136,8 +136,9 @@ def main():
                 funde.append(f"Technik: {name} Link {h} führt ins Leere")
     for name, p in seiten.items():
         for a in p.hrefs:
-            if a.get("href") == "/" and a.get("aria-label") not in (None, "Zur Startseite"):
-                funde.append(f"Technik: {name} Logo-Link mit aria-label '{a.get('aria-label')}' statt 'Zur Startseite'")
+            # Das Logo darf den sichtbaren Namen im Label tragen ("HORTA, zur Startseite"), das verlangt auch Lighthouse
+            if a.get("href") == "/" and a.get("aria-label") is not None and "zur startseite" not in a.get("aria-label").lower():
+                funde.append(f"Technik: {name} Logo-Link mit aria-label '{a.get('aria-label')}' ohne 'zur Startseite'")
     for f in glob.glob(os.path.join(root, "**", "*.*"), recursive=True):
         if f.endswith((".html", ".css", ".js")):
             t = open(f, encoding="utf-8").read()

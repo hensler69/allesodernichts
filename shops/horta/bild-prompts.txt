@@ -1,0 +1,32 @@
+BILD-PROMPTS FÜR HORTA (Englisch, für Bild-KIs oder Fotografen)
+
+WICHTIG: Das Produktfoto assets/img/produkt-entwurf.jpg stammt vom Lieferanten (AliExpress)
+und darf auf der echten Seite NUR mit schriftlicher Freigabe des Lieferanten verwendet werden.
+Besser: eigenes Foto des gelieferten Geräts. Dateiname beibehalten (1 Stelle im Abschnitt "Angebot").
+Alle Bilder im selben Look: helles Morgenlicht, cremefarbener Grund, frisches Grün, kein Text im Bild.
+
+1) Produktfoto, Hauptbild (Seitenverhältnis 5:6, Hochformat), ersetzt produkt-entwurf.jpg
+   "Studio product photo of an electric salad maker with a tapered brushed stainless steel body,
+   black top rim with a round push button, a clear plastic feed chute with a pusher and a
+   horizontal clear drum holding a stainless steel grating cone. Freshly grated zucchini falls
+   into a clear glass bowl below. Soft morning light, warm cream background, fresh basil leaves
+   nearby, natural shadows, realistic, no logos, no text."
+
+2) Küchenszene (16:9), optional für den Abschnitt "Vom Markt bis auf den Teller"
+   "Bright kitchen counter in the morning, a stainless steel electric vegetable slicer next to
+   a wooden board with cucumbers, carrots and red cabbage, a glass bowl of colorful shredded salad,
+   soft window light with leaf shadows, cream and green tones, cinematic, no people, no text."
+
+3) Die fünf Einsätze von oben (4:3), optional für "Fünf Einsätze"
+   "Flat lay from above on a light linen cloth: five stainless steel cone blades for a salad maker
+   in a row (thin slicer, thick slicer, coarse shredder, fine shredder, fine grater), each next to
+   a small heap of what it makes: cucumber slices, potato slices, grated carrot, shredded red
+   cabbage, grated parmesan. Soft daylight, clean, realistic, no text."
+
+4) Lieferumfang (4:3), optional
+   "Flat lay on a cream surface: stainless steel salad maker base, clear drum with feed chute,
+   pusher, five cone blades and a folded instruction booklet, minimal, soft top light, no text."
+
+5) Vorschaubild für soziale Netzwerke
+   assets/og-image.jpg (1200 x 630) zeigt die selbst gezeichnete Seitenansicht des Geräts mit
+   Salatschüssel, kein Fremdfoto. Es kann so bleiben.

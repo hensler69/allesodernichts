@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kasse | HORTA</title>
+<meta name="description" content="Ihre Bestellung bei HORTA prüfen und zahlungspflichtig abschicken.">
+<meta name="theme-color" content="#f6f2e8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://www.horta.example/kasse">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/Fraunces-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="HORTA">
+<meta property="og:title" content="Kasse | HORTA">
+<meta property="og:description" content="Ihre Bestellung bei HORTA prüfen und zahlungspflichtig abschicken.">
+<meta property="og:url" content="https://www.horta.example/kasse">
+<meta property="og:image" content="https://www.horta.example/assets/og-image.jpg">
+<meta property="og:image:alt" content="Gezeichneter Gemüseschneider HORTA aus Edelstahl, daneben eine Glasschüssel mit geschnittenem Gemüse">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kasse | HORTA">
+<meta name="twitter:description" content="Ihre Bestellung bei HORTA prüfen und zahlungspflichtig abschicken.">
+<meta name="twitter:image" content="https://www.horta.example/assets/og-image.jpg">
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+<body>
+<a class="springen" href="#inhalt">Zum Inhalt springen</a>
+<div class="welt" aria-hidden="true">
+  <div class="welt__sonne"></div>
+  <div class="welt__aura welt__aura--a"></div>
+  <div class="welt__aura welt__aura--b"></div>
+  <div class="welt__blatt"><img src="/assets/img/blattschatten.svg" alt="" width="900" height="760"></div>
+  <div class="welt__beet welt__beet--fern"><img src="/assets/img/beet-fern.svg" alt="" width="1600" height="420"></div>
+  <div class="welt__beet welt__beet--mitte"><img src="/assets/img/beet-mitte.svg" alt="" width="1600" height="420"></div>
+  <div class="welt__beet welt__beet--nah"><img src="/assets/img/beet-nah.svg" alt="" width="1600" height="420"></div>
+  <div class="welt__schleier"></div>
+</div>
+<div class="entwurf" role="note">Entwurf: Alle Firmen-, Hersteller- und Technikangaben sowie alle Bewertungen sind erfunden. Das Produktfoto stammt vom Lieferanten und muss vor einer Veröffentlichung ersetzt oder schriftlich freigegeben werden.</div>
+<header class="kopf kopf--schlicht"><div class="kopf__innen">
+  <a class="logo" href="/" aria-label="HORTA, zur Startseite"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="#3a7a3a"/><circle cx="24" cy="24" r="17.5" fill="#dcebbf"/><circle cx="24" cy="24" r="9.5" fill="#eef5dc"/><ellipse cx="24" cy="18.2" rx="1.5" ry="2.6" fill="#9fc27e" transform="rotate(0 24 24)"/><ellipse cx="24" cy="18.2" rx="1.5" ry="2.6" fill="#9fc27e" transform="rotate(60 24 24)"/><ellipse cx="24" cy="18.2" rx="1.5" ry="2.6" fill="#9fc27e" transform="rotate(120 24 24)"/><ellipse cx="24" cy="18.2" rx="1.5" ry="2.6" fill="#9fc27e" transform="rotate(180 24 24)"/><ellipse cx="24" cy="18.2" rx="1.5" ry="2.6" fill="#9fc27e" transform="rotate(240 24 24)"/><ellipse cx="24" cy="18.2" rx="1.5" ry="2.6" fill="#9fc27e" transform="rotate(300 24 24)"/></svg><span>HORTA</span></a>
+  <span></span>
+  <div class="kopf__rechts"><a class="kopf__zurueck" href="/">Zurück zum Shop</a></div>
+</div></header>
+<main id="inhalt" class="kasse">
+<h1>Kasse</h1>
+<div class="leere-kasse glas" hidden><p><strong>Ihr Warenkorb ist leer.</strong></p><p><a class="knopf" href="/">Zurück zum Gemüseschneider</a></p></div>
+<div class="kasse__raster" hidden>
+  <form id="kasse-form" class="glas kasse__form" action="/send.php" method="post" novalidate>
+    <input type="hidden" name="art" value="bestellung">
+    <input type="hidden" name="einzeln" value="0">
+    <input type="hidden" name="set" value="0">
+    <input type="hidden" name="gutschein" value="">
+    <div class="honig-feld" aria-hidden="true"><label>Bitte leer lassen<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <fieldset>
+      <legend>Lieferadresse</legend>
+      <div class="felder">
+        <div class="feldgruppe"><label for="vorname">Vorname</label><input class="feld" id="vorname" name="vorname" type="text" autocomplete="given-name" required data-fehler="Bitte Vornamen eingeben."><div class="fehlertext" aria-live="polite"></div></div>
+        <div class="feldgruppe"><label for="nachname">Nachname</label><input class="feld" id="nachname" name="nachname" type="text" autocomplete="family-name" required data-fehler="Bitte Nachnamen eingeben."><div class="fehlertext" aria-live="polite"></div></div>
+        <div class="feldgruppe voll"><label for="strasse">Straße und Hausnummer</label><input class="feld" id="strasse" name="strasse" type="text" autocomplete="street-address" required data-fehler="Bitte Straße und Hausnummer eingeben."><div class="fehlertext" aria-live="polite"></div></div>
+        <div class="feldgruppe"><label for="plz">Postleitzahl</label><input class="feld" id="plz" name="plz" type="text" autocomplete="postal-code" required data-fehler="Bitte eine fünfstellige Postleitzahl eingeben." inputmode="numeric" pattern="[0-9]{5}" maxlength="5"><div class="fehlertext" aria-live="polite"></div></div>
+        <div class="feldgruppe"><label for="ort">Ort</label><input class="feld" id="ort" name="ort" type="text" autocomplete="address-level2" required data-fehler="Bitte Ort eingeben."><div class="fehlertext" aria-live="polite"></div></div>
+        <div class="feldgruppe voll"><label for="land">Land</label><select class="feld" id="land" name="land"><option>Deutschland</option></select></div>
+        <div class="feldgruppe voll"><label for="email">E-Mail-Adresse für die Bestätigung</label><input class="feld" id="email" name="email" type="email" autocomplete="email" required data-fehler="Bitte eine gültige E-Mail-Adresse eingeben."><div class="fehlertext" aria-live="polite"></div></div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Zahlungsart</legend>
+      <div class="feldgruppe">
+        <div class="zahlart" role="radiogroup" aria-label="Zahlungsart">
+          <label class="option"><input type="radio" name="zahlart" value="PayPal" required data-fehler="Bitte eine Zahlungsart wählen."><span class="option__punkt"></span><span class="option__name">PayPal</span><span></span><span class="option__zusatz">Sie erhalten nach der Bestellung den Zahlungslink per E-Mail.</span></label>
+          <label class="option"><input type="radio" name="zahlart" value="Klarna" required data-fehler="Bitte eine Zahlungsart wählen."><span class="option__punkt"></span><span class="option__name">Klarna</span><span></span><span class="option__zusatz">Sie erhalten nach der Bestellung den Zahlungslink per E-Mail.</span></label>
+        </div>
+        <div class="fehlertext" aria-live="polite"></div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Zum Schluss</legend>
+      <div class="feldgruppe">
+        <label class="haken"><input type="checkbox" name="agb" value="ja" required data-fehler="Bitte bestätigen Sie die AGB und die Widerrufsbelehrung."><span>Ich habe die <a href="/agb" target="_blank" rel="noopener">AGB</a> und die <a href="/widerrufsbelehrung" target="_blank" rel="noopener">Widerrufsbelehrung</a> gelesen und bin einverstanden.</span></label>
+        <div class="fehlertext" aria-live="polite"></div>
+      </div>
+      <p class="rechtliches">Mit Ihrer Bestellung geben Sie ein verbindliches Angebot ab und verpflichten sich zur Zahlung. Wir verarbeiten Ihre Daten gemäß der <a href="/datenschutz">Datenschutzerklärung</a>.</p>
+    </fieldset>
+    <p class="rechtliches" data-feld="bestell-kurz"></p>
+    <p class="rechtliches">Lieferzeit: 8 bis 15 Werktage ab Zahlungseingang, Versand direkt aus China. Zoll und Einfuhrabgaben sind enthalten.</p>
+    <div class="summe"><span>Gesamtbetrag inkl. MwSt.</span><strong data-feld="gesamt-knopf">0,00 €</strong></div>
+    <button class="knopf knopf--gross knopf--breit" type="submit">zahlungspflichtig bestellen</button>
+    <p class="meldung" role="status" aria-live="polite"></p>
+  </form>
+  <aside class="glas kasse__seite" aria-label="Ihre Bestellung">
+    <h2>Ihre Bestellung</h2>
+    <div class="kasse__posten"></div>
+    <div class="gutschein">
+      <label class="sr" for="gutschein">Gutscheincode</label>
+      <input class="feld" id="gutschein" type="text" placeholder="Gutscheincode" autocomplete="off">
+      <button class="leise-knopf" type="button" data-gutschein>Einlösen</button>
+    </div>
+    <p class="meldung gutschein-meldung" role="status" aria-live="polite"></p>
+    <div class="zeile" data-feld="rabatt-zeile" hidden><span>Gutschein</span><span data-feld="rabatt"></span></div>
+    <div class="zeile"><span>Versand</span><span data-feld="versand"></span></div>
+    <div class="zeile zeile--gesamt"><span>Gesamt</span><span data-feld="gesamt"></span></div>
+    <div class="zeile kleingedruckt"><span>darin 19 % MwSt.</span><span data-feld="mwst"></span></div>
+    <div class="merkmale"><strong>Entwurf:</strong> PayPal und Klarna sind noch nicht angeschlossen. Die Bestellung geht per E-Mail ein, der Zahlungslink folgt danach.</div>
+    <p class="kleingedruckt"><a href="/versand-und-zahlung">Versand und Zahlung</a></p>
+  </aside>
+</div>
+</main>
+<script src="/assets/script.js" defer></script>
+</body>
+</html>

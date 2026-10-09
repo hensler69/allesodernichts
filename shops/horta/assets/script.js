@@ -1,4 +1,4 @@
-/* HELIA: Bedienung, Warenkorb, Himmel und Kasse. Reines JavaScript ohne Bibliotheken. */
+/* HORTA: Bedienung, Warenkorb, Probierstand und Kasse. Reines JavaScript ohne Bibliotheken. */
 (() => {
   'use strict';
 
@@ -7,17 +7,18 @@
   const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const feinZeiger = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const klemmen = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const KURVE = 'cubic-bezier(0.23, 1, 0.32, 1)';
 
-  /* ---------- Preise (der Server rechnet in bestellung.php noch einmal selbst) ---------- */
+  /* ---------- Preise (der Server rechnet in send.php noch einmal selbst) ---------- */
   const EINFUEHRUNG_BIS = Date.UTC(2026, 10, 30, 22, 59, 59); // 30.11.2026, 23:59:59 Uhr deutscher Zeit
   const einfuehrung = Date.now() <= EINFUEHRUNG_BIS;
   const PRODUKTE = {
-    einzeln: { name: 'HELIA', info: 'Lichtwecker, 1 Stück', einf: 4990, normal: 5990 },
-    set: { name: 'HELIA, 2er-Set', info: '2 Lichtwecker, versandkostenfrei', einf: 8480, normal: 10180 }
+    einzeln: { name: 'HORTA', info: 'Gemüseschneider, 1 Stück', einf: 4490, normal: 5490 },
+    set: { name: 'HORTA, 2er-Set', info: '2 Gemüseschneider, versandkostenfrei', einf: 7590, normal: 9290 }
   };
-  const VERSAND = 490, GRATIS_AB = 5900, MAX_MENGE = 5;
+  const VERSAND = 490, GRATIS_AB = 4900, MAX_MENGE = 5;
   // Prüfwert (SHA-256) des Newsletter-Codes, damit der Code nicht im Quelltext steht
-  const CODE_PRUEFWERT = '8fddf81207d222902430d41d1548c9f85554625f358bab69f62246c5b3d6c827';
+  const CODE_PRUEFWERT = 'b22e1a37a871f40bdb4976043a71376005875f6e0040be9919a84c4afe39a746';
   const preis = (id) => (einfuehrung ? PRODUKTE[id].einf : PRODUKTE[id].normal);
   const euro = (cent) => (cent / 100).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
 
@@ -28,11 +29,12 @@
   /* ---------- Speicher (kann im privaten Modus fehlen) ---------- */
   const speicher = {
     lesen(k, std) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : std; } catch { return std; } },
-    schreiben(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* egal */ } }
+    schreiben(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* egal */ } },
+    loeschen(k) { try { localStorage.removeItem(k); } catch { /* egal */ } }
   };
 
   /* ---------- Warenkorb ---------- */
-  let korb = speicher.lesen('helia-korb', { einzeln: 0, set: 0 });
+  let korb = speicher.lesen('horta-korb', { einzeln: 0, set: 0 });
   if (typeof korb !== 'object' || korb === null) korb = { einzeln: 0, set: 0 };
   ['einzeln', 'set'].forEach((k) => { korb[k] = klemmen(parseInt(korb[k], 10) || 0, 0, MAX_MENGE); });
 
@@ -41,7 +43,7 @@
   const versandFuer = (warenwert) => (warenwert === 0 || warenwert >= GRATIS_AB ? 0 : VERSAND);
 
   function korbSpeichern() {
-    speicher.schreiben('helia-korb', korb);
+    speicher.schreiben('horta-korb', korb);
     korbZeigen();
     document.dispatchEvent(new CustomEvent('korb-geaendert'));
   }
@@ -51,11 +53,10 @@
   async function wegAnimieren(li) {
     li.style.pointerEvents = 'none';
     if (ruhig || !li.animate) return;
-    const kurve = 'cubic-bezier(0.23, 1, 0.32, 1)';
     const abstand = parseFloat(getComputedStyle(li.parentElement).rowGap) || 0;
-    await li.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(12px)' }], { duration: 180, easing: kurve, fill: 'forwards' }).finished;
+    await li.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(12px)' }], { duration: 180, easing: KURVE, fill: 'forwards' }).finished;
     await li.animate([{ height: li.offsetHeight + 'px', marginBottom: '0px', paddingTop: getComputedStyle(li).paddingTop, paddingBottom: getComputedStyle(li).paddingBottom },
-      { height: '0px', marginBottom: -abstand + 'px', paddingTop: '0px', paddingBottom: '0px' }], { duration: 160, easing: kurve, fill: 'forwards' }).finished;
+      { height: '0px', marginBottom: -abstand + 'px', paddingTop: '0px', paddingBottom: '0px' }], { duration: 160, easing: KURVE, fill: 'forwards' }).finished;
   }
   function korbZeigen() {
     $$('.korb-knopf__zahl').forEach((z) => { z.textContent = korbAnzahl(); });
@@ -113,16 +114,6 @@
     dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
   }
 
-  let toastZeit;
-  function toast(text) {
-    const t = $('.toast');
-    if (!t) return;
-    t.textContent = text;
-    t.classList.add('ist-da');
-    clearTimeout(toastZeit);
-    toastZeit = setTimeout(() => t.classList.remove('ist-da'), 2400);
-  }
-
   function hinzufuegen(id, menge) {
     korb[id] = klemmen(korb[id] + menge, 0, MAX_MENGE);
     korbSpeichern();
@@ -137,11 +128,12 @@
     if (!angebot) return;
     const id = $('input[name="paket"]:checked', angebot).value;
     $('output', angebot).textContent = menge;
+    $$('[data-menge]', angebot).forEach((b) => { b.disabled = Number(b.dataset.menge) < 0 ? menge <= 1 : menge >= MAX_MENGE; });
     const feld = $('[data-feld="angebot-summe"]', angebot);
     const neu = euro(menge * preis(id));
     if (feld.textContent !== neu) {
       feld.textContent = neu;
-      if (feld.animate) feld.animate(ruhig ? [{ opacity: 0.4 }, { opacity: 1 }] : [{ opacity: 0.3, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 150, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+      if (feld.animate) feld.animate(ruhig ? [{ opacity: 0.4 }, { opacity: 1 }] : [{ opacity: 0.3, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 150, easing: KURVE });
     }
   }
   if (angebot) {
@@ -192,25 +184,13 @@
     $$('.zeigen, .wachsen').forEach((el) => el.classList.add('ist-da'));
   }
 
-  /* ---------- Uhrzeit auf der Lampe im Kopfbereich ---------- */
-  const heldZeit = $('.held .zeit');
-  function uhr() {
-    if (!heldZeit) return;
-    const d = new Date();
-    heldZeit.textContent = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-  }
-  uhr();
-  setInterval(uhr, 15000);
-
-  /* ---------- Himmel, Stadt, Regen und Sonnenaufgang ---------- */
-  const root = document.documentElement;
+  /* ---------- Himmel, Beet und Abschied ---------- */
+  // Licht über den Tag: oben frischer Morgen, unten warmer Abend am gedeckten Tisch
   const HIMMEL = [
-    [0, '#03050d', '#080b1c', '#10142e'],
-    [0.3, '#070a20', '#1a1a40', '#33204a'],
-    [0.62, '#15142f', '#4a2648', '#a24a3c'],
-    [1, '#22203f', '#6e3a52', '#c8683f']
+    [0, '#fbf8f1', '#f6f2e8', '#ebf1e1'],
+    [0.5, '#fdfaf3', '#f7f3ea', '#eef3e4'],
+    [1, '#fdf0dc', '#f8e2c6', '#efcda3']
   ];
-  const LAMPE = [[0, '#3a1a1c'], [0.15, '#8a1f1f'], [0.35, '#d4472a'], [0.55, '#ff7a3d'], [0.78, '#ffb35c'], [1, '#ffe7c6']];
   const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
   const mischen = (a, b, t) => {
     const x = hex(a), y = hex(b);
@@ -227,49 +207,38 @@
   }
 
   const welt = $('.welt');
-  const stadt = welt ? $$('.welt__stadt', welt) : [];
-  const aufgang = $('.aufgang');
-  const aufgangKlebt = aufgang && $('.aufgang__klebt', aufgang);
-  const simUhr = aufgang && $('.aufgang__uhr', aufgang);
-  const simZeit = aufgang && $('.zeit', aufgang);
-  const simSonne = aufgang && $('.symbol--licht', aufgang);
-  const simPhasen = aufgang ? $$('.phasen li', aufgang) : [];
-  const regler = aufgang && $('#zeitregler');
+  const beete = welt ? $$('.welt__beet', welt) : [];
   const wortweise = $('.wortweise');
   const kaufleiste = $('.kaufleiste');
   const heldKnopf = $('.held [data-hinzu]');
   const angebotTeil = $('#angebot');
   const abschied = $('.abschied');
-  let sonne = 0;
   const maus = { x: 0, y: 0 };
 
-
-  // Himmel-Werte nur am Hintergrund (.welt) setzen und nur, wenn sie sich ändern.
+  // Werte nur am Hintergrund (.welt) setzen und nur, wenn sie sich ändern.
   // An <html> gesetzt würde jede Änderung die ganze Seite neu berechnen lassen.
   const zuletzt = new Map();
   function setzeWenn(el, name, wert) {
     if (!el) return;
-    const k = el;
-    let m = zuletzt.get(k);
-    if (!m) { m = {}; zuletzt.set(k, m); }
+    let m = zuletzt.get(el);
+    if (!m) { m = {}; zuletzt.set(el, m); }
     if (m[name] === wert) return;
     m[name] = wert;
     el.style.setProperty(name, wert);
   }
-  let stadtP = 0;
-  function stadtSetzen() {
+  let beetP = 0;
+  function beetSetzen() {
     if (ruhig) return;
-    stadt.forEach((el, i) => { el.style.transform = `translate3d(${(maus.x * [-6, -14, -26][i]).toFixed(1)}px, ${(stadtP * [3, 7, 12][i]).toFixed(2)}vh, 0)`; });
+    beete.forEach((el, i) => { el.style.transform = `translate3d(${(maus.x * [-6, -14, -24][i]).toFixed(1)}px, ${(beetP * [2, 5, 9][i]).toFixed(2)}vh, 0)`; });
   }
 
-  // Himmel weich an einen Zielwert angleichen, damit Wechsel zwischen Simulation und Scrollen nicht springen
-  let himmelIst = 0.04, himmelSoll = 0.04, himmelLaeuft = false;
+  // Himmel weich an einen Zielwert angleichen, damit nichts springt
+  let himmelIst = 0.1, himmelSoll = 0.1, himmelLaeuft = false;
   function himmelZeichnen() {
     setzeWenn(welt, '--sky1', verlauf(HIMMEL, himmelIst, 1));
     setzeWenn(welt, '--sky2', verlauf(HIMMEL, himmelIst, 2));
     setzeWenn(welt, '--sky3', verlauf(HIMMEL, himmelIst, 3));
     setzeWenn(welt, '--sun', himmelIst.toFixed(2));
-    sonne = himmelIst;
   }
   function himmelZiel(s) {
     himmelSoll = s;
@@ -285,57 +254,6 @@
     requestAnimationFrame(schritt);
   }
 
-  // Tag-Nacht-Simulation: Schleife über 20 Sekunden, läuft nur, solange der Abschnitt sichtbar ist
-  const PHASEN = [
-    { bis: 6 / 20, von: 360, nach: 390, g0: 0, g1: 1, name: 'Sonnenaufgang' },
-    { bis: 10 / 20, von: 390, nach: 1320, g0: 1, g1: 1, name: 'Tag' },
-    { bis: 16 / 20, von: 1320, nach: 1350, g0: 1, g1: 0, name: 'Sonnenuntergang' },
-    { bis: 1, von: 1350, nach: 1800, g0: 0, g1: 0, name: 'Nacht' } // 1800 = 06:00 am nächsten Tag
-  ];
-  const sim = { pos: ruhig ? 0.3 : 0, sichtbar: false, laeuft: false, haelt: false, angehalten: false, himmel: 0.04, zuletzt: 0, tastenUhr: 0 };
-  function simZustand(pos) {
-    let start = 0;
-    for (let i = 0; i < PHASEN.length; i++) {
-      const ph = PHASEN[i];
-      if (pos <= ph.bis || i === PHASEN.length - 1) {
-        const t = klemmen((pos - start) / (ph.bis - start));
-        const minute = Math.round(ph.von + (ph.nach - ph.von) * t) % 1440;
-        return { phase: i, name: ph.name, g: ph.g0 + (ph.g1 - ph.g0) * t, zeit: `${String(Math.floor(minute / 60)).padStart(2, '0')}:${String(minute % 60).padStart(2, '0')}` };
-      }
-      start = ph.bis;
-    }
-  }
-  function simZeichnen() {
-    if (!aufgangKlebt) return;
-    const z = simZustand(sim.pos);
-    setzeWenn(aufgangKlebt, '--lamp', verlauf(LAMPE, z.g, 1));
-    setzeWenn(aufgangKlebt, '--glow', (0.06 + 0.94 * z.g).toFixed(3));
-    setzeWenn(aufgangKlebt, '--p', sim.pos.toFixed(3));
-    if (simUhr.textContent !== z.zeit) {
-      simUhr.textContent = z.zeit;
-      if (simZeit) simZeit.textContent = z.zeit;
-      regler.setAttribute('aria-valuetext', `${z.zeit} Uhr, ${z.name}`);
-    }
-    if (!sim.haelt) regler.value = String(Math.round(sim.pos * 1000));
-    simPhasen.forEach((li, i) => li.classList.toggle('ist-jetzt', i === z.phase));
-    if (simSonne) simSonne.classList.toggle('ist-an', z.g > 0.02);
-    sim.himmel = 0.05 + 0.95 * z.g;
-    if (sim.sichtbar) himmelZiel(sim.himmel);
-  }
-  function simSchritt(jetzt) {
-    if (!sim.laeuft) return;
-    const dt = sim.zuletzt ? Math.min(0.1, (jetzt - sim.zuletzt) / 1000) : 0;
-    sim.zuletzt = jetzt;
-    if (!sim.haelt && !document.hidden) { sim.pos = (sim.pos + dt / 20) % 1; simZeichnen(); }
-    requestAnimationFrame(simSchritt);
-  }
-  function simStart() {
-    if (sim.laeuft || sim.angehalten || !sim.sichtbar) return;
-    sim.laeuft = true; sim.zuletzt = 0;
-    requestAnimationFrame(simSchritt);
-  }
-  function simStopp() { sim.laeuft = false; }
-
   function bild() {
     const y = scrollY;
     const hoehe = Math.max(1, document.documentElement.scrollHeight - innerHeight);
@@ -346,26 +264,17 @@
     const an = kaufleiste && angebotTeil ? angebotTeil.getBoundingClientRect() : null;
     const rAb = abschied ? abschied.getBoundingClientRect() : null;
 
-    // Sonnenstand für die ganze Seite: vor dem Abschnitt Nacht, darin die Simulation, danach leichte Dämmerung
-    let s;
-    if (!aufgang) s = 0.12 + p * 0.5;
-    else if (sim.sichtbar) s = sim.himmel;
-    else {
-      const r = aufgang.getBoundingClientRect();
-      const oben = r.top + y, unten = r.bottom + y;
-      if (r.top > 0) s = 0.04 + 0.12 * klemmen(y / Math.max(1, oben));
-      else s = 1 - 0.3 * klemmen((y - unten + innerHeight) / Math.max(1, hoehe - unten + innerHeight));
-    }
-    // Abschied: am Ende der Seite geht die Sonne unter und es wird Nacht
+    let s = 0.1 + 0.4 * p;
+    // Abschied: am Ende der Seite wird das Licht warm wie an einem Sommerabend
     if (rAb) {
-      const unter = ruhig ? 0.6 : klemmen((innerHeight - rAb.top) / Math.max(1, rAb.height));
+      const unter = ruhig ? 0.7 : klemmen((innerHeight - rAb.top) / Math.max(1, rAb.height));
       setzeWenn(abschied, '--unter', unter.toFixed(3));
-      if (!sim.sichtbar) s -= (s - 0.05) * klemmen(unter * 1.15);
+      s += (1 - s) * klemmen(unter * 1.1);
     }
     himmelZiel(s);
 
-    stadtP = p;
-    stadtSetzen();
+    beetP = p;
+    beetSetzen();
 
     // Geschichte: Wort für Wort heller
     if (rWort) {
@@ -395,14 +304,13 @@
     });
   }
 
-
   let wartet = false;
   const planen = () => { if (!wartet) { wartet = true; requestAnimationFrame(() => { wartet = false; bild(); }); } };
   addEventListener('scroll', planen, { passive: true });
   let mausWartet = false;
   if (feinZeiger && !ruhig) addEventListener('pointermove', (e) => {
     maus.x = e.clientX / innerWidth - 0.5; maus.y = e.clientY / innerHeight - 0.5;
-    if (!mausWartet) { mausWartet = true; requestAnimationFrame(() => { mausWartet = false; stadtSetzen(); }); }
+    if (!mausWartet) { mausWartet = true; requestAnimationFrame(() => { mausWartet = false; beetSetzen(); }); }
   }, { passive: true });
   const held = $('.held');
   if (held && feinZeiger && !ruhig) {
@@ -417,125 +325,233 @@
   addEventListener('resize', planen);
   bild();
 
-  if (aufgang && regler) {
-    const knopf = $('#sim-knopf');
-    const knopfZeigen = () => { const an = sim.laeuft && !sim.haelt; knopf.textContent = an ? 'Anhalten' : 'Abspielen'; knopf.setAttribute('aria-pressed', String(!an)); };
-    if (ruhig) sim.angehalten = true; // kein Selbststart bei "weniger Bewegung"
-    simZeichnen(); knopfZeigen();
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver((ein) => {
-        sim.sichtbar = ein[0].isIntersecting;
-        if (sim.sichtbar) { simStart(); himmelZiel(sim.himmel); } else { simStopp(); planen(); }
-        knopfZeigen();
-      }, { threshold: 0.35 }).observe(aufgang);
-    }
-    // Regler anfassen hält die Schleife an, Loslassen lässt sie an derselben Stelle weiterlaufen
-    const halten = () => { clearTimeout(sim.tastenUhr); sim.tastenUhr = 0; sim.haelt = true; knopfZeigen(); };
-    const loslassen = () => { sim.haelt = false; sim.zuletzt = 0; knopfZeigen(); };
-    regler.addEventListener('pointerdown', halten);
-    regler.addEventListener('pointerup', loslassen);
-    regler.addEventListener('pointercancel', loslassen);
-    regler.addEventListener('input', () => {
-      sim.pos = Number(regler.value) / 1000;
-      simZeichnen();
-      if (!sim.haelt || sim.tastenUhr) { // Tastatur: kein pointerdown, daher kurz halten und später weiterlaufen
-        sim.haelt = true; clearTimeout(sim.tastenUhr);
-        sim.tastenUhr = setTimeout(() => { sim.tastenUhr = 0; loslassen(); }, 1200);
-      }
-    });
-    knopf.addEventListener('click', () => {
-      if (sim.laeuft && !sim.haelt) { sim.angehalten = true; simStopp(); }
-      else { sim.angehalten = false; sim.haelt = false; simStart(); }
-      knopfZeigen();
-    });
-  }
+  /* ---------- Probierstand: Zutat und Einsatz wählen, schneiden, die Schüssel füllt sich ---------- */
+  const ZUTATEN = {
+    gurke: { name: 'Gurke', farbe: '#4f8a3b', innen: '#d9eab8', lage: '#9cc46e' },
+    karotte: { name: 'Karotte', farbe: '#ee8a2a', innen: '#f6b36a', lage: '#ee8a2a' },
+    kartoffel: { name: 'Kartoffel', farbe: '#e3c67c', innen: '#f3e2ae', lage: '#ecd594' },
+    rotkohl: { name: 'Rotkohl', farbe: '#7b2f70', innen: '#c98bbd', lage: '#8e3a80' },
+    kaese: { name: 'Käse', farbe: '#f0cf6a', innen: '#f8e3a0', lage: '#f2d77a' },
+    nuss: { name: 'Nüsse', farbe: '#8a5a33', innen: '#c08a5a', lage: '#9a6a40' }
+  };
+  const EINSATZ = {
+    duenn: { name: 'dünne Scheiben', muster: 'scheibe' },
+    dick: { name: 'dicke Scheiben', muster: 'scheibe' },
+    grob: { name: 'grob geraspelt', muster: 'streifen' },
+    fein: { name: 'fein geraspelt', muster: 'streifen' },
+    reibe: { name: 'fein gerieben', muster: 'krumen' }
+  };
+  const TIPPS = {
+    'gurke-duenn': 'Gurkensalat mit Dill und Joghurt.',
+    'gurke-dick': 'Gurkenscheiben für die Rohkostplatte.',
+    'gurke-grob': 'Tzatziki: Gurke raspeln, ausdrücken, mit Joghurt und Knoblauch mischen.',
+    'gurke-fein': 'Fein geraspelt für ein kühles Tzatziki.',
+    'gurke-reibe': 'Für Gurke ist die feine Reibe zu fein. Besser: dünne Scheiben.',
+    'karotte-duenn': 'Karottenscheiben für Suppe oder Gemüsepfanne.',
+    'karotte-dick': 'Dicke Scheiben zum Dünsten mit etwas Butter.',
+    'karotte-grob': 'Möhrensalat mit Apfel und Zitrone.',
+    'karotte-fein': 'Fein geraspelt für Karottenkuchen.',
+    'karotte-reibe': 'Für Karotten ist die feine Reibe zu fein. Besser: grob raspeln.',
+    'kartoffel-duenn': 'Hauchdünne Kartoffelchips aus dem Ofen.',
+    'kartoffel-dick': 'Kartoffelgratin mit Sahne und Muskat.',
+    'kartoffel-grob': 'Rösti: raspeln, ausdrücken, goldbraun braten.',
+    'kartoffel-fein': 'Reibekuchen mit einer Zwiebel und etwas Ei.',
+    'kartoffel-reibe': 'Für Kartoffeln ist die feine Reibe zu fein. Besser: fein raspeln.',
+    'rotkohl-duenn': 'Dünne Streifen für einen bunten Wintersalat.',
+    'rotkohl-dick': 'Grobe Stücke zum Schmoren mit Apfel.',
+    'rotkohl-grob': 'Rotkohlsalat mit Walnüssen und Orange.',
+    'rotkohl-fein': 'Feiner Krautsalat mit Essig und Öl.',
+    'rotkohl-reibe': 'Für Kohl ist die feine Reibe zu fein. Besser: fein raspeln.',
+    'kaese-duenn': 'Käsescheiben fürs Abendbrot, am besten aus festem Käse.',
+    'kaese-dick': 'Dicke Käsescheiben zum Überbacken.',
+    'kaese-grob': 'Geriebener Gouda für Auflauf und Pizza.',
+    'kaese-fein': 'Feiner Käse für Pasta und Suppe.',
+    'kaese-reibe': 'Frischer Parmesan über die Pasta.',
+    'nuss-duenn': 'Für Nüsse passt die feine Reibe besser.',
+    'nuss-dick': 'Für Nüsse passt die feine Reibe besser.',
+    'nuss-grob': 'Grob geraspelte Nüsse für Müsli und Salat.',
+    'nuss-fein': 'Fein geraspelte Nüsse für den Kuchenteig.',
+    'nuss-reibe': 'Gemahlene Walnüsse für Kuchen und Plätzchen.'
+  };
+  const MAX_LAGEN = 6;
+  const NS = 'http://www.w3.org/2000/svg';
+  const STANDARD_SALAT = [{ z: 'gurke', e: 'duenn' }, { z: 'karotte', e: 'grob' }, { z: 'rotkohl', e: 'fein' }, { z: 'gurke', e: 'duenn' }];
+  let schuessel = speicher.lesen('horta-schuessel', []);
+  if (!Array.isArray(schuessel)) schuessel = [];
+  schuessel = schuessel.filter((x) => x && ZUTATEN[x.z] && EINSATZ[x.e]).slice(0, MAX_LAGEN);
 
-  /* ---------- Ihre Weckzeit: die Simulation und der Abschied rechnen mit Ihrer Uhrzeit ---------- */
-  const WECK_STD = 390, WECK_MIN = 270, WECK_MAX = 600; // 06:30, erlaubt 04:30 bis 10:00
-  const weckGespeichert = speicher.lesen('helia-weckzeit', null);
-  let weck = klemmen(Math.round((parseInt(weckGespeichert, 10) || WECK_STD) / 15) * 15, WECK_MIN, WECK_MAX);
-  const alsUhr = (m) => `${String(Math.floor(m / 60) % 24).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
-  function weckZeigen(richtung = 0) {
-    $$('[data-weckzeit]').forEach((el) => {
-      el.textContent = alsUhr(weck);
-      // Die Ziffer rutscht in die Richtung, in die Sie gedrückt haben
-      if (richtung && el.tagName === 'OUTPUT' && !ruhig && el.animate) {
-        el.animate([{ opacity: 0.35, transform: `translateY(${richtung * 5}px)` }, { opacity: 1, transform: 'none' }], { duration: 180, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
-      }
-    });
-    $$('[data-weck-start]').forEach((el) => { el.textContent = alsUhr(weck - 30); });
-    $$('[data-weck]').forEach((b) => { const s = Number(b.dataset.weck); b.disabled = s < 0 ? weck <= WECK_MIN : weck >= WECK_MAX; });
-    PHASEN[0].von = weck - 30; PHASEN[0].nach = weck; PHASEN[1].von = weck;
-    PHASEN[3].nach = 1440 + weck - 30;
-    if (aufgangKlebt) simZeichnen();
+  // Eine Schicht in einer Schüssel; die höchste Schicht steht vorn im Code, die tieferen decken sie unten ab
+  // Unebene Oberkante: in der Mitte gewölbt, mit kleinen festen Buckeln (gleiche Werte wie im Generator)
+  const BUCKEL = [0, 3, -2, 4, -1, 3, 0, -3, 2];
+  const lageOben = (i) => 548 - (i + 1) * 16 - 26;
+  function lageKante(i) {
+    const y0 = 548 - (i + 1) * 16, pkt = [];
+    for (let k = 0, x = 24; x <= 276; k++, x += 31) { const t = (x - 150) / 126; pkt.push([x, y0 - 26 * (1 - t * t) - BUCKEL[(k + i) % 9]]); }
+    let d = `M${pkt[0][0]} ${Math.round(pkt[0][1])}`;
+    for (let k = 1; k < pkt.length; k++) {
+      const [x1, y1] = pkt[k - 1], [x2, y2] = pkt[k];
+      d += ` Q${Math.round(x1 + 15.5)} ${Math.round((y1 + y2) / 2 - 3)} ${x2} ${Math.round(y2)}`;
+    }
+    return d + ' L276 600 L24 600 Z';
   }
-  $$('[data-weck]').forEach((b) => b.addEventListener('click', () => {
-    const s = Number(b.dataset.weck);
-    const neu = klemmen(weck + s, WECK_MIN, WECK_MAX);
-    if (neu === weck) return;
-    weck = neu;
-    speicher.schreiben('helia-weckzeit', weck);
-    sim.pos = 0; // Ihr Morgen beginnt in der Simulation von vorn
-    weckZeigen(s > 0 ? -1 : 1);
-  }));
-  weckZeigen();
+  function lageHtml(p, i, x) {
+    const d = lageKante(i);
+    return `<g class="lage" style="--n:${i}"><path d="${d}" fill="${ZUTATEN[x.z].lage}"/><path d="${d}" fill="url(#${p}-m-${EINSATZ[x.e].muster})"/></g>`;
+  }
+  function schaleFuellen(svg, liste) {
+    const g = svg && $('.lagen', svg);
+    if (!g) return;
+    g.innerHTML = liste.map((x, i) => lageHtml(svg.dataset.p, i, x)).reverse().join('');
+  }
+  const namenListe = (liste) => {
+    const namen = [...new Set(liste.map((x) => ZUTATEN[x.z].name))];
+    return namen.length < 2 ? namen.join('') : `${namen.slice(0, -1).join(', ')} und ${namen[namen.length - 1]}`;
+  };
+
+  // Abschied: zeigt Ihren eigenen Salat, sobald Sie im Probierstand etwas geschnitten haben
+  const salatSatz = $('[data-salat-satz]');
+  const salatSatzStandard = salatSatz ? salatSatz.innerHTML : '';
+  function abschiedSalat() {
+    const schale = $('.abschied .schale');
+    schaleFuellen(schale, schuessel.length ? schuessel : STANDARD_SALAT);
+    if (!salatSatz) return;
+    if (!schuessel.length) { salatSatz.innerHTML = salatSatzStandard; return; }
+    salatSatz.textContent = '';
+    salatSatz.append('Ihr Salat aus ');
+    const b = document.createElement('b');
+    b.textContent = namenListe(schuessel);
+    salatSatz.append(b, ' ist geschnitten. Jetzt fehlt nur noch das Dressing.');
+  }
+  abschiedSalat();
+
+  const probier = $('#probieren');
+  if (probier) {
+    const svg = $('.geraet', probier);
+    const P = svg.dataset.p;
+    const zutatEl = $('.zutat', svg), stopfer = $('.stopfer', svg), fallend = $('.fallend', svg);
+    const knopf = $('[data-schneiden]', probier), leeren = $('[data-leeren]', probier);
+    const tipp = $('[data-tipp]', probier), liste = $('[data-salat-liste]', probier);
+    let laeuft = false;
+    const wahl = () => ({ z: $('input[name="zutat"]:checked', probier).value, e: $('input[name="einsatz"]:checked', probier).value });
+
+    function tippZeigen(text) {
+      const { z, e } = wahl();
+      tipp.textContent = '';
+      if (text) { tipp.textContent = text; return; }
+      const b = document.createElement('b');
+      b.textContent = `${ZUTATEN[z].name}, ${EINSATZ[e].name}:`;
+      tipp.append(b, ' ' + TIPPS[`${z}-${e}`]);
+    }
+    function listeZeigen() {
+      liste.textContent = schuessel.length ? namenListe(schuessel) : 'noch nichts';
+      leeren.hidden = !schuessel.length;
+    }
+    function zutatZeigen() {
+      svg.style.setProperty('--zutat', ZUTATEN[wahl().z].farbe);
+    }
+    probier.addEventListener('change', () => { if (!laeuft) { zutatZeigen(); tippZeigen(); } });
+
+    // Ein Stück fällt aus dem Auslass in die Schüssel
+    function stueck(z, e, ziel) {
+      const x0 = 132 + Math.random() * 40, y0 = 412;
+      const x1 = klemmen(x0 + (Math.random() - 0.5) * 120, 56, 244), y1 = ziel + Math.random() * 12;
+      let el;
+      if (EINSATZ[e].muster === 'scheibe') {
+        el = document.createElementNS(NS, 'ellipse');
+        el.setAttribute('rx', e === 'dick' ? 9 : 8);
+        el.setAttribute('ry', e === 'dick' ? 4 : 2.2);
+        el.setAttribute('fill', z === 'gurke' ? ZUTATEN[z].innen : ZUTATEN[z].farbe);
+        el.setAttribute('stroke', ZUTATEN[z].farbe);
+        el.setAttribute('stroke-width', z === 'gurke' ? 1.6 : 0);
+      } else if (EINSATZ[e].muster === 'streifen') {
+        el = document.createElementNS(NS, 'path');
+        const l = e === 'grob' ? 16 : 11;
+        el.setAttribute('d', `M${-l / 2} 0 Q0 ${-3 + Math.random() * 6} ${l / 2} 0`);
+        el.setAttribute('fill', 'none');
+        el.setAttribute('stroke', Math.random() < 0.3 ? ZUTATEN[z].innen : ZUTATEN[z].farbe);
+        el.setAttribute('stroke-width', e === 'grob' ? 3 : 1.8);
+        el.setAttribute('stroke-linecap', 'round');
+      } else {
+        el = document.createElementNS(NS, 'circle');
+        el.setAttribute('r', (1.4 + Math.random()).toFixed(1));
+        el.setAttribute('fill', Math.random() < 0.3 ? ZUTATEN[z].innen : ZUTATEN[z].farbe);
+      }
+      el.setAttribute('class', 'stueck');
+      fallend.appendChild(el);
+      const dreh = (Math.random() - 0.5) * 540;
+      const a = el.animate([
+        { transform: `translate(${x0}px, ${y0}px) rotate(0deg)`, opacity: 1 },
+        { transform: `translate(${x1}px, ${y1}px) rotate(${dreh}deg)`, opacity: 1, offset: 0.92 },
+        { transform: `translate(${x1}px, ${y1 + 2}px) rotate(${dreh}deg)`, opacity: 0 }
+      ], { duration: 560 + Math.random() * 260, easing: 'cubic-bezier(0.45, 0, 0.9, 0.6)' });
+      a.onfinish = () => el.remove();
+    }
+
+    async function schneiden() {
+      if (laeuft) return;
+      const x = wahl();
+      if (schuessel.length >= MAX_LAGEN) { tippZeigen('Die Schüssel ist voll. Zeit für das Dressing. Mit „Schüssel leeren“ fangen Sie neu an.'); return; }
+      laeuft = true;
+      knopf.disabled = true;
+      tippZeigen();
+      const i = schuessel.length;
+      $('.lagen', svg).insertAdjacentHTML('afterbegin', lageHtml(P, i, x));
+      const lage = $('.lagen .lage', svg);
+      if (!ruhig && svg.animate) {
+        const dauer = 1900;
+        svg.classList.add('laeuft');
+        const unten = { duration: dauer, easing: 'cubic-bezier(0.45, 0.05, 0.55, 0.95)', fill: 'forwards' };
+        const az = zutatEl.animate([{ transform: 'translateY(0px)' }, { transform: 'translateY(172px)' }], unten);
+        const as = stopfer.animate([{ transform: 'translateY(0px)' }, { transform: 'translateY(156px)' }], unten);
+        lage.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], { duration: dauer - 300, delay: 450, easing: 'cubic-bezier(0.33, 0, 0.3, 1)', fill: 'backwards' });
+        const ziel = lageOben(i) + 6;
+        const uhren = [];
+        for (let n = 0; n < 30; n++) uhren.push(setTimeout(() => stueck(x.z, x.e, ziel), 260 + n * 52 + Math.random() * 30));
+        await az.finished;
+        svg.classList.remove('laeuft');
+        // Stopfer fährt zurück, ein neues Stück liegt im Schacht
+        as.cancel();
+        stopfer.animate([{ transform: 'translateY(156px)' }, { transform: 'translateY(0px)' }], { duration: 320, easing: KURVE });
+        az.cancel();
+        zutatEl.animate([{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 120, easing: KURVE, fill: 'backwards' });
+      }
+      schuessel.push(x);
+      speicher.schreiben('horta-schuessel', schuessel);
+      listeZeigen();
+      abschiedSalat();
+      knopf.disabled = false;
+      laeuft = false;
+    }
+    knopf.addEventListener('click', schneiden);
+    const obenKnopf = $('[data-knopf-oben]', svg);
+    if (obenKnopf) obenKnopf.addEventListener('click', schneiden);
+    leeren.addEventListener('click', () => {
+      if (laeuft) return;
+      schuessel = [];
+      speicher.loeschen('horta-schuessel');
+      const lagen = $$('.lagen .lage', svg);
+      if (!ruhig && lagen.length && lagen[0].animate) {
+        lagen.forEach((l) => l.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220, easing: KURVE, fill: 'forwards' }).finished.then(() => l.remove()));
+      } else lagen.forEach((l) => l.remove());
+      listeZeigen();
+      tippZeigen();
+      abschiedSalat();
+      knopf.focus();
+    });
+    schaleFuellen(svg, schuessel);
+    zutatZeigen();
+    tippZeigen();
+    listeZeigen();
+  }
 
   /* ---------- Begrüßung passend zur Tageszeit ---------- */
   const gruss = $('[data-gruss]');
   if (gruss) {
     const h = new Date().getHours();
-    let text = h >= 5 && h < 11 ? 'Guten Morgen. Hier ist HELIA.' : h >= 11 && h < 17 ? 'Guten Tag. Hier ist HELIA.' : h >= 17 && h < 23 ? 'Guten Abend. Hier ist HELIA.' : 'Noch wach? Hier ist HELIA.';
-    if (weckGespeichert !== null) text = 'Schön, dass Sie wieder da sind.';
+    let text = h >= 5 && h < 11 ? 'Guten Morgen. Hier ist HORTA.' : h >= 11 && h < 17 ? 'Guten Tag. Hier ist HORTA.' : h >= 17 && h < 23 ? 'Guten Abend. Hier ist HORTA.' : 'Noch wach? Hier ist HORTA.';
+    if (schuessel.length) text = 'Schön, dass Sie wieder da sind.';
     else if (korbAnzahl() > 0) text = 'Willkommen zurück.';
     gruss.textContent = text;
-  }
-
-  // Regen auf einer Zeichenfläche
-  const leinwand = $('.welt__regen');
-  if (leinwand && leinwand.getContext) {
-    const ctx = leinwand.getContext('2d');
-    let tropfen = [], b = 0, h = 0, dpr = 1;
-    function groesse() {
-      dpr = Math.min(1.5, devicePixelRatio || 1);
-      b = innerWidth; h = innerHeight;
-      leinwand.width = Math.round(b * dpr); leinwand.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const grob = window.matchMedia('(pointer: coarse)').matches;
-      const anzahl = Math.min(grob ? 55 : 110, Math.round((b * h) / (grob ? 30000 : 15000)));
-      tropfen = Array.from({ length: anzahl }, () => neu(true));
-    }
-    function neu(irgendwo) {
-      const tiefe = Math.random();
-      return { x: Math.random() * (b + 200) - 100, y: irgendwo ? Math.random() * h : -30, l: 8 + tiefe * 18, v: 7 + tiefe * 11, a: 0.03 + tiefe * 0.09 };
-    }
-    function malen(bewegen, faktor = 1) {
-      ctx.clearRect(0, 0, b, h);
-      const staerke = 1 - sonne * 0.7;
-      ctx.lineWidth = 1;
-      ctx.lineCap = 'round';
-      for (const t of tropfen) {
-        if (bewegen) { t.y += t.v * faktor; t.x += t.v * 0.16 * faktor; if (t.y > h + 20) Object.assign(t, neu(false)); }
-        ctx.strokeStyle = `rgba(178,196,235,${(t.a * staerke).toFixed(3)})`;
-        ctx.beginPath(); ctx.moveTo(t.x, t.y); ctx.lineTo(t.x - t.l * 0.16, t.y - t.l); ctx.stroke();
-      }
-    }
-    groesse();
-    addEventListener('resize', groesse);
-    if (ruhig) malen(false);
-    else {
-      // 30 Bilder pro Sekunde genügen für Regen. Bei offenem Fenster (Warenkorb, Bewertung) steht er still,
-      // damit die Glasflächen nicht ständig neu weichgezeichnet werden müssen.
-      let letztes = 0;
-      const schleife = (jetzt) => {
-        if (!document.hidden && !document.querySelector('dialog[open]') && jetzt - letztes >= 33) {
-          const faktor = letztes ? Math.min(3, (jetzt - letztes) / 16.7) : 1;
-          letztes = jetzt;
-          malen(true, faktor);
-        }
-        requestAnimationFrame(schleife);
-      };
-      requestAnimationFrame(schleife);
-    }
   }
 
   /* ---------- Technik: Kartenstapel ---------- */
@@ -553,7 +569,7 @@
         const ziel = 80 + (i + 1) * 22;
         const f = klemmen(1 - (naechste.top - ziel) / Math.max(1, rects[i].height));
         k.style.scale = (1 - 0.05 * f).toFixed(4);
-        k.style.filter = f > 0.001 ? `brightness(${(1 - 0.4 * f).toFixed(3)})` : '';
+        k.style.filter = f > 0.001 ? `brightness(${(1 - 0.12 * f).toFixed(3)})` : '';
       });
     };
     const stapelPlanen = () => { if (!stapelWartet) { stapelWartet = true; requestAnimationFrame(stapelBild); } };
@@ -562,70 +578,36 @@
     stapelBild();
   }
 
-  /* ---------- Display zum Antippen ---------- */
-  const DISPLAY = {
-    wecker: ['Zwei Weckzeiten', 'Zum Beispiel eine für Werktage und eine fürs Wochenende. Ein Tipp oben auf das Gehäuse schenkt Ihnen 9 Minuten.'],
-    licht: ['Sonnenaufgang', 'Das Licht wächst in 10 bis 60 Minuten von Glut zu Tageslicht. Tagsüber dient es als Leselicht in 20 Stufen.'],
-    klang: ['12 Klänge', 'Regen, Wellen, Wald, Lagerfeuer, weißes Rauschen und mehr. Lautstärke in 16 Stufen, zum Wecken oder zum Einschlafen.'],
-    schlaf: ['Sonnenuntergang', 'Abends dimmt das Licht in 10 bis 60 Minuten herunter, bis es ganz aus ist.'],
-    timer: ['Einschlaf-Timer', 'Licht und Klänge schalten sich nach 15, 30, 60 oder 90 Minuten von selbst ab.']
+  /* ---------- Die fünf Einsätze zum Antippen ---------- */
+  const EINSATZ_INFO = {
+    duenn: ['Dünne Scheiben', 'Für Gurkensalat, Radieschen und Kartoffelchips aus dem Ofen.', 'Gurke, Radieschen, Kartoffel'],
+    dick: ['Dicke Scheiben', 'Für Gratin, Bratkartoffeln und Gemüse aus der Pfanne.', 'Kartoffel, Zucchini, Karotte'],
+    grob: ['Grob raspeln', 'Für Möhrensalat, Rösti und geriebenen Gouda.', 'Karotte, Kartoffel, Gouda'],
+    fein: ['Fein raspeln', 'Für Krautsalat, Rotkohl und Rohkost für Kinder.', 'Weißkohl, Rotkohl, Karotte'],
+    reibe: ['Feine Reibe', 'Für Parmesan, Nüsse und Schokolade.', 'Parmesan, Walnüsse, Schokolade']
   };
-  const display = $('.display');
-  if (display) {
-    const erkl = $('.display__erklaerung');
-    $$('[data-symbol]', display).forEach((b) => b.addEventListener('click', () => {
-      $$('[data-symbol]', display).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-      const [titel, text] = DISPLAY[b.dataset.symbol];
-      $('h3', erkl).textContent = titel;
-      $('p', erkl).textContent = text;
+  const leiste = $('.einsatz-leiste');
+  if (leiste) {
+    const erkl = $('.einsatz__erklaerung');
+    $$('[data-einsatz]', leiste).forEach((b) => b.addEventListener('click', () => {
+      $$('[data-einsatz]', leiste).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      const [name, text, passt] = EINSATZ_INFO[b.dataset.einsatz];
+      $('[data-einsatz-name]', erkl).textContent = name;
+      $('[data-einsatz-text]', erkl).textContent = text;
+      $('[data-einsatz-passt]', erkl).textContent = passt;
       erkl.classList.remove('wechsel'); void erkl.offsetWidth; erkl.classList.add('wechsel');
     }));
   }
 
-  /* ---------- Regen probehören (wird im Browser erzeugt, keine Datei) ---------- */
-  const hoerKnopf = $('[data-probehoeren]');
-  if (hoerKnopf) {
-    let ac = null, quelle = null, laut = null;
-    const welle = $('.welle');
-    hoerKnopf.addEventListener('click', async () => {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) { hoerKnopf.textContent = 'Nicht verfügbar'; return; }
-      if (quelle) {
-        laut.gain.setTargetAtTime(0, ac.currentTime, 0.25);
-        const q = quelle; quelle = null;
-        setTimeout(() => q.stop(), 900);
-        hoerKnopf.setAttribute('aria-pressed', 'false');
-        $('span', hoerKnopf).textContent = 'Regen probehören';
-        welle && welle.classList.remove('spielt');
-        return;
-      }
-      ac = ac || new AC();
-      await ac.resume();
-      const dauer = 4, puffer = ac.createBuffer(1, ac.sampleRate * dauer, ac.sampleRate), d = puffer.getChannelData(0);
-      let letzte = 0;
-      for (let i = 0; i < d.length; i++) { const w = Math.random() * 2 - 1; letzte = (letzte + 0.04 * w) / 1.04; d[i] = letzte * 3.2 + w * 0.05; }
-      quelle = ac.createBufferSource(); quelle.buffer = puffer; quelle.loop = true;
-      const filter = ac.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = 1400;
-      laut = ac.createGain(); laut.gain.value = 0;
-      quelle.connect(filter).connect(laut).connect(ac.destination);
-      quelle.start();
-      laut.gain.setTargetAtTime(0.35, ac.currentTime, 0.6);
-      hoerKnopf.setAttribute('aria-pressed', 'true');
-      $('span', hoerKnopf).textContent = 'Anhalten';
-      welle && welle.classList.add('spielt');
-    });
-  }
-
-  /* ---------- Abend bis Morgen ---------- */
-  const teile = $$('.nacht__teil');
-  const fein = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  /* ---------- Vom Markt bis auf den Teller ---------- */
+  const teile = $$('.schritt');
   function oeffnen(t) {
     teile.forEach((x) => { x.classList.toggle('ist-offen', x === t); x.setAttribute('aria-expanded', String(x === t)); });
   }
   teile.forEach((t) => {
     t.addEventListener('click', () => oeffnen(t));
     t.addEventListener('focus', () => oeffnen(t));
-    if (fein) {
+    if (feinZeiger) {
       // Erst nach kurzem Verweilen öffnen, damit Durchziehen der Maus nichts aufklappt
       let warte;
       t.addEventListener('mouseenter', () => { clearTimeout(warte); warte = setTimeout(() => oeffnen(t), 120); });
@@ -633,19 +615,18 @@
     }
   });
 
-  // Betrag nur bei Änderung setzen und dann kurz weich aufblenden (Plan 014)
+  // Betrag nur bei Änderung setzen und dann kurz weich aufblenden
   function weichSetzen(el, text) {
     if (el.textContent === text) return;
     const vorher = el.textContent;
     el.textContent = text;
-    if (vorher && el.animate) el.animate(ruhig ? [{ opacity: 0.4 }, { opacity: 1 }] : [{ opacity: 0.3, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 150, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    if (vorher && el.animate) el.animate(ruhig ? [{ opacity: 0.4 }, { opacity: 1 }] : [{ opacity: 0.3, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 150, easing: KURVE });
   }
 
-  // Neue Meldungen unter Formularen sanft einblenden, Fehler mit kurzem Zucken (Plan 016)
+  // Neue Meldungen unter Formularen sanft einblenden, Fehler mit kurzem Zucken
   $$('.meldung').forEach((m) => new MutationObserver(() => {
     if (!m.textContent.trim() || !m.animate) return;
-    const kurve = 'cubic-bezier(0.23, 1, 0.32, 1)';
-    m.animate(ruhig ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 180, easing: kurve });
+    m.animate(ruhig ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 180, easing: KURVE });
     if (!ruhig && m.classList.contains('fehler')) m.animate([{ translate: '0' }, { translate: '-3px' }, { translate: '3px' }, { translate: '-3px' }, { translate: '3px' }, { translate: '0' }], { duration: 240, easing: 'ease-in-out' });
   }).observe(m, { childList: true, characterData: true, subtree: true }));
 
@@ -673,8 +654,7 @@
     }
   }
 
-
-  /* ---------- 3D: Bühne und Karten kippen mit dem Zeiger ---------- */
+  /* ---------- 3D: Karten kippen mit dem Zeiger ---------- */
   if (feinZeiger && !ruhig) {
     $$('[data-kipp]').forEach((k) => {
       // Kippen direkt per transform, Lichtreflex als eigenes Element: keine vererbten Variablen pro Mausbewegung
@@ -693,31 +673,43 @@
     });
   }
 
-  /* ---------- 3D-Lampen: ziehen, mit Schwung loslassen, Pfeiltasten, kreisende Kärtchen ---------- */
-  $$('[data-dreh]').forEach((l3d, nr) => {
-    const objekt = $('.l3d__objekt', l3d);
-    const flaechen = $$('.l3d__schirm, .l3d__sockel', l3d).map((el) => ({ el, k: Number(el.style.getPropertyValue('--k')), schirm: el.classList.contains('l3d__schirm') }));
-    const chips = $$('.l3d__chip', l3d).map((el) => ({ el, a: Number(el.dataset.winkel), h: Number(el.dataset.hoehe) }));
-    let winkel = nr === 0 ? -28 : 24, tempo = 0, zieht = false, letztesX = 0, proben = [], sichtbar = false, zuletzt = performance.now();
-    const EIGEN = ruhig ? 0 : (chips.length ? 9 : 7); // Grad pro Sekunde, langsames Eigendrehen
-    const RADIUS = 215;
+  /* ---------- 3D-Gerät: ziehen, mit Schwung loslassen, Pfeiltasten, beim Laden hereindrehen ---------- */
+  $$('[data-dreh]').forEach((g3d) => {
+    const objekt = $('.g3d__objekt', g3d);
+    const mantel = $$('.g3d__mantel', g3d).map((el) => ({ el, k: Number(el.style.getPropertyValue('--k')) }));
+    const kegel = $$('.g3d__kegel', g3d).map((el) => ({ el, k: Number(el.style.getPropertyValue('--k')) }));
+    const START = -30;
+    let winkel = START, tempo = 0, zieht = false, letztesX = 0, proben = [], sichtbar = false, zuletzt = performance.now();
+    // Beim ersten Laden dreht sich das Gerät von der Seite herein und kommt vorn zur Ruhe
+    let intro = !ruhig && !!g3d.closest('[data-intro]');
+    const introStart = performance.now() + 250;
+    if (intro) winkel = START - 150;
+    const EIGEN = ruhig ? 0 : 7; // Grad pro Sekunde, langsames Eigendrehen
+    const rad = Math.PI / 180;
     function zeichnen() {
-      objekt.style.transform = `rotateX(-14deg) rotateY(${winkel.toFixed(2)}deg)`;
-      flaechen.forEach((f) => {
-        const c = Math.cos(((winkel + f.k * 90) * Math.PI) / 180);
-        f.el.style.setProperty('--hell', (f.schirm ? 0.72 + 0.32 * Math.max(0, c) : 0.6 + 0.45 * Math.max(0, c)).toFixed(3));
+      objekt.style.transform = `rotateX(-16deg) rotateY(${winkel.toFixed(2)}deg)`;
+      // Edelstahl: matte Grundhelligkeit, ein schmaler Glanzstreifen von links vorn, schwaches Randlicht rechts
+      mantel.forEach((f) => {
+        const a = (winkel + f.k * 22.5) * rad;
+        const glanz = Math.pow(Math.max(0, Math.cos(a + 0.35)), 26);
+        const rand = Math.pow(Math.max(0, Math.cos(a - 1.25)), 6);
+        f.el.style.setProperty('--hell', (0.52 + 0.4 * Math.max(0, Math.cos(a)) + 0.6 * glanz + 0.15 * rand).toFixed(3));
       });
-      chips.forEach((c) => {
-        // Kärtchen kreisen um die Lampe, schauen aber immer zum Betrachter
-        const vorn = Math.cos(((c.a + winkel) * Math.PI) / 180);
-        c.el.style.transform = `translateY(${-c.h}px) rotateY(${c.a}deg) translateZ(${RADIUS}px) rotateY(${-(c.a + winkel)}deg) rotateX(14deg)`;
-        c.el.style.opacity = (0.25 + 0.75 * Math.max(0, (vorn + 0.35) / 1.35)).toFixed(3);
+      kegel.forEach((f) => {
+        const t = f.k * 45 * rad;
+        const vorn = Math.cos(t) * Math.cos(winkel * rad), oben = Math.sin(t);
+        f.el.style.setProperty('--hell', (0.55 + 0.4 * Math.max(0, vorn) + 0.3 * Math.max(0, oben)).toFixed(3));
       });
     }
     function schritt(jetzt) {
       const dt = Math.min(0.05, (jetzt - zuletzt) / 1000);
       zuletzt = jetzt;
-      if (!zieht) {
+      if (intro && !zieht) {
+        const t = klemmen((jetzt - introStart) / 1800);
+        winkel = START - 150 * Math.pow(1 - t, 3);
+        if (t >= 1) intro = false;
+        zeichnen();
+      } else if (!zieht) {
         tempo *= Math.pow(0.04, dt); // Schwung klingt weich aus
         winkel += (tempo + EIGEN) * dt;
         zeichnen();
@@ -725,19 +717,20 @@
       if (sichtbar && !document.hidden) requestAnimationFrame(schritt);
     }
     function starten() { zuletzt = performance.now(); requestAnimationFrame(schritt); }
-    // Lampe ist ein Drehobjekt, kein Text: nichts markieren, nichts herausziehen
-    l3d.addEventListener('dragstart', (e) => e.preventDefault());
-    l3d.addEventListener('selectstart', (e) => e.preventDefault());
-    l3d.addEventListener('pointerdown', (e) => {
+    // Das Gerät ist ein Drehobjekt, kein Text: nichts markieren, nichts herausziehen
+    g3d.addEventListener('dragstart', (e) => e.preventDefault());
+    g3d.addEventListener('selectstart', (e) => e.preventDefault());
+    g3d.addEventListener('pointerdown', (e) => {
       if (zieht || (e.pointerType === 'mouse' && e.button !== 0)) return;
       e.preventDefault();
       const auswahl = window.getSelection && window.getSelection();
       if (auswahl && !auswahl.isCollapsed) auswahl.removeAllRanges();
-      if (document.activeElement !== l3d && l3d.tabIndex >= 0) l3d.focus({ preventScroll: true });
+      if (document.activeElement !== g3d && g3d.tabIndex >= 0) g3d.focus({ preventScroll: true });
+      intro = false;
       zieht = true; tempo = 0; letztesX = e.clientX; proben = [{ x: e.clientX, t: e.timeStamp }];
-      l3d.setPointerCapture(e.pointerId); l3d.classList.add('zieht');
+      g3d.setPointerCapture(e.pointerId); g3d.classList.add('zieht');
     });
-    l3d.addEventListener('pointermove', (e) => {
+    g3d.addEventListener('pointermove', (e) => {
       if (!zieht) return;
       winkel += (e.clientX - letztesX) * 0.55;
       letztesX = e.clientX;
@@ -747,16 +740,16 @@
     });
     const loslassen = () => {
       if (!zieht) return;
-      zieht = false; l3d.classList.remove('zieht');
+      zieht = false; g3d.classList.remove('zieht');
       const a = proben[0], b = proben[proben.length - 1];
       if (a && b && b.t > a.t) tempo = ((b.x - a.x) / (b.t - a.t)) * 1000 * 0.55; // Fingertempo wird zum Drehschwung
       tempo = klemmen(tempo, -900, 900);
       if (sichtbar) starten();
     };
-    l3d.addEventListener('pointerup', loslassen);
-    l3d.addEventListener('pointercancel', loslassen);
-    l3d.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); winkel += e.key === 'ArrowLeft' ? -20 : 20; zeichnen(); }
+    g3d.addEventListener('pointerup', loslassen);
+    g3d.addEventListener('pointercancel', loslassen);
+    g3d.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); intro = false; winkel += e.key === 'ArrowLeft' ? -20 : 20; zeichnen(); }
     });
     zeichnen();
     if ('IntersectionObserver' in window) {
@@ -764,29 +757,10 @@
         const vorher = sichtbar;
         sichtbar = ein[0].isIntersecting;
         if (sichtbar && !vorher) starten();
-      }).observe(l3d);
+      }).observe(g3d);
     }
     document.addEventListener('visibilitychange', () => { if (!document.hidden && sichtbar) starten(); });
   });
-
-  /* ---------- Kopfbereich: die Lampe geht beim Laden auf wie die Sonne ---------- */
-  const intro = $('[data-intro]');
-  if (intro) {
-    const ende = { lamp: '#ffb35c', glow: 0.92 };
-    if (ruhig) { intro.style.setProperty('--lamp', ende.lamp); intro.style.setProperty('--glow', ende.glow); }
-    else {
-      const dauer = Number(intro.dataset.intro) || 2600, start = performance.now() + 250;
-      const lauf = (jetzt) => {
-        const t = klemmen((jetzt - start) / dauer);
-        const e = 1 - Math.pow(1 - t, 3);
-        intro.style.setProperty('--lamp', verlauf(LAMPE, e * 0.8, 1));
-        intro.style.setProperty('--glow', (0.04 + 0.88 * e).toFixed(3));
-        if (t < 1) requestAnimationFrame(lauf);
-      };
-      intro.style.setProperty('--glow', '0.04');
-      requestAnimationFrame(lauf);
-    }
-  }
 
   /* ---------- Zahlen zählen hoch, wenn sie ins Bild kommen ---------- */
   if (!ruhig && 'IntersectionObserver' in window) {
@@ -811,7 +785,7 @@
   if (rezDaten) {
     let alle = [];
     try { alle = JSON.parse(rezDaten.textContent); } catch { alle = []; }
-    const geklickt = speicher.lesen('helia-hilfreich', []);
+    const geklickt = speicher.lesen('horta-hilfreich', []);
     const STERN = '<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.6l2.5 5.2 5.7.8-4.1 4 1 5.6L10 14.5l-5.1 2.7 1-5.6-4.1-4 5.7-.8z"/></svg>';
     const DAUMEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9zM7 11l4-7a2 2 0 0 1 2 2v4h5.5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 17.3 20H7"/></svg>';
     const sterneHtml = (n) => {
@@ -874,7 +848,7 @@
         const hat = geklickt.includes(x.id);
         li.innerHTML = `<div class="rez__kopf"><span class="sterne" role="img" aria-label="${x.sterne} von 5 Sternen">${sterneHtml(x.sterne)}</span><span class="rez__datum"></span></div>
           <h3 class="rez__titel"></h3><p class="rez__text"></p>
-          ${x.antwort ? '<div class="rez__antwort"><b>Antwort von HELIA</b><p></p></div>' : ''}
+          ${x.antwort ? '<div class="rez__antwort"><b>Antwort von HORTA</b><p></p></div>' : ''}
           <div class="rez__fuss"><span class="rez__autor"><span class="rez__avatar" aria-hidden="true"></span><span class="rez__name"></span>
             <span class="marke-klein ${x.beispiel ? 'marke-klein--beispiel">Beispiel' : 'marke-klein--echt">Geprüfter Kauf'}</span></span>
             <button type="button" class="hilfreich" aria-pressed="${hat}">${DAUMEN}<span>Hilfreich (${x.hilfreich + (hat ? 1 : 0)})</span></button></div>`;
@@ -887,7 +861,7 @@
         $('.hilfreich', li).addEventListener('click', (e) => {
           const b = e.currentTarget, j = geklickt.indexOf(x.id);
           if (j >= 0) geklickt.splice(j, 1); else geklickt.push(x.id);
-          speicher.schreiben('helia-hilfreich', geklickt);
+          speicher.schreiben('horta-hilfreich', geklickt);
           const an = j < 0;
           b.setAttribute('aria-pressed', String(an));
           $('span', b).textContent = `Hilfreich (${x.hilfreich + (an ? 1 : 0)})`;
@@ -899,11 +873,11 @@
     }
     $('[data-rez="mehr"]').addEventListener('click', () => { gezeigt += 4; liste(); });
 
-    // Zitat-Karussell: hebt die besten Bewertungen hervor, bedient mit Pfeilen oder Pfeiltasten
+    // Zitat-Karussell: hebt die hilfreichsten Bewertungen hervor, bedient mit Pfeilen oder Pfeiltasten
     const zitate = $('[data-zitate]');
     if (zitate) {
       const auswahl = alle.filter((r) => r.sterne >= 4).sort((a, b) => b.hilfreich - a.hilfreich).slice(0, 5);
-      const buehne = $('.zitate__buehne', zitate), koepfe = $('.zitate__koepfe', zitate), zahl = $('.zitate__zahl', zitate);
+      const buehne = $('.zitate__buehne', zitate), koepfe = $('.zitate__koepfe', zitate), zaehler = $('.zitate__zahl', zitate);
       let jetzt = 0;
       koepfe.innerHTML = auswahl.map((r) => `<span>${(r.name || '?').trim().charAt(0).toUpperCase()}</span>`).join('');
       function zeigen(richtung) {
@@ -915,8 +889,8 @@
         $('blockquote', fig).textContent = r.text;
         $('.zitat__name', fig).textContent = r.name;
         buehne.replaceChildren(fig);
-        if (richtung && !ruhig && fig.animate) fig.animate([{ opacity: 0, transform: `translateX(${richtung * 18}px)` }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
-        zahl.textContent = `${jetzt + 1} / ${auswahl.length}`;
+        if (richtung && !ruhig && fig.animate) fig.animate([{ opacity: 0, transform: `translateX(${richtung * 18}px)` }, { opacity: 1, transform: 'none' }], { duration: 320, easing: KURVE });
+        zaehler.textContent = `${jetzt + 1} / ${auswahl.length}`;
         $$('span', koepfe).forEach((k, i) => k.classList.toggle('ist-jetzt', i === jetzt));
       }
       const blaettern = (d) => { jetzt = (jetzt + d + auswahl.length) % auswahl.length; zeigen(d); };
@@ -993,6 +967,7 @@
       if (leer) return;
       const liste = $('.kasse__posten', seite);
       liste.innerHTML = '';
+      const kurz = [];
       ['einzeln', 'set'].forEach((id) => {
         if (!korb[id]) return;
         const z = document.createElement('div');
@@ -1001,7 +976,10 @@
         z.firstChild.textContent = `${korb[id]} × ${PRODUKTE[id].name}`;
         z.lastChild.textContent = euro(korb[id] * preis(id));
         liste.appendChild(z);
+        kurz.push(`${korb[id]} × ${id === 'set' ? '2er-Set ' : ''}HORTA Gemüseschneider HT-5`);
       });
+      // Unmittelbar über dem Bestellknopf: Ware mit ihren wichtigsten Eigenschaften
+      $('[data-feld="bestell-kurz"]', kasse).textContent = `Sie bestellen: ${kurz.join(', ')}. Elektrischer Gemüseschneider, 800 W laut Hersteller, 5 Einsätze aus Edelstahl, Euro-Stecker.`;
       const waren = korbSumme();
       const nachlass = rabatt ? Math.round(waren * 0.1) : 0;
       const versand = versandFuer(waren - nachlass);
@@ -1053,7 +1031,7 @@
       if (!d) return;
       if (d.ok) {
         korb = { einzeln: 0, set: 0 };
-        speicher.schreiben('helia-korb', korb);
+        speicher.schreiben('horta-korb', korb);
         location.href = 'danke?nr=' + encodeURIComponent(d.nr);
       } else {
         const m = $('.meldung', kasse);
@@ -1067,9 +1045,9 @@
   const nrFeld = $('.bestellnr');
   if (nrFeld) {
     const nr = new URLSearchParams(location.search).get('nr') || '';
-    if (/^HL-[0-9A-Z-]{6,30}$/.test(nr)) nrFeld.textContent = nr; else nrFeld.parentElement.hidden = true;
+    if (/^HT-[0-9A-Z-]{6,30}$/.test(nr)) nrFeld.textContent = nr; else nrFeld.parentElement.hidden = true;
     korb = { einzeln: 0, set: 0 };
-    speicher.schreiben('helia-korb', korb);
+    speicher.schreiben('horta-korb', korb);
     korbZeigen();
   }
 

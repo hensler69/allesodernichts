@@ -68,3 +68,13 @@ Farben nur in `:root` ändern, die Rollen (Signal nur für Kauf) beibehalten.
 `helia.example`, `HL-` (Bestellnummer), `HL-1` (Modell), `SONNE10` (Gutschein, auch Prüfwert in script.js), `Lichtwecker`,
 Preise `49,90` `59,90` `84,80` `101,80` `4990` `5990` `8480` `10180`, Datum `30.11.2026` und `2026-11-30`, Versand `4,90`/`490`,
 Schwelle `59 €`/`5900`. Danach `grep -ri helia <neuer-ordner>` muss leer sein.
+
+## 6. Zweites Beispiel: HORTA (heller Shop, Ware aus China)
+- `shops/horta/` mit Generatoren in `generatoren/horta/`: Gemüseschneider, frische Marktküche auf hellem Grund.
+  Zeigt, was für eine helle Welt umgestellt wird: Glas (weiß, halbtransparent), Schatten grünlich statt schwarz,
+  Kopfleiste, Warenkorb und Dialoge hell, Stapelkarten mit deckendem hellem Grund, Entwurfshinweise in Honiggelb.
+- Erlebnis-Abschnitt als Seitenansicht in SVG (Probierstand): Auswahl als Chips, ein grüner Bedienknopf (nicht die
+  Signalfarbe), Stücke fallen per Web Animations in eine Schüssel, die Auswahl wird gemerkt und im Abschied gezeigt.
+- 3D-Modell eines Kegelstumpfs aus 16 Flächen mit Glanzstreifen, waagerechte Trommel als Zylinder um die X-Achse
+  (`rotateX(k*36deg) translateZ(r)`). Teile, die ineinander stecken, leicht auseinanderrücken, sonst entstehen helle Splitter.
+- Generatoren immer ins Projekt legen (`generatoren/<name>/`), der Scratchpad ist nach der Sitzung weg.
