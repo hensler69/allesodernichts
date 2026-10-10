@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HORTA Gemüseschneider HT-5 im Look Halftone</title>
+<meta name="description" content="Entwurf: HORTA, elektrischer Gemüseschneider HT-5, im Look Halftone (Rasterdruck, Risograph).">
+<meta name="theme-color" content="#fbf3e4">
+<link rel="icon" href="data:,">
+<link rel="preload" href="../../design-vorlagen/fonts/Anton-400.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<!-- Bausteine einmal definieren: Stern und vier Rasterfüllungen (Punkte, rosa 15 Grad, blau 45 Grad) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="stern" viewBox="0 0 22 22">
+      <path d="M11.0 1.0 L13.5 7.5 L20.5 7.9 L15.1 12.3 L16.9 19.1 L11.0 15.3 L5.1 19.1 L6.9 12.3 L1.5 7.9 L8.5 7.5Z"/>
+    </symbol>
+    <clipPath id="stern-teil"><rect x="0" y="0" width="109.2" height="22"/></clipPath>
+    <pattern id="r-fein" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><circle cx="2.5" cy="2.5" r="1.1" fill="#ff4f8b"/></pattern>
+    <pattern id="r-mittel" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><circle cx="2.5" cy="2.5" r="1.7" fill="#ff4f8b"/></pattern>
+    <pattern id="r-dicht" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><circle cx="2.5" cy="2.5" r="2.5" fill="#ff4f8b"/></pattern>
+    <pattern id="b-fein" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="2.5" cy="2.5" r="1.1" fill="#2d5bff"/></pattern>
+    <pattern id="b-mittel" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="2.5" cy="2.5" r="1.7" fill="#2d5bff"/></pattern>
+    <pattern id="b-dicht" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="2.5" cy="2.5" r="2.5" fill="#2d5bff"/></pattern>
+  </defs>
+</svg>
+
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+
+<header class="kopf">
+  <div class="rahmen kopf__innen">
+    <a class="logo" href="#ueberblick" aria-label="HORTA, zur Startseite">
+      <svg class="logo__zeichen" viewBox="0 0 40 40" width="34" height="34" aria-hidden="true" focusable="false"><circle cx="15" cy="17" r="12" fill="#ff4f8b"/><circle cx="25" cy="23" r="12" fill="#2d5bff"/></svg>
+      <span>HORTA</span>
+    </a>
+    <button class="menue" type="button" aria-expanded="false" aria-controls="nav" hidden>Menü</button>
+    <nav class="nav" id="nav" aria-label="Hauptnavigation">
+      <a href="#ueberblick">Überblick</a>
+      <a href="#funktionen">Funktionen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#bewertungen">Bewertungen</a>
+      <a href="#fragen">Fragen</a>
+    </nav>
+    <a class="korb" href="#ueberblick">Warenkorb <span class="korb__zahl" id="korb-zahl" aria-live="polite">0</span></a>
+  </div>
+</header>
+
+<main id="inhalt">
+
+<section class="hero" id="ueberblick" aria-labelledby="titel">
+  <div class="rahmen hero__innen">
+
+    <div class="hero__kopf">
+      <p class="eyebrow">Elektrischer Gemüseschneider</p>
+      <h1 class="h1" id="titel">
+        <span class="zeile ueber" data-t="Weniger schnippeln.">Weniger schnippeln.</span>
+        <span class="zeile ueber" data-t="Mehr Salat.">Mehr Salat.</span>
+      </h1>
+    </div>
+
+    <div class="hero__text">
+      <p class="untertitel">HORTA schneidet, raspelt und reibt auf Knopfdruck. Fünf Einsätze aus Edelstahl, ein breiter Schacht, und alles fällt direkt in Ihre Schüssel.</p>
+
+      <p class="sterne">
+        <svg class="sterne__bild" role="img" aria-label="4,6 von 5 Sternen" viewBox="0 0 118 22" width="118" height="22">
+          <g class="stern-leer"><use href="#stern" x="0" width="22" height="22"/><use href="#stern" x="24" width="22" height="22"/><use href="#stern" x="48" width="22" height="22"/><use href="#stern" x="72" width="22" height="22"/><use href="#stern" x="96" width="22" height="22"/></g>
+          <g class="stern-voll" clip-path="url(#stern-teil)"><use href="#stern" x="0" width="22" height="22"/><use href="#stern" x="24" width="22" height="22"/><use href="#stern" x="48" width="22" height="22"/><use href="#stern" x="72" width="22" height="22"/><use href="#stern" x="96" width="22" height="22"/></g>
+        </svg>
+        <span>4,6 von 5 · 36 Beispielbewertungen</span>
+      </p>
+
+      <div class="kauf">
+        <div class="preis druck">
+          <p class="preis__betrag">44,90&nbsp;€</p>
+          <p class="preis__zeile">Einführungspreis bis 30.11.2026, danach 54,90&nbsp;€</p>
+          <p class="preis__klein">inkl. 19&nbsp;% MwSt., zzgl. 4,90&nbsp;€ Versand, Lieferzeit 8 bis 15 Werktage</p>
+        </div>
+        <button class="cta" type="button">In den Warenkorb</button>
+      </div>
+    </div>
+
+    <!-- Hero-Bild: zwei Druckplatten (rosa 15 Grad, blau 45 Grad), die das Skript einmal beim Laden aus einer unsichtbaren Zeichnung in Punkte umrechnet. Ohne Skript bleibt das Standbild aus SVG. -->
+    <div class="hero__bild" id="bild" role="img" aria-label="Zeichnung in Rasterpunkten: der Gemüseschneider HORTA mit Kegel-Einsatz über einer Schüssel voller Gemüsestücke">
+      <div class="bild__raum" id="bildraum">
+        <canvas class="ebene ebene--rosa" aria-hidden="true"></canvas>
+        <canvas class="ebene ebene--blau" aria-hidden="true"></canvas>
+        <svg class="bild__stand" viewBox="0 0 600 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><defs><pattern id="sr1" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><circle cx="5" cy="5" r="1.3" fill="#ff4f8b"/></pattern><pattern id="sb1" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="5" cy="5" r="1.3" fill="#2d5bff"/></pattern><pattern id="sr2" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><circle cx="5" cy="5" r="2.7" fill="#ff4f8b"/></pattern><pattern id="sb2" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="5" cy="5" r="2.7" fill="#2d5bff"/></pattern><pattern id="sr3" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><circle cx="5" cy="5" r="4.0" fill="#ff4f8b"/></pattern><pattern id="sb3" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="5" cy="5" r="4.0" fill="#2d5bff"/></pattern><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset=".25" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient><mask id="sm"><rect width="600" height="600" fill="url(#sg)"/></mask></defs><g style="mix-blend-mode:multiply"><circle cx="300" cy="316" r="268" fill="url(#sr1)"/><circle cx="300" cy="316" r="268" fill="url(#sr2)" mask="url(#sm)" opacity=".8"/><ellipse cx="300" cy="574" rx="240" ry="20" fill="url(#sb2)"/></g><path d="M220 52H380L350 176H250Z" fill="url(#sb2)"/><ellipse cx="300" cy="54" rx="80" ry="13" fill="#2d1c8b"/><rect x="262" y="14" width="76" height="104" rx="10" fill="url(#sr3)"/><rect x="246" y="4" width="108" height="22" rx="11" fill="#2d1c8b"/><rect x="160" y="160" width="280" height="306" rx="30" fill="url(#sb3)"/><rect x="300" y="160" width="140" height="306" rx="30" fill="url(#sr1)" style="mix-blend-mode:multiply"/><rect x="178" y="190" width="14" height="246" rx="7" fill="#fbf3e4"/><circle cx="394" cy="428" r="28" fill="#fbf3e4"/><circle cx="394" cy="428" r="19" fill="url(#sr3)"/><circle cx="300" cy="304" r="126" fill="#fbf3e4"/><circle cx="300" cy="304" r="108" fill="none" stroke="#2d1c8b" stroke-width="11"/><circle cx="300" cy="304" r="100" fill="url(#sr1)"/><circle cx="300" cy="304" r="52" fill="url(#sr2)" opacity=".7"/><ellipse cx="300" cy="242" rx="28" ry="15" transform="rotate(-90 300 242)" fill="#2d1c8b"/><ellipse cx="359" cy="285" rx="28" ry="15" transform="rotate(-18 359 285)" fill="#2d1c8b"/><ellipse cx="336" cy="354" rx="28" ry="15" transform="rotate(54 336 354)" fill="#2d1c8b"/><ellipse cx="264" cy="354" rx="28" ry="15" transform="rotate(126 264 354)" fill="#2d1c8b"/><ellipse cx="241" cy="285" rx="28" ry="15" transform="rotate(198 241 285)" fill="#2d1c8b"/><circle cx="300" cy="304" r="22" fill="#2d1c8b"/><circle cx="300" cy="304" r="8" fill="#fbf3e4"/><ellipse cx="300" cy="506" rx="232" ry="36" fill="#2d1c8b" opacity=".85"/><circle cx="296" cy="466" r="46" fill="url(#sr3)"/><circle cx="296" cy="466" r="28" fill="none" stroke="#fbf3e4" stroke-width="8"/><circle cx="200" cy="480" r="40" fill="url(#sb3)"/><circle cx="200" cy="480" r="24" fill="none" stroke="#fbf3e4" stroke-width="7"/><circle cx="394" cy="480" r="40" fill="url(#sb3)"/><circle cx="394" cy="480" r="24" fill="none" stroke="#fbf3e4" stroke-width="7"/><circle cx="142" cy="506" r="34" fill="url(#sr3)"/><circle cx="142" cy="506" r="20" fill="none" stroke="#fbf3e4" stroke-width="6"/><circle cx="458" cy="508" r="34" fill="url(#sr3)"/><circle cx="458" cy="508" r="20" fill="none" stroke="#fbf3e4" stroke-width="6"/><circle cx="246" cy="512" r="34" fill="#2d1c8b"/><circle cx="246" cy="512" r="20" fill="none" stroke="#fbf3e4" stroke-width="6"/><circle cx="350" cy="514" r="34" fill="#2d1c8b"/><circle cx="350" cy="514" r="20" fill="none" stroke="#fbf3e4" stroke-width="6"/><path d="M68 506A232 36 0 0 0 532 506C532 586 430 598 300 598C170 598 68 586 68 506Z" fill="url(#sr2)" style="mix-blend-mode:multiply"/><path d="M68 506A232 36 0 0 0 532 506C532 586 430 598 300 598C170 598 68 586 68 506Z" fill="url(#sb1)" style="mix-blend-mode:multiply"/><path d="M92 546Q112 584 186 592L192 580Q138 574 114 542Z" fill="#fbf3e4"/></svg>
+      </div>
+      <svg class="passer passer--a" viewBox="0 0 28 28" width="28" height="28" aria-hidden="true" focusable="false"><circle cx="14" cy="14" r="8" fill="none" stroke="#1a1530" stroke-width="1.5"/><path d="M14 0V28M0 14H28" stroke="#1a1530" stroke-width="1.5"/></svg>
+      <svg class="passer passer--b" viewBox="0 0 28 28" width="28" height="28" aria-hidden="true" focusable="false"><circle cx="14" cy="14" r="8" fill="none" stroke="#1a1530" stroke-width="1.5"/><path d="M14 0V28M0 14H28" stroke="#1a1530" stroke-width="1.5"/></svg>
+    </div>
+
+  </div>
+</section>
+
+<div class="rampe rampe--ein" aria-hidden="true"></div>
+
+<section class="zahlen" aria-label="Zahlen im Überblick">
+  <ul class="rahmen zahlen__liste">
+    <li class="kachel"><span class="zahl">5</span><span class="beschr">Einsätze aus Edelstahl</span></li>
+    <li class="kachel"><span class="zahl">800&nbsp;W</span><span class="beschr">laut Hersteller</span></li>
+    <li class="kachel"><span class="zahl">27&nbsp;cm</span><span class="beschr">Höhe, passt unter den Hängeschrank</span></li>
+    <li class="kachel"><span class="zahl">8 bis 15</span><span class="beschr">Werktage Lieferung, Zoll inklusive</span></li>
+  </ul>
+</section>
+<div class="rampe rampe--aus" aria-hidden="true"></div>
+
+<section class="abschnitt" id="funktionen" aria-labelledby="h-funktionen">
+  <div class="rahmen">
+    <h2 class="h2 ueber" id="h-funktionen" data-t="Funktionen">Funktionen</h2>
+    <ul class="karten">
+      <li class="karte druck druck--rosa">
+        <svg class="symbol" viewBox="0 0 96 96" width="72" height="72" aria-hidden="true" focusable="false"><circle cx="40" cy="44" r="30" fill="url(#r-mittel)"/><path d="M62 10L86 84" stroke="#2d5bff" stroke-width="10" stroke-linecap="round" class="mul"/><rect x="58" y="22" width="26" height="60" rx="4" transform="rotate(-14 71 52)" fill="url(#b-fein)" class="mul"/></svg>
+        <h3 class="h3">Schneiden</h3><p>Gleichmäßige Scheiben, auch bei weichen Tomaten.</p>
+      </li>
+      <li class="karte druck druck--blau">
+        <svg class="symbol" viewBox="0 0 96 96" width="72" height="72" aria-hidden="true" focusable="false"><rect x="14" y="30" width="14" height="56" rx="7" transform="rotate(-18 21 58)" fill="url(#b-dicht)"/><rect x="38" y="20" width="14" height="60" rx="7" fill="url(#b-mittel)" class="mul"/><rect x="62" y="30" width="14" height="56" rx="7" transform="rotate(18 69 58)" fill="url(#b-dicht)"/><path d="M8 24 A44 44 0 0 1 88 24 Z" fill="url(#r-mittel)" class="mul"/></svg>
+        <h3 class="h3">Raspeln</h3><p>Karotten und Zucchini fein oder grob in Sekunden.</p>
+      </li>
+      <li class="karte druck druck--rosa">
+        <svg class="symbol" viewBox="0 0 96 96" width="72" height="72" aria-hidden="true" focusable="false"><rect x="10" y="14" width="76" height="36" rx="8" fill="url(#b-mittel)"/><g fill="#fffaf0"><circle cx="28" cy="32" r="5"/><circle cx="48" cy="32" r="5"/><circle cx="68" cy="32" r="5"/></g><g fill="url(#r-dicht)" class="mul"><circle cx="24" cy="72" r="8"/><circle cx="48" cy="82" r="6"/><circle cx="70" cy="70" r="9"/></g></svg>
+        <h3 class="h3">Reiben</h3><p>Käse und Kohl fallen locker in die Schüssel.</p>
+      </li>
+      <li class="karte druck druck--blau">
+        <svg class="symbol" viewBox="0 0 96 96" width="72" height="72" aria-hidden="true" focusable="false"><rect x="22" y="6" width="52" height="84" rx="10" fill="url(#b-mittel)"/><rect x="30" y="14" width="36" height="68" rx="6" fill="#fffaf0"/><rect x="14" y="40" width="68" height="22" rx="11" fill="url(#r-dicht)" class="mul"/></svg>
+        <h3 class="h3">Breiter Schacht</h3><p>Ganze Gurken und Paprika passen ohne Vorschneiden hinein (Schacht 5&nbsp;cm).</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="abschnitt abschnitt--tief" id="ablauf" aria-labelledby="h-ablauf">
+  <div class="rahmen">
+    <h2 class="h2 ueber" id="h-ablauf" data-t="Ablauf">Ablauf</h2>
+    <ol class="schritte" role="list">
+      <li class="schritt druck druck--blau"><span class="nr ueber" data-t="1" aria-hidden="true">1</span><h3 class="h3">Einsatz wählen</h3><p>Kegel einsetzen, bis er einrastet.</p></li>
+      <li class="schritt druck druck--rosa"><span class="nr ueber" data-t="2" aria-hidden="true">2</span><h3 class="h3">Gemüse einlegen</h3><p>In den Schacht legen, Deckel zu.</p></li>
+      <li class="schritt druck druck--blau"><span class="nr ueber" data-t="3" aria-hidden="true">3</span><h3 class="h3">Knopf drücken</h3><p>Alles fällt direkt in die Schüssel.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="abschnitt" id="bewertungen" aria-labelledby="h-bewertungen">
+  <div class="rahmen">
+    <h2 class="h2 ueber" id="h-bewertungen" data-t="Bewertungen">Bewertungen</h2>
+    <ul class="stimmen">
+      <li class="stimme druck druck--rosa">
+        <figure>
+          <p class="marke">Beispiel</p>
+          <svg class="sterne__bild" role="img" aria-label="5 von 5 Sternen" viewBox="0 0 118 22" width="118" height="22"><g class="stern-voll"><use href="#stern" x="0" width="22" height="22"/><use href="#stern" x="24" width="22" height="22"/><use href="#stern" x="48" width="22" height="22"/><use href="#stern" x="72" width="22" height="22"/><use href="#stern" x="96" width="22" height="22"/></g></svg>
+          <blockquote><p>„Endlich Salat ohne Schnippelei. Zehn Minuten sind jetzt zwei.“</p></blockquote>
+          <figcaption>Anna K., 5 Sterne</figcaption>
+        </figure>
+      </li>
+      <li class="stimme druck druck--blau">
+        <figure>
+          <p class="marke">Beispiel</p>
+          <svg class="sterne__bild" role="img" aria-label="4 von 5 Sternen" viewBox="0 0 118 22" width="118" height="22"><g class="stern-leer"><use href="#stern" x="0" width="22" height="22"/><use href="#stern" x="24" width="22" height="22"/><use href="#stern" x="48" width="22" height="22"/><use href="#stern" x="72" width="22" height="22"/><use href="#stern" x="96" width="22" height="22"/></g><g class="stern-voll"><use href="#stern" x="0" width="22" height="22"/><use href="#stern" x="24" width="22" height="22"/><use href="#stern" x="48" width="22" height="22"/><use href="#stern" x="72" width="22" height="22"/></g></svg>
+          <blockquote><p>„Der breite Schacht ist wirklich praktisch. Zucchini ohne Vorschneiden.“</p></blockquote>
+          <figcaption>Jens M., 4 Sterne</figcaption>
+        </figure>
+      </li>
+      <li class="stimme druck druck--rosa">
+        <figure>
+          <p class="marke">Beispiel</p>
+          <svg class="sterne__bild" role="img" aria-label="5 von 5 Sternen" viewBox="0 0 118 22" width="118" height="22"><g class="stern-voll"><use href="#stern" x="0" width="22" height="22"/><use href="#stern" x="24" width="22" height="22"/><use href="#stern" x="48" width="22" height="22"/><use href="#stern" x="72" width="22" height="22"/><use href="#stern" x="96" width="22" height="22"/></g></svg>
+          <blockquote><p>„Reinigen geht schnell, die Einsätze sind stabil.“</p></blockquote>
+          <figcaption>Sabine R., 5 Sterne</figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="china" id="fragen" aria-labelledby="h-china">
+  <div class="rahmen">
+    <div class="china__karte druck druck--blau">
+      <svg class="route" viewBox="0 0 220 60" width="220" height="60" aria-hidden="true" focusable="false"><circle cx="26" cy="30" r="22" fill="url(#r-dicht)"/><circle cx="194" cy="30" r="22" fill="url(#b-dicht)"/><g fill="#1a1530"><circle cx="64" cy="30" r="3"/><circle cx="82" cy="30" r="3"/><circle cx="100" cy="30" r="3"/><circle cx="118" cy="30" r="3"/><circle cx="136" cy="30" r="3"/><circle cx="154" cy="30" r="3"/></g></svg>
+      <div>
+        <h2 class="h2 h2--klein" id="h-china">Lieferung aus China</h2>
+        <p class="china__text">Dieses Produkt wird direkt aus China versendet. Lieferzeit 8 bis 15 Werktage, Zoll und Einfuhrsteuern sind im Preis enthalten, es kommen keine Zusatzkosten hinzu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="rampe rampe--ein rampe--fuss" aria-hidden="true"></div>
+<footer class="fuss">
+  <div class="rahmen fuss__innen">
+    <p class="fuss__logo">HORTA</p>
+    <nav class="fuss__nav" aria-label="Rechtliches">
+      <a href="#ueberblick">Impressum</a>
+      <a href="#ueberblick">Datenschutz</a>
+      <a href="#ueberblick">AGB</a>
+      <a href="#ueberblick">Vertrag widerrufen</a>
+    </nav>
+    <p class="fuss__hinweis">Entwurf: Alle Angaben und Bewertungen sind erfunden.</p>
+  </div>
+</footer>
+
+</body>
+</html>
