@@ -3,6 +3,9 @@
 
 @font-face{font-family:"Nunito";src:url("../../design-vorlagen/fonts/Nunito-800.woff2") format("woff2");font-weight:800;font-style:normal;font-display:swap}
 @font-face{font-family:"Nunito";src:url("../../design-vorlagen/fonts/Nunito-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+/* Ersatzschnitte mit den Maßen von Nunito (Breite, Auf- und Unterlänge): Kommt die Schrift spät, springt beim Tausch kein Text mehr. */
+@font-face{font-family:"Nunito Ersatz";src:local("Arial"),local("Liberation Sans");font-weight:600;font-style:normal;size-adjust:102.2%;ascent-override:98.9%;descent-override:34.5%;line-gap-override:0%}
+@font-face{font-family:"Nunito Ersatz";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold");font-weight:800;font-style:normal;size-adjust:100.5%;ascent-override:100.6%;descent-override:35.1%;line-gap-override:0%}
 
 :root{
   /* Grund und Tinte */
@@ -32,8 +35,8 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:96px}
-body{margin:0;background:var(--grund);color:var(--tinte);font:600 1.0625rem/1.6 "Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:"Nunito",system-ui,sans-serif;font-weight:800;margin:0;line-height:1.05;letter-spacing:-.01em;text-wrap:balance}
+body{margin:0;background:var(--grund);color:var(--tinte);font:600 1.0625rem/1.6 "Nunito","Nunito Ersatz",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Nunito","Nunito Ersatz",system-ui,sans-serif;font-weight:800;margin:0;line-height:1.05;letter-spacing:-.01em;text-wrap:balance}
 p{margin:0;text-wrap:pretty}
 a{color:inherit}
 a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -68,7 +71,7 @@ html:not(.js) .szene,html:not(.js) .iso{display:none}
 /* ---------- Kopfzeile ---------- */
 .kopf{position:sticky;top:0;z-index:30;background:var(--grund);box-shadow:0 2px 0 var(--grund-dunkel)}
 .kopf__innen{display:flex;align-items:center;gap:var(--s3);min-height:72px}
-.logo{display:inline-flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;font:800 1.4rem/1 "Nunito",sans-serif;letter-spacing:.02em;transition:transform 160ms var(--ease-out)}
+.logo{display:inline-flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;font:800 1.4rem/1 "Nunito","Nunito Ersatz",sans-serif;letter-spacing:.02em;transition:transform 160ms var(--ease-out)}
 .logo:active{transform:scale(.97)}
 .logo__zeichen{width:34px;height:34px}
 .nav{margin-inline:auto}
@@ -107,14 +110,14 @@ html:not(.js) .szene,html:not(.js) .iso{display:none}
 .sterne__voll{position:absolute;left:0;top:0;z-index:1;overflow:hidden;white-space:nowrap}
 
 .preis{margin-bottom:var(--s4)}
-.preis__betrag{font:800 3.2rem/1 "Nunito",sans-serif;letter-spacing:-.02em;white-space:nowrap}
+.preis__betrag{font:800 3.2rem/1 "Nunito","Nunito Ersatz",sans-serif;letter-spacing:-.02em;white-space:nowrap}
 .preis__aktion{margin-top:var(--s1);font-weight:800}
 .preis__fein{margin-top:4px;font-size:.92rem;color:var(--tinte-weich)}
 
 /* Kaufknopf: orange Block mit dunkler Kante. Beim Drücken sinkt die Fläche in die Kante. */
 .cta{position:relative;display:inline-block;padding:0 0 8px;border:0;background:none;font:inherit;cursor:pointer;transition:transform 160ms var(--ease-out)}
 .cta::before{content:"";position:absolute;inset:8px 0 0 0;border-radius:18px;background:var(--signal-dunkel)}
-.cta__flaeche{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;min-height:60px;padding:0 36px 0 28px;border-radius:18px;background:var(--signal);box-shadow:inset 0 3px 0 rgba(255,255,255,.4);color:var(--tinte);font:800 1.25rem/1 "Nunito",sans-serif;transition:transform 200ms var(--ease-out)}
+.cta__flaeche{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;min-height:60px;padding:0 36px 0 28px;border-radius:18px;background:var(--signal);box-shadow:inset 0 3px 0 rgba(255,255,255,.4);color:var(--tinte);font:800 1.25rem/1 "Nunito","Nunito Ersatz",sans-serif;transition:transform 200ms var(--ease-out)}
 .cta__wuerfel{width:26px;height:26px;flex:none}
 .cta:focus-visible{outline-offset:6px;border-radius:20px}
 @media (hover:hover) and (pointer:fine){
@@ -147,7 +150,7 @@ html:not(.js) .szene,html:not(.js) .iso{display:none}
 .zahlen__liste{display:grid;grid-auto-flow:dense;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
 .zahlen .platte__flaeche{padding:var(--s3) var(--s3) 28px}
 .iso--mini{width:60px;height:60px;margin-bottom:var(--s2)}
-.zahl{font:800 clamp(2.2rem,3.3vw,3rem)/1 "Nunito",sans-serif;letter-spacing:-.02em;white-space:nowrap}
+.zahl{font:800 clamp(2.2rem,3.3vw,3rem)/1 "Nunito","Nunito Ersatz",sans-serif;letter-spacing:-.02em;white-space:nowrap}
 .zahl__text{margin-top:var(--s1);font-size:1rem;line-height:1.4}
 
 /* ---------- Abschnitte ---------- */
@@ -169,14 +172,14 @@ h2{font-size:clamp(2rem,3.6vw,3rem)}
 .schritt{position:relative;display:grid;grid-template-columns:1fr;gap:var(--s1);padding:var(--s3) 28px 28px}
 .iso--schritt{width:128px;height:128px;margin-bottom:var(--s1)}
 .schritt h3{font-size:1.6rem}
-.ziffer{position:absolute;top:var(--s3);right:28px;display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:var(--tinte);color:var(--papier);font:800 1.5rem/1 "Nunito",sans-serif}
+.ziffer{position:absolute;top:var(--s3);right:28px;display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:var(--tinte);color:var(--papier);font:800 1.5rem/1 "Nunito","Nunito Ersatz",sans-serif}
 
 /* Bewertungen: eine große Kachel neben zwei kleinen */
 .stimmen{display:grid;grid-auto-flow:dense;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
 .s-gross{grid-row:span 2}
 .stimme{display:flex;flex-direction:column;justify-content:space-between;gap:var(--s3);padding:var(--s3) 28px 28px}
 .marke{align-self:flex-start;padding:4px 12px;border-radius:9px;background:var(--tinte);color:var(--papier);font-weight:800;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
-.stimme blockquote p{font:800 1.3rem/1.3 "Nunito",sans-serif;letter-spacing:-.005em}
+.stimme blockquote p{font:800 1.3rem/1.3 "Nunito","Nunito Ersatz",sans-serif;letter-spacing:-.005em}
 .s-gross blockquote p{font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.2}
 .stimme figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);font-weight:800}
 
@@ -190,7 +193,7 @@ h2{font-size:clamp(2rem,3.6vw,3rem)}
 /* ---------- Fußzeile ---------- */
 .fuss{background:var(--tinte);color:#e9efe9;padding:var(--s5) 0 var(--s4)}
 .fuss__innen{display:grid;gap:var(--s3)}
-.fuss__marke{font:800 1.5rem/1 "Nunito",sans-serif;letter-spacing:.04em;color:var(--papier)}
+.fuss__marke{font:800 1.5rem/1 "Nunito","Nunito Ersatz",sans-serif;letter-spacing:.04em;color:var(--papier)}
 .fuss ul{display:flex;flex-wrap:wrap;gap:4px var(--s3)}
 .fuss a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;font-weight:800;text-underline-offset:4px;transition:transform 160ms var(--ease-out)}
 .fuss a:active{transform:scale(.97)}

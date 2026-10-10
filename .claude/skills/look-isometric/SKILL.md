@@ -146,6 +146,7 @@ Produkte, die man auf einem echten Foto beurteilen will (Mode, Schmuck, Kosmetik
 - Am Handy lag der Kaufknopf zuerst bei 964 px. Mit niedrigerer Szene (224 px), kleineren Abständen und H1 `8.6vw` liegt er bei 829 px.
 - Das Sechseck vor dem Eyebrow ist ein Stempel-Zeichen im Hero und wurde entfernt.
 - Der Rand des Hero-Bildes ragt um 6 % aus der Spalte. `main{overflow-x:clip}` fängt das ab. Immer das Bildschirmfoto ansehen, das Prüfskript meldet Überlauf in `main` nicht.
+- Layoutverschiebung (CLS 0,11 im Lighthouse mobil): Gemessen mit einem `layout-shift`-Observer verschob am Handy der Tausch der Schrift Nunito (`font-display:swap`) die H1 und den Textblock um 36 bis 40 px, am Desktop kam das Platzhalter-`viewBox` der Szene (576 px statt 553 px hoch) dazu, die Handy-Szene war durch `aspect-ratio` schon fest. Gelöst mit Preload beider Schriftdateien, dem Ersatzschnitt `Nunito Ersatz` mit den Maßen von Nunito (`size-adjust`) und dem fertig berechneten `viewBox` von `szene` und `paket` im HTML (bei geänderter Zeichnung aus dem Skript neu auslesen). CLS vorher 0,11, nachher 0 (Performance 97 auf 100), bei 1,5 s verspäteter Schrift höchstens 0,0002.
 
 ## Verbund-Durchgang (gpt-taste, impeccable, emil-design-eng)
 Reihenfolge wie vorgegeben, nach jedem Durchgang Prüfskript und Bildschirmfotos. Gelesen wurden die drei SKILL.md. Beim Skill impeccable lag nur die SKILL.md vor (keine `reference/*.md`, kein Startskript), angewendet wurden deshalb seine Kernregeln aus der SKILL.md und dem Auftrag.
