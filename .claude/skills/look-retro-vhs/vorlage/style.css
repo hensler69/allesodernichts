@@ -1,0 +1,353 @@
+/* ==========================================================================
+   Look: Retro VHS (Videoband der 80er und 90er)
+   Schriften: VT323 (Bildschirmanzeige, Überschriften), IBM Plex Mono (Text)
+   Regel: Bandfehler bleiben selten und klein. Scanlines nur als schwaches Overlay,
+   Text bleibt scharf, keine Wölbung, kein Dauerflimmern.
+   ========================================================================== */
+
+@font-face{font-family:"VT323";src:url("../../design-vorlagen/fonts/VT323-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("../../design-vorlagen/fonts/IBMPlexMono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("../../design-vorlagen/fonts/IBMPlexMono-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+
+:root{
+  color-scheme:dark;
+
+  /* Grund und Flächen */
+  --grund:#0b0a2a;
+  --flaeche:#15134a;
+  --flaeche-tief:#100e3a;
+  --text:#f2f2f2;
+  --text-leise:#b9b8e0;
+
+  /* Rollen: Magenta = Marke und Gefühl (Logo-Versatz, Sterne, Bewertungen, Sonne, Hinweisrahmen)
+             Cyan    = Fakten und Bedienung (Eyebrow, Zahlen, Funktionen, Ablauf, Gitterboden)
+             Gelb    = NUR der Kaufknopf
+             Text    = Hellgrau, nie mit Effekt */
+  --magenta:#ff3cac;
+  --cyan:#2de2e6;
+  --gelb:#ffe600;
+  --gelb-text:#0b0a2a;
+
+  --ease-out:cubic-bezier(.23,1,.32,1);   /* eigene Kurve statt ease */
+  --font-osd:"VT323",ui-monospace,"Courier New",monospace;
+  --font-text:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+
+  /* Abstände */
+  --a0:.25rem; --a1:.5rem; --a2:1rem; --a3:1.5rem; --a4:2.5rem; --a5:4rem; --a6:6rem;
+
+  /* RGB-Trennung der Überschriften (statisch, zwei Pixel) */
+  --split:-2px 0 0 rgba(255,60,172,.95), 2px 0 0 rgba(45,226,230,.95);
+
+  /* Scanlines */
+  --scan-dunkel:rgba(0,0,0,.12);
+  --scan-takt:3px;
+
+  /* Bandrauschen als eigenes Bild (Rauschen, nur waagerecht gezogen) */
+  --rauschen:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='32'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.01 .85' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 2.4 -.95'/%3E%3C/filter%3E%3Crect width='320' height='32' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Grundlagen ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:5rem}
+body{
+  margin:0;
+  -webkit-tap-highlight-color:transparent;
+  font:400 1rem/1.65 var(--font-text);
+  color:var(--text);
+  background:linear-gradient(180deg,#0b0a2a 0,#170d4d 640px,#0b0a2a 1200px) 0 0/100% 1200px no-repeat,var(--grund);
+  -webkit-font-smoothing:antialiased;
+  overflow-wrap:break-word;
+}
+img,svg{max-width:100%}
+h1,h2,h3,p,ul,ol,figure,blockquote{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+.sprung{position:absolute;left:1rem;top:-4rem;z-index:1000;padding:.75rem 1rem;background:#fff;color:#000;font-weight:600}
+.sprung:focus{top:1rem}
+
+/* ---------- Bildschirm-Overlay: Scanlines (schwach, ohne Zeigerereignisse) ---------- */
+body::after{
+  content:"";position:fixed;inset:0;z-index:900;pointer-events:none;
+  background:repeating-linear-gradient(to bottom,var(--scan-dunkel) 0 1px,transparent 1px var(--scan-takt));
+}
+
+/* ---------- Störstreifen: einmal alle 8 Sekunden, sichtbar rund 120 ms (nur Deckkraft und transform) ---------- */
+.stoerung{
+  position:fixed;left:0;right:0;top:0;height:52px;z-index:800;pointer-events:none;opacity:0;
+  background:
+    var(--rauschen) 0 0/320px 100% repeat-x,
+    linear-gradient(90deg,rgba(255,60,172,.45),rgba(45,226,230,.45) 55%,rgba(255,60,172,.45));
+  clip-path:polygon(0 22%,7% 0,100% 14%,100% 86%,93% 100%,0 78%);
+  transform:translateY(var(--stoer-y,32vh));
+  animation:stoerung 8s linear infinite;
+}
+@keyframes stoerung{
+  0%,97.9%{opacity:0;transform:translateY(var(--stoer-y,32vh))}
+  98%{opacity:1;transform:translateY(var(--stoer-y,32vh))}
+  98.8%{opacity:1;transform:translateY(calc(var(--stoer-y,32vh) + 30px))}
+  99.4%{opacity:0;transform:translateY(calc(var(--stoer-y,32vh) + 40px))}
+  100%{opacity:0;transform:translateY(var(--stoer-y,32vh))}
+}
+
+/* ---------- Kleine Zeichen aus Formen (die Schriften haben kein Play-, Punkt- und Stopp-Zeichen) ---------- */
+.ikon{display:inline-block;flex:none;vertical-align:baseline}
+.ikon--play{width:.6em;height:.68em;margin-right:.4em;background:currentColor;clip-path:polygon(0 0,100% 50%,0 100%)}
+.ikon--rec{width:.62em;height:.62em;margin-right:.4em;border-radius:50%;background:var(--magenta)}
+.ikon--stop{width:.6em;height:.6em;margin-right:.4em;background:currentColor}
+
+/* ---------- Bildschirmanzeige (OSD) ---------- */
+.osd{
+  margin:0;font:400 clamp(1.3rem,2.4vw,1.8rem)/1 var(--font-osd);letter-spacing:.06em;text-transform:uppercase;
+  color:var(--text);text-shadow:2px 2px 0 rgba(0,0,0,.9);pointer-events:none;
+}
+
+/* ---------- Überschriften mit RGB-Trennung ---------- */
+h1,h2{font-family:var(--font-osd);font-weight:400;color:var(--text);text-shadow:var(--split);letter-spacing:.02em}
+h3{font-family:var(--font-osd);font-weight:400;color:var(--text)}
+
+/* ---------- Kopfzeile ---------- */
+.kopf{
+  position:sticky;top:0;z-index:20;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:var(--a3);
+  padding:var(--a1) max(var(--a3),calc((100% - 75rem)/2));
+  background:rgba(11,10,42,.96);
+  border-bottom:2px solid var(--magenta);
+}
+.logo{
+  display:inline-flex;align-items:center;min-height:44px;text-decoration:none;
+  font:400 2.6rem/1 var(--font-osd);letter-spacing:.1em;color:var(--text);text-shadow:var(--split);
+}
+.nav{display:flex;justify-content:center;gap:var(--a1)}
+.nav a,.korb{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 var(--a2);
+  font:400 1.35rem/1 var(--font-osd);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--text);
+  border-bottom:3px solid transparent;
+  touch-action:manipulation;transition:transform 160ms var(--ease-out);
+}
+.korb{gap:var(--a1);border:2px solid rgba(45,226,230,.55);color:var(--cyan)}
+.korb__zahl{display:inline-grid;place-items:center;min-width:1rem;height:1.6rem;padding:0 0 0 .6rem;border-left:2px solid rgba(45,226,230,.55);font-size:1.2rem}
+
+/* ---------- Hero ---------- */
+/* Überschrift über die ganze Breite (eine Zeile), darunter Text links und Bild rechts */
+.hero{
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  grid-template-areas:"kopf kopf" "text bild";grid-template-rows:auto auto;
+  align-items:center;column-gap:var(--a5);row-gap:var(--a4);
+  max-width:75rem;margin:0 auto;padding:var(--a5) var(--a3);
+}
+.hero__kopf{grid-area:kopf;display:grid;gap:var(--a2);align-self:start}
+.hero__text{grid-area:text;display:grid;justify-items:start;gap:var(--a3);align-self:center}
+.hero__bild{grid-area:bild;align-self:center}
+.eyebrow{font:400 1.5rem/1 var(--font-osd);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.hero h1{font-size:clamp(2.8rem,5.6vw,5.2rem);line-height:.95}
+.hero h1 .zeile{display:inline}
+.untertitel{max-width:36rem;font-size:1.0625rem}
+
+.bewertung{display:flex;align-items:center;flex-wrap:wrap;gap:var(--a2);color:var(--text-leise);font-size:.95rem}
+.sterne{display:inline-flex}
+.sterne svg{width:6.9rem;height:auto;overflow:visible}
+.sterne--klein svg{width:5.5rem}
+.sterne .voll{fill:var(--magenta);stroke:var(--magenta);stroke-width:1;stroke-linejoin:round}
+.sterne .teil{fill:url(#stern-teil);stroke:var(--magenta);stroke-width:1;stroke-linejoin:round}
+.sterne .leer{fill:none;stroke:var(--magenta);stroke-width:1.2;stroke-linejoin:round}
+
+.preisblock{display:grid;gap:var(--a0);padding:var(--a2) var(--a3);border:2px solid rgba(45,226,230,.55);background:var(--flaeche-tief)}
+.preis{font:400 4.6rem/.9 var(--font-osd);color:var(--text);letter-spacing:.02em}
+.nb{white-space:nowrap}
+.preis__aktion{font-weight:600}
+.preis__info{font-size:.9rem;color:var(--text-leise)}
+
+/* Kaufknopf: die einzige gelbe Fläche der Seite */
+.cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:64px;padding:0 var(--a4);
+  font:400 2rem/1 var(--font-osd);letter-spacing:.06em;text-transform:uppercase;
+  color:var(--gelb-text);background:var(--gelb);border:0;border-radius:0;
+  box-shadow:5px 5px 0 var(--magenta);
+  cursor:pointer;touch-action:manipulation;
+  transition:transform 160ms var(--ease-out);
+}
+.cta .ikon--play{margin-right:.5em}
+
+/* Hero-Bild: Synthwave-Szene mit Bildschirmanzeige */
+.szene{
+  position:relative;width:100%;max-width:35rem;margin-left:auto;aspect-ratio:640/600;overflow:hidden;
+  border:2px solid var(--magenta);background:var(--grund);
+}
+.szene__bild{position:absolute;inset:0;width:100%;height:100%;max-width:none;display:block}
+.szene::before{                          /* Sucher-Ecken wie bei einer Videokamera */
+  content:"";position:absolute;inset:3.2%;z-index:1;pointer-events:none;
+  --l:22px;--d:2px;
+  background:
+    linear-gradient(var(--text),var(--text)) 0 0/var(--l) var(--d) no-repeat,
+    linear-gradient(var(--text),var(--text)) 0 0/var(--d) var(--l) no-repeat,
+    linear-gradient(var(--text),var(--text)) 100% 0/var(--l) var(--d) no-repeat,
+    linear-gradient(var(--text),var(--text)) 100% 0/var(--d) var(--l) no-repeat,
+    linear-gradient(var(--text),var(--text)) 0 100%/var(--l) var(--d) no-repeat,
+    linear-gradient(var(--text),var(--text)) 0 100%/var(--d) var(--l) no-repeat,
+    linear-gradient(var(--text),var(--text)) 100% 100%/var(--l) var(--d) no-repeat,
+    linear-gradient(var(--text),var(--text)) 100% 100%/var(--d) var(--l) no-repeat;
+  opacity:.75;
+}
+.szene .osd{position:absolute;z-index:2}
+.osd--play{left:7%;top:6.5%}
+.osd--zeit{right:7%;top:6.5%;display:flex;gap:.7em}
+.osd--rec{left:7%;bottom:12%}
+
+/* Tracking-Balken: Bandrauschen am unteren Rand (steht still) */
+.spur{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;height:clamp(14px,4.4%,26px);pointer-events:none;
+  background:
+    var(--rauschen) 0 0/320px 100% repeat-x,
+    linear-gradient(90deg,rgba(255,60,172,.6),rgba(45,226,230,.6));
+  clip-path:polygon(0 34%,9% 0,100% 20%,100% 100%,0 100%);
+}
+
+/* ---------- Abschnitte ---------- */
+.abschnitt{max-width:75rem;margin:0 auto;padding:var(--a5) var(--a3)}
+.abschnitt>h2{font-size:clamp(2.8rem,5vw,4rem);line-height:1;margin-bottom:var(--a4)}
+
+/* Zahlenleiste */
+.zahlenleiste{max-width:75rem;margin:0 auto;padding:var(--a5) var(--a3)}
+.zahlen{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--a3)}
+.kachel{display:grid;align-content:start;gap:var(--a1);padding:var(--a3);background:var(--flaeche);border:2px solid rgba(242,242,242,.2);border-top:4px solid var(--cyan)}
+.zahl{font:400 clamp(3rem,4.4vw,3.8rem)/.9 var(--font-osd);color:var(--cyan);letter-spacing:.02em}
+.zahl__text{font-size:.95rem}
+
+/* Funktionen */
+.karten{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--a3)}
+.karte{display:grid;align-content:start;gap:var(--a2);padding:var(--a3);background:var(--flaeche);border:2px solid rgba(242,242,242,.2);border-top:4px solid var(--cyan)}
+.symbol{width:3.2rem;height:3.2rem;color:var(--cyan)}
+.karte h3{font-size:2rem;line-height:1;letter-spacing:.03em}
+.karte p{font-size:.95rem}
+
+/* Ablauf */
+.schritte{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--a3);position:relative}
+.schritte::before{content:"";position:absolute;left:16.6%;right:16.6%;top:2.4rem;border-top:3px dashed var(--cyan);opacity:.7}
+.schritt{position:relative;display:grid;justify-items:center;text-align:center;gap:var(--a2)}
+.schritt__nr{display:grid;place-items:center;width:4.8rem;height:4.8rem;background:var(--grund);border:3px solid var(--magenta);font:400 3.4rem/1 var(--font-osd);color:var(--text)}
+.schritt h3{font-size:2rem;line-height:1;margin-bottom:var(--a1)}
+.schritt p{font-size:.95rem}
+
+/* Bewertungen */
+.stimmen{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--a3)}
+.stimmen li{display:grid}
+.stimme{position:relative;display:grid;align-content:space-between;gap:var(--a3);padding:var(--a5) var(--a3) var(--a3);background:var(--flaeche);border:2px solid rgba(242,242,242,.2);border-top:4px solid var(--magenta)}
+.marke{position:absolute;top:var(--a2);left:var(--a3);padding:.1rem var(--a1);font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text);border:2px solid var(--magenta)}
+.stimme blockquote p{font-size:1.05rem;line-height:1.55}
+.stimme figcaption{display:flex;align-items:center;flex-wrap:wrap;gap:var(--a2);color:var(--text-leise);font-size:.95rem}
+.stimme .name{font-weight:600;color:var(--text)}
+
+/* Hinweisblock China */
+.hinweis{position:relative;overflow:hidden;display:grid;gap:var(--a2);padding:var(--a4) var(--a4) calc(var(--a4) + 1.5rem);background:var(--flaeche-tief);border:3px solid var(--magenta)}
+.hinweis h2{font-size:clamp(2.6rem,4.4vw,3.4rem);line-height:1}
+.hinweis p{max-width:46rem;font-size:1.05rem}
+.hinweis .spur--breit{height:22px}
+
+/* ---------- Fußzeile ---------- */
+.fuss{
+  position:relative;display:grid;justify-items:center;gap:var(--a2);padding:calc(var(--a5) + 14px) var(--a3) var(--a4);text-align:center;
+}
+.fuss::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:26px;
+  background:var(--rauschen) 0 0/320px 100% repeat-x,linear-gradient(90deg,rgba(255,60,172,.5),rgba(45,226,230,.5));
+  clip-path:polygon(0 0,100% 0,100% 60%,92% 100%,0 70%);
+}
+.fuss__logo{font:400 2.4rem/1 var(--font-osd);letter-spacing:.1em;text-shadow:var(--split)}
+.fuss__nav{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--a0) var(--a3)}
+.fuss__nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--a1);text-decoration:underline;text-underline-offset:.25em;font-size:.95rem}
+.fuss__hinweis{color:var(--text-leise);font-size:.9rem}
+.osd--stop{color:var(--text-leise);display:flex;align-items:center}
+
+/* ---------- Hover (nur Maus) und Drücken ---------- */
+@media (hover:hover) and (pointer:fine){
+  .nav a:hover{border-bottom-color:var(--cyan)}
+  .korb:hover{background:rgba(45,226,230,.1)}
+  .cta:hover{transform:translate(-2px,-2px)}
+  .fuss__nav a:hover{text-decoration-thickness:2px}
+}
+.cta:active,.nav a:active,.korb:active,.logo:active,.fuss__nav a:active{transform:scale(.97)}
+
+/* ---------- Tablet ---------- */
+@media (max-width:1020px){
+  .nav a,.korb{padding:0 .7rem;font-size:1.25rem}
+  .kopf{gap:var(--a2)}
+  .hero{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:var(--a4)}
+  .zahlen,.karten{grid-template-columns:repeat(2,1fr)}
+  .stimmen{gap:var(--a2)}
+  .stimme{padding-left:var(--a2);padding-right:var(--a2)}
+  .marke{left:var(--a2)}
+}
+
+/* ---------- Kopfzeile bis 900 px: zwei Zeilen ---------- */
+@media (max-width:900px){
+  .kopf{
+    position:static;grid-template-columns:1fr auto;grid-template-areas:"logo korb" "nav nav";
+    gap:var(--a0) var(--a2);padding:var(--a1) var(--a2) 0;
+  }
+  .logo{grid-area:logo}
+  .korb{grid-area:korb;min-height:48px}
+  .nav{
+    grid-area:nav;justify-content:flex-start;overflow-x:auto;gap:var(--a0);
+    margin:0 calc(var(--a2) * -1);padding:var(--a0) var(--a2) var(--a1);scrollbar-width:none;
+  }
+  .nav::-webkit-scrollbar{display:none}
+  .nav{-webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);mask-image:linear-gradient(90deg,#000 86%,transparent)}   /* Hinweis: es geht weiter */
+  .nav a{flex:none;min-height:48px;padding:0 var(--a2);font-size:1.3rem}
+  .nav a:focus-visible{outline-offset:-6px}
+  html{scroll-padding-top:var(--a2)}
+}
+
+/* ---------- Handy: eigener Entwurf ---------- */
+@media (max-width:720px){
+  :root{--scan-dunkel:rgba(0,0,0,.08);--scan-takt:4px;--split:-1.5px 0 0 rgba(255,60,172,.95), 1.5px 0 0 rgba(45,226,230,.95)}
+  body{font-size:.95rem}
+  .logo{font-size:2.3rem}
+
+  /* Reihenfolge am Handy: Überschrift, Bild, Preis, Knopf, dann der Erklärtext (Knopf bleibt im ersten Bildschirm) */
+  .hero{display:flex;flex-direction:column;gap:var(--a2);padding:var(--a2) var(--a2) var(--a4)}
+  .hero__kopf,.hero__text{display:contents}
+  .hero__text>*,.hero__kopf>*{width:100%}
+  .eyebrow{order:1;font-size:1.3rem}
+  .hero h1{order:2;font-size:clamp(2.4rem,11.2vw,3.4rem)}
+  .hero h1 .zeile{display:block}
+  .hero__bild{order:3;align-self:stretch}
+  .preisblock{order:4;padding:var(--a2)}
+  .preis{font-size:3.6rem}
+  .cta{order:5;width:100%;padding:0 var(--a2);white-space:nowrap}
+  .bewertung{order:6}
+  .untertitel{order:7}
+  .szene{max-width:none;aspect-ratio:640/470}
+  .szene .osd{font-size:1.15rem}
+
+  .abschnitt{padding:var(--a4) var(--a2)}
+  .abschnitt>h2{font-size:clamp(2.6rem,12vw,3.2rem);margin-bottom:var(--a3)}
+  .zahlenleiste{padding:var(--a4) var(--a2)}
+  .zahlen{gap:var(--a2)}
+  .kachel{padding:var(--a2)}
+  .zahl{font-size:2.5rem}
+  .zahl__text{font-size:.9rem;line-height:1.4}
+
+  .karten{grid-template-columns:1fr;gap:var(--a2)}
+  .karte{grid-template-columns:3.2rem 1fr;column-gap:var(--a2);row-gap:var(--a0);padding:var(--a3) var(--a2)}
+  .karte .symbol{grid-row:1/3;align-self:start}
+  .karte h3{align-self:end}
+
+  .schritte{grid-template-columns:1fr;gap:var(--a3)}
+  .schritte::before{left:2.4rem;right:auto;top:2.4rem;bottom:2.4rem;border-top:0;border-left:3px dashed var(--cyan)}
+  .schritt{grid-template-columns:4.8rem 1fr;justify-items:start;text-align:left;gap:var(--a2);align-items:center}
+
+  .stimmen{grid-template-columns:1fr}
+  .stimme{padding:var(--a5) var(--a3) var(--a3)}
+  .marke{left:var(--a3)}
+  .hinweis{padding:var(--a3) var(--a2) calc(var(--a3) + 1.5rem)}
+  .fuss{padding:calc(var(--a4) + 14px) var(--a2) var(--a4)}
+}
+
+/* ---------- Ruhe: Standbild statt Bewegung ---------- */
+@media (prefers-reduced-motion:reduce){
+  .stoerung{display:none;animation:none}
+  *{transition:none!important}
+}
