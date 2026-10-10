@@ -1,0 +1,484 @@
+/* Look: Gradient Mesh (weiche Netzverläufe auf warmem Weiß)
+   Demo der HORTA-Startseite. Keine Körnung, kein Glas, keine Blobs mit Kontur. */
+
+/* ---------- Schriften (nur lokal) ---------- */
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 800; font-display: swap; src: url("../../design-vorlagen/fonts/Manrope-800.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 600; font-display: swap; src: url("../../design-vorlagen/fonts/Manrope-600.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 400; font-display: swap; src: url("../../design-vorlagen/fonts/Manrope-400.woff2") format("woff2"); }
+
+/* ---------- Typisierte Eigenschaften: nur damit lassen sich die Mittelpunkte der Verläufe weich animieren ----------
+   Ohne @property-Unterstützung bleiben die Werte aus .netz stehen, das Mesh steht dann still. */
+@property --x1 { syntax: "<percentage>"; inherits: false; initial-value: 12%; }
+@property --y1 { syntax: "<percentage>"; inherits: false; initial-value: 20%; }
+@property --x2 { syntax: "<percentage>"; inherits: false; initial-value: 88%; }
+@property --y2 { syntax: "<percentage>"; inherits: false; initial-value: 14%; }
+@property --x3 { syntax: "<percentage>"; inherits: false; initial-value: 74%; }
+@property --y3 { syntax: "<percentage>"; inherits: false; initial-value: 90%; }
+@property --x4 { syntax: "<percentage>"; inherits: false; initial-value: 24%; }
+@property --y4 { syntax: "<percentage>"; inherits: false; initial-value: 92%; }
+@property --x5 { syntax: "<percentage>"; inherits: false; initial-value: 52%; }
+@property --y5 { syntax: "<percentage>"; inherits: false; initial-value: 30%; }
+@property --x6 { syntax: "<percentage>"; inherits: false; initial-value: 98%; }
+@property --y6 { syntax: "<percentage>"; inherits: false; initial-value: 58%; }
+
+:root {
+  /* Farben mit Rolle */
+  --grund: #fffaf4;            /* Seitengrund, warmes Weiß */
+  --mesh-grund: #fff4ea;       /* Grundfarbe unter jedem Netz */
+  --tinte: #14221c;            /* Text, Linien, Zeichen, Ziffern, Details im Gerät */
+  --tinte-2: #2a3b32;          /* Zweittext (Kleingedrucktes, Untertitel), gemessen mindestens 8:1 auf dem Netz */
+  --weiss: #ffffff;
+  --pfirsich: #ffd7b5;         /* nur Netz */
+  --limette: #d8f5a2;          /* nur Netz */
+  --himmel: #b9dcff;           /* nur Netz */
+  --rose: #ffc4d6;             /* nur Netz */
+  --signal: #0f3d2e;           /* NUR Kaufknopf (weiße Schrift) */
+  --signal-hell: #1d5c46;      /* Hover des Kaufknopfs */
+  --stern: #ffb77a;            /* Sterne (mit Tintenrand) */
+  --linie: rgba(20, 34, 28, .14);
+  --flaeche: rgba(255, 255, 255, .7);   /* ruhige halbdichte Fläche über dem Netz */
+  --hover: rgba(255, 215, 181, .55);    /* Hover-Fläche der Navigation (Pfirsich) */
+
+  /* Verlaufsstufen: Kosinus-Abfall in 21 Stufen (alle 5 %), weicher Rand, wenig Banding */
+  --f-pfirsich: rgb(255 215 181 / 1) 0%, rgb(255 215 181 / 0.994) 5%, rgb(255 215 181 / 0.976) 10%, rgb(255 215 181 / 0.946) 15%, rgb(255 215 181 / 0.905) 20%, rgb(255 215 181 / 0.854) 25%, rgb(255 215 181 / 0.794) 30%, rgb(255 215 181 / 0.727) 35%, rgb(255 215 181 / 0.655) 40%, rgb(255 215 181 / 0.578) 45%, rgb(255 215 181 / 0.5) 50%, rgb(255 215 181 / 0.422) 55%, rgb(255 215 181 / 0.345) 60%, rgb(255 215 181 / 0.273) 65%, rgb(255 215 181 / 0.206) 70%, rgb(255 215 181 / 0.146) 75%, rgb(255 215 181 / 0.095) 80%, rgb(255 215 181 / 0.054) 85%, rgb(255 215 181 / 0.024) 90%, rgb(255 215 181 / 0.006) 95%, rgb(255 215 181 / 0) 100%;
+  --f-limette: rgb(216 245 162 / 1) 0%, rgb(216 245 162 / 0.994) 5%, rgb(216 245 162 / 0.976) 10%, rgb(216 245 162 / 0.946) 15%, rgb(216 245 162 / 0.905) 20%, rgb(216 245 162 / 0.854) 25%, rgb(216 245 162 / 0.794) 30%, rgb(216 245 162 / 0.727) 35%, rgb(216 245 162 / 0.655) 40%, rgb(216 245 162 / 0.578) 45%, rgb(216 245 162 / 0.5) 50%, rgb(216 245 162 / 0.422) 55%, rgb(216 245 162 / 0.345) 60%, rgb(216 245 162 / 0.273) 65%, rgb(216 245 162 / 0.206) 70%, rgb(216 245 162 / 0.146) 75%, rgb(216 245 162 / 0.095) 80%, rgb(216 245 162 / 0.054) 85%, rgb(216 245 162 / 0.024) 90%, rgb(216 245 162 / 0.006) 95%, rgb(216 245 162 / 0) 100%;
+  --f-himmel: rgb(185 220 255 / 1) 0%, rgb(185 220 255 / 0.994) 5%, rgb(185 220 255 / 0.976) 10%, rgb(185 220 255 / 0.946) 15%, rgb(185 220 255 / 0.905) 20%, rgb(185 220 255 / 0.854) 25%, rgb(185 220 255 / 0.794) 30%, rgb(185 220 255 / 0.727) 35%, rgb(185 220 255 / 0.655) 40%, rgb(185 220 255 / 0.578) 45%, rgb(185 220 255 / 0.5) 50%, rgb(185 220 255 / 0.422) 55%, rgb(185 220 255 / 0.345) 60%, rgb(185 220 255 / 0.273) 65%, rgb(185 220 255 / 0.206) 70%, rgb(185 220 255 / 0.146) 75%, rgb(185 220 255 / 0.095) 80%, rgb(185 220 255 / 0.054) 85%, rgb(185 220 255 / 0.024) 90%, rgb(185 220 255 / 0.006) 95%, rgb(185 220 255 / 0) 100%;
+  --f-rose: rgb(255 196 214 / 1) 0%, rgb(255 196 214 / 0.994) 5%, rgb(255 196 214 / 0.976) 10%, rgb(255 196 214 / 0.946) 15%, rgb(255 196 214 / 0.905) 20%, rgb(255 196 214 / 0.854) 25%, rgb(255 196 214 / 0.794) 30%, rgb(255 196 214 / 0.727) 35%, rgb(255 196 214 / 0.655) 40%, rgb(255 196 214 / 0.578) 45%, rgb(255 196 214 / 0.5) 50%, rgb(255 196 214 / 0.422) 55%, rgb(255 196 214 / 0.345) 60%, rgb(255 196 214 / 0.273) 65%, rgb(255 196 214 / 0.206) 70%, rgb(255 196 214 / 0.146) 75%, rgb(255 196 214 / 0.095) 80%, rgb(255 196 214 / 0.054) 85%, rgb(255 196 214 / 0.024) 90%, rgb(255 196 214 / 0.006) 95%, rgb(255 196 214 / 0) 100%;
+
+  /* Abstandsstufen und Radien */
+  --s1: 8px; --s2: 16px; --s3: 24px; --s4: 40px; --s5: 64px; --s6: 104px;
+  --pad: 32px;      /* Innenabstand aller Kacheln */
+  --pad-l: 56px;    /* Innenabstand der großen Tafeln (Hero, Bewertungen, Hinweis seitlich) */
+  --r-l: 40px; --r-m: 28px; --r-s: 18px;
+  --ease: cubic-bezier(.23, 1, .32, 1);
+  --kopf-h: 72px;
+}
+
+/* ---------- Grundlagen ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--kopf-h) + 16px); }   /* kein smooth scroll: Sprünge per Tastatur nie animieren */
+body {
+  margin: 0;
+  background: var(--grund);
+  color: var(--tinte);
+  font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+button { font: inherit; color: inherit; }
+a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }   /* kein Antipp-Verzug, kein Doppeltipp-Zoom */
+:focus-visible { outline: 3px solid var(--tinte); outline-offset: 3px; border-radius: 6px; }
+
+.nur-lesen { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.sprung {
+  position: absolute; left: 12px; top: -80px; z-index: 100;
+  min-height: 44px; display: inline-flex; align-items: center; padding: 0 20px;
+  background: var(--tinte); color: var(--weiss); border-radius: 999px; font-weight: 600; text-decoration: none;
+  transition: transform .16s var(--ease);
+}
+.sprung:active { transform: scale(.97); }
+.sprung:focus-visible { top: 12px; outline-color: var(--weiss); outline-offset: -5px; }
+.huelle { width: min(1248px, 100% - 48px); margin-inline: auto; }
+
+/* ---------- Das Netz im Hero: sechs überlagerte Verläufe, nur die Mittelpunkte wandern ---------- */
+.netz {
+  position: absolute; inset: 0; z-index: -1;
+  --x1: 12%; --y1: 20%; --x2: 88%; --y2: 14%; --x3: 74%; --y3: 90%;
+  --x4: 24%; --y4: 92%; --x5: 52%; --y5: 30%; --x6: 98%; --y6: 58%;
+  background-color: var(--mesh-grund);
+  background-image:
+    radial-gradient(ellipse 40% 58% at var(--x5) var(--y5), var(--f-himmel)),
+    radial-gradient(ellipse 36% 52% at var(--x6) var(--y6), var(--f-pfirsich)),
+    radial-gradient(ellipse 46% 62% at var(--x1) var(--y1), var(--f-pfirsich)),
+    radial-gradient(ellipse 42% 58% at var(--x2) var(--y2), var(--f-limette)),
+    radial-gradient(ellipse 50% 66% at var(--x3) var(--y3), var(--f-himmel)),
+    radial-gradient(ellipse 46% 58% at var(--x4) var(--y4), var(--f-rose));
+}
+
+/* Bewegung nur, wenn das Skript bestätigt hat, dass @property funktioniert (Klasse netz-an), und nur ohne Wunsch nach weniger Bewegung */
+@keyframes wandern-a {
+  0%   { --x1: 12%; --y1: 20%; --x2: 88%; --y2: 14%; }
+  100% { --x1: 30%; --y1: 44%; --x2: 68%; --y2: 36%; }
+}
+@keyframes wandern-b {
+  0%   { --x3: 74%; --y3: 90%; --x4: 24%; --y4: 92%; }
+  100% { --x3: 56%; --y3: 70%; --x4: 40%; --y4: 72%; }
+}
+@keyframes wandern-c {
+  0%   { --x5: 52%; --y5: 30%; --x6: 98%; --y6: 58%; }
+  100% { --x5: 38%; --y5: 54%; --x6: 82%; --y6: 36%; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .netz-an .netz {
+    /* steps(): etwa 5 kleine Schritte pro Sekunde (je rund 2 px) statt 60 Neuzeichnungen. Fürs Auge gleitet es, die Bildzeit halbiert sich (gemessen) */
+    animation:
+      wandern-a 26s steps(130) infinite alternate,
+      wandern-b 30s steps(150) -9s infinite alternate,
+      wandern-c 22s steps(110) -4s infinite alternate;
+  }
+  .netz-an .ruht .netz,
+  .netz-an .netz.ruht { animation-play-state: paused; }
+}
+
+/* ---------- Mesh-Kacheln: jede mit eigenem kleinen Netz (statisch) ---------- */
+.kachel {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--mesh-grund);
+  border-radius: var(--r-m);
+  border: 1px solid rgba(20, 34, 28, .06);
+}
+.kachel::before {
+  content: ""; position: absolute; inset: -16%; z-index: -1; pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 58% 58% at 20% 22%, var(--k1)),
+    radial-gradient(ellipse 56% 56% at 82% 28%, var(--k2)),
+    radial-gradient(ellipse 66% 58% at 52% 94%, var(--k3));
+  transition: transform .2s var(--ease);
+}
+.m-1 { --k1: var(--f-pfirsich); --k2: var(--f-rose);    --k3: var(--f-limette); }
+.m-2 { --k1: var(--f-limette);  --k2: var(--f-himmel);  --k3: var(--f-pfirsich); }
+.m-3 { --k1: var(--f-himmel);   --k2: var(--f-rose);    --k3: var(--f-limette); }
+.m-4 { --k1: var(--f-rose);     --k2: var(--f-pfirsich); --k3: var(--f-himmel); }
+/* ruhiges, breites Netz für die Bewertungstafel */
+.m-5::before {
+  inset: -10%;
+  background-image:
+    radial-gradient(ellipse 36% 60% at 8% 30%, var(--f-pfirsich)),
+    radial-gradient(ellipse 34% 56% at 50% 10%, var(--f-limette)),
+    radial-gradient(ellipse 38% 62% at 92% 40%, var(--f-himmel)),
+    radial-gradient(ellipse 40% 54% at 40% 100%, var(--f-rose)),
+    radial-gradient(ellipse 30% 50% at 90% 96%, var(--f-pfirsich));
+}
+
+/* ---------- Kopfzeile ---------- */
+.kopf {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--grund);
+  border-bottom: 1px solid var(--linie);
+}
+.kopf__innen { display: flex; align-items: center; gap: var(--s2); min-height: var(--kopf-h); }
+.logo {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px;
+  text-decoration: none; font-weight: 800; font-size: 1.3125rem; letter-spacing: .08em;
+  border-radius: 999px;
+  transition: transform .16s var(--ease);
+}
+.logo svg { width: 36px; height: 36px; flex: none; }
+.nav { display: flex; gap: 4px; margin-left: auto; }
+.nav a, .korb, .menue-knopf {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 16px; border-radius: 999px;
+  border: 1.5px solid transparent; background: transparent;
+  font-weight: 600; font-size: .9375rem; line-height: 1; text-decoration: none; cursor: pointer;
+  transition: transform .16s var(--ease);
+}
+.nav a[aria-current] {
+  background: linear-gradient(100deg, var(--pfirsich), var(--rose) 55%, var(--himmel));
+  text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px;
+}
+.korb { border-color: var(--tinte); padding-right: 8px; }
+.korb svg { width: 20px; height: 20px; flex: none; }
+.korb__zahl {
+  display: inline-grid; place-items: center; min-width: 28px; height: 28px; padding: 0 8px;
+  border-radius: 999px; background: var(--tinte); color: var(--weiss); font-size: .875rem; font-weight: 800;
+}
+.menue-knopf { display: none; border-color: var(--tinte); }
+.logo:active, .nav a:active, .korb:active, .menue-knopf:active { transform: scale(.97); }
+
+/* ---------- Hero ---------- */
+.hero { padding-top: var(--s2); }
+.hero__tafel {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+  align-items: center; gap: var(--s3);
+  padding: var(--pad-l);
+  border-radius: var(--r-l);
+  background: var(--mesh-grund);
+}
+.hero__text { container-type: inline-size; display: flex; flex-direction: column; align-items: flex-start; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 36px; padding: 0 16px 0 12px;
+  background: var(--flaeche); border: 1px solid rgba(20, 34, 28, .1); border-radius: 999px;
+  font-weight: 600; font-size: .9375rem; line-height: 1.2;
+}
+.punkt {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--pfirsich), var(--rose) 55%, var(--himmel));
+  box-shadow: inset 0 0 0 1px rgba(20, 34, 28, .18);
+}
+h1 {
+  margin-top: 18px;
+  font-weight: 800; letter-spacing: -.035em; line-height: 1.02;
+  font-size: clamp(2.1rem, 10.2cqi, 4.5rem);
+}
+h1 .zeile { display: block; }
+.untertitel { margin-top: 20px; max-width: 34em; font-size: 1.1875rem; line-height: 1.6; color: var(--tinte-2); }
+.bewertung { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-top: var(--s3); font-weight: 600; font-size: .9375rem; }
+
+.sterne { display: inline-flex; gap: 2px; }
+.sterne svg { width: 22px; height: 22px; fill: var(--stern); stroke: var(--tinte); stroke-width: 1.6; stroke-linejoin: round; }
+.sterne .teil { fill: url(#stern-teil); }
+.sterne .leer { fill: rgba(255, 255, 255, .85); }
+
+.preis {
+  align-self: stretch; margin-top: var(--s3); max-width: 540px;
+  padding: 20px 24px 24px;
+  background: var(--flaeche); border: 1px solid rgba(255, 255, 255, .9); border-radius: var(--r-m);
+  display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 18px; align-items: center;
+}
+.preis__zahl { grid-row: 1 / span 1; font-weight: 800; font-size: 3rem; line-height: 1; letter-spacing: -.035em; white-space: nowrap; }
+.preis__aktion { font-weight: 600; font-size: .9375rem; line-height: 1.4; }
+.preis__klein { grid-column: 1 / -1; margin-top: 8px; font-size: .875rem; line-height: 1.5; color: var(--tinte-2); }
+.cta {
+  grid-column: 1 / -1; position: relative; isolation: isolate; overflow: hidden;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: 100%; min-height: 64px; margin-top: var(--s2); padding: 0 28px;
+  border: 0; border-radius: 999px; background: var(--signal); color: var(--weiss);
+  font-weight: 800; font-size: 1.1875rem; letter-spacing: -.005em; cursor: pointer;
+  box-shadow: 0 16px 28px -14px rgba(15, 61, 46, .7);
+  transition: transform .16s var(--ease);
+}
+.cta svg { width: 22px; height: 22px; flex: none; }
+.cta::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--signal-hell); opacity: 0; transition: opacity .16s var(--ease); }
+.cta:active { transform: scale(.97); }
+.cta:focus-visible { outline-offset: 4px; border-radius: 999px; }
+
+.hero__bild { display: grid; place-items: center; }
+.geraet { width: 100%; max-width: 560px; height: auto; overflow: visible; }
+
+/* fallende Stücke: nur transform und opacity */
+.fall { animation: fallen 3.6s linear infinite; opacity: 0; }
+.fall--1 { animation-delay: 0s; }
+.fall--2 { animation-delay: -.7s; }
+.fall--3 { animation-delay: -1.5s; }
+.fall--4 { animation-delay: -2.2s; }
+.fall--5 { animation-delay: -2.9s; }
+@keyframes fallen {
+  0%   { opacity: 0; transform: translate3d(0, 0, 0) rotate(0); }
+  10%  { opacity: 1; }
+  78%  { opacity: 1; }
+  100% { opacity: 0; transform: translate3d(var(--fx), 78px, 0) rotate(var(--fr)); }
+}
+.ruht .fall, .fall.ruht { animation-play-state: paused; }
+
+/* ---------- Zahlenleiste ---------- */
+.zahlen-abschnitt { padding-top: var(--s3); }
+.zahlen { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
+.zahlen li { display: flex; flex-direction: column; justify-content: flex-start; gap: 6px; padding: var(--pad); }
+.zahlen strong { font-weight: 800; font-size: clamp(2rem, 3.4vw, 3rem); line-height: 1; letter-spacing: -.035em; white-space: nowrap; }
+.zahlen span { font-size: 1rem; line-height: 1.45; }
+
+/* ---------- Abschnitte ---------- */
+.abschnitt { padding-top: var(--s6); }
+.abschnitt__kopf { margin-bottom: var(--s4); }
+.streifen { display: block; width: 64px; height: 10px; margin-bottom: 14px; border-radius: 999px; background: linear-gradient(90deg, var(--pfirsich), var(--rose) 34%, var(--himmel) 68%, var(--limette)); box-shadow: inset 0 0 0 1px rgba(20, 34, 28, .12); }
+h2 { font-weight: 800; letter-spacing: -.03em; line-height: 1.08; font-size: clamp(1.9rem, 3.6vw, 2.75rem); }
+h3 { font-weight: 800; letter-spacing: -.02em; line-height: 1.2; font-size: 1.375rem; }
+
+.karten { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
+.karte { padding: var(--pad); }
+.karte h3 { margin-top: var(--s3); }
+.karte p { margin-top: 10px; }
+.symbol { color: var(--tinte); display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--flaeche); border: 1px solid rgba(20, 34, 28, .08); }
+.symbol svg { width: 28px; height: 28px; }
+
+.schritte { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+.schritt { padding: var(--pad); }
+.schritt__nr { display: block; font-weight: 800; font-size: 5rem; line-height: .95; letter-spacing: -.05em; }
+.schritt h3 { margin-top: var(--s2); }
+.schritt p { margin-top: 10px; }
+
+/* ---------- Bewertungen ---------- */
+.stimmen-tafel { padding: var(--pad-l); border-radius: var(--r-l); }
+.stimmen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+.stimme {
+  display: flex; flex-direction: column; align-items: flex-start; gap: var(--s2); padding: var(--pad);
+  background: rgba(255, 255, 255, .78); border: 1px solid rgba(255, 255, 255, .95); border-radius: var(--r-m);
+}
+.stimme figure { display: flex; flex: 1; flex-direction: column; justify-content: space-between; gap: var(--s3); width: 100%; }
+.stimme__marke {
+  display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px;
+  border: 1.5px solid var(--tinte); border-radius: 999px; background: var(--weiss);
+  font-weight: 600; font-size: .8125rem; letter-spacing: .02em;
+}
+.stimme blockquote { font-weight: 600; font-size: 1.1875rem; line-height: 1.5; }
+.stimme__fuss { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; font-weight: 800; }
+
+/* ---------- Hinweisblock ---------- */
+.hinweis { display: grid; grid-template-columns: 148px minmax(0, 1fr); align-items: center; gap: var(--s4); padding: var(--pad) var(--pad-l); border-radius: var(--r-l); }
+.hinweis__bild { width: 148px; height: 148px; }
+.hinweis h2 { font-size: clamp(1.7rem, 3vw, 2.25rem); }
+.hinweis p { margin-top: 12px; max-width: 40em; font-size: 1.1875rem; }
+
+/* ---------- Fußzeile ---------- */
+.fuss { margin-top: var(--s6); padding: var(--s4) 0 var(--s5); border-top: 1px solid var(--linie); }
+.fuss__reihe { display: flex; flex-wrap: wrap; align-items: center; gap: 0 4px; font-size: .9375rem; }
+.fuss__marke { font-weight: 800; letter-spacing: .08em; padding-right: 8px; }
+.fuss__reihe a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; border-radius: 8px; transition: transform .16s var(--ease); }
+.fuss__reihe a:active { transform: scale(.97); }
+.fuss__entwurf { margin-top: var(--s1); font-size: .875rem; color: var(--tinte-2); }
+
+/* ---------- Einblenden beim Scrollen (nur transform und opacity, unter 300 ms) ---------- */
+@keyframes einblenden { from { opacity: 0; transform: translate3d(0, 14px, 0); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .js .zeigen:not(.ist-da) { opacity: 0; }
+  .js .zeigen.ist-da { animation: einblenden .28s var(--ease) backwards; animation-delay: calc(var(--i, 0) * 50ms); }
+}
+
+/* ---------- Hover nur mit Maus ---------- */
+@media (hover: hover) and (pointer: fine) {
+  .nav a:not([aria-current]):hover { background: var(--hover); }
+  .korb:hover { background: var(--hover); }
+  .cta:hover { transform: translate3d(0, -2px, 0); }
+  .cta:hover::after { opacity: 1; }
+  .cta:hover:active { transform: scale(.97); }
+  .kachel:hover::before { transform: translate3d(-2%, -1.5%, 0) scale(1.02); }
+  .fuss__reihe a:hover { text-decoration: underline; }
+}
+
+/* ---------- Breite Tablets ---------- */
+@media (max-width: 1100px) {
+  :root { --pad: 28px; --pad-l: 40px; }
+  .karten { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav a { padding: 0 12px; }
+}
+
+/* Menü-Knopf statt fünf Links, sobald es eng wird (Prüfbereich 720 bis 1000 px) */
+@media (max-width: 1000px) {
+  :root { --kopf-h: 64px; }
+  .logo { margin-right: auto; }
+  .nav { margin-left: 0; }
+  .js .menue-knopf { display: inline-flex; }
+  .js .nav {
+    display: none; position: absolute; left: 12px; right: 12px; top: calc(100% + 8px);
+    flex-direction: column; gap: 2px; padding: 10px;
+    background: #fffdfa; border: 1px solid var(--linie); border-radius: var(--r-m);
+    box-shadow: 0 24px 48px -24px rgba(20, 34, 28, .35);
+  }
+  .js .nav.ist-offen { display: flex; }
+  .js .nav a { justify-content: flex-start; min-height: 52px; padding: 0 18px; font-size: 1.0625rem; }
+  /* ohne Skript: Links in eigener Zeile unter dem Logo */
+  html:not(.js) .kopf__innen { flex-wrap: wrap; padding-block: 8px; }
+  html:not(.js) .nav { order: 5; width: 100%; flex-wrap: wrap; }
+}
+
+/* Hero einspaltig: Eyebrow, Überschrift, Bild, Text, Sterne, Preis */
+@media (max-width: 900px) {
+  :root { --pad-l: 32px; }
+  .stimmen { grid-template-columns: minmax(0, 1fr); }
+  .zahlen { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero__tafel { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .hero__text { display: contents; }
+  .eyebrow { order: 1; align-self: flex-start; }
+  h1 { order: 2; font-size: clamp(2rem, 7.4vw, 3.5rem); }
+  .hero__bild { order: 3; margin: var(--s2) 0 0; height: 300px; display: flex; justify-content: center; }
+  .geraet { width: auto; height: 100%; max-width: 100%; }
+  .untertitel { order: 4; margin-top: var(--s2); max-width: 36em; }
+  .bewertung { order: 5; }
+  .preis { order: 6; max-width: none; }
+  .hinweis { grid-template-columns: minmax(0, 1fr); gap: var(--s3); padding: var(--pad-l); }
+  .hinweis__bild { width: 112px; height: 112px; }
+}
+
+/* ---------- Handy: eigener Entwurf ---------- */
+@media (max-width: 700px) {
+  :root { --s3: 20px; --s4: 28px; --s5: 44px; --s6: 72px; --pad: 18px; --pad-l: 18px; --r-l: 30px; --r-m: 22px; --kopf-h: 60px; }
+  body { font-size: 1rem; }
+  .huelle { width: min(1248px, 100% - 24px); }
+  .logo { font-size: 1.125rem; }
+  .logo svg { width: 32px; height: 32px; }
+  .korb { padding: 0 6px 0 12px; }
+  .js .nav { left: 8px; right: 8px; }
+
+  /* einfacheres Netz: drei statt sechs Ebenen */
+  .netz {
+    background-image:
+      radial-gradient(ellipse 90% 34% at var(--x1) var(--y1), var(--f-pfirsich)),
+      radial-gradient(ellipse 90% 38% at var(--x3) var(--y3), var(--f-himmel)),
+      radial-gradient(ellipse 80% 30% at var(--x2) var(--y2), var(--f-limette));
+  }
+
+  .hero { padding-top: var(--s1); }
+  .hero__tafel { padding-bottom: 22px; }
+  .eyebrow { min-height: 34px; font-size: .875rem; }
+  h1 { margin-top: 12px; font-size: clamp(1.6rem, 7.6vw, 2.2rem); letter-spacing: -.03em; }
+  .hero__bild { height: 196px; margin-top: 8px; }
+  .untertitel { margin-top: 10px; font-size: 1rem; line-height: 1.5; }
+  .bewertung { margin-top: 12px; }
+  .preis { margin-top: 14px; padding: 16px; }
+  .preis__zahl { font-size: 2.375rem; }
+  .preis__aktion { font-size: .875rem; }
+  .preis__klein { margin-top: 6px; font-size: .875rem; }
+  .cta { min-height: 60px; margin-top: 14px; font-size: 1.125rem; }
+
+  .zahlen-abschnitt { padding-top: var(--s2); }
+  .zahlen { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .zahlen strong { font-size: 1.875rem; }
+  .zahlen span { font-size: .9375rem; }
+
+  .abschnitt__kopf { margin-bottom: var(--s3); }
+  .karten, .schritte { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .karte, .schritt { display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 16px; align-items: start; }
+  .karte .symbol { grid-row: 1 / span 2; }
+  .karte h3, .schritt h3 { margin-top: 2px; font-size: 1.1875rem; }
+  .karte p, .schritt p { margin-top: 4px; }
+  .schritt__nr { grid-row: 1 / span 2; font-size: 3.25rem; line-height: 1; }
+
+  .stimmen-tafel { padding: 22px 14px 14px; }
+  .stimmen-tafel .abschnitt__kopf { padding-inline: 6px; }
+  .stimme blockquote { font-size: 1.0625rem; }
+  .hinweis { padding: 22px; }
+  .hinweis p { font-size: 1.0625rem; }
+  .fuss { margin-top: var(--s5); }
+  .fuss__reihe a { padding: 0 8px; }
+}
+
+@media (max-width: 430px) {
+  .kopf__innen { gap: 8px; }
+  .logo { gap: 8px; font-size: 1.0625rem; letter-spacing: .06em; }
+  .logo svg { width: 30px; height: 30px; }
+  .korb { gap: 6px; padding: 0 6px 0 12px; }
+  .menue-knopf { padding: 0 14px; }
+}
+@media (max-width: 380px) {
+  .korb svg { display: none; }
+  .korb { font-size: .875rem; }
+  .preis { grid-template-columns: minmax(0, 1fr); }
+  .preis__zahl { grid-row: auto; }
+  .preis__aktion { margin-top: 4px; }
+}
+@media (max-width: 360px) {
+  .logo { font-size: 1rem; letter-spacing: .05em; gap: 8px; }
+  .logo svg { width: 28px; height: 28px; }
+  .korb { gap: 6px; padding: 0 5px 0 10px; font-size: .8125rem; }
+  .korb svg { display: none; }
+  .menue-knopf { padding: 0 10px; }
+}
+
+/* ---------- Mehr Kontrast gewünscht: Flächen deckend, Rahmen sichtbar, Netz steht still ---------- */
+@media (prefers-contrast: more) {
+  :root { --tinte-2: var(--tinte); }
+  .netz { animation: none !important; }
+  .kachel, .stimme, .preis, .eyebrow { border: 2px solid var(--tinte); }
+  .preis, .eyebrow, .stimme, .symbol { background: #fff; }
+  .nav a[aria-current] { background: #fff; border-color: var(--tinte); }
+  .cta { border: 2px solid var(--tinte); }
+}
+/* Erzwungene Farben (Windows-Kontrastmodus): Kaufknopf behält eine sichtbare Kante */
+@media (forced-colors: active) {
+  .cta, .korb, .menue-knopf, .stimme__marke { border: 2px solid ButtonText; }
+}
+
+/* ---------- Reduzierte Bewegung: Standbild ---------- */
+@media (prefers-reduced-motion: reduce) {
+  /* weniger, nicht null: Bewegung fällt weg, kurze Deckkraft-Übergänge (Hover am Kaufknopf) bleiben */
+  *, *::before, *::after { animation: none !important; transition-property: opacity !important; transition-duration: .15s !important; }
+  .fall { opacity: 1; transform: translate3d(0, var(--sy, 30px), 0) rotate(var(--sr, 20deg)); }
+}
