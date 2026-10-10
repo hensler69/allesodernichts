@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HORTA Gemüseschneider HT-5: Look Particles (Demo)</title>
+<meta name="description" content="Entwurf der HORTA-Startseite im Look Particles: dunkler Grund, ein lebendiges Punktfeld mit Linien, Kaufknopf in Orange.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#070b14">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23070b14%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2711%27 fill=%27none%27 stroke=%27%23b6ff5c%27 stroke-width=%272.4%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%273%27 fill=%27%235cffc8%27/%3E%3C/svg%3E">
+<link rel="preload" href="../../design-vorlagen/fonts/SpaceGrotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="springen" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Symbole, einmal definiert: Stern und die Hero-Figur (zwei Ausschnitte: Gross für PC, Klein für Handy) -->
+<svg class="sr" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="stern" viewBox="0 0 24 24"><path d="M12 2.4l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.6 5.9 21l1.4-6.8L2.2 9.5l6.9-.8z"/></symbol>
+    <linearGradient id="stern-teil" x1="0" x2="1" y1="0" y2="0"><stop offset="60%" stop-color="#b6ff5c"/><stop offset="60%" stop-color="#b6ff5c" stop-opacity="0.2"/></linearGradient>
+    <g id="fig-inhalt">
+<path class="fig-netz" d="M284 20L288 44M284 20L312 44M298.5 20L288 44M298.5 20L312 44M312.9 20L312 44M312.9 20L288 44M323.9 26.9L312 44M323.9 26.9L312 60M322.3 40.9L312 44M322.3 40.9L312 60M308.8 44L312 44M308.8 44L312 60M294.3 44L288 44M294.3 44L288 60M280 42.9L288 44M280 42.9L288 60M276 29.9L288 44M276 29.9L288 60M288 44L308.8 44M288 44L312 44M288 60L282.5 76.6M288 60L296.5 76M288 76L282.5 76.6M288 76L296.5 76M288 92L282.5 95.4M288 92L296.5 96M312 44L294.3 44M312 44L288 60M312 60L310.5 76.2M312 60L324.5 77.3M312 76L310.5 76.2M312 76L324.5 77.3M312 92L310.5 95.8M312 92L324.5 94.7M350 86L350 86M350 86L350 101.2M338.3 92.4L350 86M338.3 92.4L350 101.2M324.5 94.7L312 76M324.5 94.7L350 101.2M310.5 95.8L312 76M310.5 95.8L288 92M296.5 96L312 92M296.5 96L288 76M282.5 95.4L288 76M282.5 95.4L312 92M268.6 93.8L288 92M268.6 93.8L250 101.2M255 90.4L250 86M255 90.4L250 101.2M255 81.6L250 86M255 81.6L250 101.2M268.6 78.2L288 76M268.6 78.2L250 86M282.5 76.6L288 92M282.5 76.6L312 76M296.5 76L312 76M296.5 76L288 92M310.5 76.2L312 92M310.5 76.2L288 76M324.5 77.3L312 92M324.5 77.3L350 86M338.3 79.6L350 86M338.3 79.6L350 101.2M250 86L268.6 93.8M250 86L282.5 95.4M250 101.2L268.6 78.2M250 101.2L282.5 95.4M250 116.5L255 90.4M250 116.5L268.6 93.8M250 162.2L261 200.5M250 177.5L261 200.5M250 177.5L274.5 194.3M250 192.8L261 200.5M250 192.8L248.9 209.1M250 208L248.9 209.1M250 208L261 200.5M350 86L324.5 94.7M350 86L312 92M350 101.2L324.5 77.3M350 101.2L312 92M350 116.5L338.3 92.4M350 116.5L350 86M350 162.2L332.4 197.1M350 177.5L332.4 197.1M350 177.5L345.2 204.5M350 192.8L345.2 204.5M350 192.8L332.4 197.1M350 208L345.2 204.5M350 208L356.4 214.2M378 268L396 261.4M378 268L396 276.5M376.6 282.8L379.3 300M376.6 282.8L371 300M372.4 297L371 300M372.4 297L379.3 300M365.6 310.2L371 300M365.6 310.2L379.3 300M356.4 321.8L341 309M356.4 321.8L350.2 297M345.2 331.5L329 318.2M345.2 331.5L341 309M332.4 338.9L329 318.2M332.4 338.9L315 324M318.4 343.8L315 324M318.4 343.8L300 326M303.7 345.9L300 326M303.7 345.9L315 324M288.9 345.2L285 324M288.9 345.2L300 326M274.5 341.7L285 324M274.5 341.7L271 318.2M261 335.5L271 318.2M261 335.5L259 309M248.9 326.9L259 309M248.9 326.9L271 318.2M238.7 316.2L259 309M238.7 316.2L249.8 297M230.7 303.7L249.8 297M230.7 303.7L244 283M225.2 290L244 283M225.2 290L249.8 297M222.4 275.4L242 268M222.4 275.4L244 283M222.4 260.6L242 268M222.4 260.6L244 253M225.2 246L244 253M225.2 246L249.8 239M230.7 232.3L249.8 239M230.7 232.3L244 253M238.7 219.8L250 208M238.7 219.8L259 227M248.9 209.1L259 227M248.9 209.1L271 217.8M261 200.5L271 217.8M261 200.5L259 227M274.5 194.3L285 212M274.5 194.3L271 217.8M288.9 190.8L285 212M288.9 190.8L300 210M303.7 190.1L300 210M303.7 190.1L315 212M318.4 192.2L315 212M318.4 192.2L300 210M332.4 197.1L350 208M332.4 197.1L329 217.8M345.2 204.5L329 217.8M345.2 204.5L341 227M356.4 214.2L341 227M356.4 214.2L350 192.8M365.6 225.8L371 236M365.6 225.8L379.3 236M372.4 239L371 236M372.4 239L379.3 236M376.6 253.2L379.3 236M376.6 253.2L371 236M358 268L342.4 257.8M358 268L378 268M356 283L376.6 282.8M356 283L372.4 297M350.2 297L330.4 294.7M350.2 297L365.6 310.2M341 309L330.4 294.7M341 309L322.8 305.2M329 318.2L322.8 305.2M329 318.2L330.4 294.7M315 324L322.8 305.2M315 324L310.5 301.2M300 326L284 305.2M300 326L310.5 301.2M285 324L284 305.2M285 324L271.7 301.2M271 318.2L271.7 301.2M271 318.2L284 305.2M259 309L271.7 301.2M259 309L271.7 288.2M249.8 297L271.7 301.2M249.8 297L271.7 288.2M244 283L259.7 264.3M244 283L271.7 288.2M242 268L259.7 264.3M242 268L259.7 251.3M244 253L259.7 251.3M244 253L259.7 264.3M249.8 239L259.7 251.3M249.8 239L238.7 219.8M259 227L250 208M259 227L272 247.3M271 217.8L291.1 228.5M271 217.8L250 208M285 212L291.1 228.5M285 212L303.4 224.5M300 210L303.4 224.5M300 210L291.1 228.5M315 212L303.4 224.5M315 212L332.4 197.1M329 217.8L350 208M329 217.8L311 235M341 227L350 208M341 227L334.8 247.3M350.2 239L334.8 247.3M350.2 239L365.6 225.8M356 253L342.4 257.8M356 253L376.6 253.2M311 235L322.5 251.3M311 235L315 212M303.4 245.5L322.5 251.3M303.4 245.5L300 268M291.1 241.5L272 247.3M291.1 241.5L279.6 257.8M291.1 228.5L272 247.3M291.1 228.5L315 212M303.4 224.5L329 217.8M303.4 224.5L322.5 251.3M342.4 257.8L350.2 239M342.4 257.8L356 283M334.8 268.3L322.8 284.2M334.8 268.3L358 268M322.5 264.3L322.8 284.2M322.5 264.3L300 268M322.5 251.3L300 268M322.5 251.3L350.2 239M334.8 247.3L356 253M334.8 247.3L311 235M330.4 294.7L334.8 268.3M330.4 294.7L356 283M322.8 305.2L350.2 297M322.8 305.2L300 326M310.5 301.2L291.6 294.7M310.5 301.2L329 318.2M310.5 288.2L291.6 294.7M310.5 288.2L300 268M322.8 284.2L300 268M322.8 284.2L350.2 297M291.6 294.7L300 268M291.6 294.7L285 324M284 305.2L259 309M284 305.2L310.5 301.2M271.7 301.2L272 268.3M271.7 301.2L244 283M271.7 288.2L272 268.3M271.7 288.2L259.7 264.3M284 284.2L272 268.3M284 284.2L300 268M279.6 257.8L300 268M279.6 257.8L303.4 245.5M272 268.3L300 268M272 268.3L242 268M259.7 264.3L249.8 239M259.7 264.3L284 284.2M259.7 251.3L259 227M259.7 251.3L291.1 241.5M272 247.3L249.8 239M272 247.3L244 253M412 150L428 183.9M427.1 150L428 183.9M427.1 150L442 183.9M442.1 150L442 183.9M442.1 150L428 183.9M457.2 150L442 183.9M470.4 156L442 183.9M474 170.2L442 183.9M474 170.2L449 196M474 185.3L449 196M474 185.3L442 183.9M474 200.3L449 196M474 200.3L442 208.1M474 215.4L449 196M474 215.4L442 208.1M474 230.5L442 208.1M474 245.5L435 252M474 260.6L435 252M474 275.7L435 280M474 305.8L435 308M396 336.7L396 300M396 336.7L387.7 300M396 321.7L396 300M396 321.7L387.7 300M396 306.6L396 300M396 306.6L387.7 300M396 291.5L396 300M396 291.5L387.7 300M396 276.5L376.6 282.8M396 276.5L396 300M396 261.4L376.6 253.2M396 261.4L396 236M396 246.3L396 236M396 246.3L387.7 236M396 231.3L396 236M396 231.3L387.7 236M396 216.2L396 236M396 216.2L387.7 236M396 201.1L421 196M396 201.1L428 208.1M396 186.1L421 196M396 186.1L428 183.9M396 171L428 183.9M396 171L421 196M399.1 156.6L428 183.9M371 236L350.2 239M371 236L356 253M379.3 236L396 231.3M379.3 236L396 246.3M387.7 236L372.4 239M387.7 236L376.6 253.2M396 236L372.4 239M396 236L376.6 253.2M371 300L350.2 297M371 300L356 283M379.3 300L396 306.6M379.3 300L396 291.5M387.7 300L372.4 297M387.7 300L376.6 282.8M396 300L372.4 297M396 300L376.6 282.8M442 208.1L474 185.3M428 208.1L396 216.2M428 208.1L396 186.1M421 196L396 216.2M428 183.9L396 201.1M442 183.9L474 200.3M435 440L435 440M435 440L433.2 454.7M423.2 448.2L433.2 454.7M423.2 448.2L435 440M408.6 451.9L433.2 454.7M408.6 451.9L428 468.6M393.8 454.4L428 468.6M393.8 454.4L420 481.2M198.8 453.2L172 468.6M198.8 453.2L166.8 454.7M184 450.2L166.8 454.7M184 450.2L165 440M169.9 445.3L165 440M169.9 445.3L166.8 454.7M169.9 434.7L165 440M169.9 434.7L166.8 454.7M184 429.8L165 440M184 429.8L166.8 454.7M198.8 426.8L165 440M408.6 428.1L435 440M408.6 428.1L433.2 454.7M423.2 431.8L435 440M423.2 431.8L433.2 454.7M435 440L408.6 451.9M433.2 454.7L393.8 454.4M428 468.6L423.2 448.2M428 468.6L435 440M420 481.2L408.6 451.9M420 481.2L423.2 448.2M385.9 509.4L384 540M372.5 515.9L384 540M372.5 515.9L342 540M358.6 521.1L342 540M358.6 521.1L384 540M344.2 525L342 540M329.6 527.8L342 540M329.6 527.8L300 540M314.9 529.5L300 540M314.9 529.5L342 540M300 530L300 540M285.1 529.5L300 540M285.1 529.5L258 540M270.4 527.8L258 540M270.4 527.8L300 540M255.8 525L258 540M241.4 521.1L258 540M241.4 521.1L216 540M227.5 515.9L216 540M227.5 515.9L258 540M214.1 509.4L216 540M190 492.2L198.8 453.2M180 481.2L184 450.2M180 481.2L198.8 453.2M172 468.6L184 450.2M172 468.6L169.9 445.3M165 440L198.8 453.2M300 268L291.1 241.5M300 268L272 247.3M435 252L396 246.3M435 280L396 276.5M435 308L396 306.6M435 308L396 300M300 268L303.4 245.5M300 268L322.5 264.3M300 268L310.5 288.2M300 268L284 284.2M300 268L279.6 257.8"/>
+<path class="fig-linien" d="M284 20L298.5 20M298.5 20L312.9 20M312.9 20L323.9 26.9M323.9 26.9L322.3 40.9M322.3 40.9L308.8 44M308.8 44L294.3 44M294.3 44L280 42.9M280 42.9L276 29.9M276 29.9L284 20M288 44L288 60M288 60L288 76M288 76L288 92M312 44L312 60M312 60L312 76M312 76L312 92M350 86L338.3 92.4M338.3 92.4L324.5 94.7M324.5 94.7L310.5 95.8M310.5 95.8L296.5 96M296.5 96L282.5 95.4M282.5 95.4L268.6 93.8M268.6 93.8L255 90.4M255 90.4L255 81.6M255 81.6L268.6 78.2M268.6 78.2L282.5 76.6M282.5 76.6L296.5 76M296.5 76L310.5 76.2M310.5 76.2L324.5 77.3M324.5 77.3L338.3 79.6M338.3 79.6L350 86M250 86L250 101.2M250 101.2L250 116.5M250 116.5L250 131.8M250 131.8L250 147M250 147L250 162.2M250 162.2L250 177.5M250 177.5L250 192.8M250 192.8L250 208M350 86L350 101.2M350 101.2L350 116.5M350 116.5L350 131.8M350 131.8L350 147M350 147L350 162.2M350 162.2L350 177.5M350 177.5L350 192.8M350 192.8L350 208M378 268L376.6 282.8M376.6 282.8L372.4 297M372.4 297L365.6 310.2M365.6 310.2L356.4 321.8M356.4 321.8L345.2 331.5M345.2 331.5L332.4 338.9M332.4 338.9L318.4 343.8M318.4 343.8L303.7 345.9M303.7 345.9L288.9 345.2M288.9 345.2L274.5 341.7M274.5 341.7L261 335.5M261 335.5L248.9 326.9M248.9 326.9L238.7 316.2M238.7 316.2L230.7 303.7M230.7 303.7L225.2 290M225.2 290L222.4 275.4M222.4 275.4L222.4 260.6M222.4 260.6L225.2 246M225.2 246L230.7 232.3M230.7 232.3L238.7 219.8M238.7 219.8L248.9 209.1M248.9 209.1L261 200.5M261 200.5L274.5 194.3M274.5 194.3L288.9 190.8M288.9 190.8L303.7 190.1M303.7 190.1L318.4 192.2M318.4 192.2L332.4 197.1M332.4 197.1L345.2 204.5M345.2 204.5L356.4 214.2M356.4 214.2L365.6 225.8M365.6 225.8L372.4 239M372.4 239L376.6 253.2M376.6 253.2L378 268M358 268L356 283M356 283L350.2 297M350.2 297L341 309M341 309L329 318.2M329 318.2L315 324M315 324L300 326M300 326L285 324M285 324L271 318.2M271 318.2L259 309M259 309L249.8 297M249.8 297L244 283M244 283L242 268M242 268L244 253M244 253L249.8 239M249.8 239L259 227M259 227L271 217.8M271 217.8L285 212M285 212L300 210M300 210L315 212M315 212L329 217.8M329 217.8L341 227M341 227L350.2 239M350.2 239L356 253M356 253L358 268M311 235L303.4 245.5M303.4 245.5L291.1 241.5M291.1 241.5L291.1 228.5M291.1 228.5L303.4 224.5M303.4 224.5L311 235M342.4 257.8L334.8 268.3M334.8 268.3L322.5 264.3M322.5 264.3L322.5 251.3M322.5 251.3L334.8 247.3M334.8 247.3L342.4 257.8M330.4 294.7L322.8 305.2M322.8 305.2L310.5 301.2M310.5 301.2L310.5 288.2M310.5 288.2L322.8 284.2M322.8 284.2L330.4 294.7M291.6 294.7L284 305.2M284 305.2L271.7 301.2M271.7 301.2L271.7 288.2M271.7 288.2L284 284.2M284 284.2L291.6 294.7M279.6 257.8L272 268.3M272 268.3L259.7 264.3M259.7 264.3L259.7 251.3M259.7 251.3L272 247.3M272 247.3L279.6 257.8M412 150L427.1 150M427.1 150L442.1 150M442.1 150L457.2 150M457.2 150L470.4 156M470.4 156L474 170.2M474 170.2L474 185.3M474 185.3L474 200.3M474 200.3L474 215.4M474 215.4L474 230.5M474 230.5L474 245.5M474 245.5L474 260.6M474 260.6L474 275.7M474 275.7L474 290.7M474 290.7L474 305.8M474 305.8L474 320.9M474 320.9L474 335.9M474 335.9L474 351M474 351L470.9 365.4M470.9 365.4L458 372M458 372L442.9 372M442.9 372L427.9 372M427.9 372L412.8 372M412.8 372L399.6 366M399.6 366L396 351.8M396 351.8L396 336.7M396 336.7L396 321.7M396 321.7L396 306.6M396 306.6L396 291.5M396 291.5L396 276.5M396 276.5L396 261.4M396 261.4L396 246.3M396 246.3L396 231.3M396 231.3L396 216.2M396 216.2L396 201.1M396 201.1L396 186.1M396 186.1L396 171M396 171L399.1 156.6M399.1 156.6L412 150M371 236L379.3 236M379.3 236L387.7 236M387.7 236L396 236M371 300L379.3 300M379.3 300L387.7 300M387.7 300L396 300M449 196L442 208.1M442 208.1L428 208.1M428 208.1L421 196M421 196L428 183.9M428 183.9L442 183.9M442 183.9L449 196M435 440L423.2 448.2M423.2 448.2L408.6 451.9M408.6 451.9L393.8 454.4M393.8 454.4L378.9 456.2M378.9 456.2L363.9 457.6M363.9 457.6L348.9 458.6M348.9 458.6L333.8 459.4M333.8 459.4L318.8 459.8M318.8 459.8L303.8 460M303.8 460L288.7 459.9M288.7 459.9L273.7 459.6M273.7 459.6L258.6 459M258.6 459L243.6 458.2M243.6 458.2L228.6 457M228.6 457L213.7 455.4M213.7 455.4L198.8 453.2M198.8 453.2L184 450.2M184 450.2L169.9 445.3M169.9 445.3L169.9 434.7M169.9 434.7L184 429.8M184 429.8L198.8 426.8M198.8 426.8L213.7 424.6M213.7 424.6L228.6 423M228.6 423L243.6 421.8M243.6 421.8L258.6 421M258.6 421L273.7 420.4M273.7 420.4L288.7 420.1M288.7 420.1L303.8 420M303.8 420L318.8 420.2M318.8 420.2L333.8 420.6M333.8 420.6L348.9 421.4M348.9 421.4L363.9 422.4M363.9 422.4L378.9 423.8M378.9 423.8L393.8 425.6M393.8 425.6L408.6 428.1M408.6 428.1L423.2 431.8M423.2 431.8L435 440M435 440L433.2 454.7M433.2 454.7L428 468.6M428 468.6L420 481.2M420 481.2L410 492.2M410 492.2L398.5 501.5M398.5 501.5L385.9 509.4M385.9 509.4L372.5 515.9M372.5 515.9L358.6 521.1M358.6 521.1L344.2 525M344.2 525L329.6 527.8M329.6 527.8L314.9 529.5M314.9 529.5L300 530M300 530L285.1 529.5M285.1 529.5L270.4 527.8M270.4 527.8L255.8 525M255.8 525L241.4 521.1M241.4 521.1L227.5 515.9M227.5 515.9L214.1 509.4M214.1 509.4L201.5 501.5M201.5 501.5L190 492.2M190 492.2L180 481.2M180 481.2L172 468.6M172 468.6L166.8 454.7M166.8 454.7L165 440M90 540L132 540M132 540L174 540M174 540L216 540M216 540L258 540M258 540L300 540M300 540L342 540M342 540L384 540M384 540L426 540M426 540L468 540M468 540L510 540M435 252L435 280M435 280L435 308"/>
+<g class="fig-knoten"><circle cx="284" cy="20" r="3"/><circle cx="298.5" cy="20" r="3"/><circle cx="312.9" cy="20" r="3"/><circle cx="323.9" cy="26.9" r="3"/><circle cx="322.3" cy="40.9" r="3"/><circle cx="308.8" cy="44" r="3"/><circle cx="294.3" cy="44" r="3"/><circle cx="280" cy="42.9" r="3"/><circle cx="276" cy="29.9" r="3"/><circle cx="288" cy="44" r="3"/><circle cx="288" cy="60" r="3"/><circle cx="288" cy="76" r="3"/><circle cx="288" cy="92" r="3"/><circle cx="312" cy="44" r="3"/><circle cx="312" cy="60" r="3"/><circle cx="312" cy="76" r="3"/><circle cx="312" cy="92" r="3"/><circle cx="350" cy="86" r="3"/><circle cx="338.3" cy="92.4" r="3"/><circle cx="324.5" cy="94.7" r="3"/><circle cx="310.5" cy="95.8" r="3"/><circle cx="296.5" cy="96" r="3"/><circle cx="282.5" cy="95.4" r="3"/><circle cx="268.6" cy="93.8" r="3"/><circle cx="255" cy="90.4" r="3"/><circle cx="255" cy="81.6" r="3"/><circle cx="268.6" cy="78.2" r="3"/><circle cx="282.5" cy="76.6" r="3"/><circle cx="296.5" cy="76" r="3"/><circle cx="310.5" cy="76.2" r="3"/><circle cx="324.5" cy="77.3" r="3"/><circle cx="338.3" cy="79.6" r="3"/><circle cx="250" cy="86" r="3"/><circle cx="250" cy="101.2" r="3"/><circle cx="250" cy="116.5" r="3"/><circle cx="250" cy="131.8" r="3"/><circle cx="250" cy="147" r="3"/><circle cx="250" cy="162.2" r="3"/><circle cx="250" cy="177.5" r="3"/><circle cx="250" cy="192.8" r="3"/><circle cx="250" cy="208" r="3"/><circle cx="350" cy="86" r="3"/><circle cx="350" cy="101.2" r="3"/><circle cx="350" cy="116.5" r="3"/><circle cx="350" cy="131.8" r="3"/><circle cx="350" cy="147" r="3"/><circle cx="350" cy="162.2" r="3"/><circle cx="350" cy="177.5" r="3"/><circle cx="350" cy="192.8" r="3"/><circle cx="350" cy="208" r="3"/><circle cx="378" cy="268" r="3"/><circle cx="376.6" cy="282.8" r="3"/><circle cx="372.4" cy="297" r="3"/><circle cx="365.6" cy="310.2" r="3"/><circle cx="356.4" cy="321.8" r="3"/><circle cx="345.2" cy="331.5" r="3"/><circle cx="332.4" cy="338.9" r="3"/><circle cx="318.4" cy="343.8" r="3"/><circle cx="303.7" cy="345.9" r="3"/><circle cx="288.9" cy="345.2" r="3"/><circle cx="274.5" cy="341.7" r="3"/><circle cx="261" cy="335.5" r="3"/><circle cx="248.9" cy="326.9" r="3"/><circle cx="238.7" cy="316.2" r="3"/><circle cx="230.7" cy="303.7" r="3"/><circle cx="225.2" cy="290" r="3"/><circle cx="222.4" cy="275.4" r="3"/><circle cx="222.4" cy="260.6" r="3"/><circle cx="225.2" cy="246" r="3"/><circle cx="230.7" cy="232.3" r="3"/><circle cx="238.7" cy="219.8" r="3"/><circle cx="248.9" cy="209.1" r="3"/><circle cx="261" cy="200.5" r="3"/><circle cx="274.5" cy="194.3" r="3"/><circle cx="288.9" cy="190.8" r="3"/><circle cx="303.7" cy="190.1" r="3"/><circle cx="318.4" cy="192.2" r="3"/><circle cx="332.4" cy="197.1" r="3"/><circle cx="345.2" cy="204.5" r="3"/><circle cx="356.4" cy="214.2" r="3"/><circle cx="365.6" cy="225.8" r="3"/><circle cx="372.4" cy="239" r="3"/><circle cx="376.6" cy="253.2" r="3"/><circle cx="358" cy="268" r="3"/><circle cx="356" cy="283" r="3"/><circle cx="350.2" cy="297" r="3"/><circle cx="341" cy="309" r="3"/><circle cx="329" cy="318.2" r="3"/><circle cx="315" cy="324" r="3"/><circle cx="300" cy="326" r="3"/><circle cx="285" cy="324" r="3"/><circle cx="271" cy="318.2" r="3"/><circle cx="259" cy="309" r="3"/><circle cx="249.8" cy="297" r="3"/><circle cx="244" cy="283" r="3"/><circle cx="242" cy="268" r="3"/><circle cx="244" cy="253" r="3"/><circle cx="249.8" cy="239" r="3"/><circle cx="259" cy="227" r="3"/><circle cx="271" cy="217.8" r="3"/><circle cx="285" cy="212" r="3"/><circle cx="300" cy="210" r="3"/><circle cx="315" cy="212" r="3"/><circle cx="329" cy="217.8" r="3"/><circle cx="341" cy="227" r="3"/><circle cx="350.2" cy="239" r="3"/><circle cx="356" cy="253" r="3"/><circle cx="412" cy="150" r="3"/><circle cx="427.1" cy="150" r="3"/><circle cx="442.1" cy="150" r="3"/><circle cx="457.2" cy="150" r="3"/><circle cx="470.4" cy="156" r="3"/><circle cx="474" cy="170.2" r="3"/><circle cx="474" cy="185.3" r="3"/><circle cx="474" cy="200.3" r="3"/><circle cx="474" cy="215.4" r="3"/><circle cx="474" cy="230.5" r="3"/><circle cx="474" cy="245.5" r="3"/><circle cx="474" cy="260.6" r="3"/><circle cx="474" cy="275.7" r="3"/><circle cx="474" cy="290.7" r="3"/><circle cx="474" cy="305.8" r="3"/><circle cx="474" cy="320.9" r="3"/><circle cx="474" cy="335.9" r="3"/><circle cx="474" cy="351" r="3"/><circle cx="470.9" cy="365.4" r="3"/><circle cx="458" cy="372" r="3"/><circle cx="442.9" cy="372" r="3"/><circle cx="427.9" cy="372" r="3"/><circle cx="412.8" cy="372" r="3"/><circle cx="399.6" cy="366" r="3"/><circle cx="396" cy="351.8" r="3"/><circle cx="396" cy="336.7" r="3"/><circle cx="396" cy="321.7" r="3"/><circle cx="396" cy="306.6" r="3"/><circle cx="396" cy="291.5" r="3"/><circle cx="396" cy="276.5" r="3"/><circle cx="396" cy="261.4" r="3"/><circle cx="396" cy="246.3" r="3"/><circle cx="396" cy="231.3" r="3"/><circle cx="396" cy="216.2" r="3"/><circle cx="396" cy="201.1" r="3"/><circle cx="396" cy="186.1" r="3"/><circle cx="396" cy="171" r="3"/><circle cx="399.1" cy="156.6" r="3"/><circle cx="371" cy="236" r="3"/><circle cx="379.3" cy="236" r="3"/><circle cx="387.7" cy="236" r="3"/><circle cx="396" cy="236" r="3"/><circle cx="371" cy="300" r="3"/><circle cx="379.3" cy="300" r="3"/><circle cx="387.7" cy="300" r="3"/><circle cx="396" cy="300" r="3"/><circle cx="435" cy="440" r="3"/><circle cx="423.2" cy="448.2" r="3"/><circle cx="408.6" cy="451.9" r="3"/><circle cx="393.8" cy="454.4" r="3"/><circle cx="378.9" cy="456.2" r="3"/><circle cx="363.9" cy="457.6" r="3"/><circle cx="348.9" cy="458.6" r="3"/><circle cx="333.8" cy="459.4" r="3"/><circle cx="318.8" cy="459.8" r="3"/><circle cx="303.8" cy="460" r="3"/><circle cx="288.7" cy="459.9" r="3"/><circle cx="273.7" cy="459.6" r="3"/><circle cx="258.6" cy="459" r="3"/><circle cx="243.6" cy="458.2" r="3"/><circle cx="228.6" cy="457" r="3"/><circle cx="213.7" cy="455.4" r="3"/><circle cx="198.8" cy="453.2" r="3"/><circle cx="184" cy="450.2" r="3"/><circle cx="169.9" cy="445.3" r="3"/><circle cx="169.9" cy="434.7" r="3"/><circle cx="184" cy="429.8" r="3"/><circle cx="198.8" cy="426.8" r="3"/><circle cx="213.7" cy="424.6" r="3"/><circle cx="228.6" cy="423" r="3"/><circle cx="243.6" cy="421.8" r="3"/><circle cx="258.6" cy="421" r="3"/><circle cx="273.7" cy="420.4" r="3"/><circle cx="288.7" cy="420.1" r="3"/><circle cx="303.8" cy="420" r="3"/><circle cx="318.8" cy="420.2" r="3"/><circle cx="333.8" cy="420.6" r="3"/><circle cx="348.9" cy="421.4" r="3"/><circle cx="363.9" cy="422.4" r="3"/><circle cx="378.9" cy="423.8" r="3"/><circle cx="393.8" cy="425.6" r="3"/><circle cx="408.6" cy="428.1" r="3"/><circle cx="423.2" cy="431.8" r="3"/><circle cx="435" cy="440" r="3"/><circle cx="433.2" cy="454.7" r="3"/><circle cx="428" cy="468.6" r="3"/><circle cx="420" cy="481.2" r="3"/><circle cx="410" cy="492.2" r="3"/><circle cx="398.5" cy="501.5" r="3"/><circle cx="385.9" cy="509.4" r="3"/><circle cx="372.5" cy="515.9" r="3"/><circle cx="358.6" cy="521.1" r="3"/><circle cx="344.2" cy="525" r="3"/><circle cx="329.6" cy="527.8" r="3"/><circle cx="314.9" cy="529.5" r="3"/><circle cx="300" cy="530" r="3"/><circle cx="285.1" cy="529.5" r="3"/><circle cx="270.4" cy="527.8" r="3"/><circle cx="255.8" cy="525" r="3"/><circle cx="241.4" cy="521.1" r="3"/><circle cx="227.5" cy="515.9" r="3"/><circle cx="214.1" cy="509.4" r="3"/><circle cx="201.5" cy="501.5" r="3"/><circle cx="190" cy="492.2" r="3"/><circle cx="180" cy="481.2" r="3"/><circle cx="172" cy="468.6" r="3"/><circle cx="166.8" cy="454.7" r="3"/><circle cx="165" cy="440" r="3"/></g>
+<g class="fig-knoten fig-knoten--mint"><circle cx="311" cy="235" r="2.6"/><circle cx="303.4" cy="245.5" r="2.6"/><circle cx="291.1" cy="241.5" r="2.6"/><circle cx="291.1" cy="228.5" r="2.6"/><circle cx="303.4" cy="224.5" r="2.6"/><circle cx="342.4" cy="257.8" r="2.6"/><circle cx="334.8" cy="268.3" r="2.6"/><circle cx="322.5" cy="264.3" r="2.6"/><circle cx="322.5" cy="251.3" r="2.6"/><circle cx="334.8" cy="247.3" r="2.6"/><circle cx="330.4" cy="294.7" r="2.6"/><circle cx="322.8" cy="305.2" r="2.6"/><circle cx="310.5" cy="301.2" r="2.6"/><circle cx="310.5" cy="288.2" r="2.6"/><circle cx="322.8" cy="284.2" r="2.6"/><circle cx="291.6" cy="294.7" r="2.6"/><circle cx="284" cy="305.2" r="2.6"/><circle cx="271.7" cy="301.2" r="2.6"/><circle cx="271.7" cy="288.2" r="2.6"/><circle cx="284" cy="284.2" r="2.6"/><circle cx="279.6" cy="257.8" r="2.6"/><circle cx="272" cy="268.3" r="2.6"/><circle cx="259.7" cy="264.3" r="2.6"/><circle cx="259.7" cy="251.3" r="2.6"/><circle cx="272" cy="247.3" r="2.6"/><circle cx="449" cy="196" r="2.6"/><circle cx="442" cy="208.1" r="2.6"/><circle cx="428" cy="208.1" r="2.6"/><circle cx="421" cy="196" r="2.6"/><circle cx="428" cy="183.9" r="2.6"/><circle cx="442" cy="183.9" r="2.6"/><circle cx="90" cy="540" r="2.6"/><circle cx="132" cy="540" r="2.6"/><circle cx="174" cy="540" r="2.6"/><circle cx="216" cy="540" r="2.6"/><circle cx="258" cy="540" r="2.6"/><circle cx="300" cy="540" r="2.6"/><circle cx="342" cy="540" r="2.6"/><circle cx="384" cy="540" r="2.6"/><circle cx="426" cy="540" r="2.6"/><circle cx="468" cy="540" r="2.6"/><circle cx="510" cy="540" r="2.6"/><circle cx="300" cy="268" r="2.6"/><circle cx="435" cy="252" r="2.6"/><circle cx="435" cy="280" r="2.6"/><circle cx="435" cy="308" r="2.6"/></g>
+<g class="fig-gemuese"><circle cx="263.4" cy="428.5" r="11"/><circle cx="263.4" cy="428.5" r="5"/><circle cx="366.8" cy="431.3" r="10"/><circle cx="366.8" cy="431.3" r="4.5"/><circle cx="301.5" cy="434.1" r="9"/><circle cx="301.5" cy="434.1" r="4"/><circle cx="221.8" cy="424.8" r="11"/><circle cx="221.8" cy="424.8" r="5"/><circle cx="292.8" cy="389.8" r="8"/><circle cx="292.8" cy="389.8" r="3.6"/><circle cx="361.2" cy="401.1" r="7"/><circle cx="347.7" cy="421.6" r="6"/><circle cx="390.1" cy="414.9" r="11"/><circle cx="390.1" cy="414.9" r="5"/><circle cx="269.9" cy="405.5" r="9"/><circle cx="269.9" cy="405.5" r="4"/><circle cx="331.1" cy="409.7" r="7"/><circle cx="344.3" cy="390.9" r="8"/><circle cx="344.3" cy="390.9" r="3.6"/><circle cx="322.9" cy="391.2" r="9"/><circle cx="322.9" cy="391.2" r="4"/><circle cx="254.4" cy="391.7" r="9"/><circle cx="254.4" cy="391.7" r="4"/><circle cx="223.7" cy="402.7" r="7"/><circle cx="386.6" cy="435.9" r="6"/></g>
+<g class="fig-gemuese-punkte"><circle cx="263.4" cy="428.5" r="1.8"/><circle cx="366.8" cy="431.3" r="1.8"/><circle cx="301.5" cy="434.1" r="1.8"/><circle cx="246.1" cy="408.4" r="3.7"/><circle cx="221.8" cy="424.8" r="1.8"/><circle cx="308.5" cy="407.5" r="5.4"/><circle cx="292.8" cy="389.8" r="1.8"/><circle cx="361.2" cy="401.1" r="1.8"/><circle cx="347.7" cy="421.6" r="1.8"/><circle cx="390.1" cy="414.9" r="1.8"/><circle cx="269.9" cy="405.5" r="1.8"/><circle cx="323.7" cy="428.6" r="4.6"/><circle cx="331.1" cy="409.7" r="1.8"/><circle cx="283.6" cy="418.2" r="3.7"/><circle cx="344.3" cy="390.9" r="1.8"/><circle cx="322.9" cy="391.2" r="1.8"/><circle cx="254.4" cy="391.7" r="1.8"/><circle cx="199.2" cy="435.8" r="5.8"/><circle cx="242.1" cy="434.1" r="4.6"/><circle cx="223.7" cy="402.7" r="1.8"/><circle cx="386.6" cy="435.9" r="1.8"/><circle cx="344.3" cy="435.9" r="3.7"/></g>
+<g class="fig-fall"><circle style="--i:0" cx="294" cy="354" r="3.4"/><circle style="--i:1" cx="307" cy="363" r="2.8"/><circle style="--i:2" cx="298" cy="372" r="3.8"/><circle style="--i:3" cx="305" cy="381" r="2.6"/><circle style="--i:4" cx="292" cy="390" r="3.0"/></g>
+<g class="fig-streu"><circle cx="51.9" cy="534.9" r="2.2"/><circle cx="172.9" cy="307.1" r="1.8"/><circle cx="384.5" cy="113.7" r="2.2"/><circle cx="152.9" cy="349.6" r="2.2"/><circle cx="94.5" cy="474.7" r="1.4"/><circle cx="67.4" cy="424.5" r="1.8"/><circle cx="123.3" cy="15.6" r="1.8"/><circle cx="548.9" cy="426.7" r="2.2"/><circle cx="204.1" cy="109.3" r="2.2"/><circle cx="40.6" cy="375.4" r="1.4"/><circle cx="89.6" cy="322.7" r="1.8"/><circle cx="162.2" cy="176.2" r="2.2"/><circle cx="227.9" cy="43.7" r="1.4"/><circle cx="532.4" cy="481.2" r="1.8"/><circle cx="528.9" cy="80.8" r="1.4"/><circle cx="551" cy="245.9" r="1.4"/><circle cx="506.3" cy="420.6" r="2.2"/><circle cx="57.9" cy="275.8" r="1.8"/><circle cx="533.5" cy="172.2" r="1.8"/><circle cx="35.7" cy="109.3" r="1.4"/><circle cx="126.2" cy="149.8" r="2.2"/><circle cx="209.1" cy="170.8" r="1.4"/></g>
+    </g>
+  </defs>
+</svg>
+
+<header class="kopf">
+  <div class="wrap kopf__zeile">
+    <a class="logo" href="#ueberblick" aria-label="HORTA, zur Startseite">
+      <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="13" fill="none" stroke="#b6ff5c" stroke-width="2"/><g fill="#5cffc8"><circle cx="16" cy="9" r="2.4"/><circle cx="22.7" cy="13.9" r="2.4"/><circle cx="20.1" cy="21.8" r="2.4"/><circle cx="11.9" cy="21.8" r="2.4"/><circle cx="9.3" cy="13.9" r="2.4"/></g></svg>
+      <span>HORTA</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Hauptnavigation">
+      <a href="#ueberblick">Überblick</a>
+      <a href="#funktionen">Funktionen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#bewertungen">Bewertungen</a>
+      <a href="#fragen">Fragen</a>
+    </nav>
+    <a class="korb" href="#" id="korb">Warenkorb <span class="korb__zahl" id="korb-zahl" aria-live="polite">0</span></a>
+    <button class="menue" type="button" aria-expanded="false" aria-controls="nav">Menü</button>
+  </div>
+</header>
+
+<main id="inhalt">
+
+  <section class="hero" id="ueberblick" aria-labelledby="titel">
+    <canvas class="feld" id="feld" aria-hidden="true"></canvas>
+    <div class="wrap hero__raster">
+
+      <div class="hero__kopf ruhig">
+        <p class="eyebrow">Elektrischer Gemüseschneider</p>
+        <h1 id="titel">Weniger schnippeln. <span class="akzent">Mehr Salat.</span></h1>
+      </div>
+
+      <div class="figur" id="figur">
+        <svg class="figur__svg figur__svg--gross" viewBox="0 0 600 560" role="img" aria-label="Zeichnung aus Punkten und Linien: der HORTA Gemüseschneider mit Kegel-Einsatz über einer Schüssel voller Gemüsestücke">
+          <use href="#fig-inhalt"/>
+        </svg>
+        <svg class="figur__svg figur__svg--klein" viewBox="60 118 480 436" role="img" aria-label="Zeichnung aus Punkten und Linien: der HORTA Gemüseschneider mit Kegel-Einsatz über einer Schüssel voller Gemüsestücke">
+          <use href="#fig-inhalt"/>
+        </svg>
+        <button class="bewegung" type="button" aria-label="Hintergrundbewegung anhalten">
+          <svg class="bewegung__pause" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 4v12M14 4v12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+          <svg class="bewegung__start" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 3.5l10 6.5-10 6.5z" fill="currentColor"/></svg>
+        </button>
+      </div>
+
+      <div class="hero__rest ruhig">
+        <p class="untertitel">HORTA schneidet, raspelt und reibt auf Knopfdruck. Fünf Einsätze aus Edelstahl, ein breiter Schacht, und alles fällt direkt in Ihre Schüssel.</p>
+
+        <p class="bewertung-zeile">
+          <span class="sterne" role="img" aria-label="4,6 von 5 Sternen"><svg viewBox="0 0 120 24" width="120" height="24" aria-hidden="true" focusable="false"><use href="#stern" x="0" width="24" height="24"/><use href="#stern" x="24" width="24" height="24"/><use href="#stern" x="48" width="24" height="24"/><use href="#stern" x="72" width="24" height="24"/><g class="stern-teil"><use href="#stern" x="96" width="24" height="24"/></g></svg></span>
+          <span>4,6 von 5 · 36 Beispielbewertungen</span>
+        </p>
+
+        <div class="preis">
+          <p class="preis__zahl"><span class="sr">Preis: </span>44,90 €</p>
+          <div class="preis__text">
+            <p class="preis__aktion">Einführungspreis bis 30.11.2026, danach 54,90 €</p>
+            <p class="preis__klein">inkl. 19 % MwSt., zzgl. 4,90 € Versand, Lieferzeit 8 bis 15 Werktage</p>
+          </div>
+        </div>
+
+        <button class="cta" type="button" id="kaufen">
+          <span>In den Warenkorb</span>
+          <svg viewBox="0 0 28 14" width="28" height="14" aria-hidden="true" focusable="false"><path d="M2 7h20M17 2l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="zahlen" aria-labelledby="zahlen-titel">
+    <h2 class="sr" id="zahlen-titel">HORTA in Zahlen</h2>
+    <div class="wrap">
+      <ul class="zahlen__liste">
+        <li><strong>5</strong><span>Einsätze aus Edelstahl</span></li>
+        <li><strong>800 W</strong><span>laut Hersteller</span></li>
+        <li><strong>27 cm</strong><span>Höhe, passt unter den Hängeschrank</span></li>
+        <li><strong>8 bis 15</strong><span>Werktage Lieferung, Zoll inklusive</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sektion" id="funktionen" aria-labelledby="funktionen-titel">
+    <div class="wrap">
+      <div class="sektion__kopf">
+        <span class="knoten-linie" aria-hidden="true"></span>
+        <h2 id="funktionen-titel">Vier Aufgaben, ein Gerät.</h2>
+      </div>
+      <div class="karten">
+        <article class="karte">
+          <svg class="symbol" viewBox="0 0 56 56" aria-hidden="true" focusable="false"><circle cx="28" cy="28" r="18" fill="none" stroke="#b6ff5c" stroke-width="1.6"/><path d="M11.9 20h32.2M10 28h36M11.9 36h32.2" fill="none" stroke="#b6ff5c" stroke-width="1.4" opacity=".7"/><g fill="#5cffc8"><circle cx="11.9" cy="20" r="2.2"/><circle cx="44.1" cy="20" r="2.2"/><circle cx="10" cy="28" r="2.2"/><circle cx="46" cy="28" r="2.2"/><circle cx="11.9" cy="36" r="2.2"/><circle cx="44.1" cy="36" r="2.2"/></g></svg>
+          <div><h3>Schneiden</h3><p>Gleichmäßige Scheiben, auch bei weichen Tomaten.</p></div>
+        </article>
+        <article class="karte">
+          <svg class="symbol" viewBox="0 0 56 56" aria-hidden="true" focusable="false"><path d="M9 12l24 24" fill="none" stroke="#b6ff5c" stroke-width="1.6"/><path d="M33 36l8 6M33 36l-2 9M33 36l11-2M41 42l5 6M31 45l-1 6" fill="none" stroke="#b6ff5c" stroke-width="1.2" opacity=".6"/><g fill="#5cffc8"><circle cx="9" cy="12" r="2.4"/><circle cx="21" cy="24" r="2.2"/><circle cx="41" cy="42" r="2.2"/><circle cx="31" cy="45" r="2.2"/><circle cx="44" cy="34" r="2.2"/></g><circle cx="33" cy="36" r="3" fill="#b6ff5c"/></svg>
+          <div><h3>Raspeln</h3><p>Karotten und Zucchini fein oder grob in Sekunden.</p></div>
+        </article>
+        <article class="karte">
+          <svg class="symbol" viewBox="0 0 56 56" aria-hidden="true" focusable="false"><rect x="11" y="8" width="34" height="30" rx="5" fill="none" stroke="#b6ff5c" stroke-width="1.6"/><g fill="#5cffc8"><circle cx="20" cy="16" r="2"/><circle cx="28" cy="16" r="2"/><circle cx="36" cy="16" r="2"/><circle cx="20" cy="23" r="2"/><circle cx="28" cy="23" r="2"/><circle cx="36" cy="23" r="2"/><circle cx="20" cy="30" r="2"/><circle cx="28" cy="30" r="2"/><circle cx="36" cy="30" r="2"/></g><g fill="#b6ff5c"><circle cx="21" cy="46" r="2.4"/><circle cx="30" cy="50" r="2"/><circle cx="37" cy="45" r="2.6"/></g></svg>
+          <div><h3>Reiben</h3><p>Käse und Kohl fallen locker in die Schüssel.</p></div>
+        </article>
+        <article class="karte">
+          <svg class="symbol" viewBox="0 0 56 56" aria-hidden="true" focusable="false"><path d="M14 8v40M42 8v40M14 28h28" fill="none" stroke="#b6ff5c" stroke-width="1.6"/><path d="M19 23l-5 5 5 5M37 23l5 5-5 5" fill="none" stroke="#b6ff5c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><g fill="#5cffc8"><circle cx="14" cy="8" r="2.4"/><circle cx="42" cy="8" r="2.4"/><circle cx="14" cy="48" r="2.4"/><circle cx="42" cy="48" r="2.4"/><circle cx="28" cy="28" r="2.4"/></g></svg>
+          <div><h3>Breiter Schacht</h3><p>Ganze Gurken und Paprika passen ohne Vorschneiden hinein (Schacht 5 cm).</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" id="ablauf" aria-labelledby="ablauf-titel">
+    <div class="wrap">
+      <div class="sektion__kopf">
+        <span class="knoten-linie" aria-hidden="true"></span>
+        <h2 id="ablauf-titel">In drei Schritten zur Schüssel.</h2>
+      </div>
+      <ol class="schritte">
+        <li class="schritt">
+          <span class="schritt__knoten" aria-hidden="true">1</span>
+          <div><h3>Einsatz wählen</h3><p>Kegel einsetzen, bis er einrastet.</p></div>
+        </li>
+        <li class="schritt">
+          <span class="schritt__knoten" aria-hidden="true">2</span>
+          <div><h3>Gemüse einlegen</h3><p>In den Schacht legen, Deckel zu.</p></div>
+        </li>
+        <li class="schritt">
+          <span class="schritt__knoten" aria-hidden="true">3</span>
+          <div><h3>Knopf drücken</h3><p>Alles fällt direkt in die Schüssel.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sektion" id="bewertungen" aria-labelledby="bewertungen-titel">
+    <div class="wrap">
+      <div class="sektion__kopf">
+        <span class="knoten-linie" aria-hidden="true"></span>
+        <h2 id="bewertungen-titel">Stimmen aus der Küche.</h2>
+      </div>
+      <div class="karten karten--drei">
+        <figure class="karte bewertung">
+          <div class="bewertung__kopf">
+            <span class="sterne" role="img" aria-label="5 Sterne"><svg viewBox="0 0 120 24" width="120" height="24" aria-hidden="true" focusable="false"><use href="#stern" x="0" width="24" height="24"/><use href="#stern" x="24" width="24" height="24"/><use href="#stern" x="48" width="24" height="24"/><use href="#stern" x="72" width="24" height="24"/><use href="#stern" x="96" width="24" height="24"/></svg></span>
+            <span class="marke">Beispiel</span>
+          </div>
+          <blockquote><p>„Endlich Salat ohne Schnippelei. Zehn Minuten sind jetzt zwei.“</p></blockquote>
+          <figcaption>Anna K.</figcaption>
+        </figure>
+        <figure class="karte bewertung">
+          <div class="bewertung__kopf">
+            <span class="sterne" role="img" aria-label="4 Sterne"><svg viewBox="0 0 120 24" width="120" height="24" aria-hidden="true" focusable="false"><use href="#stern" x="0" width="24" height="24"/><use href="#stern" x="24" width="24" height="24"/><use href="#stern" x="48" width="24" height="24"/><use href="#stern" x="72" width="24" height="24"/><g class="stern-leer"><use href="#stern" x="96" width="24" height="24"/></g></svg></span>
+            <span class="marke">Beispiel</span>
+          </div>
+          <blockquote><p>„Der breite Schacht ist wirklich praktisch. Zucchini ohne Vorschneiden.“</p></blockquote>
+          <figcaption>Jens M.</figcaption>
+        </figure>
+        <figure class="karte bewertung">
+          <div class="bewertung__kopf">
+            <span class="sterne" role="img" aria-label="5 Sterne"><svg viewBox="0 0 120 24" width="120" height="24" aria-hidden="true" focusable="false"><use href="#stern" x="0" width="24" height="24"/><use href="#stern" x="24" width="24" height="24"/><use href="#stern" x="48" width="24" height="24"/><use href="#stern" x="72" width="24" height="24"/><use href="#stern" x="96" width="24" height="24"/></svg></span>
+            <span class="marke">Beispiel</span>
+          </div>
+          <blockquote><p>„Reinigen geht schnell, die Einsätze sind stabil.“</p></blockquote>
+          <figcaption>Sabine R.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion sektion--hinweis" id="fragen" aria-labelledby="hinweis-titel">
+    <div class="wrap">
+      <div class="hinweis">
+        <div class="hinweis__text">
+          <span class="knoten-linie" aria-hidden="true"></span>
+          <h2 id="hinweis-titel">Lieferung aus China</h2>
+          <p>Dieses Produkt wird direkt aus China versendet. Lieferzeit 8 bis 15 Werktage, Zoll und Einfuhrsteuern sind im Preis enthalten, es kommen keine Zusatzkosten hinzu.</p>
+        </div>
+        <ol class="route" aria-label="Weg des Pakets">
+          <li><span class="route__knoten" aria-hidden="true"></span><strong>China</strong><span>Versand</span></li>
+          <li><span class="route__knoten" aria-hidden="true"></span><strong>Zoll</strong><span>inklusive</span></li>
+          <li><span class="route__knoten" aria-hidden="true"></span><strong>Ihre Tür</strong><span>8 bis 15 Werktage</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="fuss">
+  <div class="wrap fuss__zeile">
+    <p class="fuss__name">HORTA</p>
+    <nav class="fuss__links" aria-label="Rechtliches">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">AGB</a>
+      <a href="#">Vertrag widerrufen</a>
+    </nav>
+    <p class="fuss__hinweis">Entwurf: Alle Angaben und Bewertungen sind erfunden.</p>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>

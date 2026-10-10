@@ -1,0 +1,316 @@
+/* HORTA: Look Particles
+   Dunkler Grund, ein lebendiges Punktfeld hinter dem Hero (Canvas, siehe script.js), dünne Linien, Knoten als Zierde.
+   Farben mit festen Rollen:
+   Limette  = Akzent (Linien, Zahlen, Sterne, Eyebrow, Fokusring)
+   Mint     = zweite Punktfarbe (Knoten, Marken "Beispiel")
+   Weiß/Hellgrau = Text
+   Orange   = NUR der Kaufknopf
+   Schriften: Space Grotesk 700 (Überschriften, Zahlen, Knöpfe) und 500 (Text). */
+
+@font-face{font-family:"Space Grotesk";src:url("../../design-vorlagen/fonts/SpaceGrotesk-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Space Grotesk";src:url("../../design-vorlagen/fonts/SpaceGrotesk-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+
+:root{
+  color-scheme:dark;
+  /* Flächen */
+  --grund:#070b14;
+  --flaeche:#0d1424;
+  --haar:rgba(150,175,215,.2);        /* Haarlinien neutral */
+  --haar-lime:rgba(182,255,92,.3);    /* Haarlinien im Akzent */
+  /* Text */
+  --text:#eef2f7;                     /* 17,5 : 1 auf Grund, 16,3 : 1 auf Karten */
+  --text-2:#b9c4d6;                   /* 11,2 : 1 auf Grund, 10,4 : 1 auf Karten */
+  --text-3:#9ba9c0;                   /* 8,3 : 1 auf Grund, 7,7 : 1 auf Karten (nur Kleingedrucktes) */
+  /* Farben mit Rolle */
+  --limette:#b6ff5c;
+  --mint:#5cffc8;
+  --orange:#ff7a3d;                   /* nur Kaufknopf */
+  --auf-orange:#14100a;               /* Text auf Orange, 7,3 : 1 */
+  /* Abstandsstufen (8er-Reihe) */
+  --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:7.5rem;
+  --rand:clamp(16px,4vw,40px);
+  --breite:1200px;
+  --kopf-h:72px;
+  /* Bewegung */
+  --out:cubic-bezier(.23,1,.32,1);
+  --sanft:cubic-bezier(.37,0,.63,1);
+  --f:"Space Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--kopf-h) + 12px)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;min-height:100vh;background:var(--grund);color:var(--text);font:500 1.0625rem/1.6 var(--f);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+p{margin:0}
+:focus-visible{outline:3px solid var(--limette);outline-offset:3px}   /* 16,4 : 1 auf Grund; der Ring folgt der Form des Elements */
+::selection{background:var(--limette);color:#0a1204}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:100%;max-width:calc(var(--breite) + 2*var(--rand));margin-inline:auto;padding-inline:var(--rand)}
+.springen{position:absolute;left:-999px;top:8px;z-index:100;background:var(--limette);color:#0a1204;padding:.75rem 1rem;font-weight:700;border-radius:8px}
+.springen:focus{left:16px}
+main{display:block;overflow-x:clip}
+
+h1,h2,h3{font-weight:700;margin:0;text-wrap:balance;hyphens:auto;overflow-wrap:break-word;letter-spacing:-.02em}
+h1{font-size:clamp(2.3rem,.9rem + 5.6vw,4.5rem);line-height:1.02;letter-spacing:-.03em}
+h2{font-size:clamp(2rem,1.2rem + 3vw,3.4rem);line-height:1.06}
+h3{font-size:1.3rem;line-height:1.2;letter-spacing:-.01em}
+
+/* Eyebrow: kleiner Knoten, dann Text */
+.eyebrow{display:inline-flex;align-items:center;gap:.7rem;margin:0 0 var(--s2);color:var(--limette);font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase}
+.eyebrow::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--limette);box-shadow:0 0 0 4px rgba(182,255,92,.18)}
+
+/* ---------- Kopfzeile ---------- */
+.kopf{position:sticky;top:0;z-index:50;background:rgba(7,11,20,.94);border-bottom:1px solid var(--haar)}
+.kopf__zeile{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:var(--s2);min-height:var(--kopf-h)}
+.logo{display:inline-flex;align-items:center;gap:.65rem;min-height:44px;text-decoration:none;font-weight:700;font-size:1.3rem;letter-spacing:.14em;border-radius:10px;transition:transform .16s var(--out)}
+.nav{display:flex;justify-content:center;gap:.25rem}
+.nav a,.korb,.menue,.fuss__links a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.5rem .9rem;text-decoration:none;font-weight:700;font-size:.95rem;border-radius:999px;position:relative;
+  transition:transform .16s var(--out)}
+.nav a::after{content:"";position:absolute;left:.9rem;right:.9rem;bottom:6px;height:2px;background:var(--limette);border-radius:2px;opacity:0;transform:translateY(2px);transition:opacity .16s var(--out),transform .16s var(--out)}
+.logo:active,.nav a:active,.korb:active,.menue:active,.fuss__links a:active{transform:scale(.97)}
+.korb{gap:.6rem;border:1px solid var(--haar-lime);background:var(--flaeche)}
+.korb__zahl{display:inline-grid;place-items:center;min-width:1.7em;height:1.7em;padding:0 .35em;border-radius:999px;border:1px solid var(--limette);color:var(--limette);font-size:.8rem;line-height:1}
+.korb__zahl.is-hops{animation:hops .22s var(--out)}
+@keyframes hops{from{transform:scale(1.35)}to{transform:scale(1)}}
+.menue{display:none;border:1px solid var(--haar-lime);background:var(--flaeche);cursor:pointer}
+@media (hover:hover) and (pointer:fine){
+  .nav a:hover::after{opacity:1;transform:none}
+  .korb:hover,.menue:hover{transform:translateY(-1px)}
+}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;isolation:isolate;overflow:clip;background:
+  radial-gradient(52% 62% at 76% 62%,rgba(92,255,200,.09),transparent 72%),
+  radial-gradient(40% 50% at 12% 10%,rgba(182,255,92,.05),transparent 70%),
+  var(--grund)}
+/* ohne JavaScript: ruhiges Punktraster statt Canvas */
+html:not(.js) .hero{background-image:radial-gradient(rgba(92,255,200,.22) 1.2px,transparent 1.6px),radial-gradient(52% 62% at 76% 62%,rgba(92,255,200,.09),transparent 72%);background-size:34px 34px,auto}
+.feld{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.hero__raster{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);grid-template-areas:"kopf kopf" "rest figur";column-gap:var(--s5);row-gap:var(--s3);
+  padding-block:var(--s4) var(--s4);align-content:center;min-height:min(780px,calc(100svh - var(--kopf-h)))}
+.hero__kopf{grid-area:kopf;justify-self:start;align-self:end}
+.hero__rest{grid-area:rest;align-self:start;display:grid;gap:var(--s3);justify-items:start}
+.figur{grid-area:figur;align-self:center;position:relative;display:grid;place-items:center;max-width:470px;justify-self:end;width:100%}
+/* Ruhige Fläche: Text liegt auf einem dunklen Scrim, das Feld wird dort zusätzlich im Canvas gedimmt */
+.ruhig{position:relative;isolation:isolate}
+.ruhig::before{content:"";position:absolute;inset:-28px -36px;z-index:-1;border-radius:36px;background:radial-gradient(closest-side,rgba(7,11,20,.9) 0,rgba(7,11,20,.78) 62%,rgba(7,11,20,0) 100%)}
+.akzent{color:var(--limette)}
+.untertitel{max-width:34em;font-size:clamp(1.05rem,.95rem + .45vw,1.25rem);line-height:1.55;color:var(--text-2)}
+
+.bewertung-zeile{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .9rem;color:var(--text-2);font-size:.98rem}
+.sterne{display:inline-flex}
+.sterne svg{width:120px;height:24px;fill:var(--limette)}
+.stern-teil{fill:url(#stern-teil)}
+.stern-leer{fill:rgba(182,255,92,.22)}
+
+.preis{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem var(--s3);padding-left:var(--s2);border-left:2px solid var(--limette)}
+.preis__zahl{font-weight:700;font-size:clamp(2.6rem,2rem + 2.4vw,3.6rem);line-height:1;letter-spacing:-.03em}
+.preis__text{display:grid;gap:.25rem;max-width:25em}
+.preis__aktion{font-weight:700;color:var(--text);font-size:1rem}
+.preis__klein{color:var(--text-3);font-size:.9rem;line-height:1.45;text-wrap:balance}
+
+/* Der eine Kaufknopf: einzige orange Fläche der Seite */
+.cta{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.9rem;min-height:64px;padding:1rem 2rem;border:0;border-radius:999px;cursor:pointer;
+  background:var(--orange);color:var(--auf-orange);font-weight:700;font-size:1.2rem;letter-spacing:-.005em;
+  box-shadow:0 0 0 1px rgba(255,255,255,.18) inset,0 10px 16px -6px rgba(255,122,61,.55);
+  transition:transform .16s var(--out)}
+.cta:active{transform:scale(.97)}
+.cta:focus-visible{outline-offset:4px}
+@media (hover:hover) and (pointer:fine){.cta:hover{transform:translateY(-2px)}.cta:hover:active{transform:scale(.97)}}
+
+/* ---------- Hero-Figur ---------- */
+.figur::before{content:"";position:absolute;inset:6% 0 4%;z-index:-1;background:radial-gradient(closest-side,rgba(182,255,92,.11),rgba(92,255,200,.04) 60%,transparent 100%)}
+.figur__svg{width:100%;height:auto;overflow:visible}
+.figur__svg--klein{display:none}
+.fig-netz{fill:none;stroke:var(--mint);stroke-width:1;opacity:.32}
+.fig-linien{fill:none;stroke:var(--limette);stroke-width:1.4;opacity:.82}
+.fig-knoten{fill:var(--limette)}
+.fig-knoten--mint{fill:var(--mint)}
+.fig-gemuese{fill:none;stroke:var(--mint);stroke-width:1.6}
+.fig-gemuese-punkte{fill:var(--limette)}
+.fig-fall{fill:var(--limette)}
+.fig-streu{fill:var(--mint);opacity:.6}
+
+/* Auftritt der Figur, wenn sich der Ring aus Punkten auflöst (nur mit JavaScript und ohne reduzierte Bewegung) */
+@media (prefers-reduced-motion:no-preference){
+  .js .figur{animation:figur-ein .28s var(--out) 1.25s both}
+  @keyframes figur-ein{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+  .figur__svg{animation:schweben 8s var(--sanft) infinite}
+  @keyframes schweben{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  .fig-fall circle{animation:fallen 2.6s linear infinite;animation-delay:calc(var(--i) * -.52s)}
+  @keyframes fallen{0%{transform:translateY(-8px);opacity:0}15%{opacity:1}80%{opacity:1}100%{transform:translateY(34px);opacity:0}}
+  .ruhe .figur__svg,.ruhe .fig-fall circle{animation:none}
+}
+
+/* Pausenknopf für die Hintergrundbewegung (WCAG 2.2.2: Bewegung über 5 Sekunden muss sich anhalten lassen) */
+.bewegung{position:absolute;right:0;bottom:-6px;z-index:2;display:none;place-items:center;width:44px;height:44px;padding:0;border-radius:50%;border:1px solid var(--haar-lime);background:rgba(13,20,36,.9);color:var(--limette);cursor:pointer;
+  transition:transform .16s var(--out)}
+.js .bewegung{display:grid}
+.bewegung:active{transform:scale(.97)}
+.bewegung__start{display:none}
+.ruhe .bewegung__pause{display:none}
+.ruhe .bewegung__start{display:block}
+@media (hover:hover) and (pointer:fine){.bewegung:hover{transform:translateY(-1px)}.bewegung:hover:active{transform:scale(.97)}}
+@media (prefers-reduced-motion:reduce){.bewegung{display:none!important}}
+@media (forced-colors:active){.bewegung{border:2px solid ButtonText}}
+
+/* ---------- Zahlenleiste ---------- */
+.zahlen{padding-block:0 var(--s5)}
+.zahlen__liste{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--haar);border:1px solid var(--haar);border-radius:24px;overflow:hidden}
+.zahlen__liste li{background:var(--flaeche);padding:var(--s3);display:grid;gap:.35rem;align-content:start}
+.zahlen__liste strong{font-size:clamp(1.65rem,1rem + 2.3vw,3rem);line-height:1.05;letter-spacing:-.03em;color:var(--limette);font-weight:700}
+.zahlen__liste span{color:var(--text-2);font-size:.98rem;line-height:1.4}
+
+/* ---------- Abschnitte ---------- */
+.sektion{padding-block:var(--s6) 0}
+.sektion:last-of-type{padding-bottom:var(--s6)}
+.sektion__kopf{margin-bottom:var(--s4);display:grid;gap:var(--s2);justify-items:start}
+/* statt eines Meta-Labels: ein Knoten mit Haarlinie */
+.knoten-linie{display:flex;align-items:center;height:9px}
+.knoten-linie::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--limette);box-shadow:0 0 0 4px rgba(182,255,92,.18)}
+.knoten-linie::after{content:"";width:64px;height:1px;background:var(--haar-lime);margin-left:8px}
+.sektion__kopf h2{max-width:16em}
+
+.karten{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-flow:dense;gap:var(--s3)}
+.karten--drei{grid-template-columns:repeat(3,1fr)}
+.karte{position:relative;margin:0;padding:var(--s3);background:var(--flaeche);border:1px solid var(--haar);border-radius:22px;display:grid;align-content:start;gap:var(--s2);
+  transition:transform .14s var(--out)}
+/* Knoten an zwei Ecken: Karten sehen aus wie Punkte eines Netzes */
+.karte::before,.karte::after{content:"";position:absolute;width:9px;height:9px;border-radius:50%}
+.karte::before{top:-5px;left:-5px;background:var(--limette)}
+.karte::after{right:-5px;bottom:-5px;background:var(--mint)}
+.karte h3{margin-bottom:.4rem}
+.karte p{color:var(--text-2)}
+.symbol{width:56px;height:56px}
+/* hinein langsamer (220 ms), zurück schneller (140 ms) */
+@media (hover:hover) and (pointer:fine){.karte:hover{transform:translateY(-3px);transition-duration:.22s}}
+
+/* Ablauf: Knoten auf einer gestrichelten Linie */
+.schritte{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+.schritt{position:relative;display:grid;gap:var(--s2);align-content:start}
+.schritt__knoten{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;border:2px solid var(--limette);background:var(--flaeche);color:var(--limette);font-weight:700;font-size:1.5rem;position:relative;z-index:1}
+.schritt:not(:last-child)::after{content:"";position:absolute;top:31px;left:76px;right:-12px;border-top:2px dotted var(--haar-lime)}
+.schritt h3{margin-bottom:.4rem}
+.schritt p{color:var(--text-2);max-width:20em}
+
+/* Bewertungen */
+.bewertung{align-content:space-between}
+.bewertung__kopf{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+.bewertung blockquote{margin:0}
+.bewertung blockquote p{color:var(--text);font-size:1.2rem;line-height:1.45;text-wrap:pretty}
+.bewertung figcaption{color:var(--text-3);font-size:.95rem}
+.marke{display:inline-block;padding:.3rem .7rem;border:1px solid rgba(92,255,200,.55);border-radius:999px;color:var(--mint);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.2}
+
+/* Hinweis aus China */
+.sektion--hinweis{padding-bottom:var(--s6)}
+.hinweis{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--s5);align-items:center;padding:var(--s5);border:1px solid var(--haar-lime);border-radius:28px;
+  background:linear-gradient(135deg,rgba(182,255,92,.07),rgba(92,255,200,.03) 55%,var(--flaeche))}
+.hinweis h2{font-size:clamp(1.9rem,1.2rem + 2.4vw,2.9rem);margin-bottom:var(--s2)}
+.hinweis p:not(.eyebrow){color:var(--text-2);font-size:1.1rem;max-width:32em}
+.route{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s2);position:relative}
+.route li{display:grid;gap:.15rem;justify-items:start;position:relative;padding-top:var(--s4)}
+.route__knoten{position:absolute;top:6px;left:0;width:18px;height:18px;border-radius:50%;background:var(--limette);box-shadow:0 0 0 5px rgba(182,255,92,.2);z-index:1}
+.route li:nth-child(2) .route__knoten{background:var(--mint);box-shadow:0 0 0 5px rgba(92,255,200,.2)}
+.route li:not(:last-child)::before{content:"";position:absolute;top:14px;left:26px;right:-8px;border-top:2px dotted var(--haar-lime)}
+.route strong{font-size:1.15rem;line-height:1.2}
+.route span:not(.route__knoten){color:var(--text-2);font-size:.95rem;line-height:1.35}
+
+/* ---------- Fußzeile ---------- */
+.fuss{border-top:1px solid var(--haar);background:#05080f;padding-block:var(--s4)}
+.fuss__zeile{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:var(--s2) var(--s4)}
+.fuss__name{font-weight:700;letter-spacing:.14em;font-size:1.1rem}
+.fuss__links{display:flex;flex-wrap:wrap;gap:.25rem .5rem;justify-content:flex-end}
+.fuss__links a{color:var(--text-2);font-size:.95rem}
+.fuss__hinweis{grid-column:1/-1;color:var(--text-3);font-size:.9rem}
+@media (hover:hover) and (pointer:fine){.fuss__links a:hover{color:var(--text)}}
+
+/* ---------- Tablet und Handy: ein eigener Entwurf ---------- */
+@media (max-width:1100px){
+  .karten{grid-template-columns:repeat(2,1fr)}
+  .karten--drei{grid-template-columns:repeat(3,1fr)}
+  .hinweis{padding:var(--s4)}
+}
+@media (max-width:959px){
+  :root{--kopf-h:64px;--s6:5.5rem}
+  .kopf__zeile{grid-template-columns:1fr auto auto;row-gap:0;padding-block:.35rem}
+  .nav{grid-column:1/-1;grid-row:2;justify-content:flex-start;flex-wrap:wrap;padding-bottom:.5rem}
+  .nav a{background:var(--flaeche);border:1px solid var(--haar)}
+  .js .nav{display:none}
+  .js .nav.offen{display:grid;grid-template-columns:1fr;gap:.25rem;padding-bottom:var(--s2)}
+  .js .nav.offen a{justify-content:flex-start;min-height:52px;font-size:1.05rem;padding-inline:var(--s2);border-radius:14px}
+  .js .menue{display:inline-flex}
+  .hero__raster{grid-template-columns:minmax(0,1fr);grid-template-areas:"kopf" "figur" "rest";row-gap:var(--s3);min-height:0;padding-block:var(--s4) var(--s5)}
+  .figur{justify-self:center;max-width:430px}
+  .ruhig::before{inset:-20px -20px}
+  .zahlen__liste{grid-template-columns:repeat(2,1fr)}
+  .schritte{grid-template-columns:1fr;gap:0}
+  .schritt{grid-template-columns:64px 1fr;column-gap:var(--s3);padding-bottom:var(--s4);align-items:start}
+  .schritt:last-child{padding-bottom:0}
+  .schritt:not(:last-child)::after{top:72px;bottom:8px;left:31px;right:auto;border-top:0;border-left:2px dotted var(--haar-lime)}
+  .karten--drei{grid-template-columns:1fr}
+  .hinweis{grid-template-columns:1fr;gap:var(--s4)}
+  .fuss__zeile{grid-template-columns:1fr}
+  .fuss__links{justify-content:flex-start}
+}
+@media (max-width:640px){
+  :root{--s6:4rem;--s5:3rem;--s4:2rem}
+  body{font-size:1.02rem}
+  .logo{font-size:1.15rem;letter-spacing:.12em}
+  .korb{padding-inline:.8rem}
+  .hero__raster{padding-block:var(--s2) var(--s4);row-gap:var(--s2)}
+  .eyebrow{margin-bottom:.6rem;font-size:.76rem}
+  .figur{max-width:224px}
+  .bewegung{right:-52px;bottom:0}
+  .figur__svg--gross{display:none}
+  .figur__svg--klein{display:block;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24%);mask-image:linear-gradient(180deg,transparent 0,#000 24%)}
+  .hero__rest{justify-items:stretch;gap:var(--s2)}
+  .untertitel{font-size:1rem;line-height:1.5}
+  .bewertung-zeile{flex-wrap:nowrap;gap:.6rem;font-size:.88rem}
+  .sterne svg{width:104px;height:21px}
+  .preis{padding-left:var(--s2);gap:.2rem var(--s2)}
+  .preis__zahl{font-size:2.5rem}
+  .preis__aktion{font-size:.95rem}
+  .preis__klein{font-size:.875rem}
+  .cta{width:100%;min-height:60px}
+  .karten{grid-template-columns:1fr}
+  .karte{grid-template-columns:56px 1fr;align-items:start;column-gap:var(--s2);padding:var(--s2) var(--s2) var(--s2) var(--s2)}
+  .karte h3{margin-bottom:.25rem}
+  .bewertung{grid-template-columns:1fr}
+  .zahlen__liste li{padding:var(--s2)}
+  .hinweis{padding:var(--s3);border-radius:22px}
+  .route{grid-template-columns:1fr;gap:0}
+  .route li{padding:0 0 var(--s3) 2.5rem}
+  .route__knoten{top:2px}
+  .route li:not(:last-child)::before{top:26px;bottom:2px;left:8px;right:auto;border-top:0;border-left:2px dotted var(--haar-lime)}
+}
+@media (max-width:640px){
+  h1{font-size:min(2.3rem,9.4vw)}
+}
+@media (max-width:400px){
+  .kopf__zeile{gap:.5rem}
+  .logo{font-size:1.05rem;letter-spacing:.08em;gap:.5rem}
+  .logo svg{width:26px;height:26px}
+  .korb{padding-inline:.7rem;gap:.45rem;font-size:.9rem}
+  .menue{padding-inline:.8rem;font-size:.9rem}
+  .figur{max-width:200px}
+}
+@media (max-width:340px){
+  .logo svg{display:none}
+}
+
+/* ---------- Windows-Kontrastmodus: Knöpfe behalten eine Kontur, das Feld bleibt Zierde ---------- */
+@media (forced-colors:active){
+  .cta,.korb,.menue{border:2px solid ButtonText}
+  .karte,.hinweis,.zahlen__liste{border:1px solid CanvasText}
+}
+
+/* ---------- Reduzierte Bewegung: alles still, Seite bleibt vollständig ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
