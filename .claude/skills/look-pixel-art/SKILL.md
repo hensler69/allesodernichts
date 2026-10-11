@@ -76,7 +76,7 @@ function pfade(zeilen) {                       // aufeinanderfolgende gleiche Ze
 ```css
 .sprite svg{display:block;width:calc(var(--w) * var(--s,4) * 1px);height:calc(var(--h) * var(--s,4) * 1px);image-rendering:pixelated}
 ```
-Im HTML steht nur `<span class="sprite" data-sprite="tomate" style="--s:5" aria-hidden="true"></span>`, das Skript setzt `--w` und `--h` aus der Karte. Das Gerät (76 mal 82 Pixel) ist die größte Karte, gebaut mit einem kleinen Python-Zeichner aus Rechtecken, Ellipsen und einem automatischen schwarzen Umriss.
+Im HTML steht nur `<span class="sprite" data-sprite="tomate" style="--w:14;--h:14;--s:5" aria-hidden="true"></span>` (Größe schon vorab, damit nichts springt), das Skript setzt den SVG-Inhalt aus der Karte. Das Gerät (76 mal 82 Pixel) ist die größte Karte, gebaut mit einem kleinen Python-Zeichner aus Rechtecken, Ellipsen und einem automatischen schwarzen Umriss.
 
 **2. Pixeltreppen-Rahmen: vier verschobene Kopien des Kastens ergeben ein Kreuz, also eine Kante ohne Ecke**
 ```css
@@ -193,10 +193,11 @@ Gesundheit, Baby, Pflege, Finanzen, Luxus und allem, was Ruhe und Vertrauen verk
 - Ein Euro-Zeichen, Umlaute und "·" gibt es in beiden Schriften, Pfeile und Sterne nicht. Pfeile als `clip-path:polygon(...)` mit 4-px-Stufen zeichnen.
 - Die Stufenrahmen (`box-shadow`) verschwinden im Windows-Kontrastmodus. Deshalb `@media (forced-colors:active)` mit echten Linien.
 - Die H1 mit `text-shadow:.125em .125em 0` setzt den Schatten um genau einen Schriftpixel versetzt, das passt zu jeder der drei Größen.
+- Layoutverschiebung (CLS 0,14 im Lighthouse mobil): Gemessen mit einem `layout-shift`-Observer und dem Lighthouse-Audit (Ursache „Web font loaded“) verschob der Tausch von Press Start 2P (1,0 em pro Zeichen) und VT323 (0,4 em) gegen die Systemschrift (0,6 em) die H1, den Fließtext und den Preisblock am Handy um 30 bis 36 px, bei verspätetem Skript kamen die Sprites ohne feste Größe dazu, und bei 320 bis 375 px sprang die Dialogbox, weil der Cursor als Kästchen in der Zeile den Umbruch änderte. Gelöst mit Preload beider Schriften, den Ersatzschnitten `Press Start 2P Ersatz` (`size-adjust` 166,64 %) und `VT323 Ersatz` (66,65 %) samt `ascent-override` und `descent-override`, `--w` und `--h` aller Sprites schon im HTML (die Fläche hat danach feste Größe) und einem Cursor, der nur noch Hintergrund des getippten Teils ist (Innenpolster rechts, gleich großer negativer Außenabstand). CLS vorher 0,14, nachher 0 (Performance 92 auf 100), auch bei 1,5 s verspäteter Schrift oder verspätetem Skript und gedrosselt am Handy; bei anderen Schriften die Faktoren aus Textbreiten neu messen.
 
 ## Anwenden
 1. `vorlage/style.css` nach `assets/style.css` des Shops kopieren, `vorlage/script.js` als `assets/pixel.js` ablegen und im `<head>` mit `defer` laden. Farben nur in `:root` ändern, die Rollen (Gelb nur Kaufknopf) beibehalten.
-2. Schriften aus `../design-vorlagen/fonts/` kopieren: `PressStart2P-400.woff2` und `VT323-400.woff2` samt Lizenzdateien. Die zwei `@font-face`-Zeilen im CSS auf den neuen Pfad stellen, `font-display:swap` lassen.
+2. Schriften aus `../design-vorlagen/fonts/` kopieren: `PressStart2P-400.woff2` und `VT323-400.woff2` samt Lizenzdateien. Die zwei `@font-face`-Blöcke der Webschriften im CSS auf den neuen Pfad stellen (die zwei Ersatzschnitte daneben unverändert mitnehmen), `font-display:swap` lassen, beide Dateien im `<head>` per `<link rel="preload" as="font" type="font/woff2" crossorigin>` vorladen.
 3. Klassen der Demo: `.kopf .logo .nav .korb .korb__zahl`, `.hero .hero__raster .hero__kopf .hero__text .hero__bild .hero__sterne`, `.eyebrow .untertitel .bewertung .preis`, `.cta-huelle .cta`,
    `.szene .szene__bild .stueck .s-karotte .s-geraet .boden`, `.abschnitt .band`, `.kacheln .kachel`, `.karten .karte .slot`, `.schritte .schritt .nr`, `.stimmen .stimme .marke`,
    `.dialog .dialog__text .lieferzeit .balken .seg .seg--bis`, `.fuss`. Hooks für das Skript: `data-sprite`, `data-sterne`, `data-szene`, `data-tipp`, `data-balken`.

@@ -8,6 +8,8 @@
 <meta name="theme-color" content="#1d2b53">
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:,">
+<link rel="preload" href="../../design-vorlagen/fonts/PressStart2P-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../design-vorlagen/fonts/VT323-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
 </head>
@@ -17,7 +19,7 @@
 <header class="kopf">
   <div class="kopf__innen">
     <a class="logo" href="#" aria-label="HORTA, zur Startseite">
-      <span class="sprite" data-sprite="blatt" style="--s:3" aria-hidden="true"></span>
+      <span class="sprite" data-sprite="blatt" style="--w:11;--h:11;--s:3" aria-hidden="true"></span>
       <span class="logo__text">HORTA</span>
     </a>
     <nav class="nav" aria-label="Hauptnavigation">
@@ -49,7 +51,7 @@
           <span class="bewertung__text">4,6 von 5 · 36 Beispielbewertungen</span>
         </p>
         <div class="preis">
-          <span class="sprite preis__muenze" data-sprite="muenze" aria-hidden="true"></span>
+          <span class="sprite preis__muenze" data-sprite="muenze" style="--w:14;--h:14" aria-hidden="true"></span>
           <p class="preis__zahl"><span>44,90 €</span></p>
           <p class="preis__aktion">Einführungspreis bis 30.11.2026, danach 54,90 €</p>
           <p class="preis__klein">inkl. 19 % MwSt., zzgl. 4,90 € Versand, Lieferzeit 8 bis 15 Werktage</p>
@@ -85,19 +87,19 @@
       <h2 id="h-funktionen">Funktionen</h2>
       <ul class="karten">
         <li class="karte">
-          <span class="slot"><span class="sprite" data-sprite="tomate" style="--s:5" aria-hidden="true"></span></span>
+          <span class="slot"><span class="sprite" data-sprite="tomate" style="--w:14;--h:14;--s:5" aria-hidden="true"></span></span>
           <div><h3>Schneiden</h3><p>Gleichmäßige Scheiben, auch bei weichen Tomaten.</p></div>
         </li>
         <li class="karte">
-          <span class="slot"><span class="sprite" data-sprite="karotte" style="--s:4" aria-hidden="true"></span></span>
+          <span class="slot"><span class="sprite" data-sprite="karotte" style="--w:11;--h:26;--s:4" aria-hidden="true"></span></span>
           <div><h3>Raspeln</h3><p>Karotten und Zucchini fein oder grob in Sekunden.</p></div>
         </li>
         <li class="karte">
-          <span class="slot"><span class="sprite" data-sprite="kohl" style="--s:5" aria-hidden="true"></span></span>
+          <span class="slot"><span class="sprite" data-sprite="kohl" style="--w:15;--h:15;--s:5" aria-hidden="true"></span></span>
           <div><h3>Reiben</h3><p>Käse und Kohl fallen locker in die Schüssel.</p></div>
         </li>
         <li class="karte">
-          <span class="slot"><span class="sprite" data-sprite="gurke" style="--s:4" aria-hidden="true"></span></span>
+          <span class="slot"><span class="sprite" data-sprite="gurke" style="--w:26;--h:11;--s:4" aria-hidden="true"></span></span>
           <div><h3>Breiter Schacht</h3><p>Ganze Gurken und Paprika passen ohne Vorschneiden hinein (Schacht 5 cm).</p></div>
         </li>
       </ul>
@@ -109,17 +111,17 @@
       <h2 id="h-ablauf">Ablauf</h2>
       <ol class="schritte">
         <li class="schritt">
-          <div class="schritt__kopf"><span class="nr" aria-hidden="true">1</span><span class="sprite" data-sprite="kegel" style="--s:4" aria-hidden="true"></span></div>
+          <div class="schritt__kopf"><span class="nr" aria-hidden="true">1</span><span class="sprite" data-sprite="kegel" style="--w:18;--h:20;--s:4" aria-hidden="true"></span></div>
           <h3>Einsatz wählen</h3>
           <p>Kegel einsetzen, bis er einrastet.</p>
         </li>
         <li class="schritt">
-          <div class="schritt__kopf"><span class="nr" aria-hidden="true">2</span><span class="sprite" data-sprite="schacht" style="--s:4" aria-hidden="true"></span></div>
+          <div class="schritt__kopf"><span class="nr" aria-hidden="true">2</span><span class="sprite" data-sprite="schacht" style="--w:18;--h:20;--s:4" aria-hidden="true"></span></div>
           <h3>Gemüse einlegen</h3>
           <p>In den Schacht legen, Deckel zu.</p>
         </li>
         <li class="schritt">
-          <div class="schritt__kopf"><span class="nr" aria-hidden="true">3</span><span class="sprite" data-sprite="knopf" style="--s:4" aria-hidden="true"></span></div>
+          <div class="schritt__kopf"><span class="nr" aria-hidden="true">3</span><span class="sprite" data-sprite="knopf" style="--w:18;--h:18;--s:4" aria-hidden="true"></span></div>
           <h3>Knopf drücken</h3>
           <p>Alles fällt direkt in die Schüssel.</p>
         </li>
@@ -133,7 +135,7 @@
       <ul class="stimmen">
         <li class="stimme">
           <div class="stimme__kopf">
-            <span class="sprite" data-sprite="anna" style="--s:4" aria-hidden="true"></span>
+            <span class="sprite" data-sprite="anna" style="--w:14;--h:15;--s:4" aria-hidden="true"></span>
             <span class="marke">Beispiel</span>
           </div>
           <span class="sterne sprite" role="img" aria-label="5 von 5 Sternen" data-sterne="5" style="--s:3;--w:63;--h:10"></span>
@@ -142,7 +144,7 @@
         </li>
         <li class="stimme">
           <div class="stimme__kopf">
-            <span class="sprite" data-sprite="jens" style="--s:4" aria-hidden="true"></span>
+            <span class="sprite" data-sprite="jens" style="--w:14;--h:15;--s:4" aria-hidden="true"></span>
             <span class="marke">Beispiel</span>
           </div>
           <span class="sterne sprite" role="img" aria-label="4 von 5 Sternen" data-sterne="4" style="--s:3;--w:63;--h:10"></span>
@@ -151,7 +153,7 @@
         </li>
         <li class="stimme">
           <div class="stimme__kopf">
-            <span class="sprite" data-sprite="sabine" style="--s:4" aria-hidden="true"></span>
+            <span class="sprite" data-sprite="sabine" style="--w:14;--h:15;--s:4" aria-hidden="true"></span>
             <span class="marke">Beispiel</span>
           </div>
           <span class="sterne sprite" role="img" aria-label="5 von 5 Sternen" data-sterne="5" style="--s:3;--w:63;--h:10"></span>
@@ -166,7 +168,7 @@
     <div class="wrap">
       <h2 id="h-china">Lieferung aus China</h2>
       <div class="dialog">
-        <span class="sprite dialog__bild" data-sprite="paket" style="--s:4" aria-hidden="true"></span>
+        <span class="sprite dialog__bild" data-sprite="paket" style="--w:20;--h:17;--s:4" aria-hidden="true"></span>
         <p class="dialog__text" data-tipp>Dieses Produkt wird direkt aus China versendet. Lieferzeit 8 bis 15 Werktage, Zoll und Einfuhrsteuern sind im Preis enthalten, es kommen keine Zusatzkosten hinzu.</p>
       </div>
       <div class="lieferzeit">

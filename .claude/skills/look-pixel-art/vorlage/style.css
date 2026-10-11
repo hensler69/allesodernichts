@@ -12,6 +12,22 @@
   src: url("../../design-vorlagen/fonts/VT323-400.woff2") format("woff2");
   font-weight: 400; font-style: normal; font-display: swap;
 }
+/* Ersatzschriften gegen Layoutsprung beim Schrifttausch (CLS). Beide Webschriften sind Festbreitenschriften:
+   Press Start 2P 1,000 em pro Zeichen, VT323 0,400 em. Eine Systemschrift mit Festbreite (Courier New, Liberation Mono u.a.) hat 0,600 em.
+   size-adjust = Zielbreite / 0,600 (166,64 % und 66,65 %), ascent/descent-override = Zielmass / size-adjust (Press Start 2P 1,0 und 0,0; VT323 0,8 und 0,2).
+   Gemessen mit getBoundingClientRect an 100 Zeichen bei 100 px: 100,0 / 40,0 / 60,01 px. Nach Austausch der Schrift Faktoren neu messen. */
+@font-face {
+  font-family: "Press Start 2P Ersatz";
+  src: local("Courier New"), local("Liberation Mono"), local("Cousine"), local("Menlo"), local("Roboto Mono"), local("DejaVu Sans Mono"), local("Droid Sans Mono"), local("Noto Sans Mono");
+  font-weight: 400; font-style: normal;
+  size-adjust: 166.64%; ascent-override: 60%; descent-override: 0%; line-gap-override: 0%;
+}
+@font-face {
+  font-family: "VT323 Ersatz";
+  src: local("Courier New"), local("Liberation Mono"), local("Cousine"), local("Menlo"), local("Roboto Mono"), local("DejaVu Sans Mono"), local("Droid Sans Mono"), local("Noto Sans Mono");
+  font-weight: 400; font-style: normal;
+  size-adjust: 66.65%; ascent-override: 120%; descent-override: 30%; line-gap-override: 0%;
+}
 
 :root {
   color-scheme: dark;
@@ -32,8 +48,8 @@
   --braun: #ab5236;        /* Arbeitsplatte und Erde, nur Zierde */
   --purpur: #7e2553;       /* Erde, Schatten, nur Zierde */
   --schwarz: #000000;
-  --titel: "Press Start 2P", ui-monospace, "Courier New", monospace;
-  --text: "VT323", ui-monospace, "Courier New", monospace;
+  --titel: "Press Start 2P", "Press Start 2P Ersatz", ui-monospace, "Courier New", monospace;
+  --text: "VT323", "VT323 Ersatz", ui-monospace, "Courier New", monospace;
   --kurve: cubic-bezier(.23, 1, .32, 1);   /* Rueckmeldung beim Druecken, unter 300 ms */
   --panel: var(--tief);
 }
@@ -75,7 +91,8 @@ img, svg { max-width: 100%; }
 main { overflow-x: clip; }
 
 /* ---------- Sprites ---------- */
-.sprite { display: inline-block; line-height: 0; }
+/* Breite und Hoehe stehen schon im HTML (--w, --h in Pixeln der Zeichenkarte), das Skript setzt nur noch den SVG-Inhalt ein: kein Sprung. */
+.sprite { display: inline-block; line-height: 0; width: calc(var(--w, 0) * var(--s, 4) * 1px); height: calc(var(--h, 0) * var(--s, 4) * 1px); }
 .sprite svg { display: block; width: calc(var(--w) * var(--s, 4) * 1px); height: calc(var(--h) * var(--s, 4) * 1px); image-rendering: pixelated; max-width: none; }
 
 /* ---------- Kopfzeile ---------- */
@@ -266,10 +283,13 @@ h3 { font: 16px/1.6 var(--titel); overflow-wrap: anywhere; }
               inset 0 0 0 4px var(--tief), inset 0 0 0 8px var(--blau);
 }
 .dialog__text { font-size: 26px; line-height: 1.3; }
-.dialog__text.tipp > span:first-child::after {
-  content: ""; display: inline-block; width: .5em; height: .9em; margin-left: 2px; background: var(--gruen); vertical-align: -.1em;
+/* Der Cursor ist der Hintergrund des getippten Teils, nicht ein eigenes Kästchen. Das Innenpolster rechts wird durch den negativen Außenabstand wieder
+   ausgeglichen: Die Zeile wird nicht länger, der Text bricht beim Tippen und am Ende gleich um, und es gibt nichts, das mitwandert und als Sprung zählt. */
+.dialog__text.tipp > span:first-child {
+  padding-right: calc(.5em + 2px); margin-right: calc(-.5em - 2px);
+  background: linear-gradient(var(--gruen), var(--gruen)) right top / .5em .9em no-repeat;
 }
-.dialog__text.tipp.fertig > span:first-child::after { content: none; }
+.dialog__text.tipp.fertig > span:first-child { background: none; }
 .tipp__rest { visibility: hidden; }
 
 .lieferzeit { padding: 16px; }
