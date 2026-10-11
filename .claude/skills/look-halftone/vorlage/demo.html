@@ -8,7 +8,10 @@
 <meta name="theme-color" content="#fbf3e4">
 <link rel="icon" href="data:,">
 <link rel="preload" href="../../design-vorlagen/fonts/Anton-400.woff2" as="font" type="font/woff2" crossorigin>
-<script>document.documentElement.classList.add('js');</script>
+<link rel="preload" href="../../design-vorlagen/fonts/DMSans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../design-vorlagen/fonts/DMSans-700.woff2" as="font" type="font/woff2" crossorigin>
+<!-- "menu-an" wird schon hier gesetzt, nicht erst in script.js: Am Handy hat die Kopfzeile so von Anfang an ihre endgültige Höhe (Menüknopf statt offener Navigation), die Seite springt beim Laden nicht. Ohne JavaScript bleibt die Navigation offen und das SVG-Standbild sichtbar. -->
+<script>document.documentElement.classList.add('js','menu-an');</script>
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
 </head>
