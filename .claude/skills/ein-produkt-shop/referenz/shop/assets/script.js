@@ -915,16 +915,17 @@
         $('blockquote', fig).textContent = r.text;
         $('.zitat__name', fig).textContent = r.name;
         buehne.replaceChildren(fig);
-        if (richtung && !ruhig && fig.animate) fig.animate([{ opacity: 0, transform: `translateX(${richtung * 18}px)` }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+        if (richtung && !ruhig && fig.animate) fig.animate([{ opacity: 0, transform: `translateX(${richtung * 18}px)` }, { opacity: 1, transform: 'none' }], { duration: 250, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
         zahl.textContent = `${jetzt + 1} / ${auswahl.length}`;
         $$('span', koepfe).forEach((k, i) => k.classList.toggle('ist-jetzt', i === jetzt));
       }
-      const blaettern = (d) => { jetzt = (jetzt + d + auswahl.length) % auswahl.length; zeigen(d); };
+      // Mit den Pfeiltasten wird ohne Bewegung gewechselt (Tastatur-Aktionen nicht animieren), mit Klick gleitet das Zitat ein
+      const blaettern = (d, tastatur = false) => { jetzt = (jetzt + d + auswahl.length) % auswahl.length; zeigen(tastatur ? 0 : d); };
       $('[data-zurueck]', zitate).addEventListener('click', () => blaettern(-1));
       $('[data-weiter]', zitate).addEventListener('click', () => blaettern(1));
       zitate.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') { e.preventDefault(); blaettern(-1); }
-        if (e.key === 'ArrowRight') { e.preventDefault(); blaettern(1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); blaettern(-1, true); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); blaettern(1, true); }
       });
       zeigen(0);
     }

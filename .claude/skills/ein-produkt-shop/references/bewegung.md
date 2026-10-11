@@ -41,7 +41,7 @@ Vor jeder Animation drei Fragen:
 - Ein dauerhaftes Glühen als eigene Schicht, deren Deckkraft animiert wird, nicht `box-shadow` selbst.
 
 ## 4. Bausteine, die sich bewährt haben
-- Einblenden beim Scrollen: sichtbarer Ausgangszustand (Deckkraft 0,35, 16px tiefer), nie ganz unsichtbar; Bilder wachsen
+- Einblenden beim Scrollen: sichtbarer Ausgangszustand (Deckkraft 0,65 bei HELIA und 0,9 bei HORTA, 16px tiefer, weil darunter Lighthouse Kontrastfehler meldet; früher 0,35), nie ganz unsichtbar; Bilder wachsen
   von 0,96 auf 1 und verblassen beim Hinausscrollen (Scroll-Animation in CSS, wo unterstützt).
 - Kacheln kippen mit dem Zeiger (höchstens 7°), Lichtreflex folgt. Das Einblend-Delay darf nicht fürs Kippen gelten.
 - Zahlen zählen beim ersten Sichtbarwerden hoch. Geldbeträge NICHT hochzählen (wirkt wie ein Spielautomat).

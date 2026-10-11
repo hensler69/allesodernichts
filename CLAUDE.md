@@ -25,10 +25,10 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - Mods auf dem eigenen Rechner installieren (mods/README.md) und dort die Darstellung prüfen.
 - HORTA vor einem echten Start: Typenschild und Lebensmittel-Konformität prüfen, WEEE und LUCID, echte Firmendaten, Produktfoto oder Freigabe, Markenprüfung, Beispiel-Bewertungen löschen, GEHEIMNIS ersetzen, noindex entfernen (Liste in notes/2026-10-09.md).
 - HELIA vor einem echten Start: echtes Produktfoto, echte Firmendaten, Zahlungsanbieter (PayPal, Klarna), Markenprüfung, Beispiel-Bewertungen löschen, GEHEIMNIS in send.php ersetzen, noindex entfernen.
-- Skill-Verbund auf die echten Shops HELIA und HORTA anwenden: bei den 18 neuen Looks erledigt, bei den Shops auf Wunsch abgebrochen (11.10.2026). Nur auf ausdrücklichen Wunsch neu starten.
-- Design-Galerie (`design-vorlagen/scripts/galerie_bauen.py`) liegt fertig vor, ist aber nicht veröffentlicht. Erst nach OK von Manuel veröffentlichen oder pushen.
+- Skill-Verbund ist auf die 18 neuen Looks und auf HELIA und HORTA angewendet (11.10.2026, kleine Form, Tabellen in notes/2026-10-11-verbund-horta.md und -helia.md). Offene Vorschläge daraus warten auf Manuel: HORTA Tomatenrot nur für Kaufen, HELIA Kontrast Phasenliste und Überschrift.
+- Design-Galerie: privater Artifact-Link https://claude.ai/artifact/J1RnqQL5SU2684zK8vEiEj (Skript `design-vorlagen/scripts/galerie_bauen.py`, neu bauen und erneut veröffentlichen, wenn sich Looks ändern). Pushen nur mit OK von Manuel.
 - Verbrauch: Aufträge mit vielen Sub-Agenten verbrauchen sehr viel und lösen Limits aus. Vorher warnen, in kleinen Wellen arbeiten (Notiz vom 11.10.2026).
 
 ## Laufende Themen
-- HORTA-Shop (shops/horta/): im Neo-Brutalism-Look fertig gebaut und getestet (Lighthouse 91/97/100), Vorschau https://claude.ai/artifact/Jq3Aq2eh9gxzBJHUqqVW7D. 36 Bewertungen sind erfundene Beispiele. Entwurf im KI-Vorlagen-Look: https://claude.ai/artifact/SjdCxa1UFoJ47XBgj2X383.
+- HORTA-Shop (shops/horta/): im Neo-Brutalism-Look fertig gebaut und getestet (Lighthouse 95/100/100 nach dem Verbund-Durchgang vom 11.10.2026), Vorschau https://claude.ai/artifact/Jq3Aq2eh9gxzBJHUqqVW7D (Version 3). 36 Bewertungen sind erfundene Beispiele. Entwurf im KI-Vorlagen-Look: https://claude.ai/artifact/SjdCxa1UFoJ47XBgj2X383.
 - HELIA-Shop (shops/helia/): Glas-Layout mit 3D-Lampe, Bewertungsbereich, persönlicher Weckzeit und Gute-Nacht-Abschluss fertig getestet. Die Bewertungen sind erfundene Beispiele und müssen vor dem Start raus.

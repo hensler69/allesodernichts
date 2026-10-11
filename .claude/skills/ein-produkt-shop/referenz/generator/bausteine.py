@@ -91,7 +91,9 @@ def head(titel, beschreibung, pfad="/", ld=""):
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="{DOMAIN}{pfad}">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="/assets/fonts/InstrumentSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/Outfit-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/InstrumentSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/InstrumentSerif-Italic.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <meta property="og:site_name" content="{NAME}">
@@ -133,7 +135,7 @@ ENTWURF = '<div class="entwurf" role="note">Entwurf: Alle Firmen-, Hersteller- u
 def kopf(voll=True):
     if voll:
         return f'''<header class="kopf"><div class="kopf__innen">
-  <a class="logo" href="/" aria-label="Zur Startseite">{LOGO_MARK}<span>{NAME}</span></a>
+  <a class="logo" href="/" aria-label="{NAME}, zur Startseite">{LOGO_MARK}<span>{NAME}</span></a>
   <nav class="kopf__nav" id="hauptmenue" aria-label="Hauptmenü">
     <a href="#ueberblick">Überblick</a>
     <a href="#aufgang">Tag und Nacht</a>
@@ -149,7 +151,7 @@ def kopf(voll=True):
 </div></header>
 '''
     return f'''<header class="kopf kopf--schlicht"><div class="kopf__innen">
-  <a class="logo" href="/" aria-label="Zur Startseite">{LOGO_MARK}<span>{NAME}</span></a>
+  <a class="logo" href="/" aria-label="{NAME}, zur Startseite">{LOGO_MARK}<span>{NAME}</span></a>
   <span></span>
   <div class="kopf__rechts"><a class="kopf__zurueck" href="/">Zurück zum Shop</a></div>
 </div></header>

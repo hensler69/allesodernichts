@@ -834,6 +834,7 @@
     // Zusammenfassung
     $('[data-rez="schnitt"]').textContent = zahl(schnitt);
     $('[data-rez="sterne"]').innerHTML = sterneHtml(schnitt);
+    $('[data-rez="sterne"]').setAttribute('role', 'img');
     $('[data-rez="sterne"]').setAttribute('aria-label', `${zahl(schnitt)} von 5 Sternen`);
     $('[data-rez="anzahl"]').textContent = `aus ${alle.length} ${wort}${alle.length === 1 ? '' : 'en'}`;
     const kopf = $('[data-rez="kopf"]');
@@ -845,9 +846,9 @@
     [5, 4, 3, 2, 1].forEach((n) => {
       const anzahl = alle.filter((r) => r.sterne === n).length;
       const li = document.createElement('li');
-      li.innerHTML = `<button type="button" aria-pressed="false"><span>${n} ★</span><span class="spur"><i style="--a:${alle.length ? (anzahl / alle.length).toFixed(3) : 0}"></i></span><span class="wert">${anzahl}</span></button>`;
+      // Sichtbarer Text und vorgelesener Name stimmen überein: "5 Sterne 24", gedrückt = Filter aktiv
+      li.innerHTML = `<button type="button" aria-pressed="false"><span>${n} <span aria-hidden="true">★</span><span class="sr">Sterne</span></span><span class="spur" aria-hidden="true"><i style="--a:${alle.length ? (anzahl / alle.length).toFixed(3) : 0}"></i></span><span class="wert">${anzahl}</span></button>`;
       const b = $('button', li);
-      b.setAttribute('aria-label', `${n} Sterne: ${anzahl}. Filtern`);
       b.addEventListener('click', () => { filter = filter === n ? 0 : n; gezeigt = 4; liste(); });
       vert.appendChild(li);
     });
@@ -871,7 +872,7 @@
         li.className = 'rez__karte glas';
         li.style.animationDelay = `${Math.min(i, 5) * 50}ms`;
         const hat = geklickt.includes(x.id);
-        li.innerHTML = `<div class="rez__kopf"><span class="sterne" aria-label="${x.sterne} von 5 Sternen">${sterneHtml(x.sterne)}</span><span class="rez__datum"></span></div>
+        li.innerHTML = `<div class="rez__kopf"><span class="sterne" role="img" aria-label="${x.sterne} von 5 Sternen">${sterneHtml(x.sterne)}</span><span class="rez__datum"></span></div>
           <h3 class="rez__titel"></h3><p class="rez__text"></p>
           ${x.antwort ? '<div class="rez__antwort"><b>Antwort von HELIA</b><p></p></div>' : ''}
           <div class="rez__fuss"><span class="rez__autor"><span class="rez__avatar" aria-hidden="true"></span><span class="rez__name"></span>
@@ -910,20 +911,21 @@
         if (!r) { zitate.hidden = true; return; }
         const fig = document.createElement('figure');
         fig.className = 'zitat';
-        fig.innerHTML = `<blockquote></blockquote><figcaption><span class="sterne" aria-label="${r.sterne} von 5 Sternen">${sterneHtml(r.sterne)}</span><span class="zitat__name"></span><span class="marke-klein ${r.beispiel ? 'marke-klein--beispiel">Beispiel' : 'marke-klein--echt">Geprüfter Kauf'}</span></figcaption>`;
+        fig.innerHTML = `<blockquote></blockquote><figcaption><span class="sterne" role="img" aria-label="${r.sterne} von 5 Sternen">${sterneHtml(r.sterne)}</span><span class="zitat__name"></span><span class="marke-klein ${r.beispiel ? 'marke-klein--beispiel">Beispiel' : 'marke-klein--echt">Geprüfter Kauf'}</span></figcaption>`;
         $('blockquote', fig).textContent = r.text;
         $('.zitat__name', fig).textContent = r.name;
         buehne.replaceChildren(fig);
-        if (richtung && !ruhig && fig.animate) fig.animate([{ opacity: 0, transform: `translateX(${richtung * 18}px)` }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+        if (richtung && !ruhig && fig.animate) fig.animate([{ opacity: 0, transform: `translateX(${richtung * 18}px)` }, { opacity: 1, transform: 'none' }], { duration: 250, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
         zahl.textContent = `${jetzt + 1} / ${auswahl.length}`;
         $$('span', koepfe).forEach((k, i) => k.classList.toggle('ist-jetzt', i === jetzt));
       }
-      const blaettern = (d) => { jetzt = (jetzt + d + auswahl.length) % auswahl.length; zeigen(d); };
+      // Mit den Pfeiltasten wird ohne Bewegung gewechselt (Tastatur-Aktionen nicht animieren), mit Klick gleitet das Zitat ein
+      const blaettern = (d, tastatur = false) => { jetzt = (jetzt + d + auswahl.length) % auswahl.length; zeigen(tastatur ? 0 : d); };
       $('[data-zurueck]', zitate).addEventListener('click', () => blaettern(-1));
       $('[data-weiter]', zitate).addEventListener('click', () => blaettern(1));
       zitate.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') { e.preventDefault(); blaettern(-1); }
-        if (e.key === 'ArrowRight') { e.preventDefault(); blaettern(1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); blaettern(-1, true); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); blaettern(1, true); }
       });
       zeigen(0);
     }
