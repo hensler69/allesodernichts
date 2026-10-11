@@ -145,7 +145,7 @@ Fotos von picsum und zwei Knöpfe im Hero (es gibt genau einen Kaufknopf). Wegen
 
 ## Pro
 - Der Kaufknopf ist die einzige gelbe Fläche und mit 11,3 zu 1 der kontrastreichste Text. Er liegt am 390 px breiten Handy komplett im ersten Bildschirm (Oberkante 759 px von 844 px).
-- Sehr leicht: 77 KB ohne Schriften (HTML 32, CSS 21, JS 26), Schriften 30 KB, 5 Anfragen, kein Bild, keine Bibliothek. Lighthouse nicht gelaufen, aber 0 requestAnimationFrame pro Sekunde und 0 endlose Animationen im Normalbetrieb.
+- Sehr leicht: 77 KB ohne Schriften (HTML 32, CSS 21, JS 26), Schriften 30 KB, 5 Anfragen, kein Bild, keine Bibliothek. Lighthouse mobil (11.10.2026): Leistung 100, Barrierefreiheit 100, Technik 100, Layoutverschiebung 0. Dazu 0 requestAnimationFrame pro Sekunde und 0 endlose Animationen im Normalbetrieb.
 - Ruhig im Betrieb: Mit vierfach gebremster CPU 452 Bilder beim Fallen, nur 2 über 33 ms (längstes 83 ms beim Laden). Beim Scrollen 0 von 38 (PC) und 0 von 55 (Handy) über 33 ms.
 - Unverwechselbar und ohne Foto: Gerät, Schüssel, Gemüse, Münze, Sterne und Avatare sind selbst gezeichnet. Das Gerät ist als Produkt erkennbar (Sockel, Schacht mit Karotte, Kegel-Einsatz im Fenster, Auswurf, Schüssel).
 - Lesbar und kontraststark: 70 Textknoten gemessen, kleinster Wert 5,55 zu 1 (Etikett "Beispiel"), Fließtext 12,5 zu 1. Fokus 4 px weiß an allen 13 Tab-Zielen.

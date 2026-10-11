@@ -17,14 +17,17 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - Szenen und Bilder verwenden nur selbst gezeichnete, erfundene Personen, keine echten Fotos.
 
 - Skill `ein-produkt-shop` (.claude/skills/ein-produkt-shop/): kompletter Ablauf für neue Ein-Produkt-Shops mit HELIA als Referenz, für jeden neuen Shop verwenden. Details in notes/2026-10-07.md.
-- Skill `design-vorlagen` (.claude/skills/design-vorlagen/): vereint alle Looks (Glas dunkel wie HELIA, Neo-Brutalism hell wie HORTA, KI-Vorlagen-Look als Gegenbeispiel) mit Vorlagen, Anleitung zum Look-Wechsel und dem Platz für den Skill-Verbund. Vor jedem neuen Shop den Look damit wählen. Details in notes/2026-10-09.md.
+- Skill `design-vorlagen` (.claude/skills/design-vorlagen/): Sammel-Skill für 21 Looks (Glas dunkel, Neo-Brutalism, KI-Vorlage und 18 neue: Particles, Liquid Morph, Holographic, Neon Glow, Wireframe 3D, Glassmorphism, Kinetic Type, Isometric, Clay 3D, ASCII Art, Gradient Mesh, Comic Book, Split-Flap, Retro VHS, Halftone, Bauhaus, Pixel Art, Art Deco) mit Katalog, Vergleich, Pro/Contra, Vorlagen und Galerie-Skript. Jeder neue Look ist auch ein eigener Skill `look-<name>`. Für HORTA bewertet: Platz 1 Isometric, 2 Gradient Mesh, 3 Bauhaus. Vor jedem neuen Shop den Look damit wählen. Details in notes/2026-10-09.md und notes/2026-10-11.md.
+- Skill-Verbund (festgelegt 09.10.2026, `design-vorlagen/references/verbund.md`): jedes Layout durchläuft gpt-taste, impeccable, emil-design-eng in dieser Reihenfolge. Grundregeln des Nutzers gehen vor.
 - Claude-Code-Mods (mods/, Katalog manuel-mods in .claude-plugin/marketplace.json): limit-cockpit, schutzschild, pruefer, spar-modus (Experiment, aus). Zeichnen nur lokal (Terminal/Desktop), nicht in Cloud-Sitzungen. Anleitung in mods/README.md.
 
 ## Offene Themen
 - Mods auf dem eigenen Rechner installieren (mods/README.md) und dort die Darstellung prüfen.
 - HORTA vor einem echten Start: Typenschild und Lebensmittel-Konformität prüfen, WEEE und LUCID, echte Firmendaten, Produktfoto oder Freigabe, Markenprüfung, Beispiel-Bewertungen löschen, GEHEIMNIS ersetzen, noindex entfernen (Liste in notes/2026-10-09.md).
 - HELIA vor einem echten Start: echtes Produktfoto, echte Firmendaten, Zahlungsanbieter (PayPal, Klarna), Markenprüfung, Beispiel-Bewertungen löschen, GEHEIMNIS in send.php ersetzen, noindex entfernen.
-- Skill-Verbund: Manuel will jedes Layout (HELIA, HORTA, Vorlagen) mit drei Skills überarbeiten und sie in `design-vorlagen` bündeln. Seine Nachricht vom 09.10.2026 nannte keine Namen. Nachfragen, dann `references/verbund.md` füllen und alle Layouts durchgehen.
+- Skill-Verbund auf die echten Shops HELIA und HORTA anwenden: bei den 18 neuen Looks erledigt, bei den Shops auf Wunsch abgebrochen (11.10.2026). Nur auf ausdrücklichen Wunsch neu starten.
+- Design-Galerie (`design-vorlagen/scripts/galerie_bauen.py`) liegt fertig vor, ist aber nicht veröffentlicht. Erst nach OK von Manuel veröffentlichen oder pushen.
+- Verbrauch: Aufträge mit vielen Sub-Agenten verbrauchen sehr viel und lösen Limits aus. Vorher warnen, in kleinen Wellen arbeiten (Notiz vom 11.10.2026).
 
 ## Laufende Themen
 - HORTA-Shop (shops/horta/): im Neo-Brutalism-Look fertig gebaut und getestet (Lighthouse 91/97/100), Vorschau https://claude.ai/artifact/Jq3Aq2eh9gxzBJHUqqVW7D. 36 Bewertungen sind erfundene Beispiele. Entwurf im KI-Vorlagen-Look: https://claude.ai/artifact/SjdCxa1UFoJ47XBgj2X383.
