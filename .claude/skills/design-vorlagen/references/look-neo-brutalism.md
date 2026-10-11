@@ -42,7 +42,7 @@ laden, Farben in `:root` anpassen. Bestehender Shop: `references/umstellen.md`.
 - Senkrechte Titel im waagerechten Akkordeon überlappen die Schrittnummer: Nummer bei geschlossenen Karten ausblenden.
 - `mix-blend-mode:multiply` für ein weißes Produktfoto färbt es auf farbigem Grund ein. Foto auf Papierfläche setzen.
 - Hervorhebung `.leucht` auf gelber Fläche verschwindet: dort Papierfarbe als Hintergrund.
-- Lighthouse meldet Kontrast für Elemente, die gerade einblenden (`.zeigen` startet bei Deckkraft .35). Kein echter Fehler, aber
+- Lighthouse meldet Kontrast für Elemente, die gerade einblenden (`.zeigen` startete bei Deckkraft .35 und startet seit dem Verbund-Durchgang vom 11.10.2026 bei .9, dadurch meldet Lighthouse keinen Kontrastfehler mehr). Früher kein echter Fehler, aber
   nicht schlechter starten lassen.
 - Fokusrahmen in Blau (#3d6bff) ist auf Limette, Papier und Tinte gleichermaßen sichtbar.
 - Das Logo-Label darf den Namen enthalten ("HORTA, zur Startseite"), `text_check.py` und Lighthouse verlangen den Namen im Label.
