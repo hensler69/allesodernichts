@@ -10,6 +10,10 @@
 @font-face{font-family:"Barlow Condensed";src:url("../../design-vorlagen/fonts/BarlowCondensed-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:"Barlow";src:url("../../design-vorlagen/fonts/Barlow-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Barlow";src:url("../../design-vorlagen/fonts/Barlow-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+/* Ersatzschriften mit den Maßen der Webschriften (Arial, aus den Schriftdateien gerechnet: Barlow Condensed = 66,5 % von Arial Fett,
+   Barlow = 96 % von Arial). Kommt eine Webschrift später, bleiben Zeilenumbrüche und Höhen gleich und nichts springt (CLS). */
+@font-face{font-family:"Barlow Condensed Ersatz";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("Helvetica Bold");font-weight:600 700;size-adjust:66.5%;ascent-override:150%;descent-override:30%;line-gap-override:0%}
+@font-face{font-family:"Barlow Ersatz";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("Helvetica");font-weight:400 500;size-adjust:96%;ascent-override:104%;descent-override:21%;line-gap-override:0%}
 
 :root{
   color-scheme:dark;
@@ -34,8 +38,8 @@
   --amber-dunkel:#8a6200;
   --auf-amber:#15161a;
 
-  --font-tafel:"Barlow Condensed","Arial Narrow","Roboto Condensed",system-ui,sans-serif;
-  --font-text:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-tafel:"Barlow Condensed","Barlow Condensed Ersatz","Arial Narrow","Roboto Condensed",system-ui,sans-serif;
+  --font-text:"Barlow","Barlow Ersatz",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 
   /* eigene Kurven statt ease: stark am Anfang (Antwort auf Berührung), weich am Ende */
   --ease-out:cubic-bezier(.23,1,.32,1);
@@ -75,6 +79,10 @@ img,svg{display:block;max-width:100%}
 .tafel{position:relative;display:block;font:700 var(--fs,1.6rem)/1.1 var(--font-tafel);text-transform:uppercase;letter-spacing:.04em;color:var(--zeichen)}
 .tafel b{font-weight:700;color:var(--amber)}
 .tafel--ok{color:var(--amber)}
+/* Platz steht vorher fest: Solange das Skript die Kacheln noch nicht gebaut hat (oder fehlt), hat jede Textzeile genau die Höhe einer Kachelzeile.
+   Zwei Zeilen der H1 ergeben so dieselben 2 x Kachelhöhe + Zeilenabstand wie später die Kacheln. */
+.tafel:not(.tafel--fertig){line-height:var(--kh)}
+.tafel--h1:not(.tafel--fertig){line-height:calc(var(--kh) + var(--zg)/2)}
 .tafel--ok .z{color:var(--amber)}   /* Statusanzeige OK: Zeichen in Amber */
 
 .tafel{
@@ -134,7 +142,7 @@ img,svg{display:block;max-width:100%}
 .kopf__innen{max-width:var(--seite);margin:0 auto;padding:10px var(--rand);display:flex;align-items:center;gap:24px}
 .logo{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;flex:none}
 .nav{display:flex;justify-content:center;flex:1;gap:4px}
-.nav a,.korb{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--np,12px);font:600 1.0625rem/1 var(--font-tafel);text-transform:uppercase;letter-spacing:.08em;text-decoration:none;color:var(--text);border-radius:6px;position:relative;--np:12px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:transform 160ms var(--ease-out)}
+.nav a,.korb{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--np,12px);white-space:nowrap;font:600 1.0625rem/1 var(--font-tafel);text-transform:uppercase;letter-spacing:.08em;text-decoration:none;color:var(--text);border-radius:6px;position:relative;--np:12px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:transform 160ms var(--ease-out)}
 /* Scharnier-Strich unter dem Link: erscheint nur per Transform und Deckkraft */
 .nav a::after{content:"";position:absolute;left:var(--np);right:var(--np);bottom:9px;height:2px;background:var(--zeichen);opacity:0;transform:scaleX(.5);transition:transform 160ms var(--ease-out),opacity 160ms var(--ease-out)}
 .nav a:active,.korb:active,.fuss__nav a:active{transform:scale(.97)}
@@ -150,7 +158,7 @@ img,svg{display:block;max-width:100%}
 
 /* Hero */
 .hero{max-width:var(--seite);margin:0 auto;padding:var(--s5) var(--rand) var(--s6)}
-.eyebrow{font:600 1rem/1 var(--font-tafel);text-transform:uppercase;letter-spacing:.16em;color:var(--text-leise);margin-bottom:var(--s3)}
+.eyebrow{font:600 1rem/1 var(--font-tafel);text-transform:uppercase;letter-spacing:.16em;white-space:nowrap;color:var(--text-leise);margin-bottom:var(--s3)}
 .hero__raster{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s6);align-items:start}
 .anzeige{background:var(--flaeche);border:1px solid var(--linie);border-radius:14px;padding:var(--s4);margin-bottom:var(--s5)}
 .untertitel{font-size:1.1875rem;line-height:1.55;max-width:34em;margin-bottom:var(--s4)}

@@ -44,7 +44,7 @@ Passt nicht bei Produkten, die Wärme, Natur, Pflege, Baby, Luxus oder Verspielt
 | Barlow Condensed | 600 | `BarlowCondensed-600.woff2` | Navigation, Eyebrow, Spaltenköpfe, Namen |
 | Barlow | 400 | `Barlow-400.woff2` | Fließtext |
 | Barlow | 500 | `Barlow-500.woff2` | Preiszeile, Zitate |
-Zusammen 87 KB. Lizenztexte `BarlowCondensed-LICENSE.txt` und `Barlow-LICENSE.txt` liegen im selben Ordner. Die zwei wichtigsten Dateien (700 und Barlow 400) sind per `<link rel="preload">` vorgeladen.
+Zusammen 87 KB. Lizenztexte `BarlowCondensed-LICENSE.txt` und `Barlow-LICENSE.txt` liegen im selben Ordner. Alle vier Dateien sind per `<link rel="preload">` vorgeladen, dazu gibt es im CSS Ersatzschriften in Arial-Breite (`Barlow Condensed Ersatz`, `Barlow Ersatz`), damit beim Schrifttausch nichts springt.
 
 ## So ist er gebaut
 
@@ -150,7 +150,7 @@ Konflikte: gpt-taste verlangt Hover-Skalierung 1,05, Scroll-Pinning, GSAP und La
 - Der Look ist in einer Sekunde erkennbar und passt zum Lieferstatus: Tafel, Fahrplan "GLEIS 1 bis 3" und Zahlenleiste erzählen Ablauf und Eckdaten, ohne ein einziges Foto.
 - Der Kaufknopf ist die einzige gefüllte Signalfläche der Seite. Er liegt bei 1280 x 800 auf y 696 bis 756 und am Handy (390 x 844) auf y 754 bis 814, also im ersten Bildschirm.
 - Gut lesbar: Kachelzeichen 11,8:1 bis 14,8:1, Fließtext 7,2:1 bis 15,7:1. Die H1 steht von 820 bis 1920 px in 2 Zeilen, am Handy in 3 mit höchstens 11 Kacheln.
-- Leicht: HTML 15 KB, CSS 17,8 KB, JS 7,4 KB (zusammen 40 KB), Schriften 87 KB. 0 rAF-Aufrufe, 0 Endlosanimationen, alles per CSS-Transform.
+- Leicht: HTML 15 KB, CSS 18,9 KB, JS 7,4 KB (zusammen 42 KB), Schriften 87 KB. 0 rAF-Aufrufe, 0 Endlosanimationen, alles per CSS-Transform.
 - Ohne JavaScript bleibt Überschrift, Preis und Status als normaler Text lesbar (geprüft per Bildschirmfoto), bei "weniger Bewegung" sofort fertig und ruhig.
 - Das Blättern ist eine kleine, sinnvolle Belohnung beim ersten Blick, danach steht alles still. Die H1 ist nach etwa 1,5 s fertig.
 
@@ -168,7 +168,7 @@ Konflikte: gpt-taste verlangt Hover-Skalierung 1,05, Scroll-Pinning, GSAP und La
 | Kaufwirkung | 4 | Amber ist nur beim Knopf voll, die Tafel fesselt, wirkt aber eher sachlich als verführerisch. |
 | Lesbarkeit | 4 | Kacheln 11,8:1 und Fließtext normal gesetzt, nur Wörter über 11 Zeichen sind ein Problem. |
 | Handy | 4 | Kachelzeilen mit höchstens 11 Zeichen, Knopf im ersten Bildschirm, bei 320 px zweizeilige Navigation. |
-| Tempo | 4 | 40 KB ohne Schriften und nur CSS-Transform, aber 993 Elemente und JavaScript vor dem ersten Bild der Tafel. |
+| Tempo | 4 | 42 KB ohne Schriften und nur CSS-Transform, aber 993 Elemente und JavaScript vor dem ersten Bild der Tafel. |
 | Barrierefreiheit | 4 | Klartext, Fokus, reduzierte Bewegung und Kontrast sind sauber, die Blätterbewegung bleibt Geschmackssache. |
 | Aufwand | 3 | Skript, 3D-Blatt und Größenvarianten sind viel Arbeit je neuem Shop, die Vorlage spart das Meiste. |
 | Risiko | 3 | Lange Wörter, ausgefallene Skripte (Zufallszeichen) und die Blitzgrenze brauchen Aufmerksamkeit bei jeder Änderung. |
@@ -190,10 +190,11 @@ Pflege, Baby, Mode, Genuss und Geschenken, die Wärme brauchen, und zu Produkten
 - Volle Seiten-Bildschirmfotos während schnellen Scrollens zeigen Zufallszeichen. Zum Prüfen langsam scrollen und 2 s warten, oder `prefers-reduced-motion` einstellen.
 - Ein Element mit `aria-hidden="true"` bekommt im Skript keinen Klartext (gewollt für Zierde wie die OK-Kacheln der Funktionszeilen). Wer das auf eine wichtige Tafel setzt, macht sie für Screenreader unsichtbar.
 - Ein einziges Wort mit mehr als 11 großen Kacheln (zum Beispiel "BEWERTUNGEN" in 24-px-Kacheln bei 320 px) liegt an der Grenze. Kachelgröße der Überschriften notfalls mit `cqw` verkleinern.
+- Layoutverschiebung (CLS 0,305 in Lighthouse mobil): Schuld waren nicht die Kacheln, sondern die zwei nicht vorgeladenen Schriften (Barlow Condensed 600, Barlow 500), deren breitere Ersatzschrift die Eyebrow-Zeile umbrechen ließ und die Seite beim Tausch um 16 px nach oben schob (gemessen mit PerformanceObserver, auch ohne `script.js` blieb der Wert bei 0,305). Lösung: alle vier Schriften per Preload, Ersatzschriften in Arial-Breite mit `size-adjust`, `nowrap` an Eyebrow und Navigation und vor dem Kachelbau `line-height:var(--kh)`, damit eine Textzeile so hoch ist wie die Kachelzeile. Danach CLS 0 (bei um 1,5 s verspäteten Schriften 0,0005, bei verspätetem Skript 0,002) und Performance 96 bis 100 statt 84.
 
 ## Anwenden
 1. `vorlage/style.css` und `vorlage/script.js` in den Shop kopieren (`assets/`). Farben nur in `:root` ändern. Rollen beibehalten: Amber ausschließlich für Kaufknopf und "OK".
-2. Schriften aus `../design-vorlagen/fonts/` kopieren: `BarlowCondensed-600.woff2`, `BarlowCondensed-700.woff2`, `Barlow-400.woff2`, `Barlow-500.woff2` samt Lizenzdateien, `@font-face`-Pfade im CSS anpassen, `font-display:swap` lassen. Optional zwei `<link rel="preload" as="font" crossorigin>`.
+2. Schriften aus `../design-vorlagen/fonts/` kopieren: `BarlowCondensed-600.woff2`, `BarlowCondensed-700.woff2`, `Barlow-400.woff2`, `Barlow-500.woff2` samt Lizenzdateien, `@font-face`-Pfade im CSS anpassen, `font-display:swap` lassen, die Ersatzschriften (`... Ersatz`) im CSS mitnehmen und alle vier Dateien per `<link rel="preload" as="font" crossorigin>` vorladen.
 3. Klassen der Demo: `.tafel` mit `--h1`, `--preis`, `--zahl`, `--h2`, `--h3`, `--klein`, `--logo`, `--ok`; Attribute `data-ruhig` (kein Blättern) und `aria-hidden="true"` (Zierde ohne Klartext); in der Tafel `<br>` für neue Zeile und `<b>` für Amber-Status. Seite: `.kopf .logo .nav .korb`, `.hero .anzeige .hero__raster .hero__text .hero__bild .bild`, `.preisblock`, `.status .status__zeile`, `.cta`, `.zahlen .zahl-kachel`, `.brett .reihe`, `.fahrplan .gleis`, `.meldungen .meldung .marke`, `.hinweis`, `.fuss`. Das Skript am Ende von `<body>` laden (nicht `defer`, damit die Kacheln vor dem ersten Bild stehen).
 4. Passend zu den Haken des Skills `ein-produkt-shop`: Die Demo hat eigene Namen. Im Shop entweder die Selektoren im CSS ergänzen (zum Beispiel `.cta,.knopf{...}`, `.zahl-kachel,.kachel{...}`, `.korb`) oder im HTML umbenennen. Die Schritte zum Wechsel (Schriften, `style.css`, Logo, Hintergrund, Favicon, Vorschaubild) stehen in `../design-vorlagen/references/umstellen.md`. Dort `WELT` leer lassen (der Grund kommt aus dem CSS) und `theme-color` auf #15161a setzen.
 5. Hero-Bild neu zeichnen: SVG im Zeichenraum 640 x 480 mit Farbklassen `f-hell`, `f-licht`, `f-mittel`, `f-tief`, `f-aus`, Inhalt zwischen y 40 und 435, damit eine Kürzung am Handy nichts abschneidet.
@@ -201,6 +202,6 @@ Pflege, Baby, Mode, Genuss und Geschenken, die Wärme brauchen, und zu Produkten
 
 ## Dateien
 - `vorlage/demo.html` (HORTA-Startseite, 15 KB)
-- `vorlage/style.css` (17,8 KB)
+- `vorlage/style.css` (18,9 KB)
 - `vorlage/script.js` (Kachelbauer, Blättern, Warenkorb-Zähler, 7,4 KB)
 - Schriften: `../design-vorlagen/fonts/BarlowCondensed-600.woff2`, `BarlowCondensed-700.woff2`, `Barlow-400.woff2`, `Barlow-500.woff2`
