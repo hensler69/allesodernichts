@@ -1,0 +1,406 @@
+/* ==========================================================================
+   Look: Neon Glow (Leuchtröhren bei Nacht)
+   Schriften: Tilt Neon (nur Titel und Logo), Outfit (Text)
+   Regel: Fließtext leuchtet nie. Leuchten nur auf großen Titeln und Rahmen.
+   Alle Leuchten sind statisch, kein Weichzeichner über 20 px. Bewegung nur einmal beim Laden:
+   Logo flackert kurz an (3 Wechsel), die Zeichnung blendet Rosa und Cyan nacheinander ein.
+   ========================================================================== */
+
+@font-face{font-family:"Tilt Neon";src:url("../../fonts/TiltNeon-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Outfit";src:url("../../fonts/Outfit-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Outfit";src:url("../../fonts/Outfit-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Outfit";src:url("../../fonts/Outfit-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+
+:root{
+  color-scheme:dark;
+
+  /* Grund und Flächen */
+  --grund:#0a0614;
+  --flaeche:#130b26;
+  --text:#e9e6f5;
+  --text-leise:#bdb7d4;
+
+  /* Rollen (jede Farbe hat genau eine Aufgabe):
+     Rosa  = Marke und Inhalt (Logo, Titel, Funktions- und Bewertungskarten, Sterne, Gerät in der Zeichnung)
+     Cyan  = Fakten und Bedienung (Eyebrow, Zahlen, Preisrahmen, Warenkorb, Ablauf, Hinweisblock, Schüssel in der Zeichnung)
+     Gelb  = NUR der Kaufknopf. Kein zweites gelbes Element, auch nicht bei Hover oder Fokus.
+     Weiß  = Fokusring, Preis, weißer Kern der Röhren. Hellgrau = Fließtext, nie mit Schein. */
+  --pink:#ff2e97;
+  --pink-kern:#ffd6ec;
+  --pink-rand:#ff9fd1;
+  --cyan:#27f3ff;
+  --cyan-kern:#d6fdff;
+  --cyan-rand:#8ff9ff;
+  --gelb:#ffe14a;
+  --gelb-kern:#fff4b8;
+  --gelb-text:#1b1500;
+
+  --ease-out:cubic-bezier(.23,1,.32,1);   /* eigene Kurve statt ease */
+  --font-neon:"Tilt Neon","Outfit",system-ui,sans-serif;
+  --font-text:"Outfit",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+  /* Abstände */
+  --a0:.25rem; --a1:.5rem; --a2:1rem; --a3:1.5rem; --a4:2.5rem; --a5:4rem; --a6:6rem;   /* feste Stufen: 4, 8, 16, 24, 40, 64, 96 px */
+
+  /* Leuchten Text (vier Schichten: weißer Kern, enger Schein, mittlerer Schein, weiter Schein) */
+  --glow-pink:0 0 .03em #fff, 0 0 .12em rgba(255,46,151,.9), 0 0 min(.34em,20px) rgba(255,46,151,.55), 0 0 min(.8em,20px) rgba(255,46,151,.3);
+  --glow-cyan:0 0 .03em #fff, 0 0 .12em rgba(39,243,255,.85), 0 0 min(.34em,20px) rgba(39,243,255,.5), 0 0 min(.8em,20px) rgba(39,243,255,.26);
+  --glow-klein-pink:0 0 .04em #fff, 0 0 .22em rgba(255,46,151,.7);
+  --glow-klein-cyan:0 0 .04em #fff, 0 0 .22em rgba(39,243,255,.65);
+
+  /* Leuchten Rahmen (außen und innen) */
+  --rahmen-pink:0 0 10px rgba(255,46,151,.5), 0 0 20px rgba(255,46,151,.28), inset 0 0 10px rgba(255,46,151,.36), inset 0 0 20px rgba(255,46,151,.14);
+  --rahmen-cyan:0 0 10px rgba(39,243,255,.45), 0 0 20px rgba(39,243,255,.24), inset 0 0 10px rgba(39,243,255,.32), inset 0 0 20px rgba(39,243,255,.12);
+  --rahmen-schwach-cyan:0 0 8px rgba(39,243,255,.3), inset 0 0 8px rgba(39,243,255,.2);
+  --rahmen-schild:0 0 12px rgba(39,243,255,.45), 0 0 20px rgba(39,243,255,.25), inset 0 0 14px rgba(39,243,255,.35), inset 0 0 20px rgba(39,243,255,.15);
+  --rahmen-gelb:0 0 10px rgba(255,225,74,.7), 0 0 20px rgba(255,225,74,.45), inset 0 0 8px rgba(255,255,255,.55);
+
+  /* Leuchten Zeichnung (drop-shadow in Stufen) */
+  --schein-pink:drop-shadow(0 0 1px rgba(255,255,255,.9)) drop-shadow(0 0 5px rgba(255,46,151,.9)) drop-shadow(0 0 12px rgba(255,46,151,.55)) drop-shadow(0 0 20px rgba(255,46,151,.35));
+  --schein-cyan:drop-shadow(0 0 1px rgba(255,255,255,.9)) drop-shadow(0 0 5px rgba(39,243,255,.85)) drop-shadow(0 0 12px rgba(39,243,255,.5)) drop-shadow(0 0 20px rgba(39,243,255,.3));
+}
+
+/* Handy: weniger Schichten pro Schatten (Leistung und Blendung) */
+@media (max-width:720px){
+  :root{
+    --a4:2rem; --a5:3rem; --a6:4rem;   /* Handy: gleiche Stufen, kleiner */
+    --glow-pink:0 0 .04em #fff, 0 0 .3em rgba(255,46,151,.7);
+    --glow-cyan:0 0 .04em #fff, 0 0 .3em rgba(39,243,255,.65);
+    --glow-klein-pink:0 0 .2em rgba(255,46,151,.6);
+    --glow-klein-cyan:0 0 .2em rgba(39,243,255,.55);
+    --rahmen-pink:0 0 12px rgba(255,46,151,.42), inset 0 0 12px rgba(255,46,151,.28);
+    --rahmen-cyan:0 0 12px rgba(39,243,255,.38), inset 0 0 12px rgba(39,243,255,.25);
+    --rahmen-schwach-cyan:0 0 8px rgba(39,243,255,.28), inset 0 0 8px rgba(39,243,255,.18);
+    --rahmen-schild:0 0 14px rgba(39,243,255,.4), inset 0 0 14px rgba(39,243,255,.3);
+    --rahmen-gelb:0 0 14px rgba(255,225,74,.6), inset 0 0 8px rgba(255,255,255,.5);
+    --schein-pink:drop-shadow(0 0 1px rgba(255,255,255,.8)) drop-shadow(0 0 7px rgba(255,46,151,.8));
+    --schein-cyan:drop-shadow(0 0 1px rgba(255,255,255,.8)) drop-shadow(0 0 7px rgba(39,243,255,.75));
+  }
+}
+
+/* ---------- Grundlagen ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:5rem}
+body{
+  margin:0;
+  -webkit-tap-highlight-color:transparent;
+  font:400 1.0625rem/1.6 var(--font-text);
+  color:var(--text);
+  background:
+    radial-gradient(60% 520px at 18% 0, rgba(255,46,151,.15), transparent 70%) 0 0 / 100% 900px no-repeat,
+    radial-gradient(50% 520px at 88% 280px, rgba(39,243,255,.11), transparent 70%) 0 0 / 100% 900px no-repeat,
+    var(--grund);
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%}
+h1,h2,h3,p,ul,ol,figure,blockquote{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.nav a:focus-visible{outline-offset:-6px}   /* im Streifen sonst vom Rand abgeschnitten */
+
+.sprung{position:absolute;left:1rem;top:-4rem;z-index:50;padding:.75rem 1rem;background:#fff;color:#000;border-radius:8px;font-weight:700}
+.sprung:focus{top:1rem}
+
+/* ---------- Neon-Schrift (nur Titel und Logo) ---------- */
+.neon{font-family:var(--font-neon);font-weight:400;line-height:1.08;letter-spacing:.01em;text-wrap:balance;hyphens:auto}
+.neon--pink{color:var(--pink-kern);text-shadow:var(--glow-pink)}
+.neon--cyan{color:var(--cyan-kern);text-shadow:var(--glow-cyan)}
+
+/* ---------- Kopfzeile ---------- */
+.kopf{
+  position:sticky;top:0;z-index:20;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:var(--a3);
+  padding:var(--a1) max(var(--a3),calc((100% - 75rem)/2));
+  background:rgba(10,6,20,.94);
+  border-bottom:2px solid var(--pink-rand);
+  box-shadow:0 0 10px rgba(255,46,151,.3);
+}
+.logo{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
+.logo__text{
+  position:relative;display:inline-block;
+  font:400 2rem/1 var(--font-neon);letter-spacing:.06em;
+  color:#c9609a;                      /* Röhre aus: gedämpftes Rosa */
+}
+.logo__text::after{                    /* Röhre an: weißer Kern mit Schein, nur Deckkraft wird animiert */
+  content:attr(data-text);
+  position:absolute;inset:0;
+  color:var(--pink-kern);text-shadow:var(--glow-pink);
+  animation:anflackern 1s linear .3s 1 both;
+}
+@keyframes anflackern{
+  0%{opacity:0}
+  12%{opacity:1}
+  22%{opacity:.2}
+  36%{opacity:1}
+  100%{opacity:1}
+}
+
+.nav{display:flex;justify-content:center;gap:var(--a1)}
+.nav a,.korb{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 var(--a2);
+  font-weight:500;text-decoration:none;color:var(--text);
+  border:2px solid transparent;border-radius:999px;
+  touch-action:manipulation;transition:transform 160ms var(--ease-out);
+}
+.korb{gap:var(--a1);border-color:var(--cyan-rand);box-shadow:var(--rahmen-schwach-cyan)}
+.korb__zahl{
+  display:inline-grid;place-items:center;min-width:1.7rem;height:1.7rem;padding:0 var(--a1);
+  border-radius:999px;border:2px solid var(--cyan);color:var(--cyan);font-weight:700;font-size:.95rem;
+}
+
+/* ---------- Hero ---------- */
+/* PC: Überschrift und Text links, Schild rechts. Tablet: Überschrift über die ganze Breite. */
+.hero{
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  grid-template-areas:"kopf bild" "text bild";grid-template-rows:min-content min-content;
+  align-content:center;column-gap:var(--a5);row-gap:var(--a3);
+  max-width:75rem;margin:0 auto;padding:var(--a5) var(--a3);
+}
+.hero__kopf{grid-area:kopf;display:grid;gap:var(--a2);align-self:end}
+.hero__text{grid-area:text;display:grid;justify-items:start;gap:var(--a3);align-self:start}
+.hero__bild{grid-area:bild;align-self:center}
+.eyebrow{
+  font-weight:700;font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);
+}
+.hero h1{font-size:clamp(2.7rem,4.4vw,3.8rem);line-height:1.08}   /* 3,8 rem: Zeile 1 passt in die Spalte, immer 2 Zeilen */
+.hero h1 .neon{display:block}
+.untertitel{max-width:34rem;font-size:1.2rem;color:var(--text)}
+
+.bewertung{display:flex;align-items:center;flex-wrap:wrap;gap:var(--a2);color:var(--text-leise);font-size:.98rem}
+.sterne{display:inline-flex}
+.sterne svg{width:6.9rem;height:auto;overflow:visible}
+.sterne--klein svg{width:5.5rem}
+.sterne .voll{fill:var(--pink);stroke:var(--pink);stroke-width:1;stroke-linejoin:round}
+.sterne .teil{fill:url(#stern-teil);stroke:var(--pink);stroke-width:1;stroke-linejoin:round}
+.sterne .leer{fill:none;stroke:var(--pink);stroke-width:1.2;stroke-linejoin:round}
+
+.preisblock{
+  display:grid;gap:var(--a0);padding:var(--a2) var(--a3);
+  border:2px solid var(--cyan-rand);border-radius:18px;background:rgba(39,243,255,.04);box-shadow:var(--rahmen-schwach-cyan);
+}
+.preis{font-weight:700;font-size:3rem;line-height:1.05;letter-spacing:-.01em;color:#fff}
+.nb{white-space:nowrap}
+.preis__aktion{font-weight:500;color:var(--text)}
+.preis__info{font-size:.92rem;color:var(--text-leise)}
+
+/* Kaufknopf: die einzige gelbe Röhre der Seite */
+.cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:64px;padding:0 var(--a4);
+  font:700 1.25rem/1 var(--font-text);letter-spacing:.02em;
+  color:var(--gelb-text);background:var(--gelb);
+  border:3px solid var(--gelb-kern);border-radius:999px;box-shadow:var(--rahmen-gelb);
+  position:relative;isolation:isolate;cursor:pointer;touch-action:manipulation;
+  transition:transform 160ms var(--ease-out);
+}
+.cta::after{                            /* stärkerer Schein: nur die Deckkraft wird animiert */
+  content:"";position:absolute;inset:-3px;z-index:-1;border-radius:inherit;pointer-events:none;
+  box-shadow:0 0 14px rgba(255,225,74,.9),0 0 20px rgba(255,225,74,.6);
+  opacity:0;transition:opacity 160ms var(--ease-out);
+}
+
+/* Hero-Bild: Leuchtschild mit Röhren */
+.schild{
+  position:relative;display:grid;width:100%;max-width:35rem;margin-left:auto;aspect-ratio:640/600;
+  border:3px solid var(--cyan-rand);border-radius:28px;overflow:hidden;
+  background:
+    radial-gradient(circle at 18px 18px,#4a3d68 0 4px,transparent 5px),
+    radial-gradient(circle at calc(100% - 18px) 18px,#4a3d68 0 4px,transparent 5px),
+    radial-gradient(circle at 18px calc(100% - 18px),#4a3d68 0 4px,transparent 5px),
+    radial-gradient(circle at calc(100% - 18px) calc(100% - 18px),#4a3d68 0 4px,transparent 5px),
+    radial-gradient(60% 55% at 35% 45%,rgba(255,46,151,.14),transparent 70%),
+    radial-gradient(45% 40% at 70% 78%,rgba(39,243,255,.12),transparent 70%),
+    #0d0820;
+  box-shadow:var(--rahmen-schild);
+}
+.ebene{grid-area:1/1;width:100%;height:100%;max-width:none}
+.halter rect{fill:#2f2548;stroke:#4a3d68;stroke-width:1}
+.ebene--rosa{filter:var(--schein-pink);animation:einschalten 240ms var(--ease-out) 120ms both}
+.ebene--cyan{filter:var(--schein-cyan);animation:einschalten 240ms var(--ease-out) 240ms both}
+@keyframes einschalten{from{opacity:0}to{opacity:1}}
+.rohr{stroke-width:8}
+.kern{stroke-width:3}
+.ebene--rosa .rohr{stroke:var(--pink)}
+.ebene--rosa .kern{stroke:var(--pink-kern)}
+.ebene--cyan .rohr{stroke:var(--cyan)}
+.ebene--cyan .kern{stroke:var(--cyan-kern)}
+.schwach{opacity:.5}
+
+/* ---------- Abschnitte ---------- */
+.abschnitt{max-width:75rem;margin:0 auto;padding:var(--a5) var(--a3)}
+.abschnitt>h2{font-size:clamp(2.4rem,4.2vw,3.6rem);margin-bottom:var(--a4)}
+
+/* Zahlenleiste */
+.zahlenleiste{max-width:75rem;margin:0 auto;padding:var(--a3) var(--a3) var(--a5)}
+.zahlen{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--a3)}
+.kachel{
+  display:grid;align-content:start;gap:var(--a1);padding:var(--a3);
+  background:var(--flaeche);border:2px solid var(--cyan-rand);border-radius:18px;box-shadow:var(--rahmen-schwach-cyan);
+}
+.zahl{font:400 clamp(2.2rem,3.3vw,3.1rem)/1.05 var(--font-neon);color:var(--cyan-kern);text-shadow:var(--glow-klein-cyan)}
+.zahl__text{color:var(--text)}
+
+/* Funktionen */
+.karten{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--a3)}
+.karte{
+  display:grid;align-content:start;gap:var(--a2);padding:var(--a3);
+  background:var(--flaeche);border:2px solid var(--pink-rand);border-radius:20px;box-shadow:var(--rahmen-pink);
+}
+.symbol{width:3.5rem;height:3.5rem}
+.symbol--rosa{color:var(--pink);filter:var(--schein-pink)}
+.karte h3{font:400 1.7rem/1.1 var(--font-neon);color:var(--pink-kern);text-shadow:var(--glow-klein-pink)}
+.karte p{color:var(--text)}
+
+/* Ablauf */
+.schritte{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--a3);position:relative;counter-reset:s}
+.schritte::before{                      /* durchgehende Röhre hinter den Ringen */
+  content:"";position:absolute;left:16.6%;right:16.6%;top:2.2rem;height:4px;border-radius:4px;
+  background:var(--cyan-kern);box-shadow:0 0 8px var(--cyan),0 0 22px rgba(39,243,255,.45);
+}
+.schritt{position:relative;display:grid;justify-items:center;text-align:center;gap:var(--a2)}
+.schritt__nr{
+  display:grid;place-items:center;width:4.4rem;height:4.4rem;border-radius:50%;
+  background:var(--grund);border:3px solid var(--cyan-rand);box-shadow:var(--rahmen-cyan);
+  font:400 2.2rem/1 var(--font-neon);color:var(--cyan-kern);text-shadow:var(--glow-klein-cyan);
+}
+.schritt h3{font:400 1.7rem/1.1 var(--font-neon);color:var(--cyan-kern);text-shadow:var(--glow-klein-cyan);margin-bottom:var(--a1)}
+
+/* Bewertungen */
+.stimmen{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--a3)}
+.stimmen li{display:grid}
+.stimme{
+  position:relative;display:grid;align-content:space-between;gap:var(--a3);padding:var(--a5) var(--a3) var(--a3);
+  background:var(--flaeche);border:2px solid var(--pink-rand);border-radius:20px;box-shadow:var(--rahmen-pink);
+}
+.marke{
+  position:absolute;top:var(--a2);left:var(--a3);padding:var(--a0) var(--a2);
+  font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--cyan);border:2px solid var(--cyan-rand);border-radius:999px;
+}
+.stimme blockquote p{font-size:1.2rem;line-height:1.5}
+.stimme figcaption{display:flex;align-items:center;flex-wrap:wrap;gap:var(--a2);color:var(--text-leise)}
+.stimme .name{font-weight:500;color:var(--text)}
+
+/* Hinweisblock China */
+.hinweis{
+  position:relative;display:grid;gap:var(--a2);padding:var(--a4);
+  background:var(--flaeche);border:3px solid var(--cyan-rand);border-radius:24px;box-shadow:var(--rahmen-cyan);
+}
+.hinweis::before{                       /* zweite, innere Röhre */
+  content:"";position:absolute;inset:10px;border:2px solid rgba(143,249,255,.45);border-radius:16px;pointer-events:none;
+}
+.hinweis h2{font-size:clamp(2rem,3.4vw,2.8rem)}
+.hinweis p{max-width:46rem;font-size:1.2rem}
+
+/* ---------- Fußzeile ---------- */
+.fuss{
+  display:grid;justify-items:center;gap:var(--a2);padding:var(--a5) var(--a3) var(--a4);
+  border-top:2px solid var(--pink-rand);box-shadow:0 -6px 24px rgba(255,46,151,.14);
+  text-align:center;
+}
+.fuss__logo{font:400 2rem/1 var(--font-neon);letter-spacing:.06em;color:var(--pink-kern);text-shadow:var(--glow-klein-pink)}
+.fuss__nav{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--a0) var(--a3)}
+.fuss__nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--a1);text-decoration:underline;text-underline-offset:.25em}
+.fuss__hinweis{color:var(--text-leise);font-size:.95rem}
+
+/* ---------- Hover (nur Maus) und Drücken ---------- */
+@media (hover:hover) and (pointer:fine){
+  .nav a:hover{color:#fff;border-color:var(--cyan-rand);box-shadow:var(--rahmen-schwach-cyan)}   /* Röhre geht sofort an */
+  .korb:hover{background:rgba(39,243,255,.12)}
+  .cta:hover{transform:translateY(-2px)}
+  .cta:hover::after{opacity:1}
+  .fuss__nav a:hover{color:#fff;text-decoration-thickness:2px}
+}
+.cta:active,.nav a:active,.korb:active,.logo:active,.fuss__nav a:active{transform:scale(.97)}
+.cta:active{transform:translateY(0) scale(.97)}
+
+/* ---------- Tablet ---------- */
+@media (max-width:1020px){
+  .nav a,.korb{padding:0 .7rem;font-size:.95rem}
+  .kopf{gap:var(--a2)}
+  .hero{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-areas:"kopf kopf" "text bild";grid-template-rows:auto auto;align-items:center;column-gap:var(--a4);row-gap:var(--a4)}
+  .hero__kopf{align-self:start}
+  .hero__text{align-self:center}
+  .hero h1{font-size:clamp(2.7rem,6.2vw,3.8rem)}
+  .hero h1 .neon{display:inline}
+  .zahlen,.karten{grid-template-columns:repeat(2,1fr)}
+  .stimmen{gap:var(--a2)}
+  .stimme{padding-left:var(--a2);padding-right:var(--a2)}
+  .marke{left:var(--a2)}
+  .stimme blockquote p{font-size:1.1rem}
+}
+
+/* ---------- Kopfzeile ab 860 px: zwei Zeilen (Logo und Warenkorb oben, Links als Streifen) ---------- */
+@media (max-width:860px){
+  .kopf{
+    position:static;grid-template-columns:1fr auto;grid-template-areas:"logo korb" "nav nav";
+    gap:var(--a0) var(--a2);padding:var(--a1) var(--a2) 0;
+  }
+  .logo{grid-area:logo}
+  .korb{grid-area:korb;min-height:48px}
+  .nav{
+    grid-area:nav;justify-content:flex-start;overflow-x:auto;gap:var(--a0);
+    margin:0 calc(var(--a2) * -1);padding:var(--a0) var(--a2) var(--a1);scrollbar-width:none;
+  }
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{flex:none;min-height:48px;padding:0 var(--a2);font-size:1rem;border-color:rgba(143,249,255,.35)}
+  html{scroll-padding-top:var(--a2)}
+}
+
+/* ---------- Handy: eigener Entwurf ---------- */
+@media (max-width:720px){
+  body{font-size:1rem}
+
+  /* Hero: Bild direkt unter der Überschrift, Kaufknopf über die ganze Breite */
+  .hero{display:flex;flex-direction:column;gap:var(--a3);padding:var(--a4) var(--a2) var(--a5)}
+  .hero__kopf,.hero__text{display:contents}
+  .hero__text>*,.hero__kopf>*{width:100%}
+  .eyebrow{order:1;font-size:.85rem}
+  .hero h1{order:2;font-size:clamp(2.6rem,13vw,3.4rem)}
+  .hero h1 .neon{display:block}
+  .hero__bild{order:3}
+  .untertitel{order:4;font-size:1.1rem}
+  .bewertung{order:5}
+  .preisblock{order:6;padding:var(--a2)}
+  .preis{font-size:2.6rem}
+  .cta{order:7;width:100%;min-height:64px;font-size:1.3rem}
+  .schild{max-width:none;aspect-ratio:640/500;border-radius:22px}
+  .rohr{stroke-width:11}
+  .kern{stroke-width:4.2}
+
+  .abschnitt{padding:var(--a4) var(--a2)}
+  .abschnitt>h2{font-size:clamp(2.2rem,11vw,2.8rem);margin-bottom:var(--a3)}
+  .zahlenleiste{padding:var(--a2) var(--a2) var(--a4)}
+  .zahlen{gap:var(--a2)}
+  .kachel{padding:var(--a2)}
+  .zahl{font-size:2rem}
+  .zahl__text{font-size:.95rem;line-height:1.4}
+
+  .karten{grid-template-columns:1fr;gap:var(--a2)}
+  .karte{grid-template-columns:3.5rem 1fr;column-gap:var(--a2);row-gap:var(--a0);padding:var(--a3) var(--a2)}
+  .karte .symbol{grid-row:1/3;margin:0;align-self:start}
+  .karte h3{font-size:1.5rem;align-self:end}
+
+  .schritte{grid-template-columns:1fr;gap:var(--a3)}
+  .schritte::before{left:2.1rem;right:auto;top:2.2rem;bottom:2.2rem;width:4px;height:auto}
+  .schritt{grid-template-columns:4.4rem 1fr;justify-items:start;text-align:left;gap:var(--a2);align-items:center}
+  .schritt h3{font-size:1.5rem}
+
+  .stimmen{grid-template-columns:1fr}
+  .stimme{padding:var(--a5) var(--a3) var(--a3)}
+  .marke{left:var(--a3)}
+  .stimme blockquote p{font-size:1.15rem}
+  .hinweis{padding:var(--a3) var(--a3)}
+  .hinweis::before{inset:7px;border-radius:14px}
+  .hinweis p{font-size:1.05rem}
+  .fuss{padding:var(--a4) var(--a2)}
+}
+
+/* ---------- Ruhe: Standbild statt Bewegung ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .logo__text::after{animation:none;opacity:1}
+  .ebene--rosa,.ebene--cyan{animation:none}
+  *{transition:none!important}
+}

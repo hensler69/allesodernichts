@@ -1,0 +1,370 @@
+/* Look "Comic Book": Bildkästen mit Rinnen, Sprechblasen, Erzählkästen, Lautmalerei, Halbton in den Ecken.
+   Schriften nur lokal. Bangers nur für Überschriften und Lautmalerei, Fließtext immer Comic Neue. */
+@font-face{font-family:"Bangers";src:url("../../fonts/Bangers-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Comic Neue";src:url("../../fonts/ComicNeue-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Comic Neue";src:url("../../fonts/ComicNeue-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+
+:root{
+  /* Farben mit festen Rollen */
+  --papier:#fffdf2;      /* Seitengrund, Sprechblasen, Karten */
+  --gelb:#ffe14a;        /* Erzählkästen (Text), Panel-Hintergrund, Burst-Füllung */
+  --blau:#1d4ed8;        /* Panel-Hintergrund, Banner, Zähler, Lautmalerei auf Papier */
+  --blau-hell:#cfe0ff;   /* helle Panel-Hintergründe */
+  --tinte:#111111;       /* Konturen, Text */
+  --tinte-weich:#3a3a3a; /* Kleingedrucktes */
+  --rot:#d62839;         /* NUR Kaufknopf (weiße Schrift 4,97:1) */
+  /* Zeichnungstöne, nie für Text oder Bedienelemente */
+  --gruen:#2fae63;
+  --gruen-hell:#b7eb9c;
+  --karotte:#ff9a3c;
+  --blau-strahl:#2b5ee8;
+  --gelb-strahl:#ffd51c;
+
+  --titel:"Bangers",Impact,"Arial Narrow",sans-serif;
+  --text:"Comic Neue","Comic Sans MS","Comic Sans",system-ui,sans-serif;
+
+  /* Abstandsstufen */
+  --s1:8px;--s2:16px;--s3:24px;--s4:40px;--s5:64px;--s6:96px;
+  --abschnitt:var(--s6);
+  --rand:24px;
+  --kontur:4px;
+
+  --ease:cubic-bezier(.23,1,.32,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--papier);color:var(--tinte);font:400 1.0625rem/1.55 var(--text);font-synthesis:none;-webkit-font-smoothing:antialiased;overflow-x:clip}
+h1,h2,h3,p,ul,ol,figure,blockquote{margin:0}
+ul,ol{padding:0;list-style:none}
+svg{display:block}
+a{color:inherit}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.huelle{width:min(100% - var(--rand) * 2,1200px);margin-inline:auto}
+
+/* Sichtbarer Fokus: Tinte mit Papierring, trägt auf Papier, Gelb, Blau und Tinte */
+:focus-visible{outline:3px solid var(--tinte);outline-offset:3px;box-shadow:0 0 0 6px var(--papier)}
+.fuss :focus-visible{outline-color:var(--papier);box-shadow:0 0 0 6px var(--tinte)}
+html{scroll-padding-top:16px}
+::selection{background:var(--rot);color:#fff}
+
+.springen{position:absolute;left:var(--s1);top:-80px;z-index:20;background:var(--gelb);border:3px solid var(--tinte);padding:var(--s1) var(--s2);font:700 1rem var(--text);text-decoration:none}
+.springen:focus{top:var(--s1)}
+
+/* ---------- Kopfzeile ---------- */
+.kopf{position:relative;z-index:6;background:var(--papier);border-bottom:var(--kontur) solid var(--tinte)}
+.kopf__bar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:var(--s2);padding-block:12px}
+.logo{display:inline-flex;align-items:center;gap:var(--s1);min-height:48px;color:var(--tinte);text-decoration:none;transition:transform 140ms var(--ease)}
+.logo__zeichen{width:46px;height:46px;fill:var(--gelb);stroke:var(--tinte);stroke-width:5;stroke-linejoin:round}
+.logo__text{font:400 2.1rem/1 var(--titel);letter-spacing:.05em}
+.nav ul{display:flex;justify-content:center;gap:4px}
+.nav a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 var(--s2);color:var(--tinte);font:700 1.0625rem/1 var(--text);text-decoration:none;transition:transform 140ms var(--ease)}
+.warenkorb{display:inline-flex;align-items:center;gap:var(--s1);min-height:44px;padding:0 var(--s2);border:3px solid var(--tinte);background:var(--papier);color:var(--tinte);font:700 1.0625rem/1 var(--text);text-decoration:none;transition:transform 140ms var(--ease)}
+.zaehler{display:grid;place-items:center;min-width:28px;height:28px;padding:0 6px;border:2px solid var(--tinte);border-radius:99px;background:var(--blau);color:#fff;font:400 1.1rem/1 var(--titel);letter-spacing:.03em;transition:transform 220ms var(--ease)}
+.zaehler.hoch{transform:scale(1.25);transition-duration:90ms}
+.logo:active,.nav a:active,.warenkorb:active{transform:scale(.97)}
+/* Antippen ohne Verzögerung und ohne graues Aufblitzen */
+.logo,.nav a,.warenkorb,.cta,.fuss a{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+
+/* ---------- Hero ---------- */
+.hero{padding-block:var(--s4) 0}
+.hero__raster{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"kopf collage" "text collage";column-gap:var(--s5);row-gap:var(--s3);align-items:start}
+.hero__kopf{grid-area:kopf}
+.hero__text{grid-area:text;display:grid;gap:var(--s3)}
+.collage{grid-area:collage}
+
+.eyebrow{display:inline-block;rotate:-1.5deg;margin-bottom:var(--s2);padding:var(--s1) var(--s2);background:var(--gelb);border:3px solid var(--tinte);font:700 .9375rem/1.3 var(--text);letter-spacing:.07em;text-transform:uppercase}
+h1{font:400 clamp(2.6rem,5.4vw,4.3rem)/1.02 var(--titel);letter-spacing:.02em;text-wrap:balance}
+.zeile{display:inline-block;text-shadow:4px 4px 0 var(--gelb)}
+.zeile--blau{display:block;width:fit-content;margin-top:.14em;padding:.02em .22em .08em;background:var(--blau);border:var(--kontur) solid var(--tinte);color:#fff;rotate:-1.5deg;text-shadow:none}
+
+.erzaehler{padding:var(--s2) var(--s3);background:var(--gelb);border:var(--kontur) solid var(--tinte);font:700 1.1875rem/1.5 var(--text);rotate:-.4deg}
+
+.bewertung{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1) var(--s2)}
+.bewertung__text{font:700 1.0625rem/1.3 var(--text)}
+.sterne{position:relative;flex:none;display:inline-block;width:128px;height:24px}
+.sterne__leer,.sterne__voll{position:absolute;left:0;top:0;bottom:0;display:flex;gap:2px}
+.sterne__voll{overflow:hidden}
+.sterne svg{flex:none;width:24px;height:24px;stroke:var(--tinte)}
+.sterne__leer svg{fill:var(--papier)}
+.sterne__voll svg{fill:var(--gelb)}
+
+/* Kaufblock: Preis links, Knopf rechts */
+.kauf{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"betrag cta" "aktion cta" "fein fein";align-items:center;column-gap:var(--s3);row-gap:var(--s1);padding:var(--s3);background:var(--papier);border:var(--kontur) solid var(--tinte)}
+.preis{display:contents}
+.preis__betrag{grid-area:betrag;align-self:end;font:400 3.6rem/1 var(--titel);letter-spacing:.02em}
+.preis__aktion{grid-area:aktion;justify-self:start;align-self:start;max-width:26ch;text-wrap:balance;padding:var(--s1) var(--s2);background:var(--gelb);border:3px solid var(--tinte);font:700 .9375rem/1.3 var(--text)}
+.preis__fein{grid-area:fein;margin-top:var(--s1);max-width:none;color:var(--tinte-weich);font:400 1rem/1.4 var(--text)}
+
+/* Der EINE Kaufknopf: Rot mit weißer Schrift, gelber Burst als Hof, schräg gestellt */
+.cta-huelle{grid-area:cta;position:relative;display:grid;padding:var(--s3) var(--s2)}
+.cta-halo{position:absolute;left:-6px;top:0;width:calc(100% + 12px);height:100%;fill:var(--gelb);stroke:var(--tinte);stroke-width:3;stroke-linejoin:round;pointer-events:none}
+.cta{position:relative;display:flex;align-items:center;justify-content:center;min-height:80px;padding:var(--s1) var(--s3);border:var(--kontur) solid var(--tinte);border-radius:6px;background:var(--rot);color:#fff;font:400 2.3rem/1 var(--titel);letter-spacing:.05em;text-shadow:2px 2px 0 var(--tinte);cursor:pointer;rotate:-1.5deg;transition:transform 160ms var(--ease)}
+.cta:active{transform:scale(.97);transition-duration:90ms}
+
+/* ---------- Collage: drei Bilder mit Rinnen ---------- */
+.collage{position:relative;aspect-ratio:14/15;width:100%;margin-block:4px;container-type:inline-size}
+@media (min-width:960px){.collage{aspect-ratio:auto;align-self:stretch;min-height:560px;margin-block:0}}
+.panel{position:absolute;inset:0}
+.panel--1{--form:polygon(0 0,57% 0,49.5% 100%,0 100%);--punkt:rgba(255,255,255,.28)}
+.panel--2{--form:polygon(61% 0,100% 0,100% 43%,57.3% 49%);--punkt:rgba(17,17,17,.22)}
+.panel--3{--form:polygon(57% 53.5%,100% 47.5%,100% 100%,53.5% 100%);--punkt:rgba(29,78,216,.32)}
+/* Rahmen: vier harte Schatten ergeben eine gleichmäßige Kontur, auch an schrägen Kanten */
+.panel__rahmen{position:absolute;inset:0;filter:drop-shadow(4px 0 0 var(--tinte)) drop-shadow(-4px 0 0 var(--tinte)) drop-shadow(0 4px 0 var(--tinte)) drop-shadow(0 -4px 0 var(--tinte))}
+.panel__bild{position:absolute;inset:0;overflow:hidden;clip-path:var(--form)}
+.panel--1 .panel__bild{background:repeating-conic-gradient(from 6deg at 30% 62%,var(--blau) 0 6deg,var(--blau-strahl) 6deg 12deg)}
+.panel--2 .panel__bild{background:repeating-conic-gradient(from 0deg at 82% 56%,var(--gelb) 0 6deg,var(--gelb-strahl) 6deg 12deg)}
+.panel--3 .panel__bild{background:var(--blau-hell)}
+.panel--1 .art{left:0;top:0;width:57%;height:100%}
+.panel--2 .art{left:57.3%;top:0;width:42.7%;height:49%}
+.panel--3 .art{left:53.5%;top:47.5%;width:46.5%;height:52.5%}
+
+/* Zeichnungen: Konturen und Füllungen über Klassen */
+.art{position:absolute;display:block;overflow:visible}
+.art .k{stroke:var(--tinte);stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+.f-papier{fill:var(--papier)}.f-gelb{fill:var(--gelb)}.f-blau{fill:var(--blau)}.f-blauhell{fill:var(--blau-hell)}
+.f-gruen{fill:var(--gruen)}.f-gruenhell{fill:var(--gruen-hell)}.f-karotte{fill:var(--karotte)}.f-tinte{fill:var(--tinte)}.f-none{fill:none}
+.f-haut1{fill:#ffd9b8}.f-haut2{fill:#d9a77a}.f-haut3{fill:#f2c49b}
+.schatten{fill:rgba(17,17,17,.3)}
+.bt{font:400 30px/1 var(--titel);letter-spacing:.06em;fill:var(--tinte)}
+
+/* Halbton: Rasterpunkte nur in Ecken, große Punkte am Rand, kleine weiter innen (nie unter Text) */
+.halbton{position:absolute;width:var(--hb,150px);height:var(--hb,150px);color:var(--punkt,rgba(17,17,17,.25));pointer-events:none}
+.halbton::before,.halbton::after{content:"";position:absolute;inset:0}
+.halbton::before{background:radial-gradient(circle,currentColor 0 2.7px,transparent 3.2px) 0 0/11px 11px;-webkit-mask-image:radial-gradient(circle at var(--ox) var(--oy),#000 0,#000 30%,transparent 46%);mask-image:radial-gradient(circle at var(--ox) var(--oy),#000 0,#000 30%,transparent 46%)}
+.halbton::after{background:radial-gradient(circle,currentColor 0 1.5px,transparent 2px) 5.5px 5.5px/11px 11px;-webkit-mask-image:radial-gradient(circle at var(--ox) var(--oy),transparent 0,transparent 34%,#000 48%,#000 70%,transparent 100%);mask-image:radial-gradient(circle at var(--ox) var(--oy),transparent 0,transparent 34%,#000 48%,#000 70%,transparent 100%)}
+.halbton--lo{left:0;top:0;--ox:0%;--oy:0%}
+.halbton--ro{right:0;top:0;--ox:100%;--oy:0%}
+.halbton--lu{left:0;bottom:0;--ox:0%;--oy:100%}
+.halbton--ru{right:0;bottom:0;--ox:100%;--oy:100%}
+.halbton--klein{--hb:84px}
+
+/* Sprechblasen mit Schwanz (Tinte-Dreieck plus Papier-Dreieck) */
+.blase{position:absolute;z-index:3;margin:0;padding:.35em .85em .42em;background:var(--papier);border:3px solid var(--tinte);border-radius:26px;color:var(--tinte);font:700 clamp(1.05rem,3.9cqw,1.5rem)/1.1 var(--text);white-space:nowrap}
+.blase::before,.blase::after{content:"";position:absolute;top:100%;width:36px;height:40px;left:var(--tx,60%)}
+.blase::before{background:var(--tinte);clip-path:polygon(0 0,36px 0,30px 40px)}
+.blase::after{background:var(--papier);clip-path:polygon(4.4px 0,32.5px 0,27.8px 31.2px)}
+.blase--links::before,.blase--links::after{left:auto;right:var(--tx,60%);scale:-1 1}
+.blase--leicht{left:3.5%;top:4%;--tx:58%}
+.blase--fertig{right:3.5%;top:58%;--tx:44%}
+
+/* Lautmalerei: Burst-Sterne, nur Deko */
+.burst{position:absolute;z-index:4;display:grid;place-items:center;width:var(--w);aspect-ratio:1;rotate:var(--r);color:var(--tinte);pointer-events:none}
+.burst svg{position:absolute;inset:0;width:100%;height:100%;fill:var(--fuell,var(--gelb));stroke:var(--tinte);stroke-width:3.4;stroke-linejoin:round}
+.burst b{position:relative;font:400 clamp(1.15rem,4.8cqw,2.1rem)/1 var(--titel);letter-spacing:.04em;rotate:-5deg}
+.burst--zack{--w:25cqw;--r:-9deg;left:47%;top:-4%}
+.burst--wusch{--w:22cqw;--r:9deg;--fuell:var(--papier);left:53.5%;top:35%}
+.burst--wusch b{color:var(--blau)}
+.burst--klein{--w:104px;--r:8deg;right:4%;top:50%;translate:0 -50%}
+.burst--klein b{font-size:1.2rem}
+.funktionen__b .burst--klein,.funktionen__d .burst--klein{--r:-7deg;--fuell:var(--papier)}
+.funktionen__b .burst--klein b,.funktionen__d .burst--klein b{color:var(--blau)}
+
+/* ---------- Zahlenleiste: vier Bilder in einem Streifen ---------- */
+.zahlen{padding-top:var(--abschnitt)}
+.zahlen__liste{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.kachel{position:relative;display:flex;flex-direction:column;overflow:hidden;background:var(--papier);border:var(--kontur) solid var(--tinte)}
+.kachel .halbton{--punkt:rgba(29,78,216,.34)}
+.zahl{position:relative;padding:var(--s2) var(--s2) var(--s1);font:400 clamp(2.4rem,4.3vw,3.6rem)/1 var(--titel);letter-spacing:.03em}
+.zahl__text{position:relative;margin-top:auto;min-height:calc(2.7em + var(--s4));padding:var(--s2);background:var(--gelb);border-top:var(--kontur) solid var(--tinte);font:700 1.0625rem/1.35 var(--text)}
+
+/* ---------- Abschnitte ---------- */
+.abschnitt{padding-top:var(--abschnitt)}
+.kapitel{display:inline-block;margin-bottom:var(--s4);padding:var(--s1) var(--s2);background:var(--gelb);border:var(--kontur) solid var(--tinte);font:400 clamp(2rem,3.6vw,2.9rem)/1.1 var(--titel);letter-spacing:.03em;rotate:-1deg}
+
+/* Funktionen als Bilder, Raster aus zwölf Spalten ohne Lücken */
+.funktionen{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--s3)}
+.funktionen__a{grid-column:1/8}.funktionen__b{grid-column:8/13}
+.funktionen__c{grid-column:1/6}.funktionen__d{grid-column:6/13}
+.funktionen li{display:flex}
+.karte{display:flex;flex-direction:column;width:100%;background:var(--papier);border:var(--kontur) solid var(--tinte)}
+.karte__bild{position:relative;flex:1;min-height:190px;overflow:hidden}
+.karte__bild .art{inset:0 auto 0 0;width:74%;height:100%}
+.karte__bild .k{stroke-width:4}
+.karte--hell .karte__bild{background:var(--blau-hell);--punkt:rgba(29,78,216,.32)}
+.karte--blau .karte__bild{background:repeating-conic-gradient(from 6deg at 50% 60%,var(--blau) 0 6deg,var(--blau-strahl) 6deg 12deg);--punkt:rgba(255,255,255,.28)}
+.karte__text{padding:var(--s2) var(--s3) var(--s3);background:var(--gelb);border-top:var(--kontur) solid var(--tinte)}
+.karte__text h3{margin-bottom:var(--s1);font:400 1.9rem/1.05 var(--titel);letter-spacing:.03em}
+.karte__text p{font:700 1.0625rem/1.5 var(--text)}
+
+/* Ablauf: schräg geschnittenes blaues Band */
+.ablauf{--k:clamp(16px,3.4vw,44px);position:relative;margin-top:var(--abschnitt);padding-block:calc(var(--k) + var(--s5)) calc(var(--k) + var(--s5))}
+.ablauf__grund{position:absolute;inset:0;filter:drop-shadow(0 4px 0 var(--tinte)) drop-shadow(0 -4px 0 var(--tinte))}
+.ablauf__grund::before{content:"";position:absolute;inset:0;background:repeating-conic-gradient(from 4deg at 50% 50%,var(--blau) 0 5deg,var(--blau-strahl) 5deg 10deg);clip-path:polygon(0 var(--k),100% 0,100% calc(100% - var(--k)),0 100%)}
+.ablauf>.halbton{--punkt:rgba(255,255,255,.3);--hb:170px}
+.ablauf>.halbton--ro{top:0}
+.ablauf>.halbton--lu{bottom:0}
+.ablauf__inhalt{position:relative}
+.ablauf .kapitel{margin-bottom:var(--s5)}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4)}
+.schritt{position:relative;padding:var(--s5) var(--s3) var(--s3);background:var(--papier);border:var(--kontur) solid var(--tinte)}
+.schritt:nth-child(1){rotate:-.8deg}.schritt:nth-child(2){rotate:.6deg}.schritt:nth-child(3){rotate:-.5deg}
+.ziffer{position:absolute;left:-18px;top:-26px;display:grid;place-items:center;width:84px;height:84px;color:var(--tinte)}
+.ziffer svg{position:absolute;inset:0;width:100%;height:100%;fill:var(--gelb);stroke:var(--tinte);stroke-width:3.4;stroke-linejoin:round}
+.ziffer b{position:relative;font:400 2.5rem/1 var(--titel)}
+.laut{position:absolute;right:var(--s2);top:var(--s2);color:var(--blau);font:400 1.9rem/1 var(--titel);letter-spacing:.05em;rotate:7deg}
+.schritt h3{margin-bottom:var(--s1);font:400 2.1rem/1.05 var(--titel);letter-spacing:.03em}
+.schritt p{font:700 1.125rem/1.5 var(--text)}
+
+/* Bewertungen als Sprechblasen mit selbst gezeichneten, erfundenen Sprechern */
+.stimmen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4)}
+.stimme figure{display:flex;flex-direction:column;height:100%}
+.blase--stimme{position:relative;flex:1;z-index:auto;padding:var(--s4) var(--s3) var(--s3);border-radius:30px;font:700 1.25rem/1.45 var(--text);white-space:normal;--tx:44px}
+.blase--stimme::before,.blase--stimme::after{left:var(--tx)}
+.marke{position:absolute;left:var(--s3);top:-18px;padding:4px var(--s2);background:var(--gelb);border:3px solid var(--tinte);font:700 .9375rem/1.3 var(--text);letter-spacing:.07em;text-transform:uppercase;rotate:-2deg}
+.sprecher{display:flex;align-items:center;gap:var(--s2);margin-top:var(--s5);padding-left:var(--s1)}
+.gesicht{flex:none;width:64px;height:64px}
+.gesicht .k{stroke:var(--tinte);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.sprecher__text{display:grid;gap:var(--s1);justify-items:start}
+.stimme__name{font:700 1.125rem/1.2 var(--text)}
+.stimmen .sterne{width:104px;height:20px}
+.stimmen .sterne svg{width:20px;height:20px}
+
+/* Hinweisblock als Erzählkasten mit Paketbild */
+.hinweis{padding-block:var(--abschnitt)}
+.hinweis__block{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);background:var(--gelb);border:var(--kontur) solid var(--tinte)}
+.hinweis__text{padding:var(--s4)}
+.hinweis__text h2{margin-bottom:var(--s2);font:400 clamp(2rem,3.6vw,2.9rem)/1.1 var(--titel);letter-spacing:.03em}
+.hinweis__text p{max-width:56ch;font:700 1.25rem/1.5 var(--text)}
+.hinweis__bild{position:relative;min-height:200px;overflow:hidden;background:var(--blau-hell);border-left:var(--kontur) solid var(--tinte);--punkt:rgba(29,78,216,.32)}
+.hinweis__bild .art{inset:var(--s2);width:calc(100% - 32px);height:calc(100% - 32px)}
+
+/* ---------- Fußzeile ---------- */
+.fuss{background:var(--tinte);color:var(--papier);padding-block:0 var(--s4)}
+.fuss::before{content:"";display:block;height:24px;margin-bottom:var(--s4);background:radial-gradient(circle,var(--gelb) 0 3px,transparent 3.6px) 0 0/16px 16px}
+.fuss__innen{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:var(--s2) var(--s4)}
+.fuss__marke{font:400 2.4rem/1 var(--titel);letter-spacing:.05em}
+.fuss ul{display:flex;flex-wrap:wrap;gap:4px 8px}
+.fuss a{display:flex;align-items:center;min-height:44px;padding:0 var(--s1);color:var(--papier);font:700 1.0625rem/1 var(--text);transition:transform 140ms var(--ease)}
+.fuss a:active{transform:scale(.97)}
+.fuss__entwurf{grid-column:1/-1;color:#d9d9d2;font:400 1rem/1.4 var(--text)}
+
+/* ---------- Bewegung: nur transform und opacity, unter 300 ms ---------- */
+.js .zeig{opacity:0;transform:translateY(8px);transition:opacity 280ms var(--ease),transform 280ms var(--ease)}
+.js .zeig.da{opacity:1;transform:none}
+.js .zeig:nth-child(2){transition-delay:60ms}
+.js .zeig:nth-child(3){transition-delay:120ms}
+.js .zeig:nth-child(4){transition-delay:180ms}
+@keyframes pop{
+  from{opacity:0;transform:scale(.75) rotate(-8deg)}
+  60%{opacity:1;transform:scale(1.06) rotate(1deg)}
+  to{opacity:1;transform:none}
+}
+.js .burst{opacity:0}
+.js .burst.da{opacity:1;animation:pop 260ms var(--ease) both}
+.js .burst--wusch.da{animation-delay:60ms}
+
+@media (hover:hover) and (pointer:fine){
+  .nav a:hover,.fuss a:hover{background:var(--gelb);color:var(--tinte)}
+  .warenkorb:hover{background:var(--gelb)}
+  .logo:hover{transform:rotate(-2deg)}
+  .cta:hover{transform:scale(1.03)}
+  .cta:active{transform:scale(.97)}
+}
+
+/* ---------- Tablet und kleinere Fenster ---------- */
+@media (max-width:1100px){
+  .hero__raster{column-gap:var(--s4)}
+  .kauf{grid-template-columns:minmax(0,1fr);grid-template-areas:"betrag" "aktion" "fein" "cta"}
+  .cta-huelle{max-width:360px}
+  .zahlen__liste{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:959px){
+  :root{--abschnitt:var(--s5)}
+  .kopf__bar{grid-template-columns:1fr auto;grid-template-areas:"logo korb" "nav nav";row-gap:4px;padding-block:8px 6px}
+  .logo{grid-area:logo}
+  .warenkorb{grid-area:korb}
+  .nav{grid-area:nav}
+  .nav ul{flex-wrap:wrap;justify-content:flex-start;margin-inline:calc(var(--s2) * -1)}
+  .hero__raster{grid-template-columns:minmax(0,1fr);grid-template-areas:"kopf" "text" "collage";row-gap:var(--s4)}
+  .kauf{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"betrag cta" "aktion cta" "fein fein"}
+  .cta-huelle{max-width:none}
+  .collage{max-width:640px;margin-inline:auto}
+  .funktionen__a,.funktionen__d{grid-column:1/8}
+  .funktionen__b,.funktionen__c{grid-column:8/13}
+  .funktionen__c{grid-column:1/6}
+  .funktionen__d{grid-column:6/13}
+  .hinweis__block{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+}
+@media (max-width:760px){
+  .schritte{grid-template-columns:minmax(0,1fr);gap:var(--s5)}
+  .stimmen{grid-template-columns:minmax(0,1fr);gap:var(--s5)}
+  .stimme:nth-child(2) .sprecher{justify-content:flex-end}
+  .stimme:nth-child(2) .blase--stimme::before,.stimme:nth-child(2) .blase--stimme::after{left:auto;right:44px;scale:-1 1}
+  .stimme:nth-child(2) .sprecher{flex-direction:row-reverse}
+  .funktionen{grid-template-columns:minmax(0,1fr)}
+  .funktionen li{grid-column:1/-1!important}
+  .kauf{grid-template-columns:minmax(0,1fr);grid-template-areas:"betrag" "aktion" "fein" "cta"}
+  .cta-huelle{max-width:360px}
+}
+
+/* ---------- Handy: eigener Entwurf, Bilder untereinander ---------- */
+@media (max-width:600px){
+  :root{--abschnitt:var(--s4);--rand:16px}
+  .kopf__bar{padding-block:6px 4px}
+  .logo__zeichen{width:40px;height:40px}
+  .logo__text{font-size:1.9rem}
+  .nav ul{display:grid;grid-template-columns:repeat(6,1fr);gap:0 4px;margin-inline:0}
+  .nav li:nth-child(-n+3){grid-column:span 2}
+  .nav li:nth-child(n+4){grid-column:span 3}
+  .nav a{min-height:44px;padding:0 4px;border:0}
+  .hero{padding-top:var(--s3)}
+  .hero__raster{row-gap:var(--s3)}
+  .eyebrow{margin-bottom:var(--s1);font-size:.875rem}
+  h1{font-size:clamp(2.2rem,12.2vw,3.4rem)}
+  .zeile{text-shadow:3px 3px 0 var(--gelb)}
+  .zeile--blau{text-shadow:none}
+  .erzaehler{padding:var(--s2);font-size:1.0625rem;line-height:1.45}
+  .hero__text{gap:var(--s2)}
+  .bewertung__text{font-size:.9375rem}
+  .kauf{padding:var(--s2);row-gap:var(--s1)}
+  .kauf{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"betrag aktion" "cta cta" "fein fein"}
+  .preis__betrag{font-size:3.2rem}
+  .preis__aktion{font-size:.9375rem;justify-self:end;align-self:center}
+  .preis__betrag{align-self:center}
+  .preis__fein{font-size:1rem}
+  .cta-huelle{max-width:none;padding:var(--s2) var(--s2) var(--s3)}
+  .cta{font-size:clamp(1.5rem,7.4vw,1.85rem);min-height:64px;padding:var(--s1) var(--s1)}
+
+  .collage{aspect-ratio:auto;display:grid;gap:var(--s3);max-width:none;container-type:inline-size}
+  .panel{position:relative;inset:auto;height:clamp(176px,52vw,230px);--form:polygon(0 0,100% 5%,100% 100%,0 95%)}
+  .panel--1{--form:polygon(0 0,100% 5%,100% 100%,0 95%)}
+  .panel--2{--form:polygon(0 0,100% 5%,100% 100%,0 95%)}
+  .panel--3{--form:polygon(0 0,100% 5%,100% 100%,0 95%)}
+  .panel .art{inset:0;left:0;top:0;width:100%;height:100%}
+  .panel--1 .art{left:0;top:0;width:100%;height:100%}
+  .panel--2 .art{left:0;top:0;width:100%;height:100%}
+  .panel--3 .art{left:0;top:0;width:100%;height:100%}
+  .panel--1 .panel__bild{background:repeating-conic-gradient(from 6deg at 50% 62%,var(--blau) 0 6deg,var(--blau-strahl) 6deg 12deg)}
+  .panel--2 .panel__bild{background:repeating-conic-gradient(from 0deg at 64% 66%,var(--gelb) 0 6deg,var(--gelb-strahl) 6deg 12deg)}
+  .blase{font-size:1.2rem}
+  .blase--leicht{left:5%;top:12%}
+  .blase--fertig{right:5%;top:14%}
+  .burst{--w:min(34cqw,150px)}
+  .burst b{font-size:1.5rem}
+  .burst--zack{left:auto;right:4%;top:6%}
+  .burst--wusch{left:5%;top:auto;bottom:6%}
+
+  .zahlen__liste{gap:var(--s2)}
+  .zahl{font-size:2.3rem}
+  .kachel .halbton{display:none}
+  .zahl__text{font-size:1rem;padding:var(--s1) var(--s2)}
+  .kapitel{margin-bottom:var(--s3);font-size:2rem}
+  .funktionen{gap:var(--s2)}
+  .karte__bild{min-height:150px}
+  .ablauf .kapitel{margin-bottom:var(--s4)}
+  .ziffer{left:-8px}
+  .schritt{padding:var(--s5) var(--s2) var(--s3)}
+  .blase--stimme{padding:var(--s4) var(--s2) var(--s3);font-size:1.1875rem}
+  .hinweis__block{grid-template-columns:minmax(0,1fr)}
+  .hinweis__text{padding:var(--s3) var(--s2)}
+  .hinweis__bild{border-left:0;border-top:var(--kontur) solid var(--tinte);min-height:170px}
+  .fuss__innen{grid-template-columns:minmax(0,1fr)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .js .zeig{opacity:1;transform:none;transition:none}
+  .js .burst{opacity:1;animation:none}
+  .js .burst.da{animation:none}
+  .cta,.logo,.nav a,.warenkorb,.fuss a,.zaehler{transition:none}
+}

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HORTA Gemüseschneider HT-5 im Look Neon Glow</title>
+<meta name="description" content="Entwurf: HORTA, elektrischer Gemüseschneider HT-5, im Look Neon Glow (Leuchtröhren bei Nacht).">
+<meta name="theme-color" content="#0a0614">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<!-- Symbole für Sterne (einmal definieren, mehrfach benutzen) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="stern-teil" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="60%" stop-color="#ff2e97"/>
+      <stop offset="60%" stop-color="#ff2e97" stop-opacity="0"/>
+    </linearGradient>
+    <symbol id="stern" viewBox="0 0 22 22">
+      <path d="M11.0 1.0 L13.5 7.5 L20.5 7.9 L15.1 12.3 L16.9 19.1 L11.0 15.3 L5.1 19.1 L6.9 12.3 L1.5 7.9 L8.5 7.5Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+
+<header class="kopf">
+  <a class="logo" href="#ueberblick" aria-label="HORTA, zur Startseite"><span class="logo__text" data-text="HORTA">HORTA</span></a>
+  <nav class="nav" aria-label="Hauptnavigation">
+    <a href="#ueberblick">Überblick</a>
+    <a href="#funktionen">Funktionen</a>
+    <a href="#ablauf">Ablauf</a>
+    <a href="#bewertungen">Bewertungen</a>
+    <a href="#fragen">Fragen</a>
+  </nav>
+  <a class="korb" href="#ueberblick">Warenkorb <span class="korb__zahl" id="korb-zahl" aria-live="polite">0</span></a>
+</header>
+
+<main id="inhalt">
+
+  <!-- HERO -->
+  <section class="hero" id="ueberblick" aria-labelledby="titel">
+    <div class="hero__kopf">
+      <p class="eyebrow">Elektrischer Gemüseschneider</p>
+      <h1 id="titel"><span class="neon neon--pink">Weniger schnippeln.</span> <span class="neon neon--cyan">Mehr Salat.</span></h1>
+    </div>
+
+    <div class="hero__text">
+      <p class="untertitel">HORTA schneidet, raspelt und reibt auf Knopfdruck. Fünf Einsätze aus Edelstahl, ein breiter Schacht, und alles fällt direkt in Ihre Schüssel.</p>
+      <p class="bewertung">
+        <span class="sterne" role="img" aria-label="4,6 von 5 Sternen">
+          <svg viewBox="0 0 110 22" aria-hidden="true" focusable="false">
+            <use href="#stern" x="0" width="22" height="22" class="voll"/>
+            <use href="#stern" x="22" width="22" height="22" class="voll"/>
+            <use href="#stern" x="44" width="22" height="22" class="voll"/>
+            <use href="#stern" x="66" width="22" height="22" class="voll"/>
+            <use href="#stern" x="88" width="22" height="22" class="teil"/>
+          </svg>
+        </span>
+        <span class="bewertung__text">4,6 von 5 · 36 Beispielbewertungen</span>
+      </p>
+      <div class="preisblock">
+        <p class="preis">44,90 €</p>
+        <p class="preis__aktion">Einführungspreis bis 30.11.2026, danach <span class="nb">54,90 €</span></p>
+        <p class="preis__info">inkl. 19 % MwSt., zzgl. <span class="nb">4,90 €</span> Versand, Lieferzeit 8 bis 15 Werktage</p>
+      </div>
+      <button class="cta" type="button">In den Warenkorb</button>
+    </div>
+
+    <div class="hero__bild">
+      <div class="schild" role="img" aria-label="Zeichnung als Leuchtröhren: der Gemüseschneider mit Kegel-Einsatz, daneben eine Schüssel mit Gemüsestücken">
+        <!-- Ebene 0: unbeleuchtete Halter -->
+        <svg class="ebene ebene--halter" viewBox="0 0 640 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+          <g class="halter">
+            <rect x="132" y="318" width="12" height="18" rx="3"/>
+            <rect x="272" y="318" width="12" height="18" rx="3"/>
+            <rect x="200" y="494" width="12" height="18" rx="3"/>
+            <rect x="200" y="206" width="12" height="18" rx="3"/>
+            <rect x="334" y="478" width="12" height="18" rx="3" transform="rotate(14 340 487)"/>
+            <rect x="546" y="478" width="12" height="18" rx="3" transform="rotate(-14 552 487)"/>
+            <rect x="434" y="540" width="12" height="18" rx="3"/>
+          </g>
+        </svg>
+
+        <!-- Ebene 1: Gerät in Rosa -->
+        <svg class="ebene ebene--rosa" viewBox="0 0 640 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+          <defs>
+            <g id="rohr-rosa" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Sockel -->
+              <rect x="86" y="500" width="240" height="46" rx="20"/>
+              <!-- Körper -->
+              <path d="M118 500 L138 236 Q140 214 162 214 L250 214 Q272 214 274 236 L294 500"/>
+              <!-- Schacht (breit) -->
+              <rect x="150" y="124" width="112" height="90" rx="14"/>
+              <ellipse cx="206" cy="124" rx="56" ry="13"/>
+              <!-- Fenster mit Kegel-Einsatz -->
+              <circle cx="206" cy="324" r="50"/>
+              <circle cx="206" cy="324" r="35"/>
+              <circle cx="206" cy="324" r="20" stroke-dasharray="9 11"/>
+              <circle cx="206" cy="324" r="6"/>
+              <!-- Auslauf -->
+              <path d="M287 394 L350 414 Q358 418 354 426 L344 450 Q341 454 335 452 L289 434"/>
+              <!-- Funken -->
+              <path d="M70 150 m0 -14 l3 11 l11 3 l-11 3 l-3 11 l-3 -11 l-11 -3 l11 -3z"/>
+            </g>
+          </defs>
+          <use href="#rohr-rosa" class="rohr"/>
+          <use href="#rohr-rosa" class="kern"/>
+        </svg>
+
+        <!-- Ebene 2: Schüssel und Gemüse in Cyan -->
+        <svg class="ebene ebene--cyan" viewBox="0 0 640 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+          <defs>
+            <g id="rohr-cyan" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Gurke und Möhre im Schacht -->
+              <path d="M168 126 L168 80 A18 18 0 0 1 204 80 L204 124"/>
+              <path d="M224 126 L229 86 Q232 72 240 72 Q248 72 250 86 L246 126"/>
+              <path d="M240 72 L236 56 M240 72 L242 52 M240 72 L250 58"/>
+              <!-- Knopf -->
+              <circle cx="206" cy="436" r="17"/>
+              <path d="M206 428 L206 436"/>
+              <!-- Schüssel -->
+              <path d="M322 484 Q332 552 440 552 Q548 552 558 484"/>
+              <path d="M322 484 A118 24 0 0 0 558 484"/>
+              <path class="schwach" d="M322 484 A118 24 0 0 1 558 484"/>
+              <!-- Gemüsestücke in der Schüssel -->
+              <circle cx="392" cy="470" r="22"/>
+              <circle cx="392" cy="470" r="13"/>
+              <circle cx="444" cy="456" r="22"/>
+              <circle cx="444" cy="456" r="14" stroke-dasharray="2 7"/>
+              <path d="M474 486 Q480 458 494 454 M490 488 Q498 464 512 462 M506 490 Q514 470 526 470"/>
+              <path d="M520 480 Q532 452 548 476"/>
+              <!-- fallende Stücke -->
+              <circle cx="346" cy="466" r="5"/>
+              <circle cx="358" cy="480" r="4"/>
+              <circle cx="337" cy="480" r="4"/>
+              <!-- Funken -->
+              <path d="M540 190 m0 -14 l3 11 l11 3 l-11 3 l-3 11 l-3 -11 l-11 -3 l11 -3z"/>
+              <path d="M590 280 m0 -8 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2z"/>
+            </g>
+          </defs>
+          <use href="#rohr-cyan" class="rohr"/>
+          <use href="#rohr-cyan" class="kern"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZAHLENLEISTE -->
+  <section class="zahlenleiste" aria-label="Eckdaten">
+    <ul class="zahlen">
+      <li class="kachel"><strong class="zahl">5</strong><span class="zahl__text">Einsätze aus Edelstahl</span></li>
+      <li class="kachel"><strong class="zahl">800 W</strong><span class="zahl__text">laut Hersteller</span></li>
+      <li class="kachel"><strong class="zahl">27 cm</strong><span class="zahl__text">Höhe, passt unter den Hängeschrank</span></li>
+      <li class="kachel"><strong class="zahl">8 bis 15</strong><span class="zahl__text">Werktage Lieferung, Zoll inklusive</span></li>
+    </ul>
+  </section>
+
+  <!-- FUNKTIONEN -->
+  <section class="abschnitt" id="funktionen" aria-labelledby="h-funktionen">
+    <h2 id="h-funktionen" class="neon neon--pink">Funktionen</h2>
+    <ul class="karten">
+      <li class="karte">
+        <svg class="symbol symbol--rosa" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="22" cy="13" rx="14" ry="5"/><ellipse cx="26" cy="24" rx="14" ry="5"/><ellipse cx="22" cy="35" rx="14" ry="5"/></g></svg>
+        <h3>Schneiden</h3>
+        <p>Gleichmäßige Scheiben, auch bei weichen Tomaten.</p>
+      </li>
+      <li class="karte">
+        <svg class="symbol symbol--rosa" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 38 Q12 20 22 12"/><path d="M19 40 Q21 22 31 14"/><path d="M28 41 Q30 25 39 18"/><path d="M36 42 Q37 32 43 26"/></g></svg>
+        <h3>Raspeln</h3>
+        <p>Karotten und Zucchini fein oder grob in Sekunden.</p>
+      </li>
+      <li class="karte">
+        <svg class="symbol symbol--rosa" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="6" width="30" height="36" rx="6"/><circle cx="19" cy="17" r="1.5"/><circle cx="29" cy="17" r="1.5"/><circle cx="19" cy="25" r="1.5"/><circle cx="29" cy="25" r="1.5"/><circle cx="19" cy="33" r="1.5"/><circle cx="29" cy="33" r="1.5"/></g></svg>
+        <h3>Reiben</h3>
+        <p>Käse und Kohl fallen locker in die Schüssel.</p>
+      </li>
+      <li class="karte">
+        <svg class="symbol symbol--rosa" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="36" height="22" rx="5"/><path d="M24 14 L24 40 M16 33 L24 41 L32 33"/></g></svg>
+        <h3>Breiter Schacht</h3>
+        <p>Ganze Gurken und Paprika passen ohne Vorschneiden hinein (Schacht 5 cm).</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ABLAUF -->
+  <section class="abschnitt" id="ablauf" aria-labelledby="h-ablauf">
+    <h2 id="h-ablauf" class="neon neon--pink">Ablauf</h2>
+    <ol class="schritte">
+      <li class="schritt">
+        <span class="schritt__nr" aria-hidden="true">1</span>
+        <div><h3>Einsatz wählen</h3><p>Kegel einsetzen, bis er einrastet.</p></div>
+      </li>
+      <li class="schritt">
+        <span class="schritt__nr" aria-hidden="true">2</span>
+        <div><h3>Gemüse einlegen</h3><p>In den Schacht legen, Deckel zu.</p></div>
+      </li>
+      <li class="schritt">
+        <span class="schritt__nr" aria-hidden="true">3</span>
+        <div><h3>Knopf drücken</h3><p>Alles fällt direkt in die Schüssel.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- BEWERTUNGEN -->
+  <section class="abschnitt" id="bewertungen" aria-labelledby="h-bewertungen">
+    <h2 id="h-bewertungen" class="neon neon--pink">Bewertungen</h2>
+    <ul class="stimmen">
+      <li>
+        <figure class="stimme">
+          <span class="marke">Beispiel</span>
+          <blockquote><p>„Endlich Salat ohne Schnippelei. Zehn Minuten sind jetzt zwei.“</p></blockquote>
+          <figcaption>
+            <span class="sterne sterne--klein" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 110 22" aria-hidden="true" focusable="false"><use href="#stern" x="0" width="22" height="22" class="voll"/><use href="#stern" x="22" width="22" height="22" class="voll"/><use href="#stern" x="44" width="22" height="22" class="voll"/><use href="#stern" x="66" width="22" height="22" class="voll"/><use href="#stern" x="88" width="22" height="22" class="voll"/></svg></span>
+            <span class="name">Anna K.</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="stimme">
+          <span class="marke">Beispiel</span>
+          <blockquote><p>„Der breite Schacht ist wirklich praktisch. Zucchini ohne Vorschneiden.“</p></blockquote>
+          <figcaption>
+            <span class="sterne sterne--klein" role="img" aria-label="4 von 5 Sternen"><svg viewBox="0 0 110 22" aria-hidden="true" focusable="false"><use href="#stern" x="0" width="22" height="22" class="voll"/><use href="#stern" x="22" width="22" height="22" class="voll"/><use href="#stern" x="44" width="22" height="22" class="voll"/><use href="#stern" x="66" width="22" height="22" class="voll"/><use href="#stern" x="88" width="22" height="22" class="leer"/></svg></span>
+            <span class="name">Jens M.</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="stimme">
+          <span class="marke">Beispiel</span>
+          <blockquote><p>„Reinigen geht schnell, die Einsätze sind stabil.“</p></blockquote>
+          <figcaption>
+            <span class="sterne sterne--klein" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 110 22" aria-hidden="true" focusable="false"><use href="#stern" x="0" width="22" height="22" class="voll"/><use href="#stern" x="22" width="22" height="22" class="voll"/><use href="#stern" x="44" width="22" height="22" class="voll"/><use href="#stern" x="66" width="22" height="22" class="voll"/><use href="#stern" x="88" width="22" height="22" class="voll"/></svg></span>
+            <span class="name">Sabine R.</span>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </section>
+
+  <!-- HINWEISBLOCK CHINA -->
+  <section class="abschnitt" id="fragen" aria-labelledby="h-china">
+    <div class="hinweis">
+      <h2 id="h-china" class="neon neon--cyan">Lieferung aus China</h2>
+      <p>Dieses Produkt wird direkt aus China versendet. Lieferzeit 8 bis 15 Werktage, Zoll und Einfuhrsteuern sind im Preis enthalten, es kommen keine Zusatzkosten hinzu.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="fuss">
+  <p class="fuss__logo">HORTA</p>
+  <nav class="fuss__nav" aria-label="Rechtliches">
+    <a href="#ueberblick">Impressum</a>
+    <a href="#ueberblick">Datenschutz</a>
+    <a href="#ueberblick">AGB</a>
+    <a href="#ueberblick">Vertrag widerrufen</a>
+  </nav>
+  <p class="fuss__hinweis">Entwurf: Alle Angaben und Bewertungen sind erfunden.</p>
+</footer>
+
+</body>
+</html>

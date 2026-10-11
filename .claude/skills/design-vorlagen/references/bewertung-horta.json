@@ -1,0 +1,529 @@
+{
+ "kriterien": [
+  "Passung",
+  "Vertrauen",
+  "Produktwirkung",
+  "Lesbarkeit",
+  "Handy",
+  "Technik",
+  "Aufwand",
+  "Risiko"
+ ],
+ "gewichte": {
+  "Passung": 3,
+  "Vertrauen": 2,
+  "Produktwirkung": 2,
+  "Lesbarkeit": 2,
+  "Handy": 2,
+  "Technik": 1,
+  "Aufwand": 1,
+  "Risiko": 1
+ },
+ "looks": [
+  {
+   "slug": "isometric",
+   "name": "Isometric",
+   "noten": {
+    "Passung": 5,
+    "Vertrauen": 4,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 5,
+    "Handy": 4,
+    "Technik": 5,
+    "Aufwand": 2,
+    "Risiko": 4
+   },
+   "punkte": 86,
+   "begruendung": "Ordentliche Küchen-Miniaturwelt, erklärt das Gerät, wirkt freundlich und seriös. Teuer pro Produkt (Szene neu bauen).",
+   "messwerte": {
+    "performance": 100,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1261,
+    "tbt_ms": 84,
+    "cls": 0,
+    "bytes_kb": 75,
+    "dom_elemente": 790,
+    "a11y_fehler": []
+   },
+   "rang": 1
+  },
+  {
+   "slug": "gradient-mesh",
+   "name": "Gradient Mesh",
+   "noten": {
+    "Passung": 4,
+    "Vertrauen": 4,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 5,
+    "Handy": 4,
+    "Technik": 5,
+    "Aufwand": 3,
+    "Risiko": 3
+   },
+   "punkte": 81,
+   "begruendung": "Hell, freundlich, sehr lesbar und schnell. Wirkt vertraut statt mutig, die Sterne sind blass.",
+   "messwerte": {
+    "performance": 100,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1502,
+    "tbt_ms": 0,
+    "cls": 0.001,
+    "bytes_kb": 95,
+    "dom_elemente": 348,
+    "a11y_fehler": []
+   },
+   "rang": 2
+  },
+  {
+   "slug": "bauhaus",
+   "name": "Bauhaus",
+   "noten": {
+    "Passung": 4,
+    "Vertrauen": 4,
+    "Produktwirkung": 3,
+    "Lesbarkeit": 5,
+    "Handy": 4,
+    "Technik": 5,
+    "Aufwand": 4,
+    "Risiko": 4
+   },
+   "punkte": 81,
+   "begruendung": "Klar, grafisch und gestaltet, schnell und gut lesbar. Das Gerät besteht aus Grundformen, bleibt aber erkennbar.",
+   "messwerte": {
+    "performance": 100,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1355,
+    "tbt_ms": 0,
+    "cls": 0.016,
+    "bytes_kb": 59,
+    "dom_elemente": 238,
+    "a11y_fehler": []
+   },
+   "rang": 3
+  },
+  {
+   "slug": "liquid-morph",
+   "name": "Liquid Morph",
+   "noten": {
+    "Passung": 4,
+    "Vertrauen": 3,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 5,
+    "Handy": 4,
+    "Technik": 3,
+    "Aufwand": 3,
+    "Risiko": 3
+   },
+   "punkte": 76,
+   "begruendung": "Weich, warm und lebendig, passt zu Essen. Dauerbewegung hat keinen Pause-Knopf, Filter kosten Leistung.",
+   "messwerte": {
+    "performance": 100,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1503,
+    "tbt_ms": 0,
+    "cls": 0.002,
+    "bytes_kb": 96,
+    "dom_elemente": 386,
+    "a11y_fehler": []
+   },
+   "rang": 4
+  },
+  {
+   "slug": "glassmorphism",
+   "name": "Glassmorphism",
+   "noten": {
+    "Passung": 4,
+    "Vertrauen": 4,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 4,
+    "Handy": 4,
+    "Technik": 3,
+    "Aufwand": 3,
+    "Risiko": 3
+   },
+   "punkte": 76,
+   "begruendung": "Frisch, hell und vertraut. Milchglas kostet Leistung, der Look ist verbreitet.",
+   "messwerte": {
+    "performance": 100,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1502,
+    "tbt_ms": 0,
+    "cls": 0.0,
+    "bytes_kb": 95,
+    "dom_elemente": 359,
+    "a11y_fehler": []
+   },
+   "rang": 5
+  },
+  {
+   "slug": "clay-3d",
+   "name": "Clay 3D",
+   "noten": {
+    "Passung": 4,
+    "Vertrauen": 3,
+    "Produktwirkung": 3,
+    "Lesbarkeit": 4,
+    "Handy": 4,
+    "Technik": 4,
+    "Aufwand": 3,
+    "Risiko": 3
+   },
+   "punkte": 71,
+   "begruendung": "Weich, verspielt, passt zu Küche und Familie. Das Gerät ist eine niedliche Knetfigur, nicht das echte Produkt.",
+   "messwerte": {
+    "performance": 99,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1506,
+    "tbt_ms": 0,
+    "cls": 0.057,
+    "bytes_kb": 103,
+    "dom_elemente": 295,
+    "a11y_fehler": []
+   },
+   "rang": 6
+  },
+  {
+   "slug": "art-deco",
+   "name": "Art Deco",
+   "noten": {
+    "Passung": 2,
+    "Vertrauen": 4,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 4,
+    "Handy": 4,
+    "Technik": 5,
+    "Aufwand": 3,
+    "Risiko": 3
+   },
+   "punkte": 70,
+   "begruendung": "Edel und festlich mit Gold auf Grün, passt eher zu hochwertigen Geschenken als zu einem Küchengerät für 44,90 €.",
+   "messwerte": {
+    "performance": 100,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1529,
+    "tbt_ms": 0,
+    "cls": 0,
+    "bytes_kb": 92,
+    "dom_elemente": 289,
+    "a11y_fehler": []
+   },
+   "rang": 7
+  },
+  {
+   "slug": "halftone",
+   "name": "Halftone",
+   "noten": {
+    "Passung": 3,
+    "Vertrauen": 3,
+    "Produktwirkung": 3,
+    "Lesbarkeit": 4,
+    "Handy": 4,
+    "Technik": 4,
+    "Aufwand": 3,
+    "Risiko": 4
+   },
+   "punkte": 69,
+   "begruendung": "Gedruckt und handgemacht, sehr eigenständig. Im Zweifarbdruck wird die Tomate rosa und die Gurke blau.",
+   "messwerte": {
+    "performance": 99,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1593,
+    "tbt_ms": 104,
+    "cls": 0,
+    "bytes_kb": 97,
+    "dom_elemente": 282,
+    "a11y_fehler": []
+   },
+   "rang": 8
+  },
+  {
+   "slug": "wireframe-3d",
+   "name": "Wireframe 3D",
+   "noten": {
+    "Passung": 2,
+    "Vertrauen": 4,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 4,
+    "Handy": 4,
+    "Technik": 4,
+    "Aufwand": 2,
+    "Risiko": 3
+   },
+   "punkte": 67,
+   "begruendung": "Sachlich und präzise mit Maßen und drehbarem Modell, aber kühl: eher für Technik als für Salat.",
+   "messwerte": {
+    "performance": 100,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1657,
+    "tbt_ms": 0,
+    "cls": 0,
+    "bytes_kb": 129,
+    "dom_elemente": 296,
+    "a11y_fehler": []
+   },
+   "rang": 9
+  },
+  {
+   "slug": "comic-book",
+   "name": "Comic Book",
+   "noten": {
+    "Passung": 4,
+    "Vertrauen": 2,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 4,
+    "Handy": 3,
+    "Technik": 4,
+    "Aufwand": 2,
+    "Risiko": 3
+   },
+   "punkte": 67,
+   "begruendung": "Laut und erzählend, das Gerät ist klar gezeichnet. Wirkt kindlich für ein Gerät zu 44,90 €, Seite am Handy sehr lang.",
+   "messwerte": {
+    "performance": 99,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1802,
+    "tbt_ms": 0,
+    "cls": 0,
+    "bytes_kb": 114,
+    "dom_elemente": 431,
+    "a11y_fehler": []
+   },
+   "rang": 10
+  },
+  {
+   "slug": "kinetic-type",
+   "name": "Kinetic Type",
+   "noten": {
+    "Passung": 3,
+    "Vertrauen": 3,
+    "Produktwirkung": 2,
+    "Lesbarkeit": 4,
+    "Handy": 4,
+    "Technik": 4,
+    "Aufwand": 3,
+    "Risiko": 3
+   },
+   "punkte": 64,
+   "begruendung": "Starker Slogan ersetzt das Bild, aber die Scheibe im Hero wirkt wie eine Filmspule, nicht wie ein Gerät.",
+   "messwerte": {
+    "performance": 98,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1811,
+    "tbt_ms": 0,
+    "cls": 0.01,
+    "bytes_kb": 128,
+    "dom_elemente": 281,
+    "a11y_fehler": []
+   },
+   "rang": 11
+  },
+  {
+   "slug": "pixel-art",
+   "name": "Pixel Art",
+   "noten": {
+    "Passung": 3,
+    "Vertrauen": 2,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 3,
+    "Handy": 4,
+    "Technik": 4,
+    "Aufwand": 2,
+    "Risiko": 3
+   },
+   "punkte": 63,
+   "begruendung": "Das Gerät als Sprite ist sehr gut erkennbar, der Look verspielt. Die breite Pixelschrift ist anstrengend, die Kasse ist nicht gebaut.",
+   "messwerte": {
+    "performance": 100,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1458,
+    "tbt_ms": 11,
+    "cls": 0,
+    "bytes_kb": 110,
+    "dom_elemente": 479,
+    "a11y_fehler": []
+   },
+   "rang": 12
+  },
+  {
+   "slug": "neon-glow",
+   "name": "Neon Glow",
+   "noten": {
+    "Passung": 2,
+    "Vertrauen": 2,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 4,
+    "Handy": 4,
+    "Technik": 4,
+    "Aufwand": 2,
+    "Risiko": 3
+   },
+   "punkte": 61,
+   "begruendung": "Wirkt wie eine Bar bei Nacht: auffällig, aber nicht nach frischer Küche und ohne Vertrauensgefühl.",
+   "messwerte": {
+    "performance": 99,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1509,
+    "tbt_ms": 0,
+    "cls": 0.047,
+    "bytes_kb": 96,
+    "dom_elemente": 222,
+    "a11y_fehler": []
+   },
+   "rang": 13
+  },
+  {
+   "slug": "holographic",
+   "name": "Holographic",
+   "noten": {
+    "Passung": 2,
+    "Vertrauen": 3,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 4,
+    "Handy": 3,
+    "Technik": 4,
+    "Aufwand": 2,
+    "Risiko": 3
+   },
+   "punkte": 61,
+   "begruendung": "Schillernd und modern, passt eher zu Kosmetik und Technik. Am Handy schwächer.",
+   "messwerte": {
+    "performance": 99,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1810,
+    "tbt_ms": 0,
+    "cls": 0.002,
+    "bytes_kb": 124,
+    "dom_elemente": 407,
+    "a11y_fehler": []
+   },
+   "rang": 14
+  },
+  {
+   "slug": "retro-vhs",
+   "name": "Retro VHS",
+   "noten": {
+    "Passung": 2,
+    "Vertrauen": 2,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 3,
+    "Handy": 4,
+    "Technik": 5,
+    "Aufwand": 3,
+    "Risiko": 3
+   },
+   "punkte": 61,
+   "begruendung": "Nostalgisch und plakativ, das Gerät steht gut erkennbar im Bild. Wirkt wie Videothek, nicht wie frische Küche.",
+   "messwerte": {
+    "performance": 99,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1505,
+    "tbt_ms": 0,
+    "cls": 0.076,
+    "bytes_kb": 86,
+    "dom_elemente": 287,
+    "a11y_fehler": []
+   },
+   "rang": 15
+  },
+  {
+   "slug": "particles",
+   "name": "Particles",
+   "noten": {
+    "Passung": 2,
+    "Vertrauen": 3,
+    "Produktwirkung": 4,
+    "Lesbarkeit": 4,
+    "Handy": 3,
+    "Technik": 3,
+    "Aufwand": 2,
+    "Risiko": 3
+   },
+   "punkte": 60,
+   "begruendung": "Technisch und lebendig, passt zu Smart-Home und Elektronik. Dauerbewegung braucht Pause-Knopf, am Handy schwach.",
+   "messwerte": {
+    "performance": 100,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1503,
+    "tbt_ms": 0,
+    "cls": 0,
+    "bytes_kb": 102,
+    "dom_elemente": 593,
+    "a11y_fehler": []
+   },
+   "rang": 16
+  },
+  {
+   "slug": "split-flap",
+   "name": "Split-Flap",
+   "noten": {
+    "Passung": 2,
+    "Vertrauen": 3,
+    "Produktwirkung": 3,
+    "Lesbarkeit": 3,
+    "Handy": 4,
+    "Technik": 4,
+    "Aufwand": 3,
+    "Risiko": 3
+   },
+   "punkte": 60,
+   "begruendung": "Unverwechselbar wie eine Abflugtafel, aber Kachelschrift verträgt keine langen Wörter und passt nicht zur Küche.",
+   "messwerte": {
+    "performance": 95,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1659,
+    "tbt_ms": 233,
+    "cls": 0,
+    "bytes_kb": 129,
+    "dom_elemente": 981,
+    "a11y_fehler": []
+   },
+   "rang": 17
+  },
+  {
+   "slug": "ascii-art",
+   "name": "ASCII Art",
+   "noten": {
+    "Passung": 1,
+    "Vertrauen": 2,
+    "Produktwirkung": 2,
+    "Lesbarkeit": 4,
+    "Handy": 4,
+    "Technik": 5,
+    "Aufwand": 3,
+    "Risiko": 2
+   },
+   "punkte": 53,
+   "begruendung": "Für Nerds und Technik, nicht für ein Küchengerät. Das Gerät ist im Zeichenbild nur grob erkennbar.",
+   "messwerte": {
+    "performance": 100,
+    "barrierefreiheit": 100,
+    "technik": 100,
+    "lcp_ms": 1207,
+    "tbt_ms": 15,
+    "cls": 0,
+    "bytes_kb": 82,
+    "dom_elemente": 181,
+    "a11y_fehler": []
+   },
+   "rang": 18
+  }
+ ],
+ "hinweis": "Eigene Wertung für HORTA (Küchengerät aus China, 44,90 Euro, viel Handy-Verkehr). Grundlage: Bildschirmfotos PC und Handy, Prüfskript, Lighthouse (nur Chromium, ohne Grafikkarte). Keine Nutzertests."
+}

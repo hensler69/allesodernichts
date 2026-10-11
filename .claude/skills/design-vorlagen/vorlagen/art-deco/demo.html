@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HORTA Gemüseschneider HT-5 im Look Art Deco</title>
+<meta name="description" content="Entwurf: HORTA, elektrischer Gemüseschneider HT-5, im Look Art Deco (Gold auf Flaschengrün, symmetrisch, mit Fächern und Strahlen).">
+<meta name="theme-color" content="#0b0f10">
+<link rel="icon" href="data:,">
+<link rel="preload" href="../../fonts/Limelight-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/JosefinSans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/JosefinSans-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<!-- Zeichen, einmal definiert und mehrfach benutzt -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="stern-teil" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="60%" stop-color="#e8d08a"/>
+      <stop offset="60%" stop-color="#e8d08a" stop-opacity="0"/>
+    </linearGradient>
+    <symbol id="stern" viewBox="0 0 22 22">
+      <path d="M11.0 1.0 L13.5 7.5 L20.5 7.9 L15.1 12.3 L16.9 19.1 L11.0 15.3 L5.1 19.1 L6.9 12.3 L1.5 7.9 L8.5 7.5Z"/>
+    </symbol>
+    <symbol id="faecher" viewBox="0 0 64 32">
+      <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+        <path d="M27.2 28.7L5.9 23.0M27.8 27.2L9.6 15.0M29.0 26.0L15.6 8.6M30.4 25.3L23.3 4.4M32.0 25.0L32.0 3.0M33.6 25.3L40.7 4.4M35.0 26.0L48.4 8.6M36.2 27.2L54.4 15.0M36.8 28.7L58.1 23.0"/>
+        <path d="M5 30 A27 27 0 0 1 59 30"/>
+        <path d="M20 30 A12 12 0 0 1 44 30" opacity=".7"/>
+        <path d="M0 30.5 H64"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+
+<header class="kopf">
+  <a class="logo" href="#ueberblick" aria-label="HORTA, zur Startseite">HORTA</a>
+  <nav class="nav" aria-label="Hauptnavigation">
+    <a href="#ueberblick">Überblick</a>
+    <a href="#funktionen">Funktionen</a>
+    <a href="#ablauf">Ablauf</a>
+    <a href="#bewertungen">Bewertungen</a>
+    <a href="#fragen">Fragen</a>
+  </nav>
+  <a class="korb" href="#ueberblick">
+    <svg class="korb__ikon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span class="korb__text">Warenkorb</span>
+    <span class="korb__zahl" id="korb-zahl" aria-live="polite">0</span>
+  </a>
+</header>
+
+<main id="inhalt">
+
+  <!-- HERO -->
+  <section class="hero" id="ueberblick" aria-labelledby="titel">
+    <div class="hero__kopf">
+      <p class="eyebrow">Elektrischer Gemüseschneider</p>
+      <h1 id="titel"><span class="zeile">Weniger schnippeln.</span> <span class="zeile">Mehr Salat.</span></h1>
+    </div>
+
+    <div class="hero__links">
+      <p class="untertitel">HORTA schneidet, raspelt und reibt auf Knopfdruck. Fünf Einsätze aus Edelstahl, ein breiter Schacht, und alles fällt direkt in Ihre Schüssel.</p>
+      <p class="bewertung">
+        <span class="sterne" role="img" aria-label="4,6 von 5 Sternen">
+          <svg viewBox="0 0 110 22" aria-hidden="true" focusable="false">
+            <use href="#stern" x="0" width="22" height="22" class="voll"/>
+            <use href="#stern" x="22" width="22" height="22" class="voll"/>
+            <use href="#stern" x="44" width="22" height="22" class="voll"/>
+            <use href="#stern" x="66" width="22" height="22" class="voll"/>
+            <use href="#stern" x="88" width="22" height="22" class="teil"/>
+          </svg>
+        </span>
+        <span class="bewertung__text">4,6 von 5 · 36 Beispielbewertungen</span>
+      </p>
+    </div>
+
+    <div class="hero__bild">
+      <div class="szene" role="img" aria-label="Zeichnung im Art-Deco-Stil: der Gemüseschneider auf einem gestuften Sockel, vorn der Kegel-Einsatz als Medaillon mit Strahlen, oben ragen Gurke, Tomate und Paprika aus dem Schacht, davor steht eine Schüssel mit Gemüsestücken">
+        <div class="szene__innen" aria-hidden="true">
+          <svg class="strahlen strahlen--a" viewBox="0 0 600 548" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <path d="M300.0 192.0L300.0 -268.0M317.4 193.5L397.2 -259.5M334.2 198.0L491.5 -234.2M350.0 205.4L580.0 -193.0M364.3 215.4L660.0 -137.0M376.6 227.7L729.0 -68.0M386.6 242.0L785.0 12.0M394.0 257.8L826.2 100.5M398.5 274.6L851.5 194.8M400.0 292.0L860.0 292.0M398.5 309.4L851.5 389.2M394.0 326.2L826.2 483.5M386.6 342.0L785.0 572.0M376.6 356.3L729.0 652.0M364.3 368.6L660.0 721.0M350.0 378.6L580.0 777.0M334.2 386.0L491.5 818.2M317.4 390.5L397.2 843.5M300.0 392.0L300.0 852.0M282.6 390.5L202.8 843.5M265.8 386.0L108.5 818.2M250.0 378.6L20.0 777.0M235.7 368.6L-60.0 721.0M223.4 356.3L-129.0 652.0M213.4 342.0L-185.0 572.0M206.0 326.2L-226.2 483.5M201.5 309.4L-251.5 389.2M200.0 292.0L-260.0 292.0M201.5 274.6L-251.5 194.8M206.0 257.8L-226.2 100.5M213.4 242.0L-185.0 12.0M223.4 227.7L-129.0 -68.0M235.7 215.4L-60.0 -137.0M250.0 205.4L20.0 -193.0M265.8 198.0L108.5 -234.2M282.6 193.5L202.8 -259.5" fill="none" stroke="#c9a24b" stroke-width="1" opacity=".5"/>
+          </svg>
+          <svg class="strahlen strahlen--b" viewBox="0 0 600 548" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <path d="M308.7 192.4L328.8 -36.7M325.9 195.4L385.4 -26.8M342.3 201.4L439.5 -7.1M357.4 210.1L489.3 21.7M370.7 221.3L533.3 58.7M381.9 234.6L570.3 102.7M390.6 249.7L599.1 152.5M396.6 266.1L618.8 206.6M399.6 283.3L628.7 263.2M399.6 300.7L628.7 320.8M396.6 317.9L618.8 377.4M390.6 334.3L599.1 431.5M381.9 349.4L570.3 481.3M370.7 362.7L533.3 525.3M357.4 373.9L489.3 562.3M342.3 382.6L439.5 591.1M325.9 388.6L385.4 610.8M308.7 391.6L328.8 620.7M291.3 391.6L271.2 620.7M274.1 388.6L214.6 610.8M257.7 382.6L160.5 591.1M242.6 373.9L110.7 562.3M229.3 362.7L66.7 525.3M218.1 349.4L29.7 481.3M209.4 334.3L0.9 431.5M203.4 317.9L-18.8 377.4M200.4 300.7L-28.7 320.8M200.4 283.3L-28.7 263.2M203.4 266.1L-18.8 206.6M209.4 249.7L0.9 152.5M218.1 234.6L29.7 102.7M229.3 221.3L66.7 58.7M242.6 210.1L110.7 21.7M257.7 201.4L160.5 -7.1M274.1 195.4L214.6 -26.8M291.3 192.4L271.2 -36.7" fill="none" stroke="#e8d08a" stroke-width="1" opacity=".55"/>
+          </svg>
+          <svg class="szene__bild" viewBox="0 0 600 548" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <defs>
+              <radialGradient id="halo" cx="300" cy="292" r="270" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#c9a24b" stop-opacity=".26"/>
+                <stop offset=".55" stop-color="#c9a24b" stop-opacity=".07"/>
+                <stop offset="1" stop-color="#c9a24b" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="koerper" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#0b1a17"/>
+                <stop offset=".5" stop-color="#1a463d"/>
+                <stop offset="1" stop-color="#0b1a17"/>
+              </linearGradient>
+              <linearGradient id="gurke" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#15523f"/><stop offset=".45" stop-color="#2b8a68"/><stop offset="1" stop-color="#15523f"/>
+              </linearGradient>
+              <linearGradient id="moehre" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#9a5a20"/><stop offset=".5" stop-color="#d08a35"/><stop offset="1" stop-color="#9a5a20"/>
+              </linearGradient>
+              <radialGradient id="tomate" cx=".38" cy=".35" r=".8">
+                <stop offset="0" stop-color="#d4694f"/><stop offset="1" stop-color="#8e3320"/>
+              </radialGradient>
+              <linearGradient id="schale" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#0b1a17"/><stop offset=".5" stop-color="#1d4a40"/><stop offset="1" stop-color="#0b1a17"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Schein und Ringe -->
+            <circle cx="300" cy="292" r="270" fill="url(#halo)"/>
+            <g fill="none" stroke="#c9a24b" stroke-width="1">
+              <circle cx="300" cy="292" r="132" opacity=".4"/>
+              <circle cx="300" cy="292" r="182" opacity=".32"/>
+              <circle cx="300" cy="292" r="232" opacity=".26"/>
+              <circle cx="300" cy="292" r="157" stroke-dasharray="1 7" stroke-linecap="round" opacity=".7"/>
+            </g>
+
+            <!-- Fächer oben -->
+            <g fill="none" stroke="#e8d08a" stroke-width="1.2" stroke-linecap="round">
+              <path d="M294.1 37.0L278.3 34.2M294.5 35.6L279.8 29.3M295.2 34.4L282.4 24.9M296.1 33.4L285.9 21.1M297.3 32.6L290.1 18.3M298.6 32.2L294.9 16.6M300.0 32.0L300.0 16.0M301.4 32.2L305.1 16.6M302.7 32.6L309.9 18.3M303.9 33.4L314.1 21.1M304.8 34.4L317.6 24.9M305.5 35.6L320.2 29.3M305.9 37.0L321.7 34.2"/>
+              <path d="M272 38 A28 28 0 0 1 328 38"/>
+              <path d="M282 38 A18 18 0 0 1 318 38" opacity=".6"/>
+            </g>
+
+            <g stroke-linejoin="round" stroke-linecap="round">
+              <!-- Gemüse im Schacht -->
+              <path d="M258 98 V62 Q258 46 270 46 Q282 46 282 62 V98 Z" fill="url(#gurke)" stroke="#e8d08a" stroke-width="1.6"/>
+              <path d="M265 58 V90" stroke="#f4ead2" stroke-width="1.6" opacity=".45" fill="none"/>
+              <circle cx="300" cy="80" r="17" fill="url(#tomate)" stroke="#e8d08a" stroke-width="1.6"/>
+              <path d="M300 63 q-6 -6 -12 -3 M300 63 q6 -6 12 -3 M300 63 v-7" fill="none" stroke="#3aa07b" stroke-width="2.2"/>
+              <path d="M319 76 Q319 66 327 66 Q332 68 332 68 Q337 66 341 66 Q345 66 345 76 L344 90 Q343 100 332 100 Q321 100 320 90 Z" fill="url(#moehre)" stroke="#e8d08a" stroke-width="1.6"/>
+              <path d="M332 70 V92" stroke="#f4ead2" stroke-width="1.2" opacity=".4" fill="none"/>
+              <path d="M332 68 Q332 60 337 55" fill="none" stroke="#3aa07b" stroke-width="3"/>
+
+              <!-- Schacht, Hals, Körper -->
+              <path d="M254 98 H346 V168 H254 Z" fill="url(#koerper)" stroke="#e8d08a" stroke-width="2"/>
+              <path d="M244 90 H356 V98 H244 Z" fill="#0b1a17" stroke="#e8d08a" stroke-width="2"/>
+              <path d="M240 168 H360 V182 H240 Z" fill="#0f2a24" stroke="#e8d08a" stroke-width="1.6"/>
+              <path d="M226 182 H374 V196 H226 Z" fill="#0f2a24" stroke="#e8d08a" stroke-width="1.6"/>
+              <path d="M190 410 H410 L382 196 H218 Z" fill="url(#koerper)" stroke="#e8d08a" stroke-width="2.2"/>
+              <path d="M205 404 L231 202 M395 404 L369 202" fill="none" stroke="#c9a24b" stroke-width="1" opacity=".7"/>
+              <path d="M200 372 H400 M212 224 H388" fill="none" stroke="#c9a24b" stroke-width="1" opacity=".5"/>
+
+              <!-- Sockel in zwei Stufen -->
+              <path d="M154 410 H446 L454 418 V428 L446 436 H154 L146 428 V418 Z" fill="#0f2a24" stroke="#e8d08a" stroke-width="2"/>
+              <path d="M122 436 H478 L488 446 V454 L478 464 H122 L112 454 V446 Z" fill="#0c1f1b" stroke="#e8d08a" stroke-width="2"/>
+              <path d="M170 418 V428 M190 418 V428 M210 418 V428 M390 418 V428 M410 418 V428 M430 418 V428" stroke="#c9a24b" stroke-width="1" opacity=".7" fill="none"/>
+              <path d="M276 436 V424 Q300 410 324 424 V436 Z" fill="#06100d" stroke="#e8d08a" stroke-width="1.6"/>
+
+              <!-- Kegel-Einsatz als Medaillon -->
+              <circle cx="300" cy="292" r="68" fill="#06100d" stroke="#e8d08a" stroke-width="2.4"/>
+              <circle cx="300" cy="292" r="64" fill="#0f2a24" stroke="#c9a24b" stroke-width="1"/>
+              <path d="M300.0 237.0L300.0 231.0M307.2 237.5L308.0 231.5M314.2 238.9L315.8 233.1M321.0 241.2L323.3 235.6M327.5 244.4L330.5 239.2M333.5 248.4L337.1 243.6M338.9 253.1L343.1 248.9M343.6 258.5L348.4 254.9M347.6 264.5L352.8 261.5M350.8 271.0L356.4 268.7M353.1 277.8L358.9 276.2M354.5 284.8L360.5 284.0M355.0 292.0L361.0 292.0M354.5 299.2L360.5 300.0M353.1 306.2L358.9 307.8M350.8 313.0L356.4 315.3M347.6 319.5L352.8 322.5M343.6 325.5L348.4 329.1M338.9 330.9L343.1 335.1M333.5 335.6L337.1 340.4M327.5 339.6L330.5 344.8M321.0 342.8L323.3 348.4M314.2 345.1L315.8 350.9M307.2 346.5L308.0 352.5M300.0 347.0L300.0 353.0M292.8 346.5L292.0 352.5M285.8 345.1L284.2 350.9M279.0 342.8L276.7 348.4M272.5 339.6L269.5 344.8M266.5 335.6L262.9 340.4M261.1 330.9L256.9 335.1M256.4 325.5L251.6 329.1M252.4 319.5L247.2 322.5M249.2 313.0L243.6 315.3M246.9 306.2L241.1 307.8M245.5 299.2L239.5 300.0M245.0 292.0L239.0 292.0M245.5 284.8L239.5 284.0M246.9 277.8L241.1 276.2M249.2 271.0L243.6 268.7M252.4 264.5L247.2 261.5M256.4 258.5L251.6 254.9M261.1 253.1L256.9 248.9M266.5 248.4L262.9 243.6M272.5 244.4L269.5 239.2M279.0 241.2L276.7 235.6M285.8 238.9L284.2 233.1M292.8 237.5L292.0 231.5" fill="none" stroke="#c9a24b" stroke-width="1.3"/>
+              <circle cx="300" cy="292" r="52" fill="#0b1a17" stroke="#e8d08a" stroke-width="1.4"/>
+              <g fill="none" stroke="#e8d08a" stroke-width="1.2">
+                <circle cx="300" cy="292" r="41"/><circle cx="300" cy="292" r="30"/><circle cx="300" cy="292" r="19"/>
+              </g>
+              <path d="M302.3 283.3L310.6 252.4M306.4 285.6L329.0 263.0M308.7 289.7L339.6 281.4M308.7 294.3L339.6 302.6M306.4 298.4L329.0 321.0M302.3 300.7L310.6 331.6M297.7 300.7L289.4 331.6M293.6 298.4L271.0 321.0M291.3 294.3L260.4 302.6M291.3 289.7L260.4 281.4M293.6 285.6L271.0 263.0M297.7 283.3L289.4 252.4" fill="none" stroke="#c9a24b" stroke-width="1" opacity=".9"/>
+              <circle cx="300" cy="292" r="7" fill="#e8d08a"/>
+
+              <!-- Knopf -->
+              <circle cx="300" cy="388" r="12" fill="#0b1a17" stroke="#e8d08a" stroke-width="1.8"/>
+              <path d="M300 381 V388" stroke="#e8d08a" stroke-width="2"/>
+              <circle cx="258" cy="388" r="3" fill="#c9a24b"/><circle cx="342" cy="388" r="3" fill="#c9a24b"/>
+
+              <!-- fallende Stücke -->
+              <g stroke="#e8d08a" stroke-width="1.2">
+                <path d="M300 440 l4 5 l-4 5 l-4 -5Z" fill="#2b8a68"/>
+                <path d="M286 452 l3 4 l-3 4 l-3 -4Z" fill="#d08a35"/>
+                <path d="M315 450 l3 4 l-3 4 l-3 -4Z" fill="#d4694f"/>
+                <path d="M300 462 l3 4 l-3 4 l-3 -4Z" fill="#f4ead2"/>
+              </g>
+
+              <!-- Schüssel -->
+              <path d="M180 484 C188 522 240 530 300 530 C360 530 412 522 420 484 Z" fill="url(#schale)" stroke="#e8d08a" stroke-width="2"/>
+              <path d="M262 528 H338 L330 538 H270 Z" fill="#0f2a24" stroke="#e8d08a" stroke-width="1.6"/>
+              <ellipse cx="300" cy="484" rx="120" ry="18" fill="#06100d" stroke="#e8d08a" stroke-width="2"/>
+              <!-- Stücke in der Schüssel -->
+              <circle cx="254" cy="480" r="15" fill="#2b8a68" stroke="#e8d08a" stroke-width="1.4"/>
+              <circle cx="254" cy="480" r="9" fill="none" stroke="#f4ead2" stroke-width="1.2" opacity=".6"/>
+              <circle cx="300" cy="470" r="16" fill="#2b8a68" stroke="#e8d08a" stroke-width="1.4"/>
+              <circle cx="300" cy="470" r="10" fill="none" stroke="#f4ead2" stroke-width="1.2" opacity=".6"/>
+              <circle cx="346" cy="480" r="15" fill="url(#tomate)" stroke="#e8d08a" stroke-width="1.4"/>
+              <path d="M338 480 H354 M346 472 V488" stroke="#f4ead2" stroke-width="1" opacity=".5" fill="none"/>
+              <path d="M216 484 q10 -22 20 -10 M228 488 q10 -20 22 -8 M370 486 q12 -22 22 -8 M382 490 q10 -18 20 -6" fill="none" stroke="#d08a35" stroke-width="4"/>
+              <path d="M180 484 A120 18 0 0 0 420 484" fill="none" stroke="#e8d08a" stroke-width="2"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__rechts">
+      <div class="preisblock">
+        <p class="preis">44,90 €</p>
+        <p class="preis__aktion">Einführungspreis bis 30.11.2026, danach <span class="nb">54,90 €</span></p>
+        <p class="preis__info">inkl. <span class="nb">19 % MwSt.</span>, zzgl. <span class="nb">4,90 €</span> Versand, Lieferzeit <span class="nb">8 bis 15 Werktage</span></p>
+      </div>
+      <button class="cta" type="button">In den Warenkorb</button>
+    </div>
+  </section>
+
+  <!-- ZAHLENLEISTE -->
+  <section class="zahlenleiste band" aria-label="Eckdaten">
+    <ul class="medaillons">
+      <li class="medaillon-kachel"><div class="medaillon"><strong class="zahl">5</strong></div><span class="zahl__text">Einsätze aus Edelstahl</span></li>
+      <li class="medaillon-kachel"><div class="medaillon"><strong class="zahl">800 W</strong></div><span class="zahl__text">laut Hersteller</span></li>
+      <li class="medaillon-kachel"><div class="medaillon"><strong class="zahl">27 cm</strong></div><span class="zahl__text">Höhe, passt unter den Hängeschrank</span></li>
+      <li class="medaillon-kachel"><div class="medaillon"><strong class="zahl zahl--klein">8 bis 15</strong></div><span class="zahl__text">Werktage Lieferung, Zoll inklusive</span></li>
+    </ul>
+  </section>
+
+  <!-- FUNKTIONEN -->
+  <section class="abschnitt" id="funktionen" aria-labelledby="h-funktionen">
+    <div class="abschnitt__kopf">
+      <svg class="faecher" aria-hidden="true" focusable="false"><use href="#faecher"/></svg>
+      <h2 id="h-funktionen">Funktionen</h2>
+    </div>
+    <ul class="karten">
+      <li class="karte">
+        <svg class="symbol" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="22" cy="13" rx="14" ry="5"/><ellipse cx="26" cy="24" rx="14" ry="5"/><ellipse cx="22" cy="35" rx="14" ry="5"/></g></svg>
+        <h3>Schneiden</h3>
+        <p>Gleichmäßige Scheiben, auch bei weichen Tomaten.</p>
+      </li>
+      <li class="karte">
+        <svg class="symbol" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 38 Q12 20 22 12"/><path d="M19 40 Q21 22 31 14"/><path d="M28 41 Q30 25 39 18"/><path d="M36 42 Q37 32 43 26"/></g></svg>
+        <h3>Raspeln</h3>
+        <p>Karotten und Zucchini fein oder grob in Sekunden.</p>
+      </li>
+      <li class="karte">
+        <svg class="symbol" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="6" width="30" height="36" rx="4"/><circle cx="19" cy="17" r="1.5"/><circle cx="29" cy="17" r="1.5"/><circle cx="19" cy="25" r="1.5"/><circle cx="29" cy="25" r="1.5"/><circle cx="19" cy="33" r="1.5"/><circle cx="29" cy="33" r="1.5"/></g></svg>
+        <h3>Reiben</h3>
+        <p>Käse und Kohl fallen locker in die Schüssel.</p>
+      </li>
+      <li class="karte">
+        <svg class="symbol" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="36" height="22" rx="3"/><path d="M24 14 L24 40 M16 33 L24 41 L32 33"/></g></svg>
+        <h3>Breiter Schacht</h3>
+        <p>Ganze Gurken und Paprika passen ohne Vorschneiden hinein (Schacht 5 cm).</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ABLAUF -->
+  <section class="abschnitt band" id="ablauf" aria-labelledby="h-ablauf">
+    <div class="abschnitt__kopf">
+      <svg class="faecher" aria-hidden="true" focusable="false"><use href="#faecher"/></svg>
+      <h2 id="h-ablauf">Ablauf</h2>
+    </div>
+    <ol class="schritte">
+      <li class="schritt">
+        <span class="raute" aria-hidden="true"><span class="raute__zahl">1</span></span>
+        <h3>Einsatz wählen</h3><p>Kegel einsetzen, bis er einrastet.</p>
+      </li>
+      <li class="schritt">
+        <span class="raute" aria-hidden="true"><span class="raute__zahl">2</span></span>
+        <h3>Gemüse einlegen</h3><p>In den Schacht legen, Deckel zu.</p>
+      </li>
+      <li class="schritt">
+        <span class="raute" aria-hidden="true"><span class="raute__zahl">3</span></span>
+        <h3>Knopf drücken</h3><p>Alles fällt direkt in die Schüssel.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- BEWERTUNGEN -->
+  <section class="abschnitt" id="bewertungen" aria-labelledby="h-bewertungen">
+    <div class="abschnitt__kopf">
+      <svg class="faecher" aria-hidden="true" focusable="false"><use href="#faecher"/></svg>
+      <h2 id="h-bewertungen">Bewertungen</h2>
+    </div>
+    <ul class="stimmen">
+      <li>
+        <figure class="stimme">
+          <span class="marke">Beispiel</span>
+          <blockquote><p>„Endlich Salat ohne Schnippelei. Zehn Minuten sind jetzt zwei.“</p></blockquote>
+          <figcaption>
+            <span class="sterne sterne--klein" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 110 22" aria-hidden="true" focusable="false"><use href="#stern" x="0" width="22" height="22" class="voll"/><use href="#stern" x="22" width="22" height="22" class="voll"/><use href="#stern" x="44" width="22" height="22" class="voll"/><use href="#stern" x="66" width="22" height="22" class="voll"/><use href="#stern" x="88" width="22" height="22" class="voll"/></svg></span>
+            <span class="name">Anna K.</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="stimme">
+          <span class="marke">Beispiel</span>
+          <blockquote><p>„Der breite Schacht ist wirklich praktisch. Zucchini ohne Vorschneiden.“</p></blockquote>
+          <figcaption>
+            <span class="sterne sterne--klein" role="img" aria-label="4 von 5 Sternen"><svg viewBox="0 0 110 22" aria-hidden="true" focusable="false"><use href="#stern" x="0" width="22" height="22" class="voll"/><use href="#stern" x="22" width="22" height="22" class="voll"/><use href="#stern" x="44" width="22" height="22" class="voll"/><use href="#stern" x="66" width="22" height="22" class="voll"/><use href="#stern" x="88" width="22" height="22" class="leer"/></svg></span>
+            <span class="name">Jens M.</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="stimme">
+          <span class="marke">Beispiel</span>
+          <blockquote><p>„Reinigen geht schnell, die Einsätze sind stabil.“</p></blockquote>
+          <figcaption>
+            <span class="sterne sterne--klein" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 110 22" aria-hidden="true" focusable="false"><use href="#stern" x="0" width="22" height="22" class="voll"/><use href="#stern" x="22" width="22" height="22" class="voll"/><use href="#stern" x="44" width="22" height="22" class="voll"/><use href="#stern" x="66" width="22" height="22" class="voll"/><use href="#stern" x="88" width="22" height="22" class="voll"/></svg></span>
+            <span class="name">Sabine R.</span>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </section>
+
+  <!-- HINWEISBLOCK CHINA -->
+  <section class="abschnitt band" id="fragen" aria-labelledby="h-china">
+    <div class="hinweis">
+      <svg class="faecher" aria-hidden="true" focusable="false"><use href="#faecher"/></svg>
+      <h2 id="h-china">Lieferung aus China</h2>
+      <p>Dieses Produkt wird direkt aus China versendet. Lieferzeit 8 bis 15 Werktage, Zoll und Einfuhrsteuern sind im Preis enthalten, es kommen keine Zusatzkosten hinzu.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="fuss">
+  <p class="fuss__logo">HORTA</p>
+  <nav class="fuss__nav" aria-label="Rechtliches">
+    <a href="#ueberblick">Impressum</a>
+    <a href="#ueberblick">Datenschutz</a>
+    <a href="#ueberblick">AGB</a>
+    <a href="#ueberblick">Vertrag widerrufen</a>
+  </nav>
+  <p class="fuss__hinweis">Entwurf: Alle Angaben und Bewertungen sind erfunden.</p>
+</footer>
+
+</body>
+</html>

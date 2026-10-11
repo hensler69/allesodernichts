@@ -1,0 +1,296 @@
+/* ==========================================================================
+   Look: Split-Flap (Fallblatt-Anzeige wie im Bahnhof)
+   Schriften: Barlow Condensed (Kacheln, Überschriften), Barlow (Fließtext)
+   Regel: Kacheln nur für Überschrift, Preis, Status, Zahlen, Gleis-Schilder.
+          Fließtext steht immer als normaler Text, nie in Kacheln.
+   Bewegung: jede Tafel blättert genau einmal, wenn sie sichtbar wird. Nichts läuft endlos.
+   ========================================================================== */
+
+@font-face{font-family:"Barlow Condensed";src:url("../../fonts/BarlowCondensed-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Barlow Condensed";src:url("../../fonts/BarlowCondensed-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Barlow";src:url("../../fonts/Barlow-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Barlow";src:url("../../fonts/Barlow-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+/* Ersatzschriften mit den Maßen der Webschriften (Arial, aus den Schriftdateien gerechnet: Barlow Condensed = 66,5 % von Arial Fett,
+   Barlow = 96 % von Arial). Kommt eine Webschrift später, bleiben Zeilenumbrüche und Höhen gleich und nichts springt (CLS). */
+@font-face{font-family:"Barlow Condensed Ersatz";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("Helvetica Bold");font-weight:600 700;size-adjust:66.5%;ascent-override:150%;descent-override:30%;line-gap-override:0%}
+@font-face{font-family:"Barlow Ersatz";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("Helvetica");font-weight:400 500;size-adjust:96%;ascent-override:104%;descent-override:21%;line-gap-override:0%}
+
+:root{
+  color-scheme:dark;
+
+  /* Grund und Flächen */
+  --grund:#15161a;
+  --flaeche:#1c1e23;
+  --kachel:#24262c;
+  --kachel-oben:#2b2e35;
+  --kachel-unten:#1d1f24;
+  --linie:#34373f;
+  --scharnier:#0c0d10;
+
+  /* Rollen (jede Farbe hat genau eine Aufgabe):
+     Warmweiß = Zeichen auf den Kacheln, Überschriften, Sterne, Fokusring
+     Text     = Fließtext, Text-leise = Nebentext
+     Amber    = NUR der Kaufknopf und die Statusanzeigen "OK" */
+  --zeichen:#f3efe0;
+  --text:#dcd8c9;
+  --text-leise:#aeab9d;
+  --amber:#ffb703;
+  --amber-dunkel:#8a6200;
+  --auf-amber:#15161a;
+
+  --font-tafel:"Barlow Condensed","Barlow Condensed Ersatz","Arial Narrow","Roboto Condensed",system-ui,sans-serif;
+  --font-text:"Barlow","Barlow Ersatz",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+  /* eigene Kurven statt ease: stark am Anfang (Antwort auf Berührung), weich am Ende */
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --ease-in-out:cubic-bezier(.45,0,.2,1);
+
+  --seite:1280px;
+  --rand:32px;
+
+  /* feste Abstandsstufen: 4, 8, 16, 24, 40, 64, 96 */
+  --s1:4px; --s2:8px; --s3:16px; --s4:24px; --s5:40px; --s6:64px; --s7:96px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:96px}
+body{margin:0;background:var(--grund);color:var(--text);font:400 1.0625rem/1.6 var(--font-text);overflow-x:hidden}
+h1,h2,h3,p,ul,ol,figure,blockquote{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+
+.vh{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.nb{white-space:nowrap}
+
+:focus-visible{outline:3px solid var(--zeichen);outline-offset:3px}
+
+.sprung{position:absolute;left:16px;top:0;z-index:20;background:var(--zeichen);color:var(--grund);padding:12px 16px;font:600 1rem/1 var(--font-tafel);text-transform:uppercase;letter-spacing:.06em;text-decoration:none;border-radius:6px;transform:translateY(-250%)}
+.sprung:focus{top:12px;transform:none}
+
+/* ==========================================================================
+   KACHELN (Fallblatt)
+   Eine Kachel besteht aus zwei Hälften (oben, unten). Beim Blättern fällt ein drittes Blatt (.klapp)
+   von oben nach unten: vorn die alte obere Hälfte, hinten die neue untere Hälfte.
+   Größe nur über die Variablen --kw (Breite), --kh (Höhe), --kf (Schrift), --kg (Abstand).
+   ========================================================================== */
+
+/* Ohne JavaScript bleibt das hier: normaler Text, nur im Tafel-Stil gesetzt */
+.tafel{position:relative;display:block;font:700 var(--fs,1.6rem)/1.1 var(--font-tafel);text-transform:uppercase;letter-spacing:.04em;color:var(--zeichen)}
+.tafel b{font-weight:700;color:var(--amber)}
+.tafel--ok{color:var(--amber)}
+/* Platz steht vorher fest: Solange das Skript die Kacheln noch nicht gebaut hat (oder fehlt), hat jede Textzeile genau die Höhe einer Kachelzeile.
+   Zwei Zeilen der H1 ergeben so dieselben 2 x Kachelhöhe + Zeilenabstand wie später die Kacheln. */
+.tafel:not(.tafel--fertig){line-height:var(--kh)}
+.tafel--h1:not(.tafel--fertig){line-height:calc(var(--kh) + var(--zg)/2)}
+.tafel--ok .z{color:var(--amber)}   /* Statusanzeige OK: Zeichen in Amber */
+
+.tafel{
+  --kw:20px; --kh:30px; --kf:24px; --kg:2px; --wg:12px; --zg:4px; --r:3px;
+  --dauer:110ms;
+  --kurve:var(--ease-in-out);
+}
+.tafel--logo{--kw:20px;--kh:30px;--kf:26px;--kg:2px;--fs:1.6rem}
+.tafel--h1{--kw:clamp(28px,calc((100vw - 190px)/18.4),60px);--kh:calc(var(--kw)*1.45);--kf:calc(var(--kh)*.88);--kg:3px;--wg:calc(var(--kw)*.55);--zg:8px;--r:5px;--fs:clamp(2.6rem,9vw,5rem)}
+.tafel--preis{--kw:clamp(30px,3.3vw,42px);--kh:calc(var(--kw)*1.45);--kf:calc(var(--kh)*.88);--kg:3px;--wg:calc(var(--kw)*.5);--r:5px;--fs:3.4rem}
+.tafel--zahl{--kw:clamp(24px,2.5vw,32px);--kh:calc(var(--kw)*1.45);--kf:calc(var(--kh)*.88);--kg:3px;--wg:calc(var(--kw)*.5);--r:4px;--fs:2.6rem}
+.tafel--h2{--kw:clamp(26px,2.6vw,34px);--kh:calc(var(--kw)*1.45);--kf:calc(var(--kh)*.88);--kg:3px;--wg:calc(var(--kw)*.5);--r:4px;--fs:2.2rem}
+.tafel--h3{--kw:22px;--kh:32px;--kf:28px;--kg:2px;--fs:1.6rem}
+.tafel--klein{--kw:18px;--kh:27px;--kf:24px;--kg:2px;--wg:10px;--fs:1.25rem}
+
+/* H1-Tafel: die Kachelbreite wird aus der Breite der Anzeige gerechnet, damit Zeile 1 (19 Zeichen) immer in eine Zeile passt */
+.anzeige{container-type:inline-size}
+@supports (width:1cqw){.tafel--h1{--kw:clamp(28px,calc((100cqw - 52px)/18.3),60px)}}
+
+.tafel__flaeche{display:flex;flex-direction:column;align-items:flex-start;gap:var(--zg)}
+.zeile{display:flex;flex-wrap:wrap;column-gap:var(--wg);row-gap:var(--zg)}
+.wort{display:inline-flex;gap:var(--kg)}
+
+.z{position:relative;display:block;flex:none;width:var(--kw);height:var(--kh);perspective:calc(var(--kh)*5);
+   font:700 var(--kf)/1 var(--font-tafel);letter-spacing:0;color:var(--zeichen);
+   border-radius:var(--r);box-shadow:0 2px 3px rgba(0,0,0,.45)}
+.z--schmal{width:calc(var(--kw)*.5)}
+.z--ok{color:var(--amber)}
+
+.h{position:absolute;left:0;right:0;height:50%;overflow:hidden;backface-visibility:hidden}
+.h--o{top:0;border-radius:var(--r) var(--r) 0 0;background:linear-gradient(var(--kachel-oben),var(--kachel))}
+.h--u{bottom:0;border-radius:0 0 var(--r) var(--r);background:linear-gradient(var(--kachel-unten),#1a1c20)}
+.h::before{content:attr(data-c);position:absolute;left:0;right:0;height:200%;display:flex;align-items:center;justify-content:center;padding-bottom:calc(var(--kf)*.1)}
+.h--o::before{top:0}
+.h--u::before{bottom:0}
+
+/* Scharnier: dünne dunkle Linie in der Mitte und zwei kleine Achsen an den Seiten */
+.z::after{content:"";position:absolute;left:0;right:0;top:calc(50% - 1px);height:2px;background:var(--scharnier);z-index:3;pointer-events:none}
+.z::before{content:"";position:absolute;left:-1px;top:calc(50% - 3px);width:2px;height:6px;border-radius:1px;background:var(--scharnier);box-shadow:calc(var(--kw) - 1px) 0 0 var(--scharnier);z-index:3}
+.z--schmal::before{box-shadow:calc(var(--kw)*.5 - 1px) 0 0 var(--scharnier)}
+
+/* Das fallende Blatt */
+.klapp{position:absolute;left:0;right:0;top:0;height:50%;z-index:2;transform-origin:50% 100%;transform-style:preserve-3d;
+       animation:klapp var(--dauer) var(--kurve) both}
+.klapp .h{height:100%}
+.klapp .h--o{top:0}
+.klapp .h--u{bottom:0;transform:rotateX(180deg)}
+.klapp .h--u::before{bottom:0}
+@keyframes klapp{from{transform:rotateX(0deg)}to{transform:rotateX(-180deg)}}
+
+/* ==========================================================================
+   SEITE
+   ========================================================================== */
+
+/* Kopfzeile */
+.kopf{border-bottom:1px solid var(--linie);background:var(--grund)}
+.kopf__innen{max-width:var(--seite);margin:0 auto;padding:10px var(--rand);display:flex;align-items:center;gap:24px}
+.logo{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;flex:none}
+.nav{display:flex;justify-content:center;flex:1;gap:4px}
+.nav a,.korb{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--np,12px);white-space:nowrap;font:600 1.0625rem/1 var(--font-tafel);text-transform:uppercase;letter-spacing:.08em;text-decoration:none;color:var(--text);border-radius:6px;position:relative;--np:12px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:transform 160ms var(--ease-out)}
+/* Scharnier-Strich unter dem Link: erscheint nur per Transform und Deckkraft */
+.nav a::after{content:"";position:absolute;left:var(--np);right:var(--np);bottom:9px;height:2px;background:var(--zeichen);opacity:0;transform:scaleX(.5);transition:transform 160ms var(--ease-out),opacity 160ms var(--ease-out)}
+.nav a:active,.korb:active,.fuss__nav a:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .nav a:hover{color:var(--zeichen)}
+  .nav a:hover::after{opacity:1;transform:scaleX(1)}
+    }
+.korb{flex:none;gap:10px;border:1px solid var(--linie)}
+.korb:hover{border-color:var(--zeichen)}
+.korb__zahl.neu{animation:zahl-neu 160ms var(--ease-out)}
+@keyframes zahl-neu{from{transform:perspective(160px) rotateX(-70deg);opacity:.3}to{transform:perspective(160px) rotateX(0);opacity:1}}
+.korb__zahl{display:inline-block;min-width:26px;padding:4px 7px;text-align:center;background:var(--kachel);border-radius:4px;color:var(--zeichen);font-size:1rem}
+
+/* Hero */
+.hero{max-width:var(--seite);margin:0 auto;padding:var(--s5) var(--rand) var(--s6)}
+.eyebrow{font:600 1rem/1 var(--font-tafel);text-transform:uppercase;letter-spacing:.16em;white-space:nowrap;color:var(--text-leise);margin-bottom:var(--s3)}
+.hero__raster{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s6);align-items:start}
+.anzeige{background:var(--flaeche);border:1px solid var(--linie);border-radius:14px;padding:var(--s4);margin-bottom:var(--s5)}
+.untertitel{font-size:1.1875rem;line-height:1.55;max-width:34em;margin-bottom:var(--s4)}
+.bewertung{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;margin-bottom:var(--s4)}
+.bewertung__text{font-size:1rem;color:var(--text-leise)}
+.sterne svg{width:110px;height:22px}
+.sterne--klein svg{width:90px;height:18px}
+.sterne use{fill:var(--zeichen)}
+.sterne .leer{fill:none;stroke:var(--text-leise);stroke-width:1.2}
+.sterne .teil{fill:url(#stern-teil);stroke:var(--zeichen);stroke-width:1}
+
+.preisblock{margin-bottom:var(--s4)}
+.preis{margin-bottom:var(--s3)}
+.preis__aktion{font-weight:500;color:var(--zeichen);font-size:1.0625rem}
+.preis__info{font-size:1rem;color:var(--text-leise);margin-top:2px}
+
+.status{display:flex;flex-direction:column;gap:var(--s2);margin-top:var(--s5);padding:var(--s3) var(--s4);max-width:34em;background:var(--flaeche);border:1px solid var(--linie);border-radius:12px}
+
+.status__zeile{display:flex;align-items:center;justify-content:space-between;gap:var(--s3)}
+
+.cta{display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 36px;border:0;border-radius:8px;background:var(--amber);color:var(--auf-amber);
+     font:700 1.5rem/1 var(--font-tafel);text-transform:uppercase;letter-spacing:.08em;cursor:pointer;
+     box-shadow:0 4px 0 var(--amber-dunkel),0 10px 22px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:transform 160ms var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.cta:hover{transform:translateY(-2px)}}
+.cta:active{transform:translateY(1px) scale(.97)}
+.cta:focus-visible{outline-offset:4px}
+
+/* Hero-Bild: Piktogramm auf einer großen Kachel mit Scharnier */
+.bild{position:relative;border:1px solid var(--linie);border-radius:16px;overflow:hidden;
+      background:linear-gradient(180deg,var(--kachel-oben) 0,var(--kachel) 50%,var(--kachel-unten) 50%,#1a1c20 100%);
+      box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.bild svg{width:100%;height:auto}
+/* Farbrollen im Piktogramm: hell = Gerät, licht = Rand und Möhre, mittel = Teile, tief = Sockel, aus = Hohlraum */
+.bild{--p-hell:var(--zeichen);--p-licht:#cfcab8;--p-mittel:#a8a597;--p-tief:#8f8c80;--p-aus:var(--flaeche);--p-linie:#3a3d46}
+.f-hell{fill:var(--p-hell)}.f-licht{fill:var(--p-licht)}.f-mittel{fill:var(--p-mittel)}.f-tief{fill:var(--p-tief)}.f-aus{fill:var(--p-aus)}
+.s-hell{stroke:var(--p-hell)}.s-licht{stroke:var(--p-licht)}.s-mittel{stroke:var(--p-mittel)}.s-tief{stroke:var(--p-tief)}.s-aus{stroke:var(--p-aus)}.s-linie{stroke:var(--p-linie)}
+.bild::after{content:"";position:absolute;left:0;right:0;top:calc(50% - 2px);height:4px;background:var(--scharnier);box-shadow:0 1px 0 rgba(255,255,255,.05)}
+
+/* Abschnitte */
+.abschnitt{max-width:var(--seite);margin:0 auto;padding:var(--s6) var(--rand)}
+.abschnitt--eng{padding-top:0}
+.abschnitt>.tafel{margin-bottom:var(--s4)}
+
+/* Zahlenleiste */
+.zahlen{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.zahl-kachel{background:var(--flaeche);border:1px solid var(--linie);border-radius:12px;padding:var(--s4) 20px;display:flex;flex-direction:column;justify-content:space-between;gap:var(--s3)}
+.zahl__text{font-size:1rem;color:var(--text)}
+
+/* Funktionen als Tafelzeilen */
+.brett{background:var(--flaeche);border:1px solid var(--linie);border-radius:14px;overflow:hidden}
+.brett__kopf{display:grid;grid-template-columns:minmax(220px,360px) minmax(0,1fr) 72px;gap:var(--s3) 32px;padding:12px var(--s4);border-bottom:1px solid var(--linie);font:600 .9375rem/1 var(--font-tafel);text-transform:uppercase;letter-spacing:.14em;color:var(--text-leise)}
+.reihe{display:grid;grid-template-columns:minmax(220px,360px) minmax(0,1fr) 72px;gap:12px 32px;align-items:center;padding:20px var(--s4);border-top:1px solid var(--linie)}
+.reihe:first-child{border-top:0}
+.reihe__text{color:var(--text)}
+.reihe__status{justify-self:end}
+
+/* Ablauf als Fahrplan */
+.gleis{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px 32px;align-items:center;padding:20px var(--s4);border-top:1px solid var(--linie)}
+.gleis:first-child{border-top:0}
+.gleis h3{font:700 1.75rem/1.1 var(--font-tafel);text-transform:uppercase;letter-spacing:.04em;color:var(--zeichen);margin-bottom:4px}
+.gleis p{color:var(--text)}
+
+/* Bewertungen als Tafelmeldungen */
+.meldungen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
+.meldungen>li{display:flex}
+.meldung{display:flex;flex-direction:column;gap:var(--s3);width:100%;background:var(--flaeche);border:1px solid var(--linie);border-radius:12px;padding:var(--s4)}
+.meldung blockquote{flex:1;font-size:1.1875rem;line-height:1.5;font-weight:500;color:var(--zeichen)}
+.meldung figcaption{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.name{font:600 1.0625rem/1 var(--font-tafel);text-transform:uppercase;letter-spacing:.08em;color:var(--text)}
+
+/* Hinweisblock China */
+.hinweis{background:var(--flaeche);border:1px solid var(--linie);border-left:6px solid var(--zeichen);border-radius:14px;padding:var(--s5) var(--s4);display:flex;flex-direction:column;gap:var(--s4)}
+.hinweis p{max-width:46em;font-size:1.125rem}
+
+/* Fußzeile */
+.fuss{border-top:1px solid var(--linie);margin-top:var(--s4)}
+.fuss__innen{max-width:var(--seite);margin:0 auto;padding:32px var(--rand) 40px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 32px}
+.fuss__logo{font:700 1.5rem/1 var(--font-tafel);letter-spacing:.14em;color:var(--zeichen)}
+.fuss__nav{display:flex;flex-wrap:wrap;gap:0 4px}
+.fuss__nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;font-size:1rem;color:var(--text);text-decoration:none;transition:transform 160ms var(--ease-out);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.fuss__nav a:hover{color:var(--zeichen);text-decoration:underline}
+.fuss__hinweis{flex-basis:100%;font-size:.9375rem;color:var(--text-leise)}
+
+/* ==========================================================================
+   Tablet und Handy
+   ========================================================================== */
+@media (max-width:960px){
+  .kopf__innen{flex-wrap:wrap;row-gap:0;column-gap:16px}
+  .logo{order:1}
+  .korb{order:2;margin-left:auto}
+  .nav{order:3;flex-basis:100%;justify-content:space-between;margin:0 -12px}
+  .hero__raster{grid-template-columns:minmax(0,1fr);gap:var(--s5)}
+  .hero__bild{max-width:640px}
+  .zahlen{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .meldungen{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  :root{--rand:16px}
+  .tafel--h1{--kw:29px;--kh:calc(var(--kw)*1.45);--kf:calc(var(--kh)*.88);--kg:2px;--wg:16px;--zg:6px;--r:4px}
+  .tafel--preis{--kw:32px;--kh:46px;--kf:40px;--kg:2px}
+  .tafel--zahl{--kw:24px;--kh:35px;--kf:31px;--kg:2px}
+  .tafel--h2{--kw:24px;--kh:35px;--kf:31px;--kg:2px}
+  .anzeige{padding:var(--s3) 12px;margin-bottom:var(--s4)}
+  .hero{padding-top:var(--s4);padding-bottom:var(--s5)}
+  .abschnitt{padding:var(--s5) var(--rand)}
+  .status{padding:12px;margin-top:var(--s4)}
+  .nav a{--np:5px;font-size:.9375rem;letter-spacing:.04em}
+  .nav{margin:0 -5px}
+  .cta{width:100%}
+  .brett__kopf{display:none}
+  .reihe{grid-template-columns:minmax(0,1fr) auto;padding:18px 16px}
+  .reihe__text{grid-column:1/-1;grid-row:2}
+  .gleis{grid-template-columns:minmax(0,1fr);padding:18px 16px;gap:10px}
+  .zahlen{grid-template-columns:minmax(0,1fr)}
+  .zahl-kachel{flex-direction:row;align-items:center;justify-content:space-between;gap:16px;padding:16px}
+  .zahl-kachel .tafel{flex:none}
+  .zahl__text{text-align:right}
+  .hinweis{padding:22px 16px}
+}
+
+/* kleine Handys (360 px und schmaler): Kacheln schrumpfen mit der Anzeige, Links enger, bei 340 px zweizeilig */
+@supports (width:1cqw){@media (max-width:640px){.tafel--h1{--kw:clamp(20px,calc((100cqw - 22px)/10.6),29px)}}}
+@media (max-width:380px){
+  .nav a{font-size:.875rem;letter-spacing:.02em;--np:4px}
+  .nav{margin:0 -4px}
+}
+@media (max-width:340px){
+  .nav{flex-wrap:wrap;justify-content:flex-start;column-gap:8px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .klapp{display:none}
+  .korb__zahl.neu{animation:none}
+  *,*::before,*::after{transition:none!important}
+}
