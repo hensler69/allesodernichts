@@ -14,7 +14,7 @@ das JavaScript, send.php, die Rechtsseiten und die Tests unverändert. Reihenfol
    - `head()`: `theme-color` auf die Grundfarbe, `preload` auf die Überschriftenschrift, `og:image:alt`
 4. **Generator `build_index.py`:**
    - Überschrift: im Neo-Look `<span class="leucht">` auf ein bis zwei Wörter, `<span class="leucht leucht--gruen">` für das zweite
-   - `SCHRITTE`: Hintergründe als flache Farben (`#dff3a6`, `#fffef6`, `#ffd23f`, `#ff5236`, `#b79cff`) statt Verläufe
+   - `SCHRITTE`: Hintergründe als flache Farben (`#dff3a6`, `#fffef6`, `#ffd23f`, `#43d36b`, `#b79cff`) statt Verläufe
    - Abschied: Neo-Look = dunkler Block mit Text links und Schüssel rechts (`.abschied__in`, `.abschied__text`, `.abschied__schale`),
      Glas = Szene mit Licht, Tisch und Schale (`.abschied__szene`)
    - Farben in Zeichnungen, die als SVG im Generator stehen (Schüssel, Gerät), nur anfassen, wenn sie auf dem neuen Grund nicht tragen

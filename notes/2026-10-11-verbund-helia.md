@@ -116,8 +116,8 @@ impeccable
   @font-face{font-family:"Instrument Sans Ersatz";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("Helvetica Bold");font-weight:700;font-style:normal;size-adjust:99.65%;ascent-override:97.34%;descent-override:25.09%;line-gap-override:0%}
   @font-face{font-family:"Instrument Serif Ersatz";src:local("Times New Roman Italic"),local("TimesNewRomanPS-ItalicMT"),local("Liberation Serif Italic");font-weight:400;font-style:italic;size-adjust:87.43%;ascent-override:113.23%;descent-override:35.46%;line-gap-override:0%}
   ```
-- Kleine Texte in `--text-3` auf dem hellen Himmel, vor allem die Phasenliste ("Nacht, alles aus", "22:30") mit 3,9 bis 4,4 zu 1 (Soll 4,5): Vorschlag `--text-3` in `.phasen li` auf `--text-2`. Knapp, deshalb nicht umgesetzt.
-- Große Überschriften liegen direkt auf dem Himmel: "Vom Abend" misst im untersten Drittel des Bildes 2,2 zu 1 über dem hellen Horizont. Ein weicher dunkler Schatten oder ein etwas dunklerer Himmel unten (Tabelle HIMMEL in script.js) würde helfen, berührt aber den Look (Himmel). Nur gemeldet.
+- **Umgesetzt am 12.10.2026 (Manuel: ja, siehe `notes/2026-10-12.md`).** Kleine Texte in `--text-3` auf dem hellen Himmel, vor allem die Phasenliste ("Nacht, alles aus", "22:30") mit 3,9 bis 4,4 zu 1 (Soll 4,5): Vorschlag `--text-3` in `.phasen li` auf `--text-2`. Knapp, deshalb nicht umgesetzt.
+- **Umgesetzt am 12.10.2026 mit dem weichen dunklen Schatten (Himmel und Look unverändert), siehe `notes/2026-10-12.md`.** Große Überschriften liegen direkt auf dem Himmel: "Vom Abend" misst im untersten Drittel des Bildes 2,2 zu 1 über dem hellen Horizont. Ein weicher dunkler Schatten oder ein etwas dunklerer Himmel unten (Tabelle HIMMEL in script.js) würde helfen, berührt aber den Look (Himmel). Nur gemeldet.
 - Kleine Links (Sterne-Zeile 23 px, Preisfußnote 20 px, Links im Fließtext) unter 44 px: Sie größer zu machen, würde den Kopfbereich am Handy verlängern und den Kaufknopf tiefer schieben.
 - Die Laufband-Wörter sind jetzt als Füllung gezeichnet (gleiche Optik). Wer sie als echten Lesetext wollte, müsste sie auf mindestens 3 zu 1 anheben, was die Ruhe des Bandes zerstört.
 
@@ -130,7 +130,6 @@ emil-design-eng
 
 ## Offene Punkte und Hinweise
 - Alles wurde in Chromium ohne Grafikkarte gemessen. Touch-Ziele, `:active` und die kürzeren Bewegungen bitte einmal auf einem echten Handy und iPad nachfühlen.
-- Der Auftrag lief neben einem HORTA-Durchgang. `git status` zeigt dessen Änderungen (shops/horta, generatoren/horta, Neo-Brutalism-Vorlage). Sie stammen nicht von diesem Durchgang.
-- `ein-produkt-shop/references/bewegung.md` nennt für das Einblenden noch "Deckkraft 0,35", im Stylesheet steht jetzt 0,65. Die Anleitung habe ich nicht angepasst.
-- Der Testserver für HELIA läuft weiter auf Port 8121.
+- `ein-produkt-shop/references/bewegung.md` nannte für das Einblenden noch "Deckkraft 0,35", im Stylesheet steht jetzt 0,65. Inzwischen nachgezogen.
+- Stand 12.10.2026: alles committet und gepusht (Commit 4ba8a4b), die Testserver sind beendet.
 - Vor einem echten Start bleiben die bekannten Punkte aus CLAUDE.md (echtes Produktfoto, Firmendaten, Zahlungsanbieter, Markenprüfung, Beispiel-Bewertungen löschen, GEHEIMNIS ersetzen, noindex entfernen).

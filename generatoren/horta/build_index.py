@@ -142,7 +142,7 @@ SCHRITTE = [
     ("Waschen", "Gemüse waschen, Enden abschneiden, Großes wie Kohl grob teilen.", "#dff3a6", ICON["sauber"]),
     ("Einsatz wählen", "Kegel aufstecken, Trommel ansetzen und mit einer Drehung einrasten.", "#fffef6", kegel_icon("grob")),
     ("Einfüllen", "Gemüse in den Schacht legen und den Stopfer aufsetzen.", "#ffd23f", ICON["schacht"]),
-    ("Drücken", "Oben auf den Knopf drücken und mit dem Stopfer leicht nachschieben. Alles fällt in die Schüssel.", "#ff5236", ICON["knopf"]),
+    ("Drücken", "Oben auf den Knopf drücken und mit dem Stopfer leicht nachschieben. Alles fällt in die Schüssel.", "#43d36b", ICON["knopf"]),
     ("Abspülen", "Stecker ziehen, Teile abnehmen, kurz abspülen. Das Gehäuse nur feucht abwischen.", "#b79cff", ICON["funkeln"]),
 ]
 html += '''

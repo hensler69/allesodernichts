@@ -190,7 +190,7 @@ p{margin:0 0 var(--s3)}
 .blick__kachel:nth-child(1){background:var(--green)}
 .blick__kachel:nth-child(2){background:var(--sun)}
 .blick__kachel:nth-child(3){background:var(--violet)}
-.blick__kachel:nth-child(4){background:var(--tomate)}
+.blick__kachel:nth-child(4){background:var(--paper)}
 .blick__zahl{font:400 clamp(2.6rem,4.8vw,4.2rem)/.95 var(--f-display);font-variant-numeric:tabular-nums}
 .blick__zahl small{font-size:.38em;margin-left:.15em}
 .blick__text{font-size:.98rem;line-height:1.4;font-weight:700}
@@ -249,7 +249,7 @@ p{margin:0 0 var(--s3)}
 .bento .kachel:nth-child(2){background:var(--green)}
 .bento .kachel:nth-child(3){background:var(--sun)}
 .bento .kachel:nth-child(4){background:var(--violet)}
-.bento .kachel:nth-child(5){background:var(--tomate)}
+.bento .kachel:nth-child(5){background:var(--paper)}
 .kachel__symbol{width:48px;height:48px;display:grid;place-items:center;background:var(--paper);border:var(--kante);margin-bottom:var(--s4)}
 .kachel__symbol svg{width:24px;height:24px}
 .kachel--einsaetze{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;gap:var(--s4)}
@@ -789,7 +789,7 @@ textarea.feld{min-height:8rem;resize:vertical;line-height:1.5}
 .laufband__gruppe{display:flex;align-items:center;gap:var(--s5);padding-right:var(--s5)}
 .laufband__wort{font:400 clamp(1.7rem,3.4vw,2.8rem)/1 var(--f-display);text-transform:uppercase;white-space:nowrap;color:var(--paper);padding:.55em 0}
 .laufband__wort--voll{color:var(--sun)}
-.laufband__punkt{flex:none;width:16px;height:16px;background:var(--tomate);border:3px solid var(--sun)}
+.laufband__punkt{flex:none;width:16px;height:16px;background:var(--green);border:3px solid var(--sun)}
 @keyframes lauf{to{transform:translateX(-50%)}}
 
 /* =========================================================

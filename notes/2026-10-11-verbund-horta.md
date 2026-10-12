@@ -110,7 +110,7 @@ Schon erfüllt, je ein Satz:
 - Nicht angefasst: `script.js`, `send.php`, Schriften, Texte, Preise, `CLAUDE.md`
 
 ## Vorschläge, die ich nicht umgesetzt habe (und warum)
-1. **Rote Signalfarbe nur für Kaufen.** Die Beschreibung des Looks sagt: Tomate nur für Kaufknopf, Warenkorb-Zeile und geöffnete Fragen. Im Shop sind aber auch die 4. Kachel bei "Auf einen Blick" (27 cm), die 5. Kachel bei "Funktionen" und die Punkte im Laufband tomatenrot. Am Handy steht die rote Kachel nah am Kaufknopf und nimmt ihm den Blickfang. Vorschlag: Papier oder Limette für die Kacheln, Grün für die Punkte. Das ändert das freigegebene Aussehen, darum soll Manuel entscheiden.
+1. **Umgesetzt am 12.10.2026 (Manuel: "so wie du es machen würdest", siehe `notes/2026-10-12.md`).** **Rote Signalfarbe nur für Kaufen.** Die Beschreibung des Looks sagt: Tomate nur für Kaufknopf, Warenkorb-Zeile und geöffnete Fragen. Im Shop sind aber auch die 4. Kachel bei "Auf einen Blick" (27 cm), die 5. Kachel bei "Funktionen" und die Punkte im Laufband tomatenrot. Am Handy steht die rote Kachel nah am Kaufknopf und nimmt ihm den Blickfang. Vorschlag: Papier oder Limette für die Kacheln, Grün für die Punkte. Das ändert das freigegebene Aussehen, darum soll Manuel entscheiden.
 2. **Kein Kaufknopf im Abschlussblock.** Der dunkle Block "Der Tisch ist gedeckt" endet ohne "In den Warenkorb" (gpt-taste: Handlung zum Schluss). Am Handy deckt die Kaufleiste das ab, am PC gibt es dort nur den Warenkorb in der Kopfzeile. Ein Knopf wäre neuer Text im Generator, darum nicht umgesetzt.
 3. **Konflikt zwischen gpt-taste und impeccable.** gpt-taste verlangt, dass die Wörter im Geschichtsabsatz bei 10 % Deckkraft starten. Das fällt beim Kontrast durch (1,5 zu 1). Ich habe 50 % gewählt (3,4 zu 1). Wer den stärkeren Effekt will, verliert Lesbarkeit.
 4. **Probierstand und Danke-Seite.** Die Füllung der Schüssel dauert 1,9 s und startet bei `scaleY(0)` (Skript), die Schichten auf der Danke-Seite fallen 0,7 s mit 260 ms Versatz und starten ebenfalls bei `scaleY(0)`. Das sind bewusste Erlebnis-Animationen, ich habe sie nur gemeldet. Emil: nie von Null skalieren, Vorschlag `scaleY(0.2)`.
@@ -123,7 +123,6 @@ Schon erfüllt, je ein Satz:
 11. **Handy-Überschrift im Probierstand** hat im schmalen Kasten 4 Zeilen. Für 3 Zeilen müsste die Schrift unter 1,4rem fallen, das wäre zu klein.
 
 ## Offene Punkte
-- `design-vorlagen/references/look-neo-brutalism.md` nennt in den Stolperfallen noch `.zeigen` mit Start bei 0,35. Jetzt 0,9 (und 0,5 für ungelesene Wörter), dort bei Gelegenheit anpassen.
-- Die Vorschau https://claude.ai/artifact/Jq3Aq2eh9gxzBJHUqqVW7D zeigt noch den alten Stand. Nichts wurde veröffentlicht. Neu bauen nur auf Wunsch.
-- Im Arbeitsordner stehen geänderte HELIA-Dateien (`shops/helia/assets/style.css`, `design-vorlagen/vorlagen/glas-apple/shop/style.css`, `ein-produkt-shop/referenz/shop/assets/style.css`). Sie stammen nicht von diesem Auftrag.
-- Nichts committet, nichts gepusht. Der HORTA-Testserver läuft auf Port 8120, eine Kopie des Originals auf Port 8133.
+- `design-vorlagen/references/look-neo-brutalism.md` nannte in den Stolperfallen noch `.zeigen` mit Start bei 0,35. Inzwischen angepasst (0,9, und 0,5 für ungelesene Wörter).
+- Die Vorschau https://claude.ai/artifact/Jq3Aq2eh9gxzBJHUqqVW7D (Version 3) wurde nach diesem Durchgang aktualisiert. Die Änderung vom 12.10.2026 (Tomatenrot nur für Kaufen) ist dort noch nicht drin.
+- Stand 12.10.2026: alles committet und gepusht (Commit e27067c), die Testserver sind beendet.
