@@ -124,5 +124,5 @@ Schon erfüllt, je ein Satz:
 
 ## Offene Punkte
 - `design-vorlagen/references/look-neo-brutalism.md` nannte in den Stolperfallen noch `.zeigen` mit Start bei 0,35. Inzwischen angepasst (0,9, und 0,5 für ungelesene Wörter).
-- Die Vorschau https://claude.ai/artifact/Jq3Aq2eh9gxzBJHUqqVW7D (Version 3) wurde nach diesem Durchgang aktualisiert. Die Änderung vom 12.10.2026 (Tomatenrot nur für Kaufen) ist dort noch nicht drin.
+- Die Vorschau https://claude.ai/artifact/Jq3Aq2eh9gxzBJHUqqVW7D (Version 3) wurde nach diesem Durchgang aktualisiert und am 12.10.2026 als Version 4 mit der Änderung "Tomatenrot nur für Kaufen" erneuert.
 - Stand 12.10.2026: alles committet und gepusht (Commit e27067c), die Testserver sind beendet.

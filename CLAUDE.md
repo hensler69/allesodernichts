@@ -30,5 +30,5 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - Verbrauch: Aufträge mit vielen Sub-Agenten verbrauchen sehr viel und lösen Limits aus. Vorher warnen, in kleinen Wellen arbeiten (Notiz vom 11.10.2026).
 
 ## Laufende Themen
-- HORTA-Shop (shops/horta/): im Neo-Brutalism-Look fertig gebaut und getestet (Lighthouse 95/100/100 nach dem Verbund-Durchgang vom 11.10.2026), Vorschau https://claude.ai/artifact/Jq3Aq2eh9gxzBJHUqqVW7D (Version 3, zeigt noch die Fassung vor der Tomatenrot-Änderung vom 12.10.2026, neu veröffentlichen nur mit OK von Manuel). 36 Bewertungen sind erfundene Beispiele. Entwurf im KI-Vorlagen-Look: https://claude.ai/artifact/SjdCxa1UFoJ47XBgj2X383.
+- HORTA-Shop (shops/horta/): im Neo-Brutalism-Look fertig gebaut und getestet (Lighthouse 95/100/100 nach dem Verbund-Durchgang vom 11.10.2026), Vorschau https://claude.ai/artifact/Jq3Aq2eh9gxzBJHUqqVW7D (Version 4 vom 12.10.2026, mit Tomatenrot nur für Kaufen). 36 Bewertungen sind erfundene Beispiele. Entwurf im KI-Vorlagen-Look: https://claude.ai/artifact/SjdCxa1UFoJ47XBgj2X383.
 - HELIA-Shop (shops/helia/): Glas-Layout mit 3D-Lampe, Bewertungsbereich, persönlicher Weckzeit und Gute-Nacht-Abschluss fertig getestet, seit 12.10.2026 mit besserem Kontrast in der Phasenliste und bei den Überschriften. Die Bewertungen sind erfundene Beispiele und müssen vor dem Start raus.
