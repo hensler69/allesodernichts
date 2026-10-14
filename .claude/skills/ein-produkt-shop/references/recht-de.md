@@ -1,6 +1,7 @@
 # Rechtliche Pflichtteile für einen Shop in Deutschland
 
-Stand der Recherche: Oktober 2026. Das ist keine Rechtsberatung. Vor einem echten Start die Rechtstexte
+Stand der Recherche: Oktober 2026, am 14.10.2026 nachgeprüft (Widerrufsfunktion, EU-Gewährleistungshinweis, UWG-Novelle,
+Verpackung, Produkthaftung; Quellen waren Kammern, Kanzleien und Verbände, nicht die Gesetzestexte selbst). Das ist keine Rechtsberatung. Vor einem echten Start die Rechtstexte
 prüfen lassen (Anwalt oder ein Rechtstexte-Dienst wie Händlerbund oder IT-Recht Kanzlei) und das dem Nutzer
 auch so sagen. Wenn etwas unsicher wirkt oder neuer als Juni 2026 sein könnte: per Websuche nachprüfen.
 
@@ -41,6 +42,14 @@ auch so sagen. Wenn etwas unsicher wirkt oder neuer als Juni 2026 sein könnte: 
 - Preise rechnet der Server neu (send.php), nie dem Browser vertrauen. Bestellnummern eindeutig (PRÄFIX-JJJJMMTT-ZUFALL).
 - Zahlungsanbieter (PayPal, Klarna) brauchen Händlerverträge. Bis dahin geht die Bestellung per Mail ein, das im
   Entwurf klar sagen.
+- Seit 27.09.2026 Pflicht für alle Händler, die Waren an Verbraucher verkaufen: der harmonisierte EU-Gewährleistungshinweis
+  (Label mit QR-Code zum Portal "Ihr Europa"; Richtlinie (EU) 2024/825, Durchführungsverordnung (EU) 2025/1960, Anhang I,
+  in Deutschland über Art. 246a EGBGB). Nach den Fachquellen (IHK, Kanzleien): farbig, hervorgehoben und direkt in der
+  Produktdarstellung, nicht nur in Fußzeile oder AGB; Wortlaut, Farben und Schrift sind fest und dürfen nicht verändert werden;
+  empfohlen auch im Bestellabschluss und in der Bestätigungsmail. Er ergänzt den Satz zu den gesetzlichen Mängelrechten, ersetzt
+  ihn nicht. Das Garantielabel (GARAN) nur, wenn der Hersteller eine kostenlose Haltbarkeitsgarantie über 2 Jahre für die ganze
+  Ware gibt. Die offizielle Datei (Anhang I, Sprachfassung wählen) oder die fertige Einbindung eines Rechtstexte-Dienstes
+  nehmen, nicht nachzeichnen. STAND: HELIA, HORTA und die Referenz haben ihn noch NICHT, das ist vor jedem echten Start offen.
 
 ## 3. Widerruf und Widerrufsbutton
 - Widerrufsbelehrung (14 Tage) mit Muster-Widerrufsformular als eigene Seite, Rücksendekosten-Regel nennen.
@@ -49,6 +58,11 @@ auch so sagen. Wenn etwas unsicher wirkt oder neuer als Juni 2026 sein könnte: 
   - Seite `/widerrufen` mit Formular (Name, Mail, Bestellnummer, optional Datum und Artikel),
   - Knopf "Widerruf bestätigen",
   - sofortige Eingangsbestätigung per Mail mit Datum und Uhrzeit des Eingangs und Anzeige auf der Seite.
+- Rechtsgrundlage ist § 356a BGB. Nach den Fachquellen darf die Funktion verlangen: Name, Angaben zur Identifizierung des Vertrags
+  (auch nur eines Teils davon) und den elektronischen Weg für die Eingangsbestätigung, keine Gründe. Die Knöpfe heißen "Vertrag
+  widerrufen" und "Widerruf bestätigen" (oder gleichwertig), die Funktion muss während der ganzen Widerrufsfrist ständig
+  erreichbar sein, die Bestätigung kommt unverzüglich auf einem dauerhaften Datenträger (Mail). Das Feld "Welche Ware?" der Referenz
+  ist freiwillig und dient der Kennzeichnung eines Teils des Vertrags, im Zweifel beim Anwalt-Check ansprechen.
 - Gesetzliche Mängelrechte erwähnen. Das Wort "Garantie" nur, wenn es eine echte Garantie mit allen Angaben gibt.
 
 ## 4. Impressum und Streitbeilegung
@@ -80,6 +94,13 @@ auch so sagen. Wenn etwas unsicher wirkt oder neuer als Juni 2026 sein könnte: 
   Rücksendeadresse in Deutschland angeben. Lebensmittelkontakt (VO (EG) 1935/2004) und EU-Stecker vom Lieferanten
   schriftlich bestätigen lassen. Leistungsangaben wie "800 W" nur als "laut Hersteller", bis sie geprüft sind.
 - Verpackungen: Registrierung im Verpackungsregister LUCID und Beteiligung an einem dualen System VOR dem ersten Verkauf.
+  Seit 12.08.2026 gilt die EU-Verpackungsverordnung (EU) 2025/40 (PPWR). LUCID bleibt, das Gesetz VerpackDG ergänzt das VerpackG,
+  und laut Zentraler Stelle Verpackungsregister verschiebt sich die Verantwortung für Eigenmarken und Importe stärker auf den
+  Handel. Die Fristen zur Umstellung sind in den Quellen widersprüchlich: bei der Zentralen Stelle und beim dualen System nachfragen.
+- Produkthaftung: Die neue EU-Produkthaftungsrichtlinie (EU) 2024/2853 muss bis 09.12.2026 umgesetzt sein, das deutsche Gesetz ist
+  im Verfahren (BT-Drs. 21/4297, Beschlussempfehlung des Rechtsausschusses vom 07.10.2026, der Stand danach ist nicht geprüft).
+  Haftung ohne Verschulden, Software zählt als Produkt, Importeure und Fulfilment-Dienstleister können mithaften. Eine
+  Betriebshaftpflicht mit Produkthaftpflicht empfehlen und dem Versicherer den Direktimport aus einem Drittland nennen.
 - Branchen mit eigenen Regeln prüfen: Kosmetik (Inhaltsstoffe, verantwortliche Person), Lebensmittel (LMIV), Textil (Faserangaben),
   Spielzeug (Warnhinweise), Medizinprodukte (nicht ohne Fachberatung).
 - Keine Heil- oder Gesundheitsversprechen für Produkte, die kein Medizinprodukt sind (Heilmittelwerbegesetz).
@@ -93,6 +114,10 @@ auch so sagen. Wenn etwas unsicher wirkt oder neuer als Juni 2026 sein könnte: 
   dann sichtbar als "Beispiel" markiert, mit Entwurfshinweis, und KEIN aggregateRating im JSON-LD. Vor dem Start löschen.
 - Keine falsche Knappheit ("nur noch 3 da", wenn es nicht stimmt) und keine Countdowns ohne echten Grund (UWG Anhang Nr. 7).
 - "Testsieger", "Bestseller", "Nr. 1" nur mit Beleg.
+- Seit 27.09.2026 (Drittes Gesetz zur Änderung des UWG, setzt die Richtlinie (EU) 2024/825 um): Allgemeine Umweltaussagen wie
+  "umweltfreundlich" nur mit anerkannter hervorragender Umweltleistung, "klimaneutral" auf Basis von Kompensation ist verboten,
+  eigene Nachhaltigkeitssiegel ohne unabhängige Zertifizierung sind verboten, Aussagen zu Haltbarkeit, Reparierbarkeit und Updates
+  nur mit Beleg. In HELIA und HORTA steht nichts davon (Textsuche am 14.10.2026), bei neuen Texten prüfen.
 
 ## 8. Barrierefreiheit
 Das Barrierefreiheitsstärkungsgesetz (BFSG) gilt seit 28.06.2025 auch für Onlineshops an Verbraucher. Ausgenommen sind
@@ -117,3 +142,16 @@ von selbst bewegt (WCAG 2.2.2).
 - `GEHEIMNIS` in send.php durch langen Zufallstext ersetzen, Domain eintragen
 - `noindex`, `robots.txt`-Sperre und Entwurfsleiste entfernen, Sperre in der Wurzel-.htaccess aufheben
 - Hosting mit PHP-Mailversand testen (Bestellung, Widerruf, Newsletter-Bestätigung)
+- EU-Gewährleistungshinweis einbauen (Abschnitt 2), offizielle Datei besorgen
+- Produktunterlagen vom Lieferanten schriftlich (Go oder No-Go vor allen Registrierungen): EU-Konformitätserklärung (CE) mit
+  Prüfberichten, Name und Anschrift von Hersteller und verantwortlicher Person in der EU, WEEE-Nummer oder Bevollmächtigter,
+  Verpackungslizenz, Konformitätserklärung für den Lebensmittelkontakt, Anleitung auf Deutsch, Nutzungsrecht für Fotos,
+  Lieferbedingungen (wer zahlt Zoll und Einfuhrumsatzsteuer, IOSS, echte Lieferzeit)
+- Muster bestellen: eigene Fotos, Typenschild, Stecker und Leistung prüfen, jede Werbeaussage belegen
+- Eigenmarke bedeutet Herstellerpflichten (technische Unterlagen, Konformitätserklärung auf den eigenen Namen). Entscheiden, ob der
+  Shop als Händler einer fremden Marke oder mit eigener Marke auftritt
+- Firma anmelden, Finanzamt, Steuerberater (Direktlieferung aus Drittland, Einfuhrumsatzsteuer), Impressum mit ladungsfähiger
+  Anschrift (ein Postfach reicht nicht), Versicherung (Betriebs- und Produkthaftpflicht), Rechtstexte-Dienst mit Abmahnschutz
+  oder Anwalt-Check des fertigen Shops
+- Zahlung anbinden oder auf ein Shopsystem wechseln, Testbestellungen auf dem echten Server
+- Plan für Abmahnungen: nie ignorieren, die vorformulierte Unterlassungserklärung nicht ohne Anwalt unterschreiben, Fristen beachten
