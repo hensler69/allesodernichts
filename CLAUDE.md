@@ -29,6 +29,9 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-21: Liegt dieselbe Aufnahme in höherer Auflösung (enger Zuschnitt) vor, die dort bearbeitete Person per Transformation ins weite Bild einsetzen statt das weite Bild selbst zu schärfen (echtes Detail, natürlicher)
 - 2026-10-21: Adern durch blickdichten Stoff nicht aufmalen (wäre erfunden); nur vorhandene Adern an Händen/Handgelenken betonen, mit schmalem Filter und Schonung dunkler Stellen (breiter Filter macht die Hand fleckig)
 - 2026-10-21: Beim Einsetzen einer Hi-Res-Person die Maske eng an der verformten Silhouette führen, nicht großzügig erweitern (sonst weicher Hintergrund-Saum)
+- 2026-10-21: Zubehör wie Mützen nur prozedural zeichnen (Rippen als Meridiane, Zylinderprojektion, Licht von oben-vorn, Farbe am Pullover-Schwarz kalibriert, Weichheit und Korn ans Foto angepasst), keine generative KI; Marken-Logos nur als handgezeichnete Annäherung und den Nutzer darauf hinweisen
+- 2026-10-21: Bart verdichten mit feinen, schwachen mittelbraunen Haarstrichen in Wuchsrichtung (Alpha ca. 0,14–0,34, 2-fach überabgetastet), Dichte von der Wangenlinie zur Kieferkante steigend; keine fast schwarzen Striche (wirkt wie Pfeffer)
+- 2026-10-21: Original-EXIF kann GPS enthalten; Originalformat-Datei behält es wie entschieden, Nutzer bei jeder Lieferung kurz darauf hinweisen, Post-Fassungen immer ohne EXIF
 
 ## Offene Themen
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
@@ -39,6 +42,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] Alle 3 Fotos neu ohne Finish, mit Fokus-Schärfung auf Gesicht, Arme, Brust (Dateien in ergebnis_v3, Feed 4:5, Story 9:16, unzugeschnitten): Rückmeldung zu Schärfe abwarten (seit 2026-10-21)
 - [ ] Originale in voller Auflösung: Enger Zuschnitt vor dem Upload brachte beim Hüft-Foto 1,4-fach mehr Pixel auf der Person (neu bearbeitet, ergebnis_v4). Wasserflaschen-Foto ohne Gewinn, Foto 1 noch nicht neu geschickt (seit 2026-10-21)
 - [ ] Hüft-Foto im weiten Originalformat 1680×2576, Arme und Adern verstärkt (ergebnis_v6, ersetzt v5): Rückmeldung abwarten (seit 2026-10-21)
+- [ ] Selfie von unten (1242×2208) mit dunkelblauer Polo-Beanie (Rippstrick, Umschlag, Pony-Logo) und verstärktem Seitenbart (Originalformat, Feed 4:5, Story 9:16): Rückmeldung zu Mützenform und -höhe, Blauton, Logo und Bartstärke abwarten (seit 2026-10-21, Details in notes/2026-10-21.md, Nachtrag 8)
 
 ## Laufende Themen
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
