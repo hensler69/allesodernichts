@@ -25,6 +25,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-21: Weicheres Licht per Basis/Detail-Tonwert (Schatten anheben, Lichter dämpfen, additiver Schwarzpunkt) statt einfachem Kontrastregler (wirkt wie Smart HDR, nicht flau)
 - 2026-10-21: Schärfe nicht global, sondern per Gewichtungskarte: Gesicht, Arme, Brust, Hände am stärksten, Rest der Person mittel, Hintergrund wenig (Fokus liegt auf der Person, kein Weichzeichner, sonst Halos)
 - 2026-10-21: Schärfung mit Entfaltung statt nur Unscharf maskieren, Gesicht schwächer (nur ca. 120 px breit, sonst wie gezeichnet), Foto mit Blockrauschen vorher reinigen und schwächer schärfen
+- 2026-10-21: Wenn Uploads verkleinert ankommen: Nutzer das Foto auf dem Handy eng auf sich zuschneiden lassen, dann Maßstab per SIFT gegen die alte Datei messen und echtes Zusatzdetail per Frequenzanalyse prüfen; bestehende Masken per Ähnlichkeitstransformation übernehmen statt neu vermessen
 
 ## Offene Themen
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
@@ -33,7 +34,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] Foto 2 (39108e99) und Foto 3 (be0380d5), gleiche Retusche, je Feed 4:5, Story 9:16 und Originalformat: Rückmeldung abwarten (seit 2026-10-21)
 - [x] Finish für alle 3 Fotos (heller, Digicam-Look): Nutzer gefiel das Ergebnis nicht, Schritt verworfen (2026-10-21)
 - [ ] Alle 3 Fotos neu ohne Finish, mit Fokus-Schärfung auf Gesicht, Arme, Brust (Dateien in ergebnis_v3, Feed 4:5, Story 9:16, unzugeschnitten): Rückmeldung zu Schärfe abwarten (seit 2026-10-21)
-- [ ] Originale in voller Auflösung: Upload kam erneut mit 2576 px an. Nutzer soll in der Fotos-App die echte Auflösung prüfen und Originale als Datei schicken (seit 2026-10-21)
+- [ ] Originale in voller Auflösung: Enger Zuschnitt vor dem Upload brachte beim Hüft-Foto 1,4-fach mehr Pixel auf der Person (neu bearbeitet, ergebnis_v4). Wasserflaschen-Foto ohne Gewinn, Foto 1 noch nicht neu geschickt (seit 2026-10-21)
 
 ## Laufende Themen
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
