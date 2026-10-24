@@ -35,6 +35,8 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-23: Schärfung nach gemessener Feindetail-Energie dosieren (Ziel ca. ×1,1–1,2 in Fokuszonen, Hintergrund ≤ ×0,95); bei bereits knackigen oder verrauschten Quellen die Werte weicherer Fotos nicht übernehmen (×1,6 wirkte hart und schmutzig), Relief und Schärfung auf vorgeglättetem Signal
 - 2026-10-23: Armverbreiterung nur, wo die Kontur frei liegt (am Spiegelrand angeschnittene Arme nicht verformen, dort nur Licht und Definition); handvermessene Kontur vorher auf die stärkste Kante einrasten (lag 2–4 px daneben), Jacobi min ≥ ca. 0,65
 - 2026-10-23: Story-Ausschnitt: Person im linken oder rechten Drittel, Kopf bei ca. 25 % von oben, keine angeschnittenen Fragmente am Rand, Skalierung höchstens ca. 1,2
+- 2026-10-24: Video-Zusammenfassungen nur aus dem echten Inhalt (Transkript), nichts erfinden; YouTube ist in der Cloud-Umgebung gesperrt, dann den Nutzer um die Transkripte bitten (YouTube: „Transkript anzeigen“)
+- 2026-10-24: Lern-PDFs mit eigenen Schemagrafiken statt Video-Screenshots; jede Grafik und jede Seite als Bild prüfen (keine Überlappungen, keine verwaisten Kästen), Kerzendaten automatisch prüfen; Aufbau: Kurzfassung, Abschnitte mit Merke-Kästen, Checklisten vor/während/nach dem Trade, Fehler-Tabelle, Glossar, klickbares Inhaltsverzeichnis; Ergänzungen, die nicht aus dem Video stammen, kennzeichnen
 
 ## Offene Themen
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
@@ -47,7 +49,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] Hüft-Foto im weiten Originalformat 1680×2576, Arme und Adern verstärkt (ergebnis_v6, ersetzt v5): Rückmeldung abwarten (seit 2026-10-21)
 - [ ] Selfie von unten (1242×2208) mit dunkelblauer Polo-Beanie (Rippstrick, Umschlag, Pony-Logo) und verstärktem Seitenbart (Originalformat, Feed 4:5, Story 9:16): Rückmeldung zu Mützenform und -höhe, Blauton, Logo und Bartstärke abwarten (seit 2026-10-21, Details in notes/2026-10-21.md, Nachtrag 8)
 - [ ] Gym-Spiegelselfie A (1654×2576, Hantelscheiben-Wand) für die Story, Foto B nicht bearbeitet: Rückmeldung zu Schärfe, Stärke von Arm und Bauch, Ausschnitt abwarten (seit 2026-10-23, Details in notes/2026-10-23.md)
-- [ ] Trading-PDFs aus 3 YouTube-Videos (TNybDCtwBnc, 3eTG_b5NTgw, oucPinjDdlk) mit Bildern und Checklisten: blockiert, YouTube in der Umgebung nicht erreichbar; Nutzer gibt youtube.com frei oder fügt Transkripte ein (seit 2026-10-24)
+- [ ] Trading-PDFs aus 3 YouTube-Videos (TNybDCtwBnc, 3eTG_b5NTgw, oucPinjDdlk), aus eingefügten Transkripten, je mit Grafiken, Checklisten vor/während/nach dem Trade, Fehler-Tabelle und Glossar: geliefert, Rückmeldung abwarten (seit 2026-10-24, Details in notes/2026-10-24.md)
 
 ## Laufende Themen
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
