@@ -47,6 +47,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] Hüft-Foto im weiten Originalformat 1680×2576, Arme und Adern verstärkt (ergebnis_v6, ersetzt v5): Rückmeldung abwarten (seit 2026-10-21)
 - [ ] Selfie von unten (1242×2208) mit dunkelblauer Polo-Beanie (Rippstrick, Umschlag, Pony-Logo) und verstärktem Seitenbart (Originalformat, Feed 4:5, Story 9:16): Rückmeldung zu Mützenform und -höhe, Blauton, Logo und Bartstärke abwarten (seit 2026-10-21, Details in notes/2026-10-21.md, Nachtrag 8)
 - [ ] Gym-Spiegelselfie A (1654×2576, Hantelscheiben-Wand) für die Story, Foto B nicht bearbeitet: Rückmeldung zu Schärfe, Stärke von Arm und Bauch, Ausschnitt abwarten (seit 2026-10-23, Details in notes/2026-10-23.md)
+- [ ] Trading-PDFs aus 3 YouTube-Videos (TNybDCtwBnc, 3eTG_b5NTgw, oucPinjDdlk) mit Bildern und Checklisten: blockiert, YouTube in der Umgebung nicht erreichbar; Nutzer gibt youtube.com frei oder fügt Transkripte ein (seit 2026-10-24)
 
 ## Laufende Themen
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
