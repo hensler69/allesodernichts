@@ -38,6 +38,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-24: Video-Zusammenfassungen nur aus dem echten Inhalt (Transkript), nichts erfinden; YouTube ist in der Cloud-Umgebung gesperrt, dann den Nutzer um die Transkripte bitten (YouTube: „Transkript anzeigen“)
 - 2026-10-24: Lern-PDFs mit eigenen Schemagrafiken statt Video-Screenshots; jede Grafik und jede Seite als Bild prüfen (keine Überlappungen, keine verwaisten Kästen), Kerzendaten automatisch prüfen; Aufbau: Kurzfassung, Abschnitte mit Merke-Kästen, Checklisten vor/während/nach dem Trade, Fehler-Tabelle, Glossar, klickbares Inhaltsverzeichnis; Ergänzungen, die nicht aus dem Video stammen, kennzeichnen
 - 2026-10-24: Druck-Checklisten auf eine A4-Seite: jeder Punkt einzeilig (Textbreite messen, wortgenau kürzen, lange Punkte teilen), Verweise auf die Leitfaden-Abschnitte, Graustufen prüfen, keine Linien, die mit Schreiblinien verwechselt werden können
+- 2026-10-26: Live-Chart-Fragen: kein Kauf-/Verkaufssignal, sondern Vorgehen nach den Leitfäden mit Wenn-dann-Szenarien, Bestätigung und Ungültigkeits-Punkt; Levels aus Fotos mit Perspektivkorrektur messen, gegen die OHLC-Kopfzeile prüfen und die Genauigkeit nennen; für genaue Werte um Screenshots statt Handyfotos bitten
 
 ## Offene Themen
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
@@ -51,6 +52,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] Selfie von unten (1242×2208) mit dunkelblauer Polo-Beanie (Rippstrick, Umschlag, Pony-Logo) und verstärktem Seitenbart (Originalformat, Feed 4:5, Story 9:16): Rückmeldung zu Mützenform und -höhe, Blauton, Logo und Bartstärke abwarten (seit 2026-10-21, Details in notes/2026-10-21.md, Nachtrag 8)
 - [ ] Gym-Spiegelselfie A (1654×2576, Hantelscheiben-Wand) für die Story, Foto B nicht bearbeitet: Rückmeldung zu Schärfe, Stärke von Arm und Bauch, Ausschnitt abwarten (seit 2026-10-23, Details in notes/2026-10-23.md)
 - [ ] Trading-PDFs aus 3 YouTube-Videos (TNybDCtwBnc, 3eTG_b5NTgw, oucPinjDdlk), aus eingefügten Transkripten, je mit Grafiken, Checklisten vor/während/nach dem Trade, Fehler-Tabelle und Glossar, dazu eine einseitige Kompakt-Checkliste zum Ausdrucken: geliefert, Rückmeldung abwarten (seit 2026-10-24, Details in notes/2026-10-24.md)
+- [ ] EURUSD live 26.10. (Levels, FVG, Szenarien A/B markiert): Nutzer prüft Daily-Bias und SMT mit GBPUSD/DXY, ggf. Screenshots schicken (seit 2026-10-26, Details in notes/2026-10-26.md)
 
 ## Laufende Themen
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
