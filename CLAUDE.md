@@ -59,7 +59,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [x] EURUSD live 26.10.: Szenario A (Short aus der FVG-Box) ist aufgegangen, Kurs bis 1,1173 (2026-10-27)
 - [ ] EURUSD-Vorbereitung 27.10. (grüne Linien erklärt, Level, Fed/EZB-Woche, FVG-Indikator empfohlen): Nutzer prüft Tageschart-Bias und SMT mit GBPUSD (seit 2026-10-27, Details in notes/2026-10-27.md)
 - [x] EURUSD live 27.10.: Short 1 nach SMT (GBPUSD über sein Hoch) und M5-CISD ausgelöst, Einstieg 1,11444, SL 1,11530, Ziel 1,11138: Stop getroffen, −1R (≈ −286 $) (2026-10-27)
-- [ ] EURUSD 27.10. nach dem Stop-out: Nutzer wartet den nächsten 30-Min-Schluss ab (unter 1,1155 → Short 1 nur neu mit Sweep, SMT, CISD; über 1,1160 → Short 2) und trägt den Trade ins Journal ein (seit 2026-10-27, Details in notes/2026-10-27.md)
+- [x] EURUSD 27.10. Trade 2: Short 1 nach Sweep (1,11545), SMT und M5-CISD, Einstieg 1,11472, Stop 1,11570, abends von Hand geschlossen mit ca. +400 $ (≈ +1,6R); Tag ≈ +114 $, Journal-Einträge geliefert (2026-10-27)
 
 - [x] Skill „trading-tagesablauf“ (.claude/skills/) erstellt und getestet; Nutzer hat Annahmen (250 $ Risiko, max. 2 Verluste/Tag, Sperrzeit ±15 Min. um US-Daten) und Bilder bestätigt (2026-10-27)
 
