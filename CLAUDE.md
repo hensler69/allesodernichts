@@ -55,6 +55,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] Trading-PDFs aus 3 YouTube-Videos (TNybDCtwBnc, 3eTG_b5NTgw, oucPinjDdlk), aus eingefügten Transkripten, je mit Grafiken, Checklisten vor/während/nach dem Trade, Fehler-Tabelle und Glossar, dazu eine einseitige Kompakt-Checkliste zum Ausdrucken: geliefert, Rückmeldung abwarten (seit 2026-10-24, Details in notes/2026-10-24.md)
 - [x] EURUSD live 26.10.: Szenario A (Short aus der FVG-Box) ist aufgegangen, Kurs bis 1,1173 (2026-10-27)
 - [ ] EURUSD-Vorbereitung 27.10. (grüne Linien erklärt, Level, Fed/EZB-Woche, FVG-Indikator empfohlen): Nutzer prüft Tageschart-Bias und SMT mit GBPUSD (seit 2026-10-27, Details in notes/2026-10-27.md)
+- [ ] EURUSD live 27.10.: Tief 13.10. um 10:00 MEZ gebrochen, Zonen des Nutzers geprüft (korrekt, 1,1163–1,1178 fehlt), Szenario A (Short nach Rücksetzer in 1,1151–1,1156, Ziel 1,1116) und B (Fehlausbruch) erklärt: Ausgang abwarten (seit 2026-10-27)
 
 ## Laufende Themen
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
