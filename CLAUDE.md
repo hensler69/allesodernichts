@@ -41,6 +41,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-26: Live-Chart-Fragen: kein Kauf-/Verkaufssignal, sondern Vorgehen nach den Leitfäden mit Wenn-dann-Szenarien, Bestätigung und Ungültigkeits-Punkt; Levels aus Fotos mit Perspektivkorrektur messen, gegen die OHLC-Kopfzeile prüfen und die Genauigkeit nennen; für genaue Werte um Screenshots statt Handyfotos bitten
 - 2026-10-27: Tagesvorbereitung immer mit Termin-Check (Notenbanken, US-Daten) per Websuche und Quellen; diese Woche Fed Mi 19:00 MEZ, EZB Do 14:15 MEZ; Werte aus Fotos über Kurslinie (Krümmung) und bekannte Level gegenprüfen
 - 2026-10-27: Trading-Begleitung läuft über den Skill trading-tagesablauf; Leitfäden L1–L3 sind das Modell, Handbuch (H) und TradingView-Werkzeuge nur Konfluenz, immer Zeitrahmen mit Begründung nennen
+- 2026-10-27: Risikoregeln vom Nutzer bestätigt: 250 $ Risiko pro Trade, höchstens 2 Verluste pro Tag, keine neuen Einstiege 15 Min. vor bis 15 Min. nach wichtigen US-Daten
 - 2026-10-27: Live-Setups: Sweep des Levels bzw. gleicher Hochs/Tiefs vor dem Einstieg als Pflicht nennen, Stop über die ganze Zone (nicht knapp über gleiche Hochs) und Lots danach berechnen; Seitwärtsphase im Level und die Stunde vor wichtigen Daten ohne Sweep heißt abwarten (erster Short am 27.10. so ausgestoppt)
 
 ## Offene Themen
@@ -60,7 +61,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [x] EURUSD live 27.10.: Short 1 nach SMT (GBPUSD über sein Hoch) und M5-CISD ausgelöst, Einstieg 1,11444, SL 1,11530, Ziel 1,11138: Stop getroffen, −1R (≈ −286 $) (2026-10-27)
 - [ ] EURUSD 27.10. nach dem Stop-out: Nutzer wartet den nächsten 30-Min-Schluss ab (unter 1,1155 → Short 1 nur neu mit Sweep, SMT, CISD; über 1,1160 → Short 2) und trägt den Trade ins Journal ein (seit 2026-10-27, Details in notes/2026-10-27.md)
 
-- [ ] Skill „trading-tagesablauf“ (.claude/skills/) erstellt und getestet: Rückmeldung zu Testergebnissen, Annahmen (250 $ Risiko, max. 2 Verluste, Sperrzeiten) und Bildern abwarten (seit 2026-10-27, Details in notes/2026-10-27.md)
+- [x] Skill „trading-tagesablauf“ (.claude/skills/) erstellt und getestet; Nutzer hat Annahmen (250 $ Risiko, max. 2 Verluste/Tag, Sperrzeit ±15 Min. um US-Daten) und Bilder bestätigt (2026-10-27)
 
 ## Laufende Themen
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
