@@ -40,6 +40,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-24: Druck-Checklisten auf eine A4-Seite: jeder Punkt einzeilig (Textbreite messen, wortgenau kürzen, lange Punkte teilen), Verweise auf die Leitfaden-Abschnitte, Graustufen prüfen, keine Linien, die mit Schreiblinien verwechselt werden können
 - 2026-10-26: Live-Chart-Fragen: kein Kauf-/Verkaufssignal, sondern Vorgehen nach den Leitfäden mit Wenn-dann-Szenarien, Bestätigung und Ungültigkeits-Punkt; Levels aus Fotos mit Perspektivkorrektur messen, gegen die OHLC-Kopfzeile prüfen und die Genauigkeit nennen; für genaue Werte um Screenshots statt Handyfotos bitten
 - 2026-10-27: Tagesvorbereitung immer mit Termin-Check (Notenbanken, US-Daten) per Websuche und Quellen; diese Woche Fed Mi 19:00 MEZ, EZB Do 14:15 MEZ; Werte aus Fotos über Kurslinie (Krümmung) und bekannte Level gegenprüfen
+- 2026-10-27: Live-Setups: Sweep des Levels bzw. gleicher Hochs/Tiefs vor dem Einstieg als Pflicht nennen, Stop über die ganze Zone (nicht knapp über gleiche Hochs) und Lots danach berechnen; Seitwärtsphase im Level und die Stunde vor wichtigen Daten ohne Sweep heißt abwarten (erster Short am 27.10. so ausgestoppt)
 
 ## Offene Themen
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
