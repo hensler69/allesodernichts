@@ -26,6 +26,14 @@ nächste Teil des Transkripts da ist.
 - Beispiel: Die Liquidität ist schon geholt, der Kurs läuft schon nach oben, und man hat den ersten Einstieg unten
   verpasst. Dann nutzt man eine FVG, um einen weiteren Einstieg in die Fortsetzung zu finden.
 - Danach kündigt er die **inverse FVG** als seine zweitliebste Konfluenz an. Der Auszug endet dort.
+- **Bilder aus dem Video** (Bildschirmaufnahme des Nutzers, 21 Sekunden, gleicher Abschnitt wie das Transkript):
+  - Beispiel im Nasdaq-Future (NQ1!): zwei bärische FVGs als rote Boxen in einer Abwärtsbewegung. In der unteren Lücke
+    ist die Stelle eingekreist, an der der Kurs ein tieferes Hoch und ein tieferes Tief macht (der Einstieg); danach
+    fällt der Kurs weiter.
+  - Skizze für den Long: Der Kurs sticht unter eine waagerechte Linie (Liquiditäts-Sweep) und läuft hoch. Beim
+    Rücklauf markiert er eine Lücke mit zwei Linien. In der Lücke entsteht eine kleine W-Form (höheres Tief, dann
+    höheres Hoch), danach ein Pfeil nach oben: der Fortsetzungs-Einstieg.
+  - Die Aufnahme endet bei „das ist meine drittliebste“. Die IFVG-Erklärung ist auch dort nicht enthalten.
 
 ## 2. FVG-Fortsetzungs-Einstieg (TJR-FE)
 
