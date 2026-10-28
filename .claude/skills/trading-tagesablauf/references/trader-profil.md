@@ -152,6 +152,9 @@ neuen Werte (in den Notizen festhalten).
 - 28.10.: TJR-Setup (HTF-Sweep → M5-BOS → M5-FVG gefüllt → M1-BOS) aufgenommen, Short und Long; danach alle Setups eigenständig gemacht (A je Setup, A+ bei Kombination,
   Dafür/Dagegen-Bilanz)
   (`references/tjr-setup.md`).
-- 29.10. (nachts): FVG-Nachzügler-Einstieg (TJR-FE) und IFVG aus einem Video-Auszug aufgenommen; IFVG mit der üblichen Definition übernommen; beides nur nutzen, wenn es sich anbietet (`references/fvg-ifvg.md`).
-- 29.10. (nachts): Key-Level-Reel als Variante TJR-KL aufgenommen, kein fünftes Setup (`references/key-level-variante.md`).
+- 28.10. (abends): Key-Level-Reel als Variante TJR-KL aufgenommen, kein fünftes Setup (`references/key-level-variante.md`).
+- 28.10. (abends): FVG-Nachzügler-Einstieg (TJR-FE) aus einem Video-Auszug aufgenommen, nur wenn es sich anbietet.
+- 28.10. (abends): IFVG-Video als Variante TJR-IF aufgenommen (Körper-Schluss durch FVG → Ziel festlegen → Rücklauf in
+  die IFVG = Einstieg, Stop hinter der IFVG), jeden Morgen und live, vor und während des Trades; Gegen-IFVG im
+  offenen Trade = Warnzeichen (`references/fvg-ifvg.md`).
 - 28.10.: Screenshot-Protokoll mit Uhrzeitplan; nur noch vier Setups (M, TJR, SB, PV), Handbuch nur Konfluenz.

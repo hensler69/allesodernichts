@@ -1,6 +1,6 @@
 ---
 name: "trading-tagesablauf"
-description: Täglicher Trading-Begleiter für den Nutzer (EURUSD, SMT mit GBPUSD, IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens aus dem ersten Chart-Screenshot - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, vorhandene und neue Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit TradingView-Werkzeugen wie Fibonacci und Volumenprofil. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
+description: Täglicher Trading-Begleiter für den Nutzer (EURUSD, SMT mit GBPUSD, IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens aus dem ersten Chart-Screenshot - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, vorhandene und neue Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit TradingView-Werkzeugen wie Fibonacci und Volumenprofil. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
 compatibility: Python 3 mit Pillow und numpy für die Skripte; Websuche für den Termin-Check; ein Werkzeug zum Senden von Bildern an den Nutzer (z. B. SendUserFile).
 ---
 
@@ -41,9 +41,10 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    `references/key-level-variante.md` (TJR-KL: Key Level der vorigen Session/1H/4H gesweept → Orderflow-Wechsel per
    BOS, IFVG oder 79-%-Schluss → Rücklauf in FVG/EQ/Order Block/Breaker → Kerze stößt heraus) zusammen mit dem
    TJR-Setup.
-   `references/fvg-ifvg.md` (FVG als Nachzügler-Einstieg TJR-FE: nach verpasstem Einstieg Rücklauf in die nächste FVG,
-   M1 tieferes Hoch/tieferes Tief; inverse FVG als Wende-Signal und Einstiegs-Zone), nur wenn es sich anbietet: ein
-   Setup ist schon gelaufen und der Einstieg verpasst, oder eine wichtige FVG wurde mit Körper-Schluss durchbrochen.
+   `references/fvg-ifvg.md`: **TJR-IF** (IFVG-Einstieg aus dem Video: FVG der alten Richtung mit Körper
+   durchbrochen → Ziel festlegen → Rücklauf in die IFVG = Einstieg, Stop hinter der IFVG) jeden Morgen bei der
+   Zonen-Suche und live nach einem Sweep, vor und während des Trades (Gegen-IFVG im offenen Trade = Warnzeichen);
+   **TJR-FE** (Nachzügler-Einstieg in die nächste FVG) nur, wenn ein Setup schon gelaufen und der Einstieg verpasst ist.
    `references/screenshot-protokoll.md` am Ende jedes Morgenplans (welche Bilder er heute wann schickt) und
    immer, wenn du ein Bild anforderst. Dort steht auch, welche Setups er handelt (nur M, TJR, SB, PV).
    `references/wirtschaftstermine.md` jeden Morgen beim Termin-Check und immer, wenn heute oder morgen ein
@@ -77,7 +78,7 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   | **M** (Grundmodell L1–L3) | Zone aus dem Plan, Sweep, SMT klar (über 1 Pip, gleiche Datenquelle, Partner nicht durch eigene Nachrichten verzerrt), M5-CISD mit kräftiger Kerze, keine Seitwärtsphase/Annahme im Level | L1–L3, `references/checkliste.md` |
   | **SB** (Silver Bullet) | im Fenster: Sweep, CHoCH auf M5, FVG, Rücklauf in die FVG | `references/silver-bullet.md` |
   | **PV** (Pivot) | Pivot ≤ 3 Pips auf seiner Zone, Push → Rücklauf mit Sweep, kräftige Engulfing auf 15 Min. | `references/pivot-setup.md` |
-  | **TJR** | HTF-Sweep, M5-BOS, Rücklauf in die M5-FVG, M1-BOS in der Lücke. Variante **TJR-KL**: Key-Level-Sweep nach der Eröffnung, Wende per BOS/IFVG/79 %, Rücklauf in FVG/EQ/OB/Breaker, M5-Kerze stößt heraus (zählt mit TJR als ein Setup). Nachzügler-Einstieg **TJR-FE**: nach bestätigter Wende Rücklauf in die erste/zweite FVG, M1-Struktur dreht in der Lücke | `references/tjr-setup.md`, `references/key-level-variante.md`, `references/fvg-ifvg.md` |
+  | **TJR** | HTF-Sweep, M5-BOS, Rücklauf in die M5-FVG, M1-BOS in der Lücke. Variante **TJR-KL**: Key-Level-Sweep nach der Eröffnung, Wende per BOS/IFVG/79 %, Rücklauf in FVG/EQ/OB/Breaker, M5-Kerze stößt heraus (zählt mit TJR als ein Setup). Variante **TJR-IF**: Sweep, Körper-Schluss durch eine FVG der alten Richtung (IFVG), Ziel ≥ 2R festgelegt, Rücklauf in die IFVG = Limit-Einstieg, Stop hinter der IFVG (zählt mit TJR als ein Setup). Nachzügler-Einstieg **TJR-FE**: nach bestätigter Wende Rücklauf in die erste/zweite FVG, M1-Struktur dreht in der Lücke | `references/tjr-setup.md`, `references/key-level-variante.md`, `references/fvg-ifvg.md` |
 
   **Risiko-Rahmen, gilt für jeden Trade, egal welches Setup** (seine Risikoregeln, `references/trader-profil.md`
   Abschnitt 4): mindestens 2R bis knapp vor die Gegen-Liquidität; Stop hinter dem Ungültigkeits-Punkt ohne Liquidität
@@ -185,7 +186,8 @@ Information steht in der Kopfzeile des Bildes.
    Steht der Kurs an einem Pivot mit Konfluenz: PV-Stand nennen (Push, Rücklauf mit Sweep, Engulfing 15 Min.,
    Stoch RSI, SMT, 2R) und dafür EURUSD 15 Min. anfordern.
    Ist an einer Zone ein Sweep passiert: TJR-Status nennen (Sweep / M5-BOS / FVG gefüllt / M1-BOS, dazu SMT und 2R),
-   bei einem Key Level auch TJR-KL (Wende per BOS/IFVG/79 %, Zone, Auslöser-Kerze)
+   bei einem Key Level auch TJR-KL (Wende per BOS/IFVG/79 %, Zone, Auslöser-Kerze), dazu immer TJR-IF (FVG der
+   alten Richtung / Körper-Schluss durch → IFVG / Ziel und 2R / Rücklauf in die IFVG)
    und dafür EURUSD M5, später M1 anfordern.
    Liegt die Uhrzeit im Silver-Bullet-Fenster oder bis 30 Min. davor: Status Sweep / CHoCH / FVG / SMT / 2R nennen.
    Wie lange noch bis zum nächsten Termin der Stufe 1 oder 2? Unter 90 Minuten: Warnung in die erste Zeile. Lag ein
@@ -211,7 +213,8 @@ Information steht in der Kopfzeile des Bildes.
    Preis und in Ticks, schlechtester Einstieg für 2R) und die IQ-Eingabe Schritt für Schritt
    (`references/trader-profil.md`, Abschnitt 3). Vor dem Klick: Units in Lots, beide Schalter an, Werte prüfen.
 6. **Im Trade**: Stop nie vergrößern, Breakeven nur nach der festen Regel, nicht aus Angst schließen, nicht
-   nachlegen. Zeitgrenzen nennen (Daten, Tageswechsel, Notenbank). Anzeigefehler „−0.00 USD“ erklären, wenn er
+   nachlegen. Bei jedem M5-Bild auf **Gegen-IFVG** prüfen (FVG in Trade-Richtung mit Körper durchbrochen): Warnzeichen
+   in die erste Zeile, Stop bleibt, ab 1R im Plus Breakeven (`references/fvg-ifvg.md`, Abschnitt 4). Zeitgrenzen nennen (Daten, Tageswechsel, Notenbank). Anzeigefehler „−0.00 USD“ erklären, wenn er
    fragt.
 7. **Nach dem Trade**: Ursache ehrlich, Journal-Eintrag nach `references/journal.md`, Tagesbilanz in R und $, Puffer
    bis zur Verlustgrenze, Tageslimit (2 Verluste). Nach einem Verlust Pause empfehlen.
@@ -226,6 +229,9 @@ Prüfe jeden Morgen und bei jedem neuen Bild, ob diese Zonen wichtig sind und sc
 - **Heute**: Asia-Hoch/-Tief, London-Hoch/-Tief (bzw. Frankfurt), New-York-Hoch/-Tief, sobald sie entstehen, neue
   Lücken aus dem heutigen Displacement, gleiche Hochs oder Tiefs (Liquidität, Magnet für den Kurs).
 - **Key Levels** (TJR-KL): Hoch und Tief der vorigen Session, Swing-Hochs/-Tiefs auf 1H und 4H in Tagesreichweite.
+- **FVG-Status** (TJR-IF): Jede Lücke in der Liste mit Richtung und Status (offen / angelaufen / mit Körper
+  durchbrochen = **IFVG**, Richtung umgedreht). Bei jeder Zone die Lücke nennen, die hinein führt: Sie würde nach
+  einem Sweep zur IFVG (Einstieg, Stop, Ziel, grobe R-Schätzung).
 - **Höherer Zeitrahmen**: alte Tageshochs/-tiefs, die noch nicht geholt sind (ERL, z. B. „11 Day Low“), und große
   Lücken. Sie sind die großen Ziele.
 - **Rollenwechsel**: Eine gebrochene Unterstützung wird zum Widerstand und umgekehrt, sobald eine Kerze darüber

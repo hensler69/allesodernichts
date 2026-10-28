@@ -15,7 +15,7 @@ Seitwärtsphase.
 | Familie | Setup | Kurz | Pflicht |
 |---|---|---|---|
 | Sweep → Strukturbruch | **M** (Grundmodell) | Zone, Sweep, SMT, M5-CISD | 5 Bedingungen, `references/checkliste.md` |
-| | **TJR** (mit Variante TJR-KL) | HTF-Sweep, M5-BOS, Rücklauf in M5-FVG, M1-BOS; KL: Key-Level-Sweep, BOS/IFVG/79 %, FVG/EQ/OB/Breaker, Kerze stößt heraus | 4 Schritte, `references/tjr-setup.md`, `references/key-level-variante.md` |
+| | **TJR** (mit Varianten TJR-KL, TJR-IF) | HTF-Sweep, M5-BOS, Rücklauf in M5-FVG, M1-BOS; KL: Key-Level-Sweep, BOS/IFVG/79 %, FVG/EQ/OB/Breaker, Kerze stößt heraus; IF: Sweep, Körper-Schluss durch FVG = IFVG, Ziel ≥ 2R, Rücklauf in die IFVG | 4–5 Schritte, `references/tjr-setup.md`, `references/key-level-variante.md`, `references/fvg-ifvg.md` |
 | | **SB** (Silver Bullet) | wie TJR, aber nur im Fenster, CHoCH + FVG | 5 Bedingungen, `references/silver-bullet.md` |
 | Pivot | **PV** | Pivot auf Zone, Rücklauf mit Sweep, Engulfing 15 Min. | 3 Bedingungen, `references/pivot-setup.md` |
 
@@ -54,11 +54,12 @@ Seitwärtsphase.
 | Schritt | Auslöser | Bild | Prüft |
 |---|---|---|---|
 | 1 | Kurs erreicht eine Zone aus dem Plan (TradingView-Alarm) | EURUSD **15 Min.** + GBPUSD **15 Min.** | Sweep? SMT? PV-Pivot? Seitwärtsphase? |
-| 2 | Sweep ist passiert | EURUSD **M5** | CISD (M), BOS und FVG (TJR), BOS/IFVG/79 % und Zone (TJR-KL), CHoCH (SB) |
+| 2 | Sweep ist passiert | EURUSD **M5** | CISD (M), BOS und FVG (TJR), BOS/IFVG/79 % und Zone (TJR-KL), Körper-Schluss durch FVG = IFVG (TJR-IF), CHoCH (SB) |
+| 2b | IFVG steht, Kurs läuft zurück (TJR-IF) | EURUSD **M5** | Rücklauf in die IFVG ohne Körper-Schluss hindurch, Limit liegt |
 | 3 | M5-FVG wird angelaufen (TJR, TJR-FE) | EURUSD **M1** | M1-BOS bzw. tieferes Hoch/tieferes Tief in der Lücke |
 | 3b | Engulfing-Kerze an einem Pivot (nur PV) | EURUSD **15 Min.** | Körper, Stoch RSI |
 | 4 | Setup erfüllt, vor dem Klick | **IQ-Order-Panel** (Units, Stop, Ziel, Schalter) | Lots, Werte, Schalter an |
-| 5 | Im Trade: bei 1R, vor Terminen, oder alle 30 Min. | EURUSD **M5** | Breakeven, Management |
+| 5 | Im Trade: bei 1R, vor Terminen, oder alle 30 Min. | EURUSD **M5** | Breakeven, Management, Gegen-IFVG |
 | 6 | Trade beendet | IQ-Positionsliste + EURUSD M5 | Journal |
 
 Ohne Ereignis keine Bilder nötig. Er muss nicht dauernd schauen: Alarme an den Zonen reichen.

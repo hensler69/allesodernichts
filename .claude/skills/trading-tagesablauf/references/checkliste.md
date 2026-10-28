@@ -44,12 +44,14 @@ Von oben nach unten abhaken. **Gilt für das Grundmodell (M). Ein Punkt offen = 
 - [ ] **M5-FVG** entstanden und vom Kurs wieder angelaufen, ohne M5-Schluss jenseits der Lücke?
 - [ ] **M1-BOS** innerhalb der Lücke = Einstieg. Risiko (Punkt 6) erfüllt → A. SMT, Bias usw. als Dafür/Dagegen zählen.
 - [ ] Variante **TJR-KL**: Key Level (vorige Session/1H/4H) nach der Eröffnung gesweept? Wende per BOS, IFVG oder 79-%-Schluss? Rücklauf in FVG/EQ/OB/Breaker? M5-Kerze schließt aus der Zone heraus? (`references/key-level-variante.md`)
+- [ ] Variante **TJR-IF**: Sweep vorher? Bärische FVG (Long) mit M5-**Körper** darüber geschlossen = IFVG, kräftig, außerhalb der Sperrzeit? Ziel (offensichtliche Liquidität) festgelegt und ≥ 2R mit Stop unter der IFVG? Keine gleichen Tiefs direkt unter dem Stop? Limit an der IFVG-Kante, löschen bei Körper-Schluss zurück durch die IFVG. (`references/fvg-ifvg.md`)
 - [ ] Nachzügler **TJR-FE**: Sweep und Wende schon bestätigt? Erste/zweite M5-FVG in Trend-Richtung angelaufen? M1 tieferes Hoch + tieferes Tief (Long: höheres Tief + höheres Hoch) in der Lücke? Noch ≥ 2R? (`references/fvg-ifvg.md`)
 
 ## Während des Trades
 
 - [ ] Hält die Invalidierung bzw. das geschützte Tief? Sonst greift der Stop, nie weiter weg setzen. (L1·3, L3·6)
 - [ ] Bleibt es expansiv? Flache Rücksetzer, neue Gaps, kein Schluss durchs Gap oder unter EQ. (L1·6, L2·3)
+- [ ] **Gegen-IFVG?** FVG in Trade-Richtung mit Körper durchbrochen = Warnzeichen: Stop bleibt, ab 1R im Plus Breakeven. Bei TJR-IF: Körper-Schluss zurück durch die IFVG = Idee ungültig. (`references/fvg-ifvg.md`)
 - [ ] Kleine gegenläufige Hochs/Tiefs sind Rücksetzer (Failure Swings): nicht rausschütteln lassen. (L1·8, L2·8)
 - [ ] Führender Markt am Ziel? Gewinnmitnahme prüfen, danach neue Preisphase erwarten. (L2·8)
 - [ ] Break-even und Teilgewinne nur nach fester Regel. Keine Regeln im Trade ändern. (L2·8)

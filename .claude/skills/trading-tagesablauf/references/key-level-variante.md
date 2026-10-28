@@ -1,6 +1,6 @@
 # Key-Level-Variante (TJR-KL): Key Level sweepen → Orderflow dreht → Rücklauf ins PD-Array → Kerze stößt heraus
 
-Wunsch des Nutzers (29.10.2026, nachts): diesen Reel in den Plan aufnehmen. Quelle: Instagram-Reel (Transkript vom
+Wunsch des Nutzers (28.10.2026, abends): diesen Reel in den Plan aufnehmen. Quelle: Instagram-Reel (Transkript vom
 Nutzer eingefügt, ca. 40 Sekunden). Hier steht nur, was im Reel gesagt wird; was dazukommt, ist als **Ergänzung**
 gekennzeichnet.
 
