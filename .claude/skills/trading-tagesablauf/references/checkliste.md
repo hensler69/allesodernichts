@@ -1,6 +1,6 @@
 # Kompakt-Checkliste: alle drei Modelle
 
-Von oben nach unten abhaken. **Ein Punkt offen = kein Trade.** Bullisch formuliert, bärisch gilt alles spiegelverkehrt. Verweise: L1 Continuation, L2 GXT, L3 TTrades, die Zahl ist der Abschnitt im Leitfaden.
+Von oben nach unten abhaken. **Gilt für das Grundmodell (M). Ein Punkt offen = kein M-Trade**, aber vielleicht ein anderes Setup (SB, PV, TJR) mit eigenen Bedingungen. Punkt 6 (Risiko) gilt für jedes Setup. Bullisch formuliert, bärisch gilt alles spiegelverkehrt. Verweise: L1 Continuation, L2 GXT, L3 TTrades, die Zahl ist der Abschnitt im Leitfaden.
 
 ## Vor dem Trade
 
@@ -36,6 +36,13 @@ Von oben nach unten abhaken. **Ein Punkt offen = kein Trade.** Bullisch formulie
 - [ ] **Stop** hinter Invalidierung bzw. geschütztem Tief (nicht zu eng), **Ziel** ≥ 2R oder HTF-Ziel. (L2·8, L3·6)
 - [ ] **Ziel-Liquidität noch offen?** Kurzfristige Hochs/Tiefs in Zielrichtung sind noch nicht geholt. (L2·8, L3·7)
 - [ ] **Positionsgröße** zum festen Risiko berechnet (Ergänzung, nicht aus den Videos: oft 0,5–1 %).
+
+### 7 · TJR-Setup (eigenständig, beide Richtungen)
+
+- [ ] **HTF-Sweep** eines Levels aus dem Plan, Schluss zurück? (1H/30 Min.)
+- [ ] **M5-BOS** in Gegenrichtung zum Sweep, kräftige Kerze, außerhalb der Sperrzeit?
+- [ ] **M5-FVG** entstanden und vom Kurs wieder angelaufen, ohne M5-Schluss jenseits der Lücke?
+- [ ] **M1-BOS** innerhalb der Lücke = Einstieg. Risiko (Punkt 6) erfüllt → A. SMT, Bias usw. als Dafür/Dagegen zählen.
 
 ## Während des Trades
 

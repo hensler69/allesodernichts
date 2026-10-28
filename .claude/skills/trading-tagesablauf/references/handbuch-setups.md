@@ -5,6 +5,9 @@ Skill: **H·Abschnitt**, z. B. H1.2 = Doppel-Top. Abbildungen des PDFs sind hier
 
 ## Einordnung in sein System
 
+- **Kein Handbuch-Muster ist ein eigenes Setup** (Wunsch vom 28.10.: nur wenige Setups handeln). Alles hier ist
+  Konfluenz. Begründung je Muster in `references/screenshot-protokoll.md`, Abschnitt 1.
+
 - Sein Kernmodell sind die Leitfäden L1–L3 und die Kompakt-Checkliste. Das Handbuch ist **zusätzliches Wissen**:
   klassische Chartmuster und Indikatoren. Nutze es als **Konfluenz** (zweite, unabhängige Bestätigung, so verlangt
   es das Handbuch selbst in H5.3) und um Muster in seinen Charts zu benennen. Kennzeichne Herkunft: „laut Handbuch

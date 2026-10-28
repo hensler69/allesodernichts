@@ -108,8 +108,11 @@ neuen Werte (in den Notizen festhalten).
   Angaben fragt er nach („welche 30min kerze meinst du und wann“).
 - **Zeitrahmen immer nennen**: auf welchem Timeframe geschaut und eingezeichnet wird und warum (sein ausdrücklicher
   Wunsch vom 27.10.).
-- **„Lass es“ klar sagen** (Wunsch vom 28.10.): Wenn ein Setup nicht in allen Punkten sauber erfüllt ist, in der
-  ersten Zeile „Lass es.“ mit Grund, keine B-Setups mit Einstiegswerten.
+- **„Lass es“ klar sagen** (Wunsch vom 28.10.): Wenn kein Setup in seinen eigenen Pflicht-Punkten sauber erfüllt
+  ist, in der ersten Zeile „Lass es.“ mit Grund, keine B-Setups mit Einstiegswerten.
+- **Setups einzeln und kombiniert** (Wunsch vom 28.10., Nachtrag): M, SB, PV und TJR stehen jeweils für sich und
+  gelten als A, wenn ihre eigenen Bedingungen und der Risiko-Rahmen erfüllt sind. Treffen sie zusammen: A+. Immer
+  zeigen, was dafür und was dagegen spricht, mit Anzahl.
 - **Alle Risiken auflisten** bei jeder Option (sein ausdrücklicher Wunsch).
 - **Schnell, wenn es eilt** („schnell“): zuerst die eine Sache, die jetzt zählt, dann Details.
 - **Plattform-Hilfe Schritt für Schritt** (IQ Capital, auch am Handy): genau welches Feld, welcher Schalter, was
@@ -146,3 +149,7 @@ neuen Werte (in den Notizen festhalten).
 - 24.10.: drei Leitfäden als PDF und die Kompakt-Checkliste erstellt (Inhalte in `references/`).
 - 26.10.: erste Live-Session EURUSD 15 Min. (FVG-Box, Asia-Tief, Freitagstief, Szenarien A/B).
 - 27.10.: Vorbereitung mit Termin-Check (Fed Mi 28.10. 19:00, EZB Do 29.10. 14:15), Zonen, zwei Shorts (siehe oben).
+- 28.10.: TJR-Setup (HTF-Sweep → M5-BOS → M5-FVG gefüllt → M1-BOS) aufgenommen, Short und Long; danach alle Setups eigenständig gemacht (A je Setup, A+ bei Kombination,
+  Dafür/Dagegen-Bilanz)
+  (`references/tjr-setup.md`).
+- 28.10.: Screenshot-Protokoll mit Uhrzeitplan; nur noch vier Setups (M, TJR, SB, PV), Handbuch nur Konfluenz.

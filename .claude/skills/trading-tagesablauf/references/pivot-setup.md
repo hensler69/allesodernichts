@@ -135,7 +135,9 @@ GBPUSD 15 Min.
 
 ## 8. A-Setup-Prüfung für PV
 
-Es gilt die A-Setup-Regel aus SKILL.md. Für PV bedeuten die sieben Punkte:
+PV ist ein eigenständiges Setup (SKILL.md, Grundsätze). **Pflicht** für ein A sind die Punkte 1 (nur der Teil
+„Pivot ≤ 3 Pips auf seiner Zone“), 2 und 4, dazu der Risiko-Rahmen (Punkte 5 und 7). Bias, SMT (Punkt 3), Punkt 6
+und die Stoch-RSI-Drehung zählen als **Dafür/Dagegen**. Zur Übersicht alle Punkte in PV-Bedeutung:
 
 | Punkt | PV-Bedeutung |
 |---|---|
@@ -147,7 +149,7 @@ Es gilt die A-Setup-Regel aus SKILL.md. Für PV bedeuten die sieben Punkte:
 | 6. Keine Annahme | Keine Seitwärtsphase am Pivot, VAH/POC wandern nicht in die Zone |
 | 7. Zeit | Keine Sperrzeit, genug Abstand zu Notenbank und Tageswechsel, Tageslimit nicht erreicht |
 
-Fehlt ein Punkt oder ist er nur knapp: „**Lass es.**“
+Fehlt ein Pflicht-Punkt oder ist er nur knapp: kein PV-Trade. Ist auch kein anderes Setup vollständig: „**Lass es.**“
 
 ## 9. Teilgewinne (feste Regel für PV, aus dem Video abgeleitet)
 

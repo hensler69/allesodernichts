@@ -86,6 +86,9 @@ Zeitrahmen: Fenster und FVG auf **M5** (wie im Beitrag), Zonen und Ziel aus 30 M
 8. **Management**: wie immer. Breakeven bei 1R, Stop nie vergrößern, an Notenbank-Tagen spätestens 30 Min. vor dem
    Entscheid schließen.
 
+Einordnung: SB ist ein eigenständiges Setup (SKILL.md, Grundsätze). Pflicht sind Fenster, Sweep, CHoCH, FVG und
+Rücklauf plus Risiko-Rahmen; SMT und Bias zählen als Dafür/Dagegen.
+
 ## 6. Risiken (zusätzlich zur Prüfliste in SKILL.md)
 
 - **Kein Sweep: kein Trade** (letzte Regel des Videos). Ohne CHoCH ebenfalls kein Trade (Beitragstext).
