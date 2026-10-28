@@ -43,6 +43,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-27: Trading-Begleitung läuft über den Skill trading-tagesablauf; Leitfäden L1–L3 sind das Modell, Handbuch (H) und TradingView-Werkzeuge nur Konfluenz, immer Zeitrahmen mit Begründung nennen
 - 2026-10-27: Risikoregeln vom Nutzer bestätigt: 250 $ Risiko pro Trade, höchstens 2 Verluste pro Tag, keine neuen Einstiege 15 Min. vor bis 15 Min. nach wichtigen US-Daten
 - 2026-10-27: Live-Setups: Sweep des Levels bzw. gleicher Hochs/Tiefs vor dem Einstieg als Pflicht nennen, Stop über die ganze Zone (nicht knapp über gleiche Hochs) und Lots danach berechnen; Seitwärtsphase im Level und die Stunde vor wichtigen Daten ohne Sweep heißt abwarten (erster Short am 27.10. so ausgestoppt)
+- 2026-10-28: Wirtschaftstermine sind Teil des Skills (references/wirtschaftstermine.md): Stufen, Sperrregeln, Szenarien; Warnung in der ersten Zeile, wenn ein Termin der Stufe 1/2 in < 90 Min. ansteht; Erinnerungen per send_later vor Stufe-1-Terminen
 
 ## Offene Themen
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
@@ -62,6 +63,8 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [x] EURUSD 27.10. Trade 2: Short 1 nach Sweep (1,11545), SMT und M5-CISD, Einstieg 1,11472, Stop 1,11570, abends von Hand geschlossen mit ca. +400 $ (≈ +1,6R); Tag ≈ +114 $, Journal-Einträge geliefert (2026-10-27)
 
 - [x] Skill „trading-tagesablauf“ (.claude/skills/) erstellt und getestet; Nutzer hat Annahmen (250 $ Risiko, max. 2 Verluste/Tag, Sperrzeit ±15 Min. um US-Daten) und Bilder bestätigt (2026-10-27)
+- [ ] EURUSD 28.10. (Fed-Tag): Morgenplan mit Long 1 (Gegentrend nach Sweep 1,11132), Short A 1,1130–1,1137, Short 1 1,1142–1,1155; Erinnerungen 16:45 und 18:15 MEZ gesetzt (seit 2026-10-28, Details in notes/2026-10-28.md)
+- [ ] Regeln von IQ Capital zu News-Trading und Halten über Notenbank-Termine prüfen (Nutzer)
 
 ## Laufende Themen
 <!-- Themen der letzten Tage, die du mir nennst, kommen hierher -->
