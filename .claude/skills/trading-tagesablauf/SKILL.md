@@ -1,6 +1,6 @@
 ---
 name: trading-tagesablauf
-description: Täglicher Trading-Begleiter für den Nutzer (EURUSD, SMT mit GBPUSD, Prop-Konto IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens aus dem ersten Chart-Screenshot - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, vorhandene und neue Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit TradingView-Werkzeugen wie Fibonacci. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Immer mit Zeitrahmen und Begründung. Verwende diesen Skill bei jedem Chartbild oder Handyfoto (TradingView, IQ Capital) und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, FVG, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "eurusd m5" oder "was jetzt?".
+description: Täglicher Trading-Begleiter für den Nutzer (EURUSD, SMT mit GBPUSD, Prop-Konto IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens aus dem ersten Chart-Screenshot - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, vorhandene und neue Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit TradingView-Werkzeugen wie Fibonacci und Volumenprofil. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Immer mit Zeitrahmen und Begründung. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, FVG, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "eurusd m5" oder "was jetzt?".
 compatibility: Python 3 mit Pillow und numpy für die Skripte; Websuche für den Termin-Check; ein Werkzeug zum Senden von Bildern an den Nutzer (z. B. SendUserFile).
 ---
 
@@ -126,7 +126,8 @@ Information steht in der Kopfzeile des Bildes.
    Kerze. Bei Detailfragen ein eng ausgeschnittenes, vergrößertes Bild (`zoom` 2–3).
 4. **Nächster Schritt als Wenn-dann** mit exakten Werten und den Risiken. Fehlt ein Bild (M5, GBPUSD), sag genau
    welches.
-5. **Einstieg steht an**: Werte mit `scripts/rechner.py` (Lots für 250 $ oder sein aktuelles Risiko, Stop/Ziel als
+5. **Einstieg steht an**: Wo sinnvoll, Volumenprofil prüfen (Einstieg auf LVN/VA-Kante statt mitten im HVN, Stop
+   hinter HVN bzw. VA-Kante, Ziel knapp vor dem nächsten POC). Werte mit `scripts/rechner.py` (Lots für 250 $ oder sein aktuelles Risiko, Stop/Ziel als
    Preis und in Ticks, schlechtester Einstieg für 2R) und die IQ-Eingabe Schritt für Schritt
    (`references/trader-profil.md`, Abschnitt 3). Vor dem Klick: Units in Lots, beide Schalter an, Werte prüfen.
 6. **Im Trade**: Stop nie vergrößern, Breakeven nur nach der festen Regel, nicht aus Angst schließen, nicht
@@ -164,9 +165,15 @@ Kurz:
 - **Fibonacci** (kostenlos, fast immer nützlich): 0,5 = EQ aus den Leitfäden (L1·6, L2·3), −1 als Ziel (L3·6).
   Dazu als Ergänzung Premium/Discount und OTE 0,62–0,79. Zeichne die Stufen selbst ein (Element `fibos`), z. B. über
   die letzte Displacement-Bewegung oder die Vortagesspanne, und nenne die Ankerpunkte, damit er es nachzeichnen kann.
-- **VWAP** und **Volumenprofil** sind Ergänzungen, nicht aus den Videos. Aus einem Foto lassen sie sich nicht
+- **Volumenprofil Fixed Range und verankertes Volumenprofil** (seine zwei Zeichenwerkzeuge, Wunsch vom 28.10.):
+  in Analyse und Ausführung einsetzen, **wo es sich anbietet und sinnvoll ist**: FRVP über das letzte
+  Displacement-Bein, den Vortag oder eine Seitwärtsspanne; verankert ab Sweep-Extrem, Session-Eröffnung,
+  Daten-Kerze oder Einstieg. POC, VAH/VAL, HVN und LVN bestätigen Zonen und helfen bei Einstieg, Stop, Ziel und
+  Breakeven-Marke. Du rechnest sie nicht aus dem Foto, er zeichnet sie, du liest sie ab und sagst ihm vorher genau
+  den Anker. Details in `references/tradingview-werkzeuge.md`, Abschnitt 5.
+- **VWAP** und das **Volumenprofil als Indikator** sind Ergänzungen, nicht aus den Videos. Aus einem Foto lassen sie sich nicht
   berechnen (keine Volumendaten). Lies sie ab, wenn sie im Bild sind, oder sag ihm, wie er sie einblendet und was du
-  davon erwartest. Sein Plan hat vermutlich nur 2 Indikator-Plätze, und das Volumenprofil gibt es erst im bezahlten
+  davon erwartest. Sein Plan hat vermutlich nur 2 Indikator-Plätze, und das Volumenprofil als Indikator gibt es erst im bezahlten
   Plan.
 - Ein Werkzeug bestätigt oder schwächt eine Option, es ersetzt keinen Checklisten-Punkt. Spricht es dagegen (z. B.
   Kurs über dem VWAP bei einem Short), gehört das in die Risiken.

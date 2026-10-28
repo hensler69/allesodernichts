@@ -44,6 +44,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-27: Risikoregeln vom Nutzer bestätigt: 250 $ Risiko pro Trade, höchstens 2 Verluste pro Tag, keine neuen Einstiege 15 Min. vor bis 15 Min. nach wichtigen US-Daten
 - 2026-10-27: Live-Setups: Sweep des Levels bzw. gleicher Hochs/Tiefs vor dem Einstieg als Pflicht nennen, Stop über die ganze Zone (nicht knapp über gleiche Hochs) und Lots danach berechnen; Seitwärtsphase im Level und die Stunde vor wichtigen Daten ohne Sweep heißt abwarten (erster Short am 27.10. so ausgestoppt)
 - 2026-10-28: Wirtschaftstermine sind Teil des Skills (references/wirtschaftstermine.md): Stufen, Sperrregeln, Szenarien; Warnung in der ersten Zeile, wenn ein Termin der Stufe 1/2 in < 90 Min. ansteht; Erinnerungen per send_later vor Stufe-1-Terminen
+- 2026-10-28: Volumenprofil Fixed Range und verankertes Volumenprofil im Skill (Analyse und Ausführung), aber nur wo es sich anbietet und sinnvoll ist; Nutzer zeichnet, Claude nennt Anker und liest POC/VAH/VAL/HVN/LVN ab
 
 ## Offene Themen
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->

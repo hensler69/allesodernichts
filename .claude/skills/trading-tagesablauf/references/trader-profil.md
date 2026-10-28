@@ -27,6 +27,9 @@ in den Tagesnotizen (`notes/`) gelten die neueren Angaben.
 - **Indikator „TJR-Style Sessions (Clean Lines + Following Labels)“**: farbige Hintergründe je Session (Asien,
   London, New York) und Linien mit Beschriftung „Asia High/Low“, „London High/Low“, „New York High/Low“. Dazu grüne
   Linien für offene alte Hochs/Tiefs (z. B. „11 Day Low“), die der Kurs noch nicht wieder erreicht hat.
+- **Volumenprofil-Werkzeuge**: „Fixed Range Volume Profile“ und „Anchored Volume Profile“ (verankert) hat er in der
+  Zeichenleiste. Wunsch vom 28.10.: in Analyse und Ausführung nutzen, wo es sich anbietet und sinnvoll ist
+  (`references/tradingview-werkzeuge.md`, Abschnitt 5).
 - **Empfohlener zweiter Indikator**: ein FVG-Indikator mit Zeitrahmen-Option (z. B. „Fair Value Gap [LuxAlgo]“).
   Ob er ihn nutzt, ist offen. SMT vergleicht er selbst mit GBPUSD im zweiten Tab.
 - **Seine eigenen Zeichnungen**: Rechtecke mit orangem Rand und roter Schrift, z. B. „Short 1 Rücksetzer
