@@ -107,6 +107,11 @@ Information steht in der Kopfzeile des Bildes.
    (z. B. `send_later`), Erinnerungen ca. 30 Minuten vor jeder Sperrzeit anlegen und ihm sagen, welche.
 3. **Messen** nach `references/messung.md`: Preisachse kalibrieren, Level seiner Linien und Boxen und der wichtigen
    Kerzen bestimmen, gegen die Kopfzeile prüfen.
+3b. **Rückblick auf gestern** (immer, besonders nach Notenbank- oder Datentagen), als eigener Block ganz oben in
+   der Antwort: Wo hat der Tag geschlossen, über oder unter dem Level, das gestern als Entscheidung genannt wurde
+   (steht in den Notizen)? Wo liegen Hoch und Tief der Termin-Bewegung (z. B. Fed-Hoch/-Tief)? Welche gestern
+   genannten Liquiditäts-Level wurden geholt? Hat der Termin die gestrigen Zonen überrollt, gelten sie noch, und ist
+   der Kurs noch in ihrer Nähe? Jede Frage mit Ja/Nein, Preis und Uhrzeit beantworten.
 4. **Bias** nach L3·3: Wo schloss der letzte Tag im Verhältnis zum Vortag (jenseits = Fortsetzung, Sweep und Schluss
    zurück = Umkehr)? Ist der Tageschart nicht sichtbar, lies die Tagesschlüsse an den Session-Trennern ab oder bitte
    um einen Daily-Screenshot und nenne den Bias „vorläufig“.
