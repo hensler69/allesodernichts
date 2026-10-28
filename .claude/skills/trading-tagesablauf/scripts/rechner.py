@@ -6,6 +6,8 @@ Beispiele:
   python rechner.py --einstieg 1.1147 --stop 1.1157 --ziel 1.1116 --risiko 250
   python rechner.py --einstieg 1.1147 --stop 1.1157 --ziel 1.1116 --lots 2.5
   python rechner.py --stop 1.1157 --ziel 1.1116            (nur: ab welchem Einstieg sind es 2R?)
+  python rechner.py --einstieg 1.1147 --stop 1.1157 --ziel 1.1110 --teile 3
+                                          (Teilgewinne: drei Positionen mit Ziel 1R, 2R und dem Endziel)
 
 Richtung ergibt sich aus Stop und Ziel (Stop über dem Ziel = Short). Standard: EURUSD-artige Paare
 (1 Pip = 0,0001, 10 $ pro Pip und Lot, 1 IQ-Tick = 0,00001). Für andere Märkte --pip und --pipwert setzen.
@@ -33,6 +35,7 @@ def main():
     ap.add_argument("--pip", type=float, default=0.0001)
     ap.add_argument("--pipwert", type=float, default=10.0, help="$ pro Pip und Lot (EURUSD: 10)")
     ap.add_argument("--tick", type=float, default=0.00001, help="Tickgröße der Plattform (IQ: 0,00001)")
+    ap.add_argument("--teile", type=int, choices=[3], help="3 = Position dritteln: Ziele 1R, 2R und --ziel")
     a = ap.parse_args()
 
     short = a.stop > a.ziel
@@ -71,6 +74,35 @@ def main():
     print(f"IQ-Eingabe (mit Punkt tippen): Units {lots:.2f} | Stop loss {a.stop:.5f} bzw. "
           f"{round(stop_pips * a.pip / a.tick)} ticks | Take profit {a.ziel:.5f} bzw. "
           f"{round(ziel_pips * a.pip / a.tick)} ticks | beide Schalter einschalten")
+    if a.teile:
+        teilgewinne(a, e, short, stop_pips, r, lots)
+
+
+def teilgewinne(a, e, short, stop_pips, r_end, lots):
+    """Position in drei gleiche Teile mit eigenem Ziel (1R, 2R, Endziel); alle mit demselben Stop."""
+    print()
+    print("Teilgewinne (3 Teile, jeder mit demselben Stop):")
+    if r_end < 2 + 1e-9:
+        print("  Das Endziel liegt nicht über 2R. Teilgewinne passen hier nicht, nur ein Ziel verwenden.")
+        return
+    teil = math.floor(lots / 3 * 100) / 100
+    if teil < 0.01:
+        print("  Position zu klein zum Dritteln.")
+        return
+    schritt = stop_pips * a.pip
+    ziele = [(1.0, e - schritt if short else e + schritt), (2.0, e - 2 * schritt if short else e + 2 * schritt),
+             (r_end, a.ziel)]
+    for i, (rr, z) in enumerate(ziele, 1):
+        ticks = round(rr * stop_pips * a.pip / a.tick)
+        print(f"  Teil {i}: {de(teil, 2)} Lots | Ziel {fmt(z)} ({de(rr, 2)}R, {ticks} ticks) | "
+              f"Gewinn {de(teil * rr * stop_pips * a.pipwert, 2)} $")
+    schnitt = (1 + 2 + r_end) / 3
+    print(f"  Zusammen {de(3 * teil, 2)} Lots, Risiko {de(3 * teil * stop_pips * a.pipwert, 2)} $, "
+          f"im Schnitt {de(schnitt, 2)}R, wenn alle Ziele kommen")
+    if schnitt < a.min_r - 1e-9:
+        print(f"  Schnitt unter {a.min_r:g}R: Endziel weiter weg wählen oder nur ein Ziel nehmen.")
+    print(f"  Nach Teil 1 (1R): Stop der beiden übrigen Teile auf den Einstieg {fmt(e)} ziehen.")
+    print("  IQ: drei getrennte Orders mit je eigenem Take profit, beide Schalter jeweils an.")
 
 
 if __name__ == "__main__":

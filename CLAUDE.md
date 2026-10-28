@@ -47,6 +47,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-28: Volumenprofil Fixed Range und verankertes Volumenprofil im Skill (Analyse und Ausführung), aber nur wo es sich anbietet und sinnvoll ist; Nutzer zeichnet, Claude nennt Anker und liest POC/VAH/VAL/HVN/LVN ab
 - 2026-10-28: Silver Bullet (10–11 Uhr New York, Sweep → CHoCH → FVG → Rücklauf, „No sweep, no trade“) als Szenario im Skill (references/silver-bullet.md); Stop standardmäßig nach seiner Regel hinter dem Sweep-Extrem, FVG-Stop nur auf seinen Wunsch; SB-Trades im Journal mit „SB“ kennzeichnen
 - 2026-10-28: Bei nicht sauber erfüllten Voraussetzungen klar „Lass es.“ in der ersten Zeile, Trade nur bei A-Setup (Zone+Bias, Sweep, klares SMT, CISD mit Displacement außerhalb der Sperrzeit, ≥ 2R, keine Seitwärtsphase/Volumen-Annahme, Zeit passt); keine Einstiegswerte für B-Setups (Wunsch des Nutzers nach Verlust am 28.10.)
+- 2026-10-28: Pivot-Setup (PV) im Skill (references/pivot-setup.md, scripts/pivots.py): tägliche OANDA-Floor-Pivots jeden Morgen, nur Pivots mit Konfluenz zu seinen Zonen werden Optionen; Push → Rücklauf mit Sweep → Engulfing 15 Min. + SMT; Teilgewinne 1/3 bei 1R/2R/Endziel ≥ 3R als drei IQ-Orders; Nachlegen und News-Trading aus dem Video nicht übernommen
 
 ## Offene Themen
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
@@ -68,8 +69,9 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [x] Skill „trading-tagesablauf“ (.claude/skills/) erstellt und getestet; Nutzer hat Annahmen (250 $ Risiko, max. 2 Verluste/Tag, Sperrzeit ±15 Min. um US-Daten) und Bilder bestätigt (2026-10-27)
 - [ ] EURUSD 28.10. (Fed-Tag): Morgenplan mit Long 1 (Gegentrend nach Sweep 1,11132), Short A 1,1130–1,1137, Short 1 1,1142–1,1155; Erinnerungen 16:45 und 18:15 MEZ gesetzt (seit 2026-10-28, Details in notes/2026-10-28.md)
 - [x] EURUSD 28.10. Trade: Short A nach Sweep (1,11369), SMT und M5-CISD, 5,74 Lots ab 1,11327, Stop 1,11411 getroffen ≈ −482 $ (Lots zu groß, Seitwärtsphase in der Zone) (2026-10-28)
-- [ ] Morgen 29.10. nach 4H- und 30-Min-Screenshot zuerst beantworten (Wunsch des Nutzers): Tagesschluss 28.10. über oder unter 1,1127? Fed-Hoch und Fed-Tief? 1,1155 geholt? Hat die Fed die Zonen (Support 1 1,1134–1,1139, Support 2 1,1130–1,1133, Short 1 1,1142–1,1155) überrollt, gelten sie noch, ist der Kurs in der Nähe? Dann der gewohnte Morgenplan (EZB 14:15, US-BIP/PCE 13:30) (seit 2026-10-28)
+- [ ] Morgen 29.10. nach 4H- und 30-Min-Screenshot zuerst beantworten (Wunsch des Nutzers): Tagesschluss 28.10. über oder unter 1,1127? Fed-Hoch und Fed-Tief? 1,1155 geholt? Hat die Fed die Zonen (Support 1 1,1134–1,1139, Support 2 1,1130–1,1133, Short 1 1,1142–1,1155) überrollt, gelten sie noch, ist der Kurs in der Nähe? Dann der gewohnte Morgenplan (EZB 14:15, US-BIP/PCE 13:30), neu mit Tages-Pivots aus H/L/C der OANDA-Tageskerze 28.10. (Nutzer um Daily-Kopfzeile bitten, falls nicht ablesbar) (seit 2026-10-28)
 - [ ] Silver Bullet: Nutzer entscheidet, ob Stop nach seiner Regel (hinter Sweep-Extrem) oder enger hinter der FVG wie im Video (seit 2026-10-28)
+- [ ] Pivot-Setup: Nutzer testet es am besten zuerst im TradingView-Replay oder Papierhandel (ca. 20 Tage), Stochastic RSI und 20/50/200-MA im Chart klären (Indikator-Plätze) (seit 2026-10-28)
 - [ ] Regeln von IQ Capital zu News-Trading und Halten über Notenbank-Termine prüfen (Nutzer)
 
 ## Laufende Themen

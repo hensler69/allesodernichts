@@ -27,6 +27,8 @@ in den Tagesnotizen (`notes/`) gelten die neueren Angaben.
 - **Indikator „TJR-Style Sessions (Clean Lines + Following Labels)“**: farbige Hintergründe je Session (Asien,
   London, New York) und Linien mit Beschriftung „Asia High/Low“, „London High/Low“, „New York High/Low“. Dazu grüne
   Linien für offene alte Hochs/Tiefs (z. B. „11 Day Low“), die der Kurs noch nicht wieder erreicht hat.
+- **Weitere Indikatoren im Chart**: „BB %b – RSI – Stoch“ (Unterfenster). Für das Pivot-Setup (PV) relevant: Stochastic
+  RSI und gleitende Durchschnitte 20/50/200 auf 15 Min. (`references/pivot-setup.md`, Abschnitt 6).
 - **Volumenprofil-Werkzeuge**: „Fixed Range Volume Profile“ und „Anchored Volume Profile“ (verankert) hat er in der
   Zeichenleiste. Wunsch vom 28.10.: in Analyse und Ausführung nutzen, wo es sich anbietet und sinnvoll ist
   (`references/tradingview-werkzeuge.md`, Abschnitt 5).
