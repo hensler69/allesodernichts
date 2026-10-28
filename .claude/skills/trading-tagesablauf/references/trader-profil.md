@@ -126,6 +126,13 @@ neuen Werte (in den Notizen festhalten).
 - **27.10., Trade 2**: nach dem Sweep (Hoch 1,11545), SMT (GBPUSD tiefere Hochs, EURUSD minimal höheres Hoch) und
   M5-CISD (Schluss 1,11472 unter 1,11495): Einstieg 1,11472, Stop 1,11570 über der ganzen Zone, Ziel 1,11160 (≈ 3,2R,
   2,5 Lots, 245 $ Risiko). So soll ein Einstieg aussehen.
+- **28.10., Short A (≈ −482 $, ≈ −1,9R bei 250 $ Regel-Risiko)**: Short 5,74 Lots ab 1,11327 nach Sweep des
+  Asia-Hochs (Hochs 1,11366/1,11369), SMT (GBPUSD unter London-Hoch) und M5-CISD; Stop 1,11411 über gleichen Hochs und
+  Zone. Der Kurs lief weiter in Short 1 (1,1143). **Warnzeichen**: großes Ziel (11-Tage-Tief) schon morgens erreicht,
+  Rücksetzer suchte die nächste höhere Zone; über 1,5 Std. Seitwärtsphase in der Zone, verankertes Volumenprofil
+  zeigte Annahme (VAH stieg 1,1127 → 1,1133); CISD in der Sperrzeit und ohne Displacement (am 27.10. galt eine CISD in
+  der Sperrzeit nicht, hier wurde sie fälschlich gezählt); SMT vom Pfund getrieben (Haushalt); Lots fast doppelt so
+  groß wie berechnet. Gut: Stop nicht verschoben, Ziel vor den Support gezogen.
 - **26.10.**: Szenario A (Short aus der FVG-Box 1,1212–1,1215 nach Abpraller, Ziel Asia-Tief/PDL) ist aufgegangen.
 - **Messfehler, die passiert sind**: Bildgröße falsch angenommen; Kerzen-Uhrzeit um eine Kerze verzählt; ICE-Daten
   (4 Nachkommastellen) mit OANDA (5) verglichen. Siehe `references/messung.md`.
