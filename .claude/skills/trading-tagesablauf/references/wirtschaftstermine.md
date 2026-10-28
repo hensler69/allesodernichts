@@ -157,6 +157,10 @@ Jedes Szenario im Plan als Wenn-dann mit Preisen und Uhrzeiten schreiben.
   Ihm sagen, welche Erinnerungen gesetzt sind. Ohne ein solches Werkzeug im Text sagen, dass du nicht von selbst
   schreiben kannst, und ihm die Alarme in TradingView (Kalender-Alarm oder Zeit-Alarm) empfehlen.
 - Nach einem Termin: im nächsten Live-Bild kurz einordnen, welches Szenario eingetreten ist.
+- **Morgen nach einer Notenbank**: Ton des Chefs zu den kommenden Monaten (wörtliche Kernsätze, Quellen) und die
+  Verschiebung der Zinserwartungen (vorher/nachher). Hintergrund: Ist der Entscheid selbst (z. B. eine Pause) schon
+  eingepreist, bewegt oft erst die **Änderung der Erwartungen** für die nächsten Sitzungen den Markt. Falkenhafter als
+  erwartet → Dollar stärker, EURUSD eher schwächer; taubenhafter → umgekehrt (Abschnitt 5).
 
 ## 7. Quellen für den Termin-Check
 

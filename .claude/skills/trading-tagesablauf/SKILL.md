@@ -114,6 +114,11 @@ Information steht in der Kopfzeile des Bildes.
    (steht in den Notizen)? Wo liegen Hoch und Tief der Termin-Bewegung (z. B. Fed-Hoch/-Tief)? Welche gestern
    genannten Liquiditäts-Level wurden geholt? Hat der Termin die gestrigen Zonen überrollt, gelten sie noch, und ist
    der Kurs noch in ihrer Nähe? Jede Frage mit Ja/Nein, Preis und Uhrzeit beantworten.
+   Nach einem Notenbank-Termin zusätzlich per Websuche mit Quellen: In welchem **Ton** hat der Notenbank-Chef über
+   die kommenden Monate gesprochen (falkenhaft/taubenhaft, wörtliche Kernsätze), und wie haben sich die
+   **Zinserwartungen** verschoben (z. B. Wahrscheinlichkeit der nächsten Änderung laut CME FedWatch bzw. Marktberichten,
+   vorher/nachher)? Daraus: was das für den Dollar und für EURUSD heute bedeutet. Nichts erfinden; was sich nicht
+   belegen lässt, als unbestätigt kennzeichnen.
 4. **Bias** nach L3·3: Wo schloss der letzte Tag im Verhältnis zum Vortag (jenseits = Fortsetzung, Sweep und Schluss
    zurück = Umkehr)? Ist der Tageschart nicht sichtbar, lies die Tagesschlüsse an den Session-Trennern ab oder bitte
    um einen Daily-Screenshot und nenne den Bias „vorläufig“.
