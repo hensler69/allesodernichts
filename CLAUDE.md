@@ -46,6 +46,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-28: Wirtschaftstermine sind Teil des Skills (references/wirtschaftstermine.md): Stufen, Sperrregeln, Szenarien; Warnung in der ersten Zeile, wenn ein Termin der Stufe 1/2 in < 90 Min. ansteht; Erinnerungen per send_later vor Stufe-1-Terminen
 - 2026-10-28: Volumenprofil Fixed Range und verankertes Volumenprofil im Skill (Analyse und Ausführung), aber nur wo es sich anbietet und sinnvoll ist; Nutzer zeichnet, Claude nennt Anker und liest POC/VAH/VAL/HVN/LVN ab
 - 2026-10-28: Silver Bullet (10–11 Uhr New York, Sweep → CHoCH → FVG → Rücklauf, „No sweep, no trade“) als Szenario im Skill (references/silver-bullet.md); Stop standardmäßig nach seiner Regel hinter dem Sweep-Extrem, FVG-Stop nur auf seinen Wunsch; SB-Trades im Journal mit „SB“ kennzeichnen
+- 2026-10-28: Bei nicht sauber erfüllten Voraussetzungen klar „Lass es.“ in der ersten Zeile, Trade nur bei A-Setup (Zone+Bias, Sweep, klares SMT, CISD mit Displacement außerhalb der Sperrzeit, ≥ 2R, keine Seitwärtsphase/Volumen-Annahme, Zeit passt); keine Einstiegswerte für B-Setups (Wunsch des Nutzers nach Verlust am 28.10.)
 
 ## Offene Themen
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->

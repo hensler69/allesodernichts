@@ -106,6 +106,8 @@ neuen Werte (in den Notizen festhalten).
   Angaben fragt er nach („welche 30min kerze meinst du und wann“).
 - **Zeitrahmen immer nennen**: auf welchem Timeframe geschaut und eingezeichnet wird und warum (sein ausdrücklicher
   Wunsch vom 27.10.).
+- **„Lass es“ klar sagen** (Wunsch vom 28.10.): Wenn ein Setup nicht in allen Punkten sauber erfüllt ist, in der
+  ersten Zeile „Lass es.“ mit Grund, keine B-Setups mit Einstiegswerten.
 - **Alle Risiken auflisten** bei jeder Option (sein ausdrücklicher Wunsch).
 - **Schnell, wenn es eilt** („schnell“): zuerst die eine Sache, die jetzt zählt, dann Details.
 - **Plattform-Hilfe Schritt für Schritt** (IQ Capital, auch am Handy): genau welches Feld, welcher Schalter, was
