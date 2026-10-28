@@ -43,7 +43,8 @@ Keine Angaben im Reel zu: Zeitrahmen-Namen, Mindest-CRV, SMT, Uhrzeiten, Teilgew
   Session, 1H- und 4H-Swing-Hochs/-Tiefs.
 - **Orderflow-Wechsel**: Die kleinen Kerzen zeigen, dass die Richtung gedreht hat.
 - **Inverse FVG (IFVG)**: Eine Lücke in die alte Richtung wird von einer Kerze **mit Schluss** durchbrochen. Ab dann
-  wirkt sie umgekehrt (z. B. eine bärische Lücke, über der der Kurs schließt, wird zur Unterstützung).
+  wirkt sie umgekehrt (z. B. eine bärische Lücke, über der der Kurs schließt, wird zur Unterstützung). Ausführlich in
+  `references/fvg-ifvg.md`.
 - **BOS**: Schluss jenseits des letzten Swing-Hochs/-Tiefs (wie im TJR-Setup).
 - **79-%-Stufe**: Fibonacci-Stufe 0,79 (Obergrenze der OTE-Zone, `references/tradingview-werkzeuge.md`).
 - **PD-Array / Fortsetzungs-Zone**: Bereich, in den der Kurs nach der Wende zurückläuft, bevor es weitergeht:

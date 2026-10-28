@@ -55,7 +55,7 @@ Seitwärtsphase.
 |---|---|---|---|
 | 1 | Kurs erreicht eine Zone aus dem Plan (TradingView-Alarm) | EURUSD **15 Min.** + GBPUSD **15 Min.** | Sweep? SMT? PV-Pivot? Seitwärtsphase? |
 | 2 | Sweep ist passiert | EURUSD **M5** | CISD (M), BOS und FVG (TJR), BOS/IFVG/79 % und Zone (TJR-KL), CHoCH (SB) |
-| 3 | M5-FVG wird angelaufen (nur TJR) | EURUSD **M1** | M1-BOS in der Lücke |
+| 3 | M5-FVG wird angelaufen (TJR, TJR-FE) | EURUSD **M1** | M1-BOS bzw. tieferes Hoch/tieferes Tief in der Lücke |
 | 3b | Engulfing-Kerze an einem Pivot (nur PV) | EURUSD **15 Min.** | Körper, Stoch RSI |
 | 4 | Setup erfüllt, vor dem Klick | **IQ-Order-Panel** (Units, Stop, Ziel, Schalter) | Lots, Werte, Schalter an |
 | 5 | Im Trade: bei 1R, vor Terminen, oder alle 30 Min. | EURUSD **M5** | Breakeven, Management |

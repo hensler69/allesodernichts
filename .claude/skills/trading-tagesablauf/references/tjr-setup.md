@@ -5,6 +5,7 @@ Wunsch des Nutzers (28.10.2026): dieses Setup in seinen Plan aufnehmen, als **ei
 Inhalt hier nur so, wie er im Reel steht; was dazukommt, ist als **Ergänzung** gekennzeichnet.
 
 Variante mit mehr erlaubten Wende-Arten, Rücklauf-Zonen und Auslösern: `references/key-level-variante.md` (TJR-KL).
+Nachzügler-Einstieg in die nächste FVG und inverse FVG: `references/fvg-ifvg.md` (TJR-FE).
 
 ## Inhalt
 

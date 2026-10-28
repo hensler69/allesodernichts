@@ -41,6 +41,9 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    `references/key-level-variante.md` (TJR-KL: Key Level der vorigen Session/1H/4H gesweept → Orderflow-Wechsel per
    BOS, IFVG oder 79-%-Schluss → Rücklauf in FVG/EQ/Order Block/Breaker → Kerze stößt heraus) zusammen mit dem
    TJR-Setup.
+   `references/fvg-ifvg.md` (FVG als Nachzügler-Einstieg TJR-FE: nach verpasstem Einstieg Rücklauf in die nächste FVG,
+   M1 tieferes Hoch/tieferes Tief; inverse FVG als Wende-Signal und Einstiegs-Zone, IFVG-Teil vorläufig), wenn ein
+   Setup schon gelaufen ist oder eine FVG durchbrochen wurde.
    `references/screenshot-protokoll.md` am Ende jedes Morgenplans (welche Bilder er heute wann schickt) und
    immer, wenn du ein Bild anforderst. Dort steht auch, welche Setups er handelt (nur M, TJR, SB, PV).
    `references/wirtschaftstermine.md` jeden Morgen beim Termin-Check und immer, wenn heute oder morgen ein
@@ -74,7 +77,7 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   | **M** (Grundmodell L1–L3) | Zone aus dem Plan, Sweep, SMT klar (über 1 Pip, gleiche Datenquelle, Partner nicht durch eigene Nachrichten verzerrt), M5-CISD mit kräftiger Kerze, keine Seitwärtsphase/Annahme im Level | L1–L3, `references/checkliste.md` |
   | **SB** (Silver Bullet) | im Fenster: Sweep, CHoCH auf M5, FVG, Rücklauf in die FVG | `references/silver-bullet.md` |
   | **PV** (Pivot) | Pivot ≤ 3 Pips auf seiner Zone, Push → Rücklauf mit Sweep, kräftige Engulfing auf 15 Min. | `references/pivot-setup.md` |
-  | **TJR** | HTF-Sweep, M5-BOS, Rücklauf in die M5-FVG, M1-BOS in der Lücke. Variante **TJR-KL**: Key-Level-Sweep nach der Eröffnung, Wende per BOS/IFVG/79 %, Rücklauf in FVG/EQ/OB/Breaker, M5-Kerze stößt heraus (zählt mit TJR als ein Setup) | `references/tjr-setup.md`, `references/key-level-variante.md` |
+  | **TJR** | HTF-Sweep, M5-BOS, Rücklauf in die M5-FVG, M1-BOS in der Lücke. Variante **TJR-KL**: Key-Level-Sweep nach der Eröffnung, Wende per BOS/IFVG/79 %, Rücklauf in FVG/EQ/OB/Breaker, M5-Kerze stößt heraus (zählt mit TJR als ein Setup). Nachzügler-Einstieg **TJR-FE**: nach bestätigter Wende Rücklauf in die erste/zweite FVG, M1-Struktur dreht in der Lücke | `references/tjr-setup.md`, `references/key-level-variante.md`, `references/fvg-ifvg.md` |
 
   **Risiko-Rahmen, gilt für jeden Trade, egal welches Setup** (seine Risikoregeln, `references/trader-profil.md`
   Abschnitt 4): mindestens 2R bis knapp vor die Gegen-Liquidität; Stop hinter dem Ungültigkeits-Punkt ohne Liquidität

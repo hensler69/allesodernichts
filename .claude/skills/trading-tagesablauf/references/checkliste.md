@@ -44,6 +44,7 @@ Von oben nach unten abhaken. **Gilt für das Grundmodell (M). Ein Punkt offen = 
 - [ ] **M5-FVG** entstanden und vom Kurs wieder angelaufen, ohne M5-Schluss jenseits der Lücke?
 - [ ] **M1-BOS** innerhalb der Lücke = Einstieg. Risiko (Punkt 6) erfüllt → A. SMT, Bias usw. als Dafür/Dagegen zählen.
 - [ ] Variante **TJR-KL**: Key Level (vorige Session/1H/4H) nach der Eröffnung gesweept? Wende per BOS, IFVG oder 79-%-Schluss? Rücklauf in FVG/EQ/OB/Breaker? M5-Kerze schließt aus der Zone heraus? (`references/key-level-variante.md`)
+- [ ] Nachzügler **TJR-FE**: Sweep und Wende schon bestätigt? Erste/zweite M5-FVG in Trend-Richtung angelaufen? M1 tieferes Hoch + tieferes Tief (Long: höheres Tief + höheres Hoch) in der Lücke? Noch ≥ 2R? (`references/fvg-ifvg.md`)
 
 ## Während des Trades
 
