@@ -1,6 +1,6 @@
 ---
 name: trading-tagesablauf
-description: Täglicher Trading-Begleiter für den Nutzer (EURUSD, SMT mit GBPUSD, Prop-Konto IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens aus dem ersten Chart-Screenshot - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, vorhandene und neue Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit TradingView-Werkzeugen wie Fibonacci und Volumenprofil. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Immer mit Zeitrahmen und Begründung. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, FVG, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "eurusd m5" oder "was jetzt?".
+description: Täglicher Trading-Begleiter für den Nutzer (EURUSD, SMT mit GBPUSD, IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens aus dem ersten Chart-Screenshot - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, vorhandene und neue Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit TradingView-Werkzeugen wie Fibonacci und Volumenprofil. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Immer mit Zeitrahmen und Begründung. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, FVG, Silver Bullet, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "eurusd m5" oder "was jetzt?".
 compatibility: Python 3 mit Pillow und numpy für die Skripte; Websuche für den Termin-Check; ein Werkzeug zum Senden von Bildern an den Nutzer (z. B. SendUserFile).
 ---
 
@@ -32,6 +32,8 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    EMA, MACD), wenn ein Muster oder Indikator daraus im Chart auftaucht oder eine Option bestätigen kann.
    `references/tradingview-werkzeuge.md`, wenn Fibonacci, VWAP, Volumenprofil oder andere TradingView-Werkzeuge
    helfen oder im Bild zu sehen sind.
+   `references/silver-bullet.md` (Silver Bullet: Fenster 10–11 Uhr New York, Sweep → CHoCH → FVG → Rücklauf) beim
+   Morgenplan und wenn die Uhrzeit im Fenster oder bis 30 Min. davor liegt.
    `references/wirtschaftstermine.md` jeden Morgen beim Termin-Check und immer, wenn heute oder morgen ein
    wichtiger Termin ansteht (Stufen, Uhrzeiten, seine Sperrregeln, Szenarien, Erinnerungen).
    Verweise schreibst du als „L1·5“ (= Leitfaden 1, Abschnitt 5), so wie in seiner gedruckten Checkliste.
@@ -99,10 +101,13 @@ Information steht in der Kopfzeile des Bildes.
    fehlende wichtige Zonen ergänzen, als „neu“ markiert.
 6. **Optionen bauen** (Abschnitt „Optionen“): alle sinnvollen Long- und Short-Optionen, meist 2 bis 4. Die Richtung
    des Bias zuerst, Gegenrichtung nur als Ausnahme mit strengeren Bedingungen. Zahlen mit `scripts/rechner.py`.
-7. **Kein-Trade-Bereiche** benennen: die Mitte zwischen zwei Zonen, die Sperrzeiten, nach 2 Verlusten.
-8. **Bild zeichnen** nach `references/grafik.md` und ansehen, bevor es rausgeht.
-9. **Antwort** im Format unten, Bild per SendUserFile (`display: render`).
-10. **Notizen**: Morgenplan in `notes/JJJJ-MM-TT.md` (Bias, Termine, Zonen mit Preisen, Optionen, Messgrundlage),
+7. **Silver Bullet** einplanen (`references/silver-bullet.md`): Fenster 16:00–17:00 MEZ (in den
+   Zeitumstellungs-Wochen 15:00–16:00), welche Liquidität dort geholt werden kann, Ziel, Termin-Konflikte. Im Bild als
+   Zeitband. „No sweep, no trade“.
+8. **Kein-Trade-Bereiche** benennen: die Mitte zwischen zwei Zonen, die Sperrzeiten, nach 2 Verlusten.
+9. **Bild zeichnen** nach `references/grafik.md` und ansehen, bevor es rausgeht.
+10. **Antwort** im Format unten, Bild per SendUserFile (`display: render`).
+11. **Notizen**: Morgenplan in `notes/JJJJ-MM-TT.md` (Bias, Termine, Zonen mit Preisen, Optionen, Messgrundlage),
     offene Punkte in `CLAUDE.md`, nur Text committen und pushen. Bilder bleiben im Scratchpad, denn es sind
     private Fotos.
 
@@ -110,6 +115,7 @@ Information steht in der Kopfzeile des Bildes.
 
 1. **Was ist neu?** Zeitrahmen und Uhrzeit des Bildes, Kopfzeile, neue Kerzen seit dem letzten Bild. Hat eine Kerze
    eine Zone berührt, durchstochen (Docht) oder durchbrochen (Schluss)? Neue Hochs/Tiefs, neue Lücken?
+   Liegt die Uhrzeit im Silver-Bullet-Fenster oder bis 30 Min. davor: Status Sweep / CHoCH / FVG / SMT / 2R nennen.
    Wie lange noch bis zum nächsten Termin der Stufe 1 oder 2? Unter 90 Minuten: Warnung in die erste Zeile. Lag ein
    Termin zwischen den Bildern: Welches Szenario aus `references/wirtschaftstermine.md` ist eingetreten?
 2. **Status jeder Option** in einem Satz: wartet, Bedingung erfüllt, ausgelöst, ungültig. Prüfe dabei streng:

@@ -45,6 +45,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-27: Live-Setups: Sweep des Levels bzw. gleicher Hochs/Tiefs vor dem Einstieg als Pflicht nennen, Stop über die ganze Zone (nicht knapp über gleiche Hochs) und Lots danach berechnen; Seitwärtsphase im Level und die Stunde vor wichtigen Daten ohne Sweep heißt abwarten (erster Short am 27.10. so ausgestoppt)
 - 2026-10-28: Wirtschaftstermine sind Teil des Skills (references/wirtschaftstermine.md): Stufen, Sperrregeln, Szenarien; Warnung in der ersten Zeile, wenn ein Termin der Stufe 1/2 in < 90 Min. ansteht; Erinnerungen per send_later vor Stufe-1-Terminen
 - 2026-10-28: Volumenprofil Fixed Range und verankertes Volumenprofil im Skill (Analyse und Ausführung), aber nur wo es sich anbietet und sinnvoll ist; Nutzer zeichnet, Claude nennt Anker und liest POC/VAH/VAL/HVN/LVN ab
+- 2026-10-28: Silver Bullet (10–11 Uhr New York, Sweep → CHoCH → FVG → Rücklauf, „No sweep, no trade“) als Szenario im Skill (references/silver-bullet.md); Stop standardmäßig nach seiner Regel hinter dem Sweep-Extrem, FVG-Stop nur auf seinen Wunsch; SB-Trades im Journal mit „SB“ kennzeichnen
 
 ## Offene Themen
 <!-- Format: - [ ] Thema (seit YYYY-MM-DD) -->
@@ -65,6 +66,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 
 - [x] Skill „trading-tagesablauf“ (.claude/skills/) erstellt und getestet; Nutzer hat Annahmen (250 $ Risiko, max. 2 Verluste/Tag, Sperrzeit ±15 Min. um US-Daten) und Bilder bestätigt (2026-10-27)
 - [ ] EURUSD 28.10. (Fed-Tag): Morgenplan mit Long 1 (Gegentrend nach Sweep 1,11132), Short A 1,1130–1,1137, Short 1 1,1142–1,1155; Erinnerungen 16:45 und 18:15 MEZ gesetzt (seit 2026-10-28, Details in notes/2026-10-28.md)
+- [ ] Silver Bullet: Nutzer entscheidet, ob Stop nach seiner Regel (hinter Sweep-Extrem) oder enger hinter der FVG wie im Video (seit 2026-10-28)
 - [ ] Regeln von IQ Capital zu News-Trading und Halten über Notenbank-Termine prüfen (Nutzer)
 
 ## Laufende Themen
