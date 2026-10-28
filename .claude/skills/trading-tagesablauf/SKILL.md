@@ -42,8 +42,8 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    BOS, IFVG oder 79-%-Schluss → Rücklauf in FVG/EQ/Order Block/Breaker → Kerze stößt heraus) zusammen mit dem
    TJR-Setup.
    `references/fvg-ifvg.md` (FVG als Nachzügler-Einstieg TJR-FE: nach verpasstem Einstieg Rücklauf in die nächste FVG,
-   M1 tieferes Hoch/tieferes Tief; inverse FVG als Wende-Signal und Einstiegs-Zone, IFVG-Teil vorläufig), wenn ein
-   Setup schon gelaufen ist oder eine FVG durchbrochen wurde.
+   M1 tieferes Hoch/tieferes Tief; inverse FVG als Wende-Signal und Einstiegs-Zone), nur wenn es sich anbietet: ein
+   Setup ist schon gelaufen und der Einstieg verpasst, oder eine wichtige FVG wurde mit Körper-Schluss durchbrochen.
    `references/screenshot-protokoll.md` am Ende jedes Morgenplans (welche Bilder er heute wann schickt) und
    immer, wenn du ein Bild anforderst. Dort steht auch, welche Setups er handelt (nur M, TJR, SB, PV).
    `references/wirtschaftstermine.md` jeden Morgen beim Termin-Check und immer, wenn heute oder morgen ein
