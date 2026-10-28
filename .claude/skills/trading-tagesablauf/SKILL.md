@@ -38,6 +38,9 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    Teilgewinne) jeden Morgen bei der Zonen-Suche und live, wenn der Kurs an einem Pivot mit Konfluenz steht.
    `references/tjr-setup.md` (TJR: HTF-Sweep → M5-BOS → M5-FVG gefüllt → M1-BOS, Long und Short) beim
    Morgenplan für jede Zone und live, sobald ein Sweep passiert ist.
+   `references/key-level-variante.md` (TJR-KL: Key Level der vorigen Session/1H/4H gesweept → Orderflow-Wechsel per
+   BOS, IFVG oder 79-%-Schluss → Rücklauf in FVG/EQ/Order Block/Breaker → Kerze stößt heraus) zusammen mit dem
+   TJR-Setup.
    `references/screenshot-protokoll.md` am Ende jedes Morgenplans (welche Bilder er heute wann schickt) und
    immer, wenn du ein Bild anforderst. Dort steht auch, welche Setups er handelt (nur M, TJR, SB, PV).
    `references/wirtschaftstermine.md` jeden Morgen beim Termin-Check und immer, wenn heute oder morgen ein
@@ -71,7 +74,7 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   | **M** (Grundmodell L1–L3) | Zone aus dem Plan, Sweep, SMT klar (über 1 Pip, gleiche Datenquelle, Partner nicht durch eigene Nachrichten verzerrt), M5-CISD mit kräftiger Kerze, keine Seitwärtsphase/Annahme im Level | L1–L3, `references/checkliste.md` |
   | **SB** (Silver Bullet) | im Fenster: Sweep, CHoCH auf M5, FVG, Rücklauf in die FVG | `references/silver-bullet.md` |
   | **PV** (Pivot) | Pivot ≤ 3 Pips auf seiner Zone, Push → Rücklauf mit Sweep, kräftige Engulfing auf 15 Min. | `references/pivot-setup.md` |
-  | **TJR** | HTF-Sweep, M5-BOS, Rücklauf in die M5-FVG, M1-BOS in der Lücke | `references/tjr-setup.md` |
+  | **TJR** | HTF-Sweep, M5-BOS, Rücklauf in die M5-FVG, M1-BOS in der Lücke. Variante **TJR-KL**: Key-Level-Sweep nach der Eröffnung, Wende per BOS/IFVG/79 %, Rücklauf in FVG/EQ/OB/Breaker, M5-Kerze stößt heraus (zählt mit TJR als ein Setup) | `references/tjr-setup.md`, `references/key-level-variante.md` |
 
   **Risiko-Rahmen, gilt für jeden Trade, egal welches Setup** (seine Risikoregeln, `references/trader-profil.md`
   Abschnitt 4): mindestens 2R bis knapp vor die Gegen-Liquidität; Stop hinter dem Ungültigkeits-Punkt ohne Liquidität
@@ -178,7 +181,8 @@ Information steht in der Kopfzeile des Bildes.
    eine Zone berührt, durchstochen (Docht) oder durchbrochen (Schluss)? Neue Hochs/Tiefs, neue Lücken?
    Steht der Kurs an einem Pivot mit Konfluenz: PV-Stand nennen (Push, Rücklauf mit Sweep, Engulfing 15 Min.,
    Stoch RSI, SMT, 2R) und dafür EURUSD 15 Min. anfordern.
-   Ist an einer Zone ein Sweep passiert: TJR-Status nennen (Sweep / M5-BOS / FVG gefüllt / M1-BOS, dazu SMT und 2R)
+   Ist an einer Zone ein Sweep passiert: TJR-Status nennen (Sweep / M5-BOS / FVG gefüllt / M1-BOS, dazu SMT und 2R),
+   bei einem Key Level auch TJR-KL (Wende per BOS/IFVG/79 %, Zone, Auslöser-Kerze)
    und dafür EURUSD M5, später M1 anfordern.
    Liegt die Uhrzeit im Silver-Bullet-Fenster oder bis 30 Min. davor: Status Sweep / CHoCH / FVG / SMT / 2R nennen.
    Wie lange noch bis zum nächsten Termin der Stufe 1 oder 2? Unter 90 Minuten: Warnung in die erste Zeile. Lag ein
@@ -218,6 +222,7 @@ Prüfe jeden Morgen und bei jedem neuen Bild, ob diese Zonen wichtig sind und sc
   aus den kräftigen Bewegungen auf 15/30 Min. oder 1H.
 - **Heute**: Asia-Hoch/-Tief, London-Hoch/-Tief (bzw. Frankfurt), New-York-Hoch/-Tief, sobald sie entstehen, neue
   Lücken aus dem heutigen Displacement, gleiche Hochs oder Tiefs (Liquidität, Magnet für den Kurs).
+- **Key Levels** (TJR-KL): Hoch und Tief der vorigen Session, Swing-Hochs/-Tiefs auf 1H und 4H in Tagesreichweite.
 - **Höherer Zeitrahmen**: alte Tageshochs/-tiefs, die noch nicht geholt sind (ERL, z. B. „11 Day Low“), und große
   Lücken. Sie sind die großen Ziele.
 - **Rollenwechsel**: Eine gebrochene Unterstützung wird zum Widerstand und umgekehrt, sobald eine Kerze darüber

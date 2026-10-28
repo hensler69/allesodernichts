@@ -4,6 +4,8 @@ Wunsch des Nutzers (28.10.2026): dieses Setup in seinen Plan aufnehmen, als **ei
 **Short (wie im Video) und Long (spiegelverkehrt)**. Quelle: Video-Reel von TJR (Transkript vom Nutzer eingefügt).
 Inhalt hier nur so, wie er im Reel steht; was dazukommt, ist als **Ergänzung** gekennzeichnet.
 
+Variante mit mehr erlaubten Wende-Arten, Rücklauf-Zonen und Auslösern: `references/key-level-variante.md` (TJR-KL).
+
 ## Inhalt
 
 1. Die Regeln aus dem Reel

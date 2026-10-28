@@ -15,7 +15,7 @@ Seitwärtsphase.
 | Familie | Setup | Kurz | Pflicht |
 |---|---|---|---|
 | Sweep → Strukturbruch | **M** (Grundmodell) | Zone, Sweep, SMT, M5-CISD | 5 Bedingungen, `references/checkliste.md` |
-| | **TJR** | HTF-Sweep, M5-BOS, Rücklauf in M5-FVG, M1-BOS | 4 Schritte, `references/tjr-setup.md` |
+| | **TJR** (mit Variante TJR-KL) | HTF-Sweep, M5-BOS, Rücklauf in M5-FVG, M1-BOS; KL: Key-Level-Sweep, BOS/IFVG/79 %, FVG/EQ/OB/Breaker, Kerze stößt heraus | 4 Schritte, `references/tjr-setup.md`, `references/key-level-variante.md` |
 | | **SB** (Silver Bullet) | wie TJR, aber nur im Fenster, CHoCH + FVG | 5 Bedingungen, `references/silver-bullet.md` |
 | Pivot | **PV** | Pivot auf Zone, Rücklauf mit Sweep, Engulfing 15 Min. | 3 Bedingungen, `references/pivot-setup.md` |
 
@@ -54,7 +54,7 @@ Seitwärtsphase.
 | Schritt | Auslöser | Bild | Prüft |
 |---|---|---|---|
 | 1 | Kurs erreicht eine Zone aus dem Plan (TradingView-Alarm) | EURUSD **15 Min.** + GBPUSD **15 Min.** | Sweep? SMT? PV-Pivot? Seitwärtsphase? |
-| 2 | Sweep ist passiert | EURUSD **M5** | CISD (M), BOS und FVG (TJR), CHoCH (SB) |
+| 2 | Sweep ist passiert | EURUSD **M5** | CISD (M), BOS und FVG (TJR), BOS/IFVG/79 % und Zone (TJR-KL), CHoCH (SB) |
 | 3 | M5-FVG wird angelaufen (nur TJR) | EURUSD **M1** | M1-BOS in der Lücke |
 | 3b | Engulfing-Kerze an einem Pivot (nur PV) | EURUSD **15 Min.** | Körper, Stoch RSI |
 | 4 | Setup erfüllt, vor dem Klick | **IQ-Order-Panel** (Units, Stop, Ziel, Schalter) | Lots, Werte, Schalter an |
