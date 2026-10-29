@@ -47,11 +47,9 @@ Von oben nach unten abhaken. **Gilt für das Grundmodell (M). Ein Punkt offen = 
 - [ ] Variante **TJR-IF**: Sweep vorher? Bärische FVG (Long) mit M5-**Körper** darüber geschlossen = IFVG, kräftig, außerhalb der Sperrzeit? Ziel (offensichtliche Liquidität) festgelegt und ≥ 2R mit Stop unter der IFVG? Keine gleichen Tiefs direkt unter dem Stop? Limit an der IFVG-Kante, löschen bei Körper-Schluss zurück durch die IFVG. (`references/fvg-ifvg.md`)
 - [ ] Nachzügler **TJR-FE**: Sweep und Wende schon bestätigt? Erste/zweite M5-FVG in Trend-Richtung angelaufen? M1 tieferes Hoch + tieferes Tief (Long: höheres Tief + höheres Hoch) in der Lücke? Noch ≥ 2R? (`references/fvg-ifvg.md`)
 
-### 8 · SPX500 / NAS100 (je eigene Strategie: `references/strategie-spx500.md`, `references/strategie-nas100.md`)
+### 8 · SPX500 / NAS100 (nur TJR: `references/tjr-index-strategie.md`, Marktdateien `references/strategie-spx500.md`, `references/strategie-nas100.md`)
 
-- [ ] **ORB**: Spanne = erste 15-Min.-Kerze ab 09:30 NY (15:30 MEZ)? 1-Min.-**Körper** außerhalb (Docht = kein Ausbruch)? Retest berührt die Kante? Rejection (Morning Star/Engulfing/Docht/Konsolidierung) und Schluss wieder außerhalb?
-- [ ] Stop unter dem Rejection-Tief plus Spread (SPX500 0,55, NAS100 1,89 Punkte), Ziel vor der Liquidität (SPX500 ca. 20–25 Punkte, NAS100 ca. 0,3 %), ≥ 2R, Units mit `rechner.py --markt SPX500|NAS100` (1 Unit = 10 $ pro Punkt)?
-- [ ] **Fehlausbruch** an der Kante = Sweep → TJR-Familie in die Gegenrichtung prüfen, nie beide Richtungen.
+- [ ] **Levels** für Schritt 1: Vortag, Asia/London, 1H/4H, **Eröffnungsspanne** (erste 15-Min.-Kerze ab 09:30 NY) als Level; Docht darüber/darunter mit Schluss zurück = Sweep. Kein ORB mehr (29.10. gestrichen).
 - [ ] **TJR-Box** (`references/tjr-index-strategie.md`): Sweep (1H/4H/Session)? 5-Min.-Bestätigung? Bei Premarket-Sweep: 5-Min.-Manipulation nach 15:30? Rücklauf in EQ/FVG (zusammen: SMT)? 1-Min.-Bestätigung? Stop hinter dem Sweep + Spread, ≥ 2R?
 
 ## Während des Trades

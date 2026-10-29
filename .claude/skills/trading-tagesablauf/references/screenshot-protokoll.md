@@ -70,9 +70,9 @@ Nennt er morgens den Index, gilt der Bilderplan der jeweiligen Strategie (`refer
 `references/strategie-nas100.md`, Abschnitt 11):
 - **morgens**: Daily mit Kopfzeile von gestern, 1H (3–5 Tage), 15 Min. (gestern und die Nacht), IQ-Kopfleiste;
 - **15:15 MEZ**: 15 Min.;
-- **15:46 MEZ**: die Spanne (Kopfzeile der 09:30-Kerze);
-- **bei Alarm**: 1 Min. (NAS100 zusätzlich 5 Min.);
-- **Retest**: 1 Min.;
+- **15:46 MEZ**: die Eröffnungsspanne als Level;
+- **nach einem Sweep**: 5 Min.;
+- **in der Zone**: 1 Min.;
 - **vor dem Klick**: Order-Panel.
 
 In den Zeitumstellungs-Wochen gilt alles eine Stunde früher. Handelt er am selben Tag auch EURUSD, gilt für EURUSD

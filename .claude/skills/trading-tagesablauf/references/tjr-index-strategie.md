@@ -14,8 +14,10 @@ Diese Box ist die vollständige Fassung. Sie ergänzt zwei Dinge:
 - **Schritt 2b**: Sweep im Premarket bzw. in einer anderen Session.
 - **Schritt 4**: Bestätigung auf **1 Min.** in der Fortsetzungs-Zone.
 
-Für SPX500 und NAS100 ist sie **das TJR-Setup** (Journal „TJR-SPX500“, „TJR-NAS100“, „TJR-ES+NQ“). Das ORB-Setup aus
-`references/strategie-spx500.md` und `references/strategie-nas100.md` bleibt daneben bestehen.
+Für SPX500 und NAS100 ist sie **das einzige Setup** (Journal „TJR-SPX500“, „TJR-NAS100“, „TJR-ES+NQ“). Der ORB
+aus einem anderen Video wurde am 29.10. gestrichen; die Eröffnungsspanne (erste 15-Min.-Kerze ab 09:30 New York) bleibt
+als Level für Schritt 1. Marktspezifisches (Instrument, Zeiten, Levels, Bilder) steht in
+`references/strategie-spx500.md` und `references/strategie-nas100.md`.
 
 ## Inhalt
 
@@ -152,8 +154,7 @@ Datenquelle).
 
 **Noten**:
 - **A (TJR)** = alles erfüllt.
-- **A+** = zusätzlich ORB am selben Ort in dieselbe Richtung (z. B. Fehlausbruch der Spanne = Sweep, Abschnitt 6 der
-  ORB-Strategie), oder im Silver-Bullet-Fenster.
+- **A+** = zusätzlich im Silver-Bullet-Fenster, oder (Variante A/B) mit SMT zum anderen Index als Zusatz.
 - Sonst **„Lass es.“**
 - **Dafür/Dagegen**: Bias Daily/4H, mehrere Bestätigungen je Schritt, Displacement, Ziel-Liquidität offen, Termine,
   Spread.
@@ -197,7 +198,7 @@ eine für **Short**, mit der ganzen TJR-Familie (Abschnitt 2a). Uhrzeiten gelten
 ```
 TJR LONG – SPX500 (allein)
 1: Sweep eines Tiefs (1H, 4H, Asia/London,
-   Vortag, Spanne) – Schluss zurück darüber
+   Vortag, Eröffnungsspanne) – Schluss zurück darüber
 2: 5-Min.-Wende nach oben: BOS, IFVG o. 79%
 2b: Tief schon im Premarket geholt -> ab 15:30
     5-Min.-Tief nach Eröffnung wird gesweept
@@ -214,7 +215,7 @@ Units = 25 / Stop in Punkten (250 $)
 ```
 TJR SHORT – SPX500 (allein)
 1: Sweep eines Hochs (1H, 4H, Asia/London,
-   Vortag, Spanne) – Schluss zurück darunter
+   Vortag, Eröffnungsspanne) – Schluss zurück darunter
 2: 5-Min.-Wende nach unten: BOS, IFVG o. 79%
 2b: Hoch schon im Premarket geholt -> ab 15:30
     5-Min.-Hoch nach Eröffnung wird gesweept
@@ -233,7 +234,7 @@ Units = 25 / Stop in Punkten (250 $)
 ```
 TJR LONG – NAS100 (allein)
 1: Sweep eines Tiefs (1H, 4H, Asia/London,
-   Vortag, Spanne) – Schluss zurück darüber
+   Vortag, Eröffnungsspanne) – Schluss zurück darüber
 2: 5-Min.-Wende nach oben: BOS, IFVG o. 79%
 2b: Tief schon im Premarket geholt -> ab 15:30
     5-Min.-Tief nach Eröffnung wird gesweept
@@ -250,7 +251,7 @@ Units = 25 / Stop in Punkten (250 $)
 ```
 TJR SHORT – NAS100 (allein)
 1: Sweep eines Hochs (1H, 4H, Asia/London,
-   Vortag, Spanne) – Schluss zurück darunter
+   Vortag, Eröffnungsspanne) – Schluss zurück darunter
 2: 5-Min.-Wende nach unten: BOS, IFVG o. 79%
 2b: Hoch schon im Premarket geholt -> ab 15:30
     5-Min.-Hoch nach Eröffnung wird gesweept
@@ -269,7 +270,7 @@ Units = 25 / Stop in Punkten (250 $)
 ```
 TJR LONG – ES + NQ (zusammen, SMT)
 1: Sweep eines Tiefs (1H, 4H, Asia/London,
-   Vortag, Spanne) – Schluss zurück darüber
+   Vortag, Eröffnungsspanne) – Schluss zurück darüber
 2: 5-Min.-Wende nach oben: BOS, IFVG, SMT o. 79%
 2b: Tief schon im Premarket geholt -> ab 15:30
     5-Min.-Tief nach Eröffnung wird gesweept (SMT)
@@ -287,7 +288,7 @@ Units = 25 / Stop in Punkten (250 $)
 ```
 TJR SHORT – ES + NQ (zusammen, SMT)
 1: Sweep eines Hochs (1H, 4H, Asia/London,
-   Vortag, Spanne) – Schluss zurück darunter
+   Vortag, Eröffnungsspanne) – Schluss zurück darunter
 2: 5-Min.-Wende nach unten: BOS, IFVG, SMT o. 79%
 2b: Hoch schon im Premarket geholt -> ab 15:30
     5-Min.-Hoch nach Eröffnung wird gesweept (SMT)

@@ -1,6 +1,6 @@
 ---
 name: "trading-tagesablauf"
-description: Täglicher Trading-Begleiter für den Nutzer (EURUSD mit SMT GBPUSD auf IQ Capital, dazu SPX500 und NAS100 als je eigene Strategie mit ORB und TJR) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit Fibonacci und Volumenprofil. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, ORB, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
+description: Täglicher Trading-Begleiter für den Nutzer (EURUSD mit SMT GBPUSD auf IQ Capital, dazu SPX500 und NAS100 als je eigene TJR-Strategie) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit Fibonacci und Volumenprofil. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
 compatibility: Python 3 mit Pillow und numpy für die Skripte; Websuche für den Termin-Check; ein Werkzeug zum Senden von Bildern an den Nutzer (z. B. SendUserFile).
 ---
 
@@ -47,9 +47,8 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    **TJR-FE** (Nachzügler-Einstieg in die nächste FVG) nur, wenn ein Setup schon gelaufen und der Einstieg verpasst ist.
    `references/strategie-spx500.md` immer, wenn er den **S&P 500** handelt (bei IQ „SPX500“; auch S&P, SP500, US500,
    ES), und `references/strategie-nas100.md`, wenn er den **Nasdaq 100** handelt (bei IQ „NAS100“; auch Nasdaq,
-   US100, NQ). Zwei getrennte Strategien: je ORB aus dem Video (erste 15-Min.-Kerze ab 09:30 New York,
-   1-Min.-Körper-Schluss außerhalb, Retest, Rejection, Einstieg) plus die ganze TJR-Familie, CFD bei IQ, Zeiten,
-   Morgenplan, vor und während des Trades. Dazu `references/tjr-index-strategie.md`: TJRs eigene 6-Schritte-Box
+   US100, NQ). Zwei getrennte Marktdateien (CFD bei IQ, Zeiten, Levels inkl. Eröffnungsspanne, Morgenplan, Bilder);
+   einziges Setup dort ist TJR (ORB am 29.10. gestrichen). Dazu `references/tjr-index-strategie.md`: TJRs eigene 6-Schritte-Box
    (Sweep → 5-Min.-Bestätigung → 2b → 5-Min.-Fortsetzung → 1-Min.-Bestätigung → Einstieg → Liquidität) für SPX500
    allein, NAS100 allein und **zusammen** (beide Charts, SMT), mit dem Text für seine Layout-Box.
    `references/screenshot-protokoll.md` am Ende jedes Morgenplans (welche Bilder er heute wann schickt) und
@@ -84,7 +83,7 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   den Videos“. Er soll wissen, worauf sein System wirklich beruht.
 - **Jede Option mit allen Risiken.** Das ist sein ausdrücklicher Wunsch, und der Verlust am 27.10. kam genau von
   einem Risiko, das vorher zu wenig gewichtet wurde (Liquidität direkt hinter dem Stop). Nutze die Prüfliste unten.
-- **Nur vier Setups** (EURUSD): M, TJR, SB, PV. Für SPX500 und NAS100 gelten je ORB und die TJR-Familie
+- **Nur vier Setups** (EURUSD): M, TJR, SB, PV. Für SPX500 und NAS100 gilt nur TJR (6-Schritte-Box mit der TJR-Familie)
   (`references/strategie-spx500.md`, `references/strategie-nas100.md`), mit denselben Noten, demselben
   Risiko-Rahmen und demselben Tageslimit (2 Verluste pro Tag über alle Märkte). Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
   (Begründung in `references/screenshot-protokoll.md`, Abschnitt 1).
