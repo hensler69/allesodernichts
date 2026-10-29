@@ -27,6 +27,7 @@ war kurz im Plan und ist am 29.10. als Setup gestrichen. Zwei Dinge daraus bleib
 7. Risiken
 8. Bilder, Grafik, Journal
 9. Beispiel vom 29.10. (NQ-Abverkauf)
+10. Test-Variante VE: Einstieg vor der Eröffnung (kein Setup)
 
 ## 1. Instrument bei IQ Capital, Chart und was beim Nasdaq anders ist
 
@@ -63,6 +64,9 @@ Normal / in den Zeitumstellungs-Wochen (z. B. 26.–31.10.2026) eine Stunde frü
 | Tech-Quartalszahlen | ca. 16:00–16:30 | ca. 22:00–22:30 / 21:00–21:30 |
 
 - **Premarket-Sweep (Fall 2b)**: Kam der Sweep vor 15:30 MEZ, nach der Eröffnung auf die 5-Min.-Manipulation warten.
+- **LuxAlgo-Sessions** (auf PC und Handy gleich): Zeitzone UTC−4, ab 2.11.2026 UTC−5 (Winterzeit New York),
+  „Use Exchange Timezone“ aus; New York 09:30–16:00, London 02:00–05:00, Asia 20:00–00:00 (New Yorker Zeit). Mit den
+  Standardzeiten beginnt die NY-Box schon um 09:00 und die London-Box läuft bis 12:00 NY (Handy-Foto vom 29.10.).
 - Seine Regeln gelten: keine neuen Einstiege 15 Min. vor bis 15 Min. nach US-Daten, an Fed-Tagen ab 30 Min. vor dem
   Entscheid keine Position. Fällt die Eröffnung in eine EZB-/Fed-Pressekonferenz, ist der Tag zum Zuschauen. Kein
   NAS100-Trade über Tech-Zahlen am Abend halten.
@@ -148,6 +152,7 @@ Normal / in den Zeitumstellungs-Wochen (z. B. 26.–31.10.2026) eine Stunde frü
 |---|---|---|
 | Morgens (Morgen-Paket) | NAS100 **Daily** mit Kopfzeile von gestern, **1H** (3–5 Tage), **15 Min.** (gestern und die Nacht), IQ-Kopfleiste | Bias, Levels, Termine |
 | 15:15 / 14:15 | NAS100 **15 Min.** | Premarket-Sweep? Levels, Alarme |
+| 15:05–15:20 / 14:05–14:20 | NAS100 **5 Min.** mit Asia- und London-Box | Test-Variante VE (Abschnitt 10) |
 | 15:46 / 14:46 | NAS100 **15 Min.** | Eröffnungsspanne als Level |
 | Nach einem Sweep | NAS100 **5 Min.** (bei Variante C auch SPX500 5 Min.) | Schritt 2 und 3 |
 | In der Zone | NAS100 **1 Min.** | Schritt 4, Einstieg |
@@ -177,3 +182,57 @@ Rechnung im Rückblick (Stop über dem Hoch 29.737, Ziel 29.606):
 Lehren:
 - Ein Stop knapp über der IFVG (≈ 29.715) wäre von den Dochten bis 29.718 abgeholt worden.
 - Der Sweep lag im Premarket (Fall 2b), nach den Regeln also kein Trade vor der Eröffnung.
+
+## 10. Test-Variante VE: Einstieg vor der Eröffnung (kein Setup)
+
+Wunsch vom 29.10. abends, nach dem Abverkauf zur Eröffnung: schon vor der Eröffnung drin sein, wenn das London-Hoch
+oder -Tief im Premarket gesweept wurde. Der Stop liegt hinter dem Sweep-Extrem, damit eine erste Manipulation nach der
+Eröffnung den Trade nicht abholt.
+- **Kein Setup, sondern ein Test.** VE bricht Box-Regel 2b (nach einem Premarket-Sweep die 5-Min.-Manipulation nach
+  der Eröffnung abwarten) und „No sweep, no trade“ für die Eröffnung.
+- **Risiko bis zur Auswertung**: Papierhandel/Replay oder halbes Risiko (125 $, Units = 12,5 ÷ Stop in Punkten).
+  Ein Verlust zählt zum Tageslimit.
+- **Bewertung**: „VE-Test erfüllt“ oder „Lass es.“ Nie Note A, solange VE nicht ausgewertet ist.
+
+**Foto**: 14:05–14:20 MEZ in Umstellungs-Wochen (z. B. bis 30.10.2026), sonst 15:05–15:20. Dazu NAS100 **5 Min.** mit
+Asia- und London-Box (LuxAlgo-Zeiten wie in Abschnitt 2 eingestellt, auch auf dem Handy), Kurs aus IQ oder mit
+bekanntem Abstand zu IQ.
+
+**Alle Bedingungen** (Short; Long spiegelverkehrt):
+1. **Sweep im Premarket**: Docht über das London-Hoch (oder Asia-Hoch, gleiche Hochs), Körper schließt zurück darunter.
+   Ein Körper-Schluss darüber ist ein Ausbruch, kein Sweep.
+2. **5-Min.-Bestätigung nach dem Sweep**: BOS oder IFVG nach unten. Docht und Rückkehr allein reichen nicht.
+3. **Richtung**: Daily/4H und Nachrichten (Notenbank, Quartalszahlen über Nacht, US-Daten 08:30 NY) sprechen nicht
+   dagegen.
+4. **Vor der Eröffnung**: Der Rücklauf bildet ein tieferes Hoch unter dem Sweep-Extrem, der Kurs stockt, eine
+   5-Min.-Kerze schließt nach unten.
+5. **Ziel-Liquidität offen**: ungeholte Tiefs darunter (Asia-/London-Tief, Tief nach den Daten, Vortagestief),
+   mindestens **2R**.
+6. **Stop** über dem Sweep-Extrem + Spread (1,89) + ca. 2 Punkte. Ein neues Hoch darüber heißt: Der Sweep war ein
+   Ausbruch, die Idee ist ungültig.
+7. **Zeit**: Einstieg 10–15 Min. vor der Eröffnung (14:15–14:25 bzw. 15:15–15:25), nicht in einer Sperrzeit. Kommen
+   US-Daten um 09:45 oder 10:00 NY, läuft der Trade in sie hinein: als Risiko nennen.
+
+**Während des Trades**: Stop bleibt, Breakeven bei 1R. Ist bis 15 Min. nach der Eröffnung weder das Ziel noch 1R
+erreicht: schließen (Zeitstopp, Ergänzung). Steht der Stop schon auf Breakeven, darf der Trade weiterlaufen.
+
+**Danach**: Die Gegenseite nach TJR prüfen. Werden die Tiefs gesweept und schließt der Kurs zurück darüber, folgen
+Bestätigung, Rücklauf und Einstieg tief im Rücklauf. Ziel ist die Kante, an der der Abverkauf begann.
+
+**Risiken**:
+- Die Eröffnung holt zuerst das Sweep-Extrem (doppelter Sweep).
+- Große Zahlen über Nacht (z. B. Amazon am 29.10. abends) treiben den Premarket. Ein „Sweep“ ist dann oft ein Ausbruch
+  (Ergänzung).
+- Spread und Schlupf in der ersten Minute.
+- Ohne Bestätigung nach der Eröffnung ist es ein Vorgriff: Die Trefferquote ist unbekannt.
+
+**Journal** „VE-Test“: Zeit des Sweeps, Bestätigung, Einstieg, Stop, Ziel, Ergebnis in R und wie weit die Eröffnung
+zuerst gegen den Trade lief (Punkte). Nach 20 Fällen auswerten (Trefferquote, Durchschnitt in R). Dann entscheidet
+der Nutzer, ob VE ein Setup wird.
+
+**Beispiel 29.10.** (OANDA NAS100USD 5 Min., aus seinem Foto, ±3 Punkte):
+- Mittags Sweep des London-Hochs 29.598, danach IFVG und BOS nach unten (Abschnitt 9, dort auf NQ1!).
+- Nach den US-Daten (13:30 MEZ) Tief 29.435, dann Rücklauf bis 29.573: tieferes Hoch, Stillstand.
+- 14:20 MEZ rote 5-Min.-Kerze, Schluss ca. 29.520.
+- VE-Rechnung: Einstieg ca. 29.520, Stop ca. 29.602, Ziel Asia-Tief 29.349 ≈ 2,1R.
+- Eröffnungskerze 14:30 von 29.478 bis 29.303, Tief 29.274: Ziel nach wenigen Minuten erreicht.

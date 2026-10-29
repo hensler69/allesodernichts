@@ -87,6 +87,9 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   (`references/strategie-spx500.md`, `references/strategie-nas100.md`), mit denselben Noten, demselben
   Risiko-Rahmen und demselben Tageslimit (2 Verluste pro Tag über alle Märkte). Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
   (Begründung in `references/screenshot-protokoll.md`, Abschnitt 1).
+- **Test-Variante VE (NAS100)**: Einstieg 10–15 Min. vor der Eröffnung nach Premarket-Sweep des London-Hochs/-Tiefs
+  mit 5-Min.-Bestätigung (`references/strategie-nas100.md`, Abschnitt 10). Kein Setup, nur Papier oder halbes Risiko
+  (125 $), bis 20 Fälle ausgewertet sind. Sein Foto dafür kommt 14:05–14:20 (Umstellungs-Woche) bzw. 15:05–15:20.
 - **Jedes Setup steht für sich** (Wunsch vom 28.10., ersetzt die frühere 7-Punkte-Regel für alle Setups). Es gibt
   vier Setups mit eigenen Pflicht-Bedingungen. Sie gelten einzeln und werden kombiniert, wenn sie am selben Ort
   zusammentreffen:
