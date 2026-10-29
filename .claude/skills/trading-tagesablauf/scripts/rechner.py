@@ -10,16 +10,22 @@ Beispiele:
                                           (Teilgewinne: drei Positionen mit Ziel 1R, 2R und dem Endziel)
   python rechner.py --markt MES --einstieg 6850.25 --stop 6842.50 --ziel 6872.25
                                           (Index-Futures ES/MES/NQ/MNQ: Punkte, Ticks 0,25, ganze Kontrakte)
+  python rechner.py --markt SPX500 --pipwert 1 --einstieg 7728.40 --stop 7720.20 --ziel 7750.40
+                                          (Index-CFDs bei IQ: Punkte, IQ-Tick 0,01; --pipwert = $ pro Punkt und Unit)
 
 Richtung ergibt sich aus Stop und Ziel (Stop über dem Ziel = Short). Standard: EURUSD-artige Paare
 (1 Pip = 0,0001, 10 $ pro Pip und Lot, 1 IQ-Tick = 0,00001). Für andere Märkte --pip und --pipwert setzen.
 --markt ES|MES|NQ|MNQ setzt die CME-Werte (1 Punkt = 50/5/20/2 $, Tick 0,25) und rechnet ganze Kontrakte.
+--markt SPX500|NAS100 (CFDs bei IQ Capital) rechnet in Punkten mit IQ-Tick 0,01; den Dollarwert pro Punkt und Unit
+gibt es nur aus der Plattform, deshalb muss --pipwert dazu.
 """
 import argparse
 import math
 
 # CME-Index-Futures: $ pro Punkt und Kontrakt, Tick 0,25 Punkte
 MAERKTE = {"ES": 50.0, "MES": 5.0, "NQ": 20.0, "MNQ": 2.0}
+# Index-CFDs bei IQ Capital: IQ-Tick 0,01 Punkte, $ pro Punkt und Unit laut Plattform (--pipwert)
+CFDS = ("SPX500", "NAS100")
 
 
 def fmt(x, n=5):
@@ -39,15 +45,25 @@ def main():
     ap.add_argument("--lots", type=float, help="feste Positionsgröße statt Risiko")
     ap.add_argument("--min-r", type=float, default=2.0, help="Mindest-CRV (Standard 2)")
     ap.add_argument("--pip", type=float, default=0.0001)
-    ap.add_argument("--pipwert", type=float, default=10.0, help="$ pro Pip und Lot (EURUSD: 10)")
+    ap.add_argument("--pipwert", type=float, help="$ pro Pip und Lot (EURUSD: 10); bei CFDs $ pro Punkt und Unit")
     ap.add_argument("--tick", type=float, default=0.00001, help="Tickgröße der Plattform (IQ: 0,00001)")
     ap.add_argument("--teile", type=int, choices=[3], help="3 = Position dritteln: Ziele 1R, 2R und --ziel")
-    ap.add_argument("--markt", choices=sorted(MAERKTE), help="Index-Future statt Forex: ES, MES, NQ, MNQ")
+    ap.add_argument("--markt", choices=sorted(MAERKTE) + list(CFDS),
+                    help="Index-Future (ES, MES, NQ, MNQ) oder Index-CFD bei IQ (SPX500, NAS100) statt Forex")
     a = ap.parse_args()
     a.einheit, a.groesse, a.stellen = "Pips", "Lots", 5
-    if a.markt:
+    a.futures = a.markt in MAERKTE
+    if a.futures:
         a.pip, a.pipwert, a.tick = 1.0, MAERKTE[a.markt], 0.25
         a.einheit, a.groesse, a.stellen = "Punkte", f"Kontrakte {a.markt}", 2
+    elif a.markt:
+        if a.pipwert is None:
+            print(f"Für {a.markt} fehlt --pipwert: $ pro Punkt und Unit laut IQ (Symbol-Info bzw. Order-Panel).")
+            return
+        a.pip, a.tick = 1.0, 0.01
+        a.einheit, a.groesse, a.stellen = "Punkte", f"Units {a.markt}", 2
+    if a.pipwert is None:
+        a.pipwert = 10.0
 
     short = a.stop > a.ziel
     richtung = "Short" if short else "Long"
@@ -69,7 +85,7 @@ def main():
     r = ziel_pips / stop_pips
     if a.lots:
         lots = a.lots
-    elif a.markt:
+    elif a.futures:
         lots = math.floor(a.risiko / (stop_pips * a.pipwert))
     else:
         lots = math.floor(a.risiko / (stop_pips * a.pipwert) * 100) / 100
@@ -81,23 +97,23 @@ def main():
     print(f"Stop-Abstand: {de(stop_pips, 2 if a.markt else 1)} {a.einheit} = {round(stop_pips * a.pip / a.tick)} Ticks")
     print(f"Ziel-Abstand: {de(ziel_pips, 2 if a.markt else 1)} {a.einheit} = {round(ziel_pips * a.pip / a.tick)} Ticks")
     print(f"CRV: {de(r, 2)}R " + ("(ok)" if r >= a.min_r - 1e-9 else f"(UNTER {a.min_r:g}R, kein Trade nach den Regeln)"))
-    if a.markt and lots < 1:
+    if a.futures and lots < 1:
         print(f"Positionsgröße: 0 Kontrakte. 1 {a.markt} riskiert hier {de(stop_pips * a.pipwert, 2)} $, mehr als "
               f"{a.risiko:.0f} $. Kleineren Kontrakt (MES/MNQ) nehmen oder: Lass es.")
         return
-    print(f"Positionsgröße: {de(lots, 0 if a.markt else 2)} {a.groesse}"
+    print(f"Positionsgröße: {de(lots, 0 if a.futures else 2)} {a.groesse}"
           + ("" if a.lots else f" (für {a.risiko:.0f} $ Risiko, abgerundet)"))
     print(f"Risiko bis Stop: {de(risiko, 2)} $ | Gewinn bis Ziel: {de(gewinn, 2)} $")
     print(f"1R im Plus erreicht bei: {fmt(ein_r, n)} (Breakeven-Regel)")
-    if a.markt:
+    if a.futures:
         print(f"Order-Eingabe (mit Punkt tippen): Menge {lots:.0f} | Stop {a.stop:.2f} | Ziel {a.ziel:.2f} | "
               "Stop und Ziel als OCO-Bracket an die Order hängen")
         if a.teile:
             teilgewinne(a, e, short, stop_pips, r, lots)
         return
     # Plattform-Felder erwarten Punkt statt Komma
-    print(f"IQ-Eingabe (mit Punkt tippen): Units {lots:.2f} | Stop loss {a.stop:.5f} bzw. "
-          f"{round(stop_pips * a.pip / a.tick)} ticks | Take profit {a.ziel:.5f} bzw. "
+    print(f"IQ-Eingabe (mit Punkt tippen): Units {lots:.2f} | Stop loss {a.stop:.{n}f} bzw. "
+          f"{round(stop_pips * a.pip / a.tick)} ticks | Take profit {a.ziel:.{n}f} bzw. "
           f"{round(ziel_pips * a.pip / a.tick)} ticks | beide Schalter einschalten")
     if a.teile:
         teilgewinne(a, e, short, stop_pips, r, lots)
@@ -110,8 +126,8 @@ def teilgewinne(a, e, short, stop_pips, r_end, lots):
     if r_end < 2 + 1e-9:
         print("  Das Endziel liegt nicht über 2R. Teilgewinne passen hier nicht, nur ein Ziel verwenden.")
         return
-    teil = math.floor(lots / 3) if a.markt else math.floor(lots / 3 * 100) / 100
-    if teil < (1 if a.markt else 0.01):
+    teil = math.floor(lots / 3) if a.futures else math.floor(lots / 3 * 100) / 100
+    if teil < (1 if a.futures else 0.01):
         print("  Position zu klein zum Dritteln.")
         return
     schritt = stop_pips * a.pip
@@ -119,15 +135,15 @@ def teilgewinne(a, e, short, stop_pips, r_end, lots):
              (r_end, a.ziel)]
     for i, (rr, z) in enumerate(ziele, 1):
         ticks = round(rr * stop_pips * a.pip / a.tick)
-        print(f"  Teil {i}: {de(teil, 0 if a.markt else 2)} {a.groesse} | Ziel {fmt(z, a.stellen)} ({de(rr, 2)}R, {ticks} ticks) | "
+        print(f"  Teil {i}: {de(teil, 0 if a.futures else 2)} {a.groesse} | Ziel {fmt(z, a.stellen)} ({de(rr, 2)}R, {ticks} ticks) | "
               f"Gewinn {de(teil * rr * stop_pips * a.pipwert, 2)} $")
     schnitt = (1 + 2 + r_end) / 3
-    print(f"  Zusammen {de(3 * teil, 0 if a.markt else 2)} {a.groesse}, Risiko {de(3 * teil * stop_pips * a.pipwert, 2)} $, "
+    print(f"  Zusammen {de(3 * teil, 0 if a.futures else 2)} {a.groesse}, Risiko {de(3 * teil * stop_pips * a.pipwert, 2)} $, "
           f"im Schnitt {de(schnitt, 2)}R, wenn alle Ziele kommen")
     if schnitt < a.min_r - 1e-9:
         print(f"  Schnitt unter {a.min_r:g}R: Endziel weiter weg wählen oder nur ein Ziel nehmen.")
     print(f"  Nach Teil 1 (1R): Stop der beiden übrigen Teile auf den Einstieg {fmt(e, a.stellen)} ziehen.")
-    if not a.markt:
+    if not a.futures:
         print("  IQ: drei getrennte Orders mit je eigenem Take profit, beide Schalter jeweils an.")
 
 

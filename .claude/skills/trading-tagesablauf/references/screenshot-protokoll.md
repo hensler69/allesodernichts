@@ -64,8 +64,16 @@ Seitwärtsphase.
 
 Ohne Ereignis keine Bilder nötig. Er muss nicht dauernd schauen: Alarme an den Zonen reichen.
 
-## 5. ES1!/NQ1!-Tag
+## 5. SPX500- oder NAS100-Tag
 
-Eigener Bilderplan in `references/es-nq-strategie.md`, Abschnitt 11: 15:15 MEZ ES/NQ 15 Min. + ES Daily, 15:46 die
-Spanne (Kopfzeile der 09:30-Kerze), bei Alarm ES und NQ 1 Min., Retest 1 Min., vor dem Klick das Order-Panel. In den
-Zeitumstellungs-Wochen eine Stunde früher.
+Nennt er morgens den Index, gilt der Bilderplan der jeweiligen Strategie (`references/strategie-spx500.md` bzw.
+`references/strategie-nas100.md`, Abschnitt 11):
+- **morgens**: Daily mit Kopfzeile von gestern, 1H (3–5 Tage), 15 Min. (gestern und die Nacht), IQ-Kopfleiste;
+- **15:15 MEZ**: 15 Min.;
+- **15:46 MEZ**: die Spanne (Kopfzeile der 09:30-Kerze);
+- **bei Alarm**: 1 Min. (NAS100 zusätzlich 5 Min.);
+- **Retest**: 1 Min.;
+- **vor dem Klick**: Order-Panel.
+
+In den Zeitumstellungs-Wochen gilt alles eine Stunde früher. Handelt er am selben Tag auch EURUSD, gilt für EURUSD
+weiter Abschnitt 2.

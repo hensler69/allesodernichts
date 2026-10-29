@@ -68,14 +68,17 @@ def main():
         print("Achtung: Der Schluss liegt nicht zwischen Tief und Hoch. Werte prüfen.")
         return
     zonen = zonen_lesen(a.zonen) if a.zonen else []
+    n = 2 if a.pip >= 0.01 else 5  # Indizes (--pip 1) mit 2 Nachkommastellen
     spanne = (a.hoch - a.tief) / a.pip
-    print(f"Vortag: Hoch {fmt(a.hoch)} | Tief {fmt(a.tief)} | Schluss {fmt(a.schluss)} | Spanne {de(spanne)} Pips")
-    print(f"Pivot-Zonen (±{de(a.band)} Pips):")
+    print(f"Vortag: Hoch {fmt(a.hoch, n)} | Tief {fmt(a.tief, n)} | Schluss {fmt(a.schluss, n)} | Spanne {de(spanne)} "
+          + ("Punkte" if n == 2 else "Pips"))
+    einheit = "Punkte" if n == 2 else "Pips"
+    print(f"Pivot-Zonen (±{de(a.band)} {einheit}):")
     for name, wert in pivots(a.hoch, a.tief, a.schluss):
-        zeile = f"  {name:>2}: {fmt(wert)}  (Zone {fmt(wert - a.band * a.pip)}–{fmt(wert + a.band * a.pip)})"
+        zeile = f"  {name:>2}: {fmt(wert, n)}  (Zone {fmt(wert - a.band * a.pip, n)}–{fmt(wert + a.band * a.pip, n)})"
         if a.kurs is not None:
             abstand = (wert - a.kurs) / a.pip
-            zeile += f"  | {de(abs(abstand))} Pips {'über' if abstand > 0 else 'unter'} dem Kurs"
+            zeile += f"  | {de(abs(abstand))} {einheit} {'über' if abstand > 0 else 'unter'} dem Kurs"
         treffer = []
         for zname, lo, hi in zonen:
             if lo - a.toleranz * a.pip <= wert <= hi + a.toleranz * a.pip:
@@ -84,8 +87,8 @@ def main():
             zeile += "  | KONFLUENZ mit " + ", ".join(treffer)
         print(zeile)
     if zonen:
-        print(f"Konfluenz = Pivot liegt in der Zone oder höchstens {de(a.toleranz)} Pips daneben.")
-    print("TradingView-Eingabe (mit Punkt): " + " | ".join(f"{n} {w:.5f}" for n, w in pivots(a.hoch, a.tief, a.schluss)))
+        print(f"Konfluenz = Pivot liegt in der Zone oder höchstens {de(a.toleranz)} {einheit} daneben.")
+    print("TradingView-Eingabe (mit Punkt): " + " | ".join(f"{name} {w:.{n}f}" for name, w in pivots(a.hoch, a.tief, a.schluss)))
 
 
 if __name__ == "__main__":

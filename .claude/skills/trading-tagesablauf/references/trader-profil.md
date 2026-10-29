@@ -157,6 +157,7 @@ neuen Werte (in den Notizen festhalten).
 - 28.10. (abends): IFVG-Video als Variante TJR-IF aufgenommen (Körper-Schluss durch FVG → Ziel festlegen → Rücklauf in
   die IFVG = Einstieg, Stop hinter der IFVG), jeden Morgen und live, vor und während des Trades; Gegen-IFVG im
   offenen Trade = Warnzeichen (`references/fvg-ifvg.md`).
-- 29.10.: Strategie für ES1!/NQ1! aus einem ORB-Video (Opening Range Breakout, MES-Beispiel) plus TJR-Familie
-  (`references/es-nq-strategie.md`); `rechner.py --markt` für Kontrakte. Offen: Futures oder CFD, welche Plattform.
+- 29.10.: Er handelt auch die Index-CFDs **SPX500** und **NAS100** bei IQ Capital (Spread ca. 0,55 bzw. 1,89 Punkte,
+  IQ-Tick 0,01). Wunsch: zwei getrennte Strategien (`references/strategie-spx500.md`, `references/strategie-nas100.md`,
+  je ORB aus einem Video plus TJR-Familie), ausgelöst über „Guten Morgen, heute …“. Offen: $ pro Punkt und Unit.
 - 28.10.: Screenshot-Protokoll mit Uhrzeitplan; nur noch vier Setups (M, TJR, SB, PV), Handbuch nur Konfluenz.
