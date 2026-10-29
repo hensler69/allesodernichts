@@ -75,9 +75,9 @@ Keine Angaben zu: Bias, SMT, Breakeven, Nachrichten, Trefferquote, CFDs.
 ## 2. Instrument bei IQ Capital und Chart
 
 - **Handel**: CFD **SPX500** bei IQ Capital. In IQ ist ein Tick 0,01 Punkte (Spread 55 = 0,55 Punkte).
-- **Offen: Dollar pro Punkt und Unit**, kleinste Unit. Er schickt dafür einmal die Symbol-Info bzw. das Order-Panel.
-  Dann wird mit `scripts/rechner.py --markt SPX500 --pipwert <$ pro Punkt und Unit>` gerechnet. Ohne diesen Wert
-  keine Positionsgröße nennen.
+- **1 Unit = 10 $ pro Punkt** (gemessen im IQ-Order-Panel am 29.10.2026: 0,5 Units mit Stop 10 Punkte = 50 $
+  Risiko; die Symbol-Info zeigt keinen Punktwert). Positionsgröße immer mit `scripts/rechner.py --markt SPX500`.
+  Beispiel aus dem Video: Stop 7,75 Punkte → **3,22 Units** für 250 $. Ändert IQ den Wert, zeigt das Panel bei „Risk“ den Betrag zum Gegenprüfen.
 - **Chart**: Levels auf dem Chart messen, dessen Kurse er handelt, also **SPX500 in IQ** (Quelle „INDEX“). Andere
   Charts (OANDA:SPX500USD, ES1!) weichen um einige Punkte ab; ES1! ist in kostenlosen TradingView-Konten meist auch
   verzögert. Wenn er in TradingView zeichnet, den Abstand zu IQ einmal prüfen (Ergänzung).

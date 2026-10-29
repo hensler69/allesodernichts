@@ -159,5 +159,5 @@ neuen Werte (in den Notizen festhalten).
   offenen Trade = Warnzeichen (`references/fvg-ifvg.md`).
 - 29.10.: Er handelt auch die Index-CFDs **SPX500** und **NAS100** bei IQ Capital (Spread ca. 0,55 bzw. 1,89 Punkte,
   IQ-Tick 0,01). Wunsch: zwei getrennte Strategien (`references/strategie-spx500.md`, `references/strategie-nas100.md`,
-  je ORB aus einem Video plus TJR-Familie), ausgelöst über „Guten Morgen, heute …“. Offen: $ pro Punkt und Unit.
+  je ORB aus einem Video plus TJR-Familie), ausgelöst über „Guten Morgen, heute …“. 1 Unit = 10 $ pro Punkt (IQ-Panel: 0,5 Units × 10 Punkte = 50 $).
 - 28.10.: Screenshot-Protokoll mit Uhrzeitplan; nur noch vier Setups (M, TJR, SB, PV), Handbuch nur Konfluenz.

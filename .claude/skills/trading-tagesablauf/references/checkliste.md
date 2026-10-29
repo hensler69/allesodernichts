@@ -50,7 +50,7 @@ Von oben nach unten abhaken. **Gilt für das Grundmodell (M). Ein Punkt offen = 
 ### 8 · SPX500 / NAS100 (je eigene Strategie: `references/strategie-spx500.md`, `references/strategie-nas100.md`)
 
 - [ ] **ORB**: Spanne = erste 15-Min.-Kerze ab 09:30 NY (15:30 MEZ)? 1-Min.-**Körper** außerhalb (Docht = kein Ausbruch)? Retest berührt die Kante? Rejection (Morning Star/Engulfing/Docht/Konsolidierung) und Schluss wieder außerhalb?
-- [ ] Stop unter dem Rejection-Tief plus Spread (SPX500 0,55, NAS100 1,89 Punkte), Ziel vor der Liquidität (SPX500 ca. 20–25 Punkte, NAS100 ca. 0,3 %), ≥ 2R, Units mit `rechner.py --markt … --pipwert …`?
+- [ ] Stop unter dem Rejection-Tief plus Spread (SPX500 0,55, NAS100 1,89 Punkte), Ziel vor der Liquidität (SPX500 ca. 20–25 Punkte, NAS100 ca. 0,3 %), ≥ 2R, Units mit `rechner.py --markt SPX500|NAS100` (1 Unit = 10 $ pro Punkt)?
 - [ ] **Fehlausbruch** an der Kante = Sweep → TJR-Familie in die Gegenrichtung prüfen, nie beide Richtungen.
 
 ## Während des Trades

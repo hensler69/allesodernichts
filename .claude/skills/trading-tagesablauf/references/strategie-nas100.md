@@ -71,9 +71,9 @@ Den weiten Stop gibt es nur als Variante, wenn trotzdem ≥ 2R herauskommen.
 ## 2. Instrument bei IQ Capital, Chart und was beim Nasdaq anders ist
 
 - **Handel**: CFD **NAS100** bei IQ Capital. In IQ ist ein Tick 0,01 Punkte (Spread 189 = 1,89 Punkte).
-- **Offen: Dollar pro Punkt und Unit**, kleinste Unit. Er schickt dafür einmal die Symbol-Info bzw. das Order-Panel.
-  Dann wird mit `scripts/rechner.py --markt NAS100 --pipwert <$ pro Punkt und Unit>` gerechnet. Ohne diesen Wert
-  keine Positionsgröße nennen.
+- **1 Unit = 10 $ pro Punkt** (gemessen im IQ-Order-Panel am 29.10.2026: 0,5 Units mit Stop 10 Punkte = 50 $
+  Risiko; die Symbol-Info zeigt keinen Punktwert). Positionsgröße immer mit `scripts/rechner.py --markt NAS100`.
+  Beispiel: Stop 35 Punkte → **0,71 Units** für 250 $. Ändert IQ den Wert, zeigt das Panel bei „Risk“ den Betrag zum Gegenprüfen.
 - **Chart**: Levels auf dem Chart messen, dessen Kurse er handelt, also **NAS100 in IQ**. Andere Charts
   (OANDA:NAS100USD, NQ1!) weichen ab; NQ1! ist in kostenlosen TradingView-Konten meist auch verzögert (Ergänzung).
 - **Punkte umrechnen (Ergänzung)**: Der Nasdaq steht ca. 3,8-mal so hoch wie der S&P 500 und schwankt stärker. Feste

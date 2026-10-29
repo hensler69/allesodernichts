@@ -10,22 +10,22 @@ Beispiele:
                                           (Teilgewinne: drei Positionen mit Ziel 1R, 2R und dem Endziel)
   python rechner.py --markt MES --einstieg 6850.25 --stop 6842.50 --ziel 6872.25
                                           (Index-Futures ES/MES/NQ/MNQ: Punkte, Ticks 0,25, ganze Kontrakte)
-  python rechner.py --markt SPX500 --pipwert 1 --einstieg 7728.40 --stop 7720.20 --ziel 7750.40
-                                          (Index-CFDs bei IQ: Punkte, IQ-Tick 0,01; --pipwert = $ pro Punkt und Unit)
+  python rechner.py --markt SPX500 --einstieg 7728.40 --stop 7720.20 --ziel 7750.40
+                                          (Index-CFDs bei IQ: Punkte, IQ-Tick 0,01, 1 Unit = 10 $ pro Punkt)
 
 Richtung ergibt sich aus Stop und Ziel (Stop über dem Ziel = Short). Standard: EURUSD-artige Paare
 (1 Pip = 0,0001, 10 $ pro Pip und Lot, 1 IQ-Tick = 0,00001). Für andere Märkte --pip und --pipwert setzen.
 --markt ES|MES|NQ|MNQ setzt die CME-Werte (1 Punkt = 50/5/20/2 $, Tick 0,25) und rechnet ganze Kontrakte.
---markt SPX500|NAS100 (CFDs bei IQ Capital) rechnet in Punkten mit IQ-Tick 0,01; den Dollarwert pro Punkt und Unit
-gibt es nur aus der Plattform, deshalb muss --pipwert dazu.
+--markt SPX500|NAS100 (CFDs bei IQ Capital) rechnet in Punkten mit IQ-Tick 0,01 und 10 $ pro Punkt und Unit
+(gemessen im IQ-Order-Panel am 29.10.2026: 0,5 Units, Stop 10 Punkte = 50 $ Risiko).
 """
 import argparse
 import math
 
 # CME-Index-Futures: $ pro Punkt und Kontrakt, Tick 0,25 Punkte
 MAERKTE = {"ES": 50.0, "MES": 5.0, "NQ": 20.0, "MNQ": 2.0}
-# Index-CFDs bei IQ Capital: IQ-Tick 0,01 Punkte, $ pro Punkt und Unit laut Plattform (--pipwert)
-CFDS = ("SPX500", "NAS100")
+# Index-CFDs bei IQ Capital: IQ-Tick 0,01 Punkte, $ pro Punkt und Unit (IQ-Order-Panel, 29.10.2026)
+CFDS = {"SPX500": 10.0, "NAS100": 10.0}
 
 
 def fmt(x, n=5):
@@ -48,7 +48,7 @@ def main():
     ap.add_argument("--pipwert", type=float, help="$ pro Pip und Lot (EURUSD: 10); bei CFDs $ pro Punkt und Unit")
     ap.add_argument("--tick", type=float, default=0.00001, help="Tickgröße der Plattform (IQ: 0,00001)")
     ap.add_argument("--teile", type=int, choices=[3], help="3 = Position dritteln: Ziele 1R, 2R und --ziel")
-    ap.add_argument("--markt", choices=sorted(MAERKTE) + list(CFDS),
+    ap.add_argument("--markt", choices=sorted(MAERKTE) + sorted(CFDS),
                     help="Index-Future (ES, MES, NQ, MNQ) oder Index-CFD bei IQ (SPX500, NAS100) statt Forex")
     a = ap.parse_args()
     a.einheit, a.groesse, a.stellen = "Pips", "Lots", 5
@@ -58,8 +58,7 @@ def main():
         a.einheit, a.groesse, a.stellen = "Punkte", f"Kontrakte {a.markt}", 2
     elif a.markt:
         if a.pipwert is None:
-            print(f"Für {a.markt} fehlt --pipwert: $ pro Punkt und Unit laut IQ (Symbol-Info bzw. Order-Panel).")
-            return
+            a.pipwert = CFDS[a.markt]
         a.pip, a.tick = 1.0, 0.01
         a.einheit, a.groesse, a.stellen = "Punkte", f"Units {a.markt}", 2
     if a.pipwert is None:

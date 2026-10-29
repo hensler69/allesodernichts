@@ -357,8 +357,8 @@ Pfade relativ zum Ordner dieses Skills (der Basisordner wird beim Laden des Skil
   (Kalibrierung prüfen), `preis` / `y` (umrechnen), `zeichnen` (Plan ins Bild). Details in
   `references/messung.md` und `references/grafik.md`.
 - `scripts/rechner.py`: Pips, R, Lots, Dollar, IQ-Ticks, schlechtester Einstieg für 2R, 1R-Marke für Breakeven.
-  Mit `--teile 3` die Teilgewinne (drei Orders mit Ziel 1R, 2R und Endziel, Schnitt-R). Mit `--markt SPX500|NAS100
-  --pipwert <$ pro Punkt und Unit>` für seine Index-CFDs bei IQ (Punkte, IQ-Tick 0,01), mit `--markt ES|MES|NQ|MNQ`
+  Mit `--teile 3` die Teilgewinne (drei Orders mit Ziel 1R, 2R und Endziel, Schnitt-R). Mit `--markt SPX500|NAS100`
+  für seine Index-CFDs bei IQ (Punkte, IQ-Tick 0,01, 1 Unit = 10 $ pro Punkt), mit `--markt ES|MES|NQ|MNQ`
   für Index-Futures (ganze Kontrakte).
 - `scripts/pivots.py`: Tages-Pivots (P, R1–R3, S1–S3) aus Vortages-H/L/C, Abstand zum Kurs, Konfluenz mit seinen
   Zonen, Werte zum Eintippen.
