@@ -1,6 +1,6 @@
 ---
 name: "trading-tagesablauf"
-description: Täglicher Trading-Begleiter für den Nutzer (EURUSD, SMT mit GBPUSD, IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens aus dem ersten Chart-Screenshot - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, vorhandene und neue Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit TradingView-Werkzeugen wie Fibonacci und Volumenprofil. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
+description: Täglicher Trading-Begleiter für den Nutzer (EURUSD mit SMT GBPUSD auf IQ Capital, dazu ES1!/NQ1! mit ORB und TJR) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens aus den Screenshots - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit Fibonacci und Volumenprofil. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, ORB, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
 compatibility: Python 3 mit Pillow und numpy für die Skripte; Websuche für den Termin-Check; ein Werkzeug zum Senden von Bildern an den Nutzer (z. B. SendUserFile).
 ---
 
@@ -45,6 +45,9 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    durchbrochen → Ziel festlegen → Rücklauf in die IFVG = Einstieg, Stop hinter der IFVG) jeden Morgen bei der
    Zonen-Suche und live nach einem Sweep, vor und während des Trades (Gegen-IFVG im offenen Trade = Warnzeichen);
    **TJR-FE** (Nachzügler-Einstieg in die nächste FVG) nur, wenn ein Setup schon gelaufen und der Einstieg verpasst ist.
+   `references/es-nq-strategie.md` immer bei ES1!/NQ1! (Index-Futures, auch MES/MNQ oder US500/US100):
+   ORB aus dem Video (erste 15-Min.-Kerze ab 09:30 New York, 1-Min.-Körper-Schluss außerhalb, Retest, Rejection,
+   Einstieg) plus die ganze TJR-Familie, SMT zwischen ES und NQ, Kontrakte, Zeiten, vor und während des Trades.
    `references/screenshot-protokoll.md` am Ende jedes Morgenplans (welche Bilder er heute wann schickt) und
    immer, wenn du ein Bild anforderst. Dort steht auch, welche Setups er handelt (nur M, TJR, SB, PV).
    `references/wirtschaftstermine.md` jeden Morgen beim Termin-Check und immer, wenn heute oder morgen ein
@@ -67,7 +70,8 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   den Videos“. Er soll wissen, worauf sein System wirklich beruht.
 - **Jede Option mit allen Risiken.** Das ist sein ausdrücklicher Wunsch, und der Verlust am 27.10. kam genau von
   einem Risiko, das vorher zu wenig gewichtet wurde (Liquidität direkt hinter dem Stop). Nutze die Prüfliste unten.
-- **Nur vier Setups**: M, TJR, SB, PV. Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
+- **Nur vier Setups** (EURUSD): M, TJR, SB, PV. Für ES1!/NQ1! gelten ORB und die TJR-Familie
+  (`references/es-nq-strategie.md`), mit denselben Noten, demselben Risiko-Rahmen und demselben Tageslimit. Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
   (Begründung in `references/screenshot-protokoll.md`, Abschnitt 1).
 - **Jedes Setup steht für sich** (Wunsch vom 28.10., ersetzt die frühere 7-Punkte-Regel für alle Setups). Es gibt
   vier Setups mit eigenen Pflicht-Bedingungen. Sie gelten einzeln und werden kombiniert, wenn sie am selben Ort
@@ -342,7 +346,8 @@ Pfade relativ zum Ordner dieses Skills (der Basisordner wird beim Laden des Skil
   (Kalibrierung prüfen), `preis` / `y` (umrechnen), `zeichnen` (Plan ins Bild). Details in
   `references/messung.md` und `references/grafik.md`.
 - `scripts/rechner.py`: Pips, R, Lots, Dollar, IQ-Ticks, schlechtester Einstieg für 2R, 1R-Marke für Breakeven.
-  Mit `--teile 3` die Teilgewinne (drei Orders mit Ziel 1R, 2R und Endziel, Schnitt-R).
+  Mit `--teile 3` die Teilgewinne (drei Orders mit Ziel 1R, 2R und Endziel, Schnitt-R). Mit `--markt ES|MES|NQ|MNQ`
+  für Index-Futures (Punkte, Ticks 0,25, ganze Kontrakte).
 - `scripts/pivots.py`: Tages-Pivots (P, R1–R3, S1–S3) aus Vortages-H/L/C, Abstand zum Kurs, Konfluenz mit seinen
   Zonen, Werte zum Eintippen.
   Für andere Märkte `--pip` und `--pipwert` setzen.

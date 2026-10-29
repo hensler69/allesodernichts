@@ -63,3 +63,9 @@ Seitwärtsphase.
 | 6 | Trade beendet | IQ-Positionsliste + EURUSD M5 | Journal |
 
 Ohne Ereignis keine Bilder nötig. Er muss nicht dauernd schauen: Alarme an den Zonen reichen.
+
+## 5. ES1!/NQ1!-Tag
+
+Eigener Bilderplan in `references/es-nq-strategie.md`, Abschnitt 11: 15:15 MEZ ES/NQ 15 Min. + ES Daily, 15:46 die
+Spanne (Kopfzeile der 09:30-Kerze), bei Alarm ES und NQ 1 Min., Retest 1 Min., vor dem Klick das Order-Panel. In den
+Zeitumstellungs-Wochen eine Stunde früher.

@@ -157,4 +157,6 @@ neuen Werte (in den Notizen festhalten).
 - 28.10. (abends): IFVG-Video als Variante TJR-IF aufgenommen (Körper-Schluss durch FVG → Ziel festlegen → Rücklauf in
   die IFVG = Einstieg, Stop hinter der IFVG), jeden Morgen und live, vor und während des Trades; Gegen-IFVG im
   offenen Trade = Warnzeichen (`references/fvg-ifvg.md`).
+- 29.10.: Strategie für ES1!/NQ1! aus einem ORB-Video (Opening Range Breakout, MES-Beispiel) plus TJR-Familie
+  (`references/es-nq-strategie.md`); `rechner.py --markt` für Kontrakte. Offen: Futures oder CFD, welche Plattform.
 - 28.10.: Screenshot-Protokoll mit Uhrzeitplan; nur noch vier Setups (M, TJR, SB, PV), Handbuch nur Konfluenz.

@@ -47,6 +47,12 @@ Von oben nach unten abhaken. **Gilt für das Grundmodell (M). Ein Punkt offen = 
 - [ ] Variante **TJR-IF**: Sweep vorher? Bärische FVG (Long) mit M5-**Körper** darüber geschlossen = IFVG, kräftig, außerhalb der Sperrzeit? Ziel (offensichtliche Liquidität) festgelegt und ≥ 2R mit Stop unter der IFVG? Keine gleichen Tiefs direkt unter dem Stop? Limit an der IFVG-Kante, löschen bei Körper-Schluss zurück durch die IFVG. (`references/fvg-ifvg.md`)
 - [ ] Nachzügler **TJR-FE**: Sweep und Wende schon bestätigt? Erste/zweite M5-FVG in Trend-Richtung angelaufen? M1 tieferes Hoch + tieferes Tief (Long: höheres Tief + höheres Hoch) in der Lücke? Noch ≥ 2R? (`references/fvg-ifvg.md`)
 
+### 8 · ES1!/NQ1! (eigene Strategie, `references/es-nq-strategie.md`)
+
+- [ ] **ORB**: Spanne = erste 15-Min.-Kerze ab 09:30 NY (15:30 MEZ)? 1-Min.-**Körper** außerhalb (Docht = kein Ausbruch)? Retest berührt die Kante? Rejection (Morning Star/Engulfing/Docht/Konsolidierung) und Schluss wieder außerhalb?
+- [ ] Stop unter dem Rejection-Tief, Ziel ca. 20–25 Punkte (ES) bzw. vor der Liquidität, ≥ 2R, Kontrakte mit `rechner.py --markt`? Partner-Index (SMT) auch ausgebrochen?
+- [ ] **Fehlausbruch** an der Kante = Sweep → TJR-Familie in die Gegenrichtung prüfen, nie beide Richtungen.
+
 ## Während des Trades
 
 - [ ] Hält die Invalidierung bzw. das geschützte Tief? Sonst greift der Stop, nie weiter weg setzen. (L1·3, L3·6)
