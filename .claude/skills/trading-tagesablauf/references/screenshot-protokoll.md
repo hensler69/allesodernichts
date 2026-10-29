@@ -67,7 +67,7 @@ Ohne Ereignis keine Bilder nötig. Er muss nicht dauernd schauen: Alarme an den 
 ## 5. SPX500- oder NAS100-Tag
 
 Nennt er morgens den Index, gilt der Bilderplan der jeweiligen Strategie (`references/strategie-spx500.md` bzw.
-`references/strategie-nas100.md`, Abschnitt 11):
+`references/strategie-nas100.md`, Abschnitt 8):
 - **morgens**: Daily mit Kopfzeile von gestern, 1H (3–5 Tage), 15 Min. (gestern und die Nacht), IQ-Kopfleiste;
 - **15:15 MEZ**: 15 Min.;
 - **15:46 MEZ**: die Eröffnungsspanne als Level;
