@@ -21,6 +21,7 @@ Für SPX500 und NAS100 ist sie **das TJR-Setup** (Journal „TJR-SPX500“, „T
 
 1. Was im Video steht
 2. Die 6 Schritte auf Deutsch
+2a. Long und Short mit der ganzen TJR-Familie
 3. Variante A: SPX500 allein
 4. Variante B: NAS100 allein
 5. Variante C: zusammen (ES + NQ mit SMT)
@@ -78,6 +79,28 @@ Das ist eine Auslegung, keine wörtliche Box-Zeile.
 - **79 % ext** ist wie in TJR-KL ausgelegt: Fibonacci über das Sweep-Bein, Schluss jenseits der 79-%-Stufe. Das ist
   die unsicherste Bestätigung; Rangfolge BOS vor IFVG vor SMT vor 79 % (Ergänzung).
 - **Eine** Bestätigung je Schritt reicht laut Box („bos, ifvg, smt, 79%“ als Auswahl). Mehrere zählen als Dafür.
+
+## 2a. Long und Short mit der ganzen TJR-Familie
+
+Wunsch des Nutzers (29.10.2026): dasselbe nicht nur für Short, sondern auch für Long, mit allem, was im TJR-Setup
+schon steht. Das Video zeigt nur Shorts. Long ist **genau gespiegelt**. Die TJR-Familie füllt die Schritte so:
+- **TJR** (`references/tjr-setup.md`): Schritt 2 = M5-BOS, Schritt 3 = M5-FVG, Schritt 4 = M1-BOS.
+- **TJR-KL** (`references/key-level-variante.md`): mehr Auswahl in Schritt 2 (BOS/IFVG/79 %) und 3
+  (FVG/EQ/Order Block/Breaker); als Auslöser auch eine M5-Kerze, die aus der Zone herausstößt.
+- **TJR-IF** (`references/fvg-ifvg.md`): IFVG als Wende in Schritt 2 und als Zone in Schritt 3. Einstieg dann per
+  Limit an der IFVG-Kante, Stop hinter der IFVG (ohne Tiefs/Hochs direkt dahinter).
+- **TJR-FE** (`references/fvg-ifvg.md`): Einstieg verpasst? Die 1. oder 2. FVG nach dem BOS, darin dreht M1.
+
+| Schritt | **LONG** (Sweep eines Tiefs) | **SHORT** (Sweep eines Hochs) |
+|---|---|---|
+| 1 Sweep | Tief auf 1H/4H, Asia-/London-/Vortagestief oder Tief der Eröffnungsspanne wird unterstochen, Schluss zurück darüber | Hoch auf 1H/4H, Asia-/London-/Vortageshoch oder Hoch der Spanne wird überstochen, Schluss zurück darunter |
+| 2 5-Min.-Wende | BOS: Schluss über dem letzten tieferen Hoch · IFVG: bärische FVG mit Körper **überschlossen** · 79 %: Schluss über der 79-%-Stufe · (zusammen: SMT, der andere Index macht das Tief nicht mit) | BOS: Schluss unter dem letzten höheren Tief · IFVG: bullische FVG mit Körper **unterschlossen** · 79 %: Schluss unter der 79-%-Stufe · (zusammen: SMT, der andere Index macht das Hoch nicht mit) |
+| 2b Premarket | Tief schon vor 15:30 geholt → nach der Eröffnung entsteht ein 5-Min.-Tief, das gesweept wird | Hoch schon vor 15:30 geholt → nach der Eröffnung entsteht ein 5-Min.-Hoch, das gesweept wird |
+| 3 5-Min.-Rücklauf | in **bullische** FVG, EQ (50 %), Order Block (letzte rote Kerze vor dem Anstieg), Breaker oder IFVG, ohne 5-Min.-Schluss darunter | in **bärische** FVG, EQ (50 %), Order Block (letzte grüne Kerze vor dem Abverkauf), Breaker oder IFVG, ohne 5-Min.-Schluss darüber |
+| 4 1-Min.-Bestätigung | BOS nach oben (höheres Hoch), IFVG nach oben, (SMT), 79 % · oder M5-Kerze stößt nach oben aus der Zone (KL) | BOS nach unten (tieferes Tief), IFVG nach unten, (SMT), 79 % · oder M5-Kerze stößt nach unten aus der Zone (KL) |
+| 5 Einstieg | beim Schluss der Bestätigungs-Kerze · **Stop unter dem Sweep-Tief** + Spread (IF-Limit: Stop unter der IFVG) | beim Schluss der Bestätigungs-Kerze · **Stop über dem Sweep-Hoch** + Spread (IF-Limit: Stop über der IFVG) |
+| 6 Ziel | vorige Hochs/Liquidität oben (Session-Hoch, Vortageshoch, offene FVG), ≥ 2R | vorige Tiefs/Liquidität unten (Session-Tief, Vortagestief, offene FVG), ≥ 2R |
+| Nachzügler (FE) | 1./2. bullische FVG nach dem BOS, darin M1 höheres Tief + höheres Hoch | 1./2. bärische FVG nach dem BOS, darin M1 tieferes Hoch + tieferes Tief |
 
 ## 3. Variante A: SPX500 allein
 
@@ -165,51 +188,118 @@ Datenquelle).
 
 ## 8. Text für die Box im Layout
 
-Zum Kopieren in eine TradingView-Text-Box (Zeichenwerkzeug „Text“ bzw. „Notiz“), je Variante eine Box. Uhrzeiten
-gelten außerhalb der Zeitumstellungs-Wochen (sonst 1 Std. früher).
+Zum Kopieren in eine TradingView-Text-Box (Zeichenwerkzeug „Text“ bzw. „Notiz“). Je Markt eine Box für **Long** und
+eine für **Short**, mit der ganzen TJR-Familie (Abschnitt 2a). Uhrzeiten gelten außerhalb der Zeitumstellungs-Wochen
+(sonst 1 Std. früher).
 
 **SPX500 allein**
+
 ```
-TJR-PLAN SPX500 (allein)
-1: Liquiditäts-Sweep (1H, 4H, Session-Hochs/-Tiefs)
-2: 5-Min.-Bestätigung (BOS, IFVG, 79%-Ext.)
-2b: Sweep im Premarket/anderer Session -> ab 15:30
-    auf 5-Min.-Manipulation warten (5-Min.-Hoch/-Tief geholt)
-3: 5-Min.-Fortsetzung (Rücklauf in EQ oder FVG)
-4: 1-Min.-Bestätigung (BOS, IFVG, 79%-Ext.)
-5: Einstieg - Stop hinter Sweep-Hoch/-Tief + Spread, min. 2R
-6: Ziel: vorige Liquidität in unserer Richtung
-Units = 25 / Stop in Punkten (250 $ Risiko)
+TJR LONG – SPX500 (allein)
+1: Sweep eines Tiefs (1H, 4H, Asia/London,
+   Vortag, Spanne) – Schluss zurück darüber
+2: 5-Min.-Wende nach oben: BOS, IFVG o. 79%
+2b: Tief schon im Premarket geholt -> ab 15:30
+    5-Min.-Tief nach Eröffnung wird gesweept
+3: 5-Min.-Rücklauf in bullische FVG, EQ 50%,
+   Order Block o. IFVG – kein Schluss darunter
+4: 1-Min.: BOS o. IFVG nach oben
+5: Einstieg – Stop unter Sweep-Tief + Spread, min. 2R
+6: Ziel: vorige Hochs / Liquidität oben
+IFVG-Limit: an der Oberkante, Stop hinter IFVG
+Verpasst? 1./2. FVG nach BOS: M1 höheres Tief + Hoch
+Units = 25 / Stop in Punkten (250 $)
+```
+
+```
+TJR SHORT – SPX500 (allein)
+1: Sweep eines Hochs (1H, 4H, Asia/London,
+   Vortag, Spanne) – Schluss zurück darunter
+2: 5-Min.-Wende nach unten: BOS, IFVG o. 79%
+2b: Hoch schon im Premarket geholt -> ab 15:30
+    5-Min.-Hoch nach Eröffnung wird gesweept
+3: 5-Min.-Rücklauf in bärische FVG, EQ 50%,
+   Order Block o. IFVG – kein Schluss darüber
+4: 1-Min.: BOS o. IFVG nach unten
+5: Einstieg – Stop über Sweep-Hoch + Spread, min. 2R
+6: Ziel: vorige Tiefs / Liquidität unten
+IFVG-Limit: an der Unterkante, Stop hinter IFVG
+Verpasst? 1./2. FVG nach BOS: M1 tieferes Hoch + Tief
+Units = 25 / Stop in Punkten (250 $)
 ```
 
 **NAS100 allein**
+
 ```
-TJR-PLAN NAS100 (allein)
-1: Liquiditäts-Sweep (1H, 4H, Session-Hochs/-Tiefs)
-2: 5-Min.-Bestätigung (BOS, IFVG, 79%-Ext.)
-2b: Sweep im Premarket/anderer Session -> ab 15:30
-    auf 5-Min.-Manipulation warten (5-Min.-Hoch/-Tief geholt)
-3: 5-Min.-Fortsetzung (Rücklauf in EQ oder FVG)
-4: 1-Min.-Bestätigung (BOS oder IFVG, kräftige Kerze)
-5: Einstieg - Stop hinter Sweep-Hoch/-Tief + Spread, min. 2R
-6: Ziel: vorige Liquidität in unserer Richtung
-Units = 25 / Stop in Punkten (250 $ Risiko)
+TJR LONG – NAS100 (allein)
+1: Sweep eines Tiefs (1H, 4H, Asia/London,
+   Vortag, Spanne) – Schluss zurück darüber
+2: 5-Min.-Wende nach oben: BOS, IFVG o. 79%
+2b: Tief schon im Premarket geholt -> ab 15:30
+    5-Min.-Tief nach Eröffnung wird gesweept
+3: 5-Min.-Rücklauf in bullische FVG, EQ 50%,
+   Order Block o. IFVG – kein Schluss darunter
+4: 1-Min.: BOS o. IFVG nach oben, kräftige Kerze
+5: Einstieg – Stop unter Sweep-Tief + Spread, min. 2R
+6: Ziel: vorige Hochs / Liquidität oben
+IFVG-Limit: an der Oberkante, Stop hinter IFVG
+Verpasst? 1./2. FVG nach BOS: M1 höheres Tief + Hoch
+Units = 25 / Stop in Punkten (250 $)
 ```
 
-**ES + NQ zusammen**
 ```
-TJR-PLAN ES + NQ (zusammen, SMT)
-1: Liquiditäts-Sweep (1H, 4H, Session-Hochs/-Tiefs)
-2: 5-Min.-Bestätigung (BOS, IFVG, SMT, 79%-Ext.)
-2b: Sweep im Premarket/anderer Session -> ab 15:30
-    auf 5-Min.-Manipulation warten
-3: 5-Min.-Fortsetzung (EQ oder FVG; bei 2b: SMT =
-    nur ein Index holt das 5-Min.-Hoch/-Tief)
-4: 1-Min.-Bestätigung (BOS, IFVG, SMT, 79%-Ext.)
-5: Einstieg im Index MIT dem Sweep - Stop hinter
-   dem Hoch/Tief + Spread, min. 2R, nur EIN Index
-6: Ziel: vorige Liquidität in unserer Richtung
-Units = 25 / Stop in Punkten (250 $ Risiko)
+TJR SHORT – NAS100 (allein)
+1: Sweep eines Hochs (1H, 4H, Asia/London,
+   Vortag, Spanne) – Schluss zurück darunter
+2: 5-Min.-Wende nach unten: BOS, IFVG o. 79%
+2b: Hoch schon im Premarket geholt -> ab 15:30
+    5-Min.-Hoch nach Eröffnung wird gesweept
+3: 5-Min.-Rücklauf in bärische FVG, EQ 50%,
+   Order Block o. IFVG – kein Schluss darüber
+4: 1-Min.: BOS o. IFVG nach unten, kräftige Kerze
+5: Einstieg – Stop über Sweep-Hoch + Spread, min. 2R
+6: Ziel: vorige Tiefs / Liquidität unten
+IFVG-Limit: an der Unterkante, Stop hinter IFVG
+Verpasst? 1./2. FVG nach BOS: M1 tieferes Hoch + Tief
+Units = 25 / Stop in Punkten (250 $)
+```
+
+**ES + NQ zusammen** (SPX500 und NAS100 nebeneinander)
+
+```
+TJR LONG – ES + NQ (zusammen, SMT)
+1: Sweep eines Tiefs (1H, 4H, Asia/London,
+   Vortag, Spanne) – Schluss zurück darüber
+2: 5-Min.-Wende nach oben: BOS, IFVG, SMT o. 79%
+2b: Tief schon im Premarket geholt -> ab 15:30
+    5-Min.-Tief nach Eröffnung wird gesweept (SMT)
+3: 5-Min.-Rücklauf in bullische FVG, EQ 50%,
+   Order Block o. IFVG – kein Schluss darunter
+4: 1-Min.: BOS o. IFVG nach oben, SMT
+5: Einstieg – Stop unter Sweep-Tief + Spread, min. 2R
+   nur EIN Index: der mit dem Sweep
+6: Ziel: vorige Hochs / Liquidität oben
+IFVG-Limit: an der Oberkante, Stop hinter IFVG
+Verpasst? 1./2. FVG nach BOS: M1 höheres Tief + Hoch
+Units = 25 / Stop in Punkten (250 $)
+```
+
+```
+TJR SHORT – ES + NQ (zusammen, SMT)
+1: Sweep eines Hochs (1H, 4H, Asia/London,
+   Vortag, Spanne) – Schluss zurück darunter
+2: 5-Min.-Wende nach unten: BOS, IFVG, SMT o. 79%
+2b: Hoch schon im Premarket geholt -> ab 15:30
+    5-Min.-Hoch nach Eröffnung wird gesweept (SMT)
+3: 5-Min.-Rücklauf in bärische FVG, EQ 50%,
+   Order Block o. IFVG – kein Schluss darüber
+4: 1-Min.: BOS o. IFVG nach unten, SMT
+5: Einstieg – Stop über Sweep-Hoch + Spread, min. 2R
+   nur EIN Index: der mit dem Sweep
+6: Ziel: vorige Tiefs / Liquidität unten
+IFVG-Limit: an der Unterkante, Stop hinter IFVG
+Verpasst? 1./2. FVG nach BOS: M1 tieferes Hoch + Tief
+Units = 25 / Stop in Punkten (250 $)
 ```
 
 ## 9. Risiken, Journal
