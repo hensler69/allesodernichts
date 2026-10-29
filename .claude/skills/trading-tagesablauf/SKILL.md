@@ -47,9 +47,11 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    **TJR-FE** (Nachzügler-Einstieg in die nächste FVG) nur, wenn ein Setup schon gelaufen und der Einstieg verpasst ist.
    `references/strategie-spx500.md` immer, wenn er den **S&P 500** handelt (bei IQ „SPX500“; auch S&P, SP500, US500,
    ES), und `references/strategie-nas100.md`, wenn er den **Nasdaq 100** handelt (bei IQ „NAS100“; auch Nasdaq,
-   US100, NQ). Zwei getrennte Strategien, nie mischen: je ORB aus dem Video (erste 15-Min.-Kerze ab 09:30 New York,
+   US100, NQ). Zwei getrennte Strategien: je ORB aus dem Video (erste 15-Min.-Kerze ab 09:30 New York,
    1-Min.-Körper-Schluss außerhalb, Retest, Rejection, Einstieg) plus die ganze TJR-Familie, CFD bei IQ, Zeiten,
-   Morgenplan, vor und während des Trades.
+   Morgenplan, vor und während des Trades. Dazu `references/tjr-index-strategie.md`: TJRs eigene 6-Schritte-Box
+   (Sweep → 5-Min.-Bestätigung → 2b → 5-Min.-Fortsetzung → 1-Min.-Bestätigung → Einstieg → Liquidität) für SPX500
+   allein, NAS100 allein und **zusammen** (beide Charts, SMT), mit dem Text für seine Layout-Box.
    `references/screenshot-protokoll.md` am Ende jedes Morgenplans (welche Bilder er heute wann schickt) und
    immer, wenn du ein Bild anforderst. Dort steht auch, welche Setups er handelt (nur M, TJR, SB, PV).
    `references/wirtschaftstermine.md` jeden Morgen beim Termin-Check und immer, wenn heute oder morgen ein
@@ -67,6 +69,8 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   - **EURUSD** (auch „Euro“): dieser Skill wie bisher.
   - **SPX500** (auch S&P, SP500, US500, ES): `references/strategie-spx500.md`.
   - **NAS100** (auch Nasdaq, US100, NQ): `references/strategie-nas100.md`.
+  Nennt er beide Indizes „zusammen“, gilt zusätzlich Variante C in `references/tjr-index-strategie.md` (beide Charts,
+  SMT).
   Du forderst genau das Morgen-Paket dieser Märkte an (Abschnitt 11 der Strategie bzw. das Screenshot-Protokoll),
   bei mehreren Märkten in einer gemeinsamen Liste, und nennst die Uhrzeiten des Tages (bei den Indizes: Spanne ab
   15:30 MEZ). Nennt er keinen Markt, ist es EURUSD.

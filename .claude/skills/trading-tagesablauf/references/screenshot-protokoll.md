@@ -76,4 +76,5 @@ Nennt er morgens den Index, gilt der Bilderplan der jeweiligen Strategie (`refer
 - **vor dem Klick**: Order-Panel.
 
 In den Zeitumstellungs-Wochen gilt alles eine Stunde früher. Handelt er am selben Tag auch EURUSD, gilt für EURUSD
-weiter Abschnitt 2.
+weiter Abschnitt 2. **Beide Indizes zusammen** (TJR-Variante C, `references/tjr-index-strategie.md`): jedes Bild von
+SPX500 und NAS100 im gleichen Zeitrahmen, ab 15:30 MEZ 5 Min., in der Zone 1 Min.

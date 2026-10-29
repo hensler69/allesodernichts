@@ -4,6 +4,10 @@ Wunsch des Nutzers (28.10.2026, abends): diesen Reel in den Plan aufnehmen. Quel
 Nutzer eingefügt, ca. 40 Sekunden). Hier steht nur, was im Reel gesagt wird; was dazukommt, ist als **Ergänzung**
 gekennzeichnet.
 
+**Nachtrag 29.10.**: Ein Video mit TJRs eigener Text-Box bestätigt dieses Modell und ergänzt Schritt 2b (Sweep im
+Premarket bzw. in einer anderen Session → auf eine 5-Min.-Manipulation nach der New-Yorker Eröffnung warten) und eine
+**1-Min.-Bestätigung** (BOS/IFVG/SMT/79 %) in der Fortsetzungs-Zone. Details in `references/tjr-index-strategie.md`.
+
 **Einordnung**: Kein fünftes Setup. Der Ablauf ist derselbe wie beim TJR-Setup (Sweep → Wende auf kleinem Zeitrahmen →
 Rücklauf → Einstieg), nur mit mehr erlaubten Varianten bei Wende, Rücklauf-Zone und Auslöser. Deshalb läuft es als
 **Variante des TJR-Setups** mit der Kennung **TJR-KL**. Seine vier Setups (M, TJR, SB, PV) bleiben. TJR und TJR-KL am

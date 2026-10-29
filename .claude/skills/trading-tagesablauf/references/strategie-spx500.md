@@ -139,8 +139,11 @@ Pflicht-Bedingungen wie in den drei TJR-Dateien, mit diesen Anpassungen:
 - **Stop**: hinter dem Sweep-Extrem (TJR, TJR-KL), hinter der IFVG (TJR-IF), hinter der FVG-Bewegung (TJR-FE). Immer
   plus Spread und ohne Liquidität direkt dahinter.
 - **Ziel**: nächste Gegen-Liquidität (anderes Ende der Spanne, Nacht-Hoch/-Tief, PDH/PDL), ≥ 2R.
-- **SMT ist hier keine Bedingung** (Wunsch des Nutzers: Märkte getrennt). Bei TJR fällt der SMT-Punkt also weg,
-  dafür muss die Wende auf M5 sauber sein (kräftige Kerze, Displacement).
+- **Ablauf nach TJRs eigener Text-Box** (Video 29.10.: Sweep → 5-Min.-Bestätigung → 2b Premarket-Sweep: 5-Min.-
+  Manipulation nach der Eröffnung → 5-Min.-Fortsetzung EQ/FVG → 1-Min.-Bestätigung → Einstieg → vorige Liquidität):
+  `references/tjr-index-strategie.md`, dort Variante A (SPX500 allein) und der Text für die Box.
+- **SMT**: SPX500 allein ohne SMT (Wende auf M5 sauber, kräftige Kerze). Mit beiden Charts (Variante C „zusammen“)
+  ist SMT zwischen SPX500 und NAS100 als Bestätigung erlaubt.
 
 ## 6. ORB oder TJR: der Fehlausbruch
 
