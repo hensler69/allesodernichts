@@ -88,7 +88,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] SPX500/NAS100: TJR erst einige Tage im Papierhandel/Replay testen (heute 29.10. nur zuschauen ab 14:30); Punktwert geklärt (1 Unit = 10 $ pro Punkt) (seit 2026-10-29)
 - [ ] VE-Test NAS100 (Einstieg vor der Eröffnung): Fälle sammeln, erstes Foto Fr 30.10. 14:05–14:20; LuxAlgo-Zeiten auf dem Handy-Layout noch auf Standard (seit 2026-10-29)
 - [ ] Aufzug-Foto (Haare dunkler/weniger gelb, Unterlippe des Kollegen minimal): Originalformat, Story 9:16, Feed 4:5 geliefert, Rückmeldung zu Haarton und Lippe abwarten (seit 2026-10-31, Details in notes/2026-10-31.md)
-- [ ] IQ-Konto prüfen (Nutzer): Plan Core oder Rapid (Rapid hat laut Drittseiten eine 40-%-Konsistenzregel), Gewinnziel (Drittseiten: 4.000 $), Verlustgrenze trailt am Tagesende 3.000 $, Zeitlimit; aktuelle Kopfleiste (Eq, MD) für den Puffer schicken; Puffer-Empfehlung bestätigen oder ablehnen (seit 2026-11-02)
+- [ ] IQ-Konto prüfen (Nutzer): Plan Core oder Rapid (Rapid hat laut Drittseiten eine 40-%-Konsistenzregel), Gewinnziel (Drittseiten: 4.000 $), Verlustgrenze trailt am Tagesende 3.000 $, Zeitlimit; Kopfleiste 2.11.: Eq 49.866,46 $, MD 47.131,12 $, Puffer 2.735 $; Puffer-Empfehlung bestätigen oder ablehnen (seit 2026-11-02)
 - [ ] Regeln von IQ Capital zu News-Trading und Halten über Notenbank-Termine prüfen (Nutzer)
 
 ## Laufende Themen
