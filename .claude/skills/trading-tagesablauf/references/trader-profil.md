@@ -81,6 +81,9 @@ Typische Fragen von ihm: „wann long, wann short?“, „ist das ein gutes Setu
   Order und kann nach dem Stop-out eine Gegenposition eröffnen.
 - **Am Handy** (Website im Browser) lassen sich Stop- und Ziel-Linie mit dem Finger ziehen. Er hat am 27.10. so das
   Ziel gesetzt. Tipp: vorher auf 5m stellen, dann liegen die Linien weiter auseinander.
+  Am 2.11. ließ sich das **Order-Panel** am Handy (Safari, Hochformat) nicht öffnen („Trading panel“ nicht
+  antippbar, auch nicht quer/Desktop-Ansicht/Zoom). Neue Orders also nur am PC planen oder die Limit-Order vor dem
+  Weggehen am PC anlegen; Handy-Bedienung in Ruhe testen bzw. den IQ-Support (Chat) fragen.
 - **Kosten**: EURUSD 10 $ pro Pip und Lot. Das Tagesergebnis −286,38 $ passte exakt zu 3,33 Lots × 8,6 Pips, also
   war keine Kommission sichtbar. Die Regeln von IQ Capital zum Halten über Nacht und zum Handeln um Nachrichten
   sind noch nicht geprüft. Darauf hinweisen, wenn es relevant wird.
