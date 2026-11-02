@@ -61,6 +61,10 @@ Typische Fragen von ihm: „wann long, wann short?“, „ist das ein gutes Setu
 ## 3. Konto und Plattform IQ Capital
 
 - Prop-Firma **IQ Capital**, **50K-Konto**, Plattform „VolumetricaFX“ (Website, mit eingebautem TradingView-Chart).
+  Plan **Core** (Konto IQCPEV50K-215941, vom Nutzer am 2.11. bestätigt). Laut Drittseiten (propfirmmap,
+  damnpropfirms, nicht offiziell geprüft): Gewinnziel 4.000 $ (Kontostand 54.000 $), Verlustgrenze trailt am
+  Tagesende 3.000 $ unter dem höchsten Tagesschluss, kein Tageslimit bei CFD, keine Konsistenzregel in der
+  Bewertung (im finanzierten Core-Konto evtl. 30 %).
   Kopfleiste: **Eq** = Kontostand, **DPL** = Tagesergebnis, **MD** = Verlustgrenze (47.000 $), **OPL** = offener
   Gewinn/Verlust. **Puffer = Eq − MD** (nach dem Verlust am 27.10. ca. 2.700 $). Den Puffer bei jeder
   Risikoplanung nennen.
