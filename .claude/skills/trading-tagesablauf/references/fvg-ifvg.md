@@ -141,7 +141,7 @@ Pivots, weitere Setups am Ort und Termine zählen als **Dafür/Dagegen**. Fehlt 
    Unter 2R: **„Lass es.“**
 3. **Liquidität direkt unter dem Stop?** Liegen gleiche Tiefs knapp unter der IFVG (Lehre vom 27.10.), muss der Stop
    hinter sie. Dann neu rechnen; reicht es nicht mehr für 2R: „Lass es.“
-4. **Order**: Limit-Order an der Kante der IFVG mit Stop und Ziel, Lots für 250 $. In IQ beide Schalter an.
+4. **Order**: Limit-Order an der Kante der IFVG mit Stop und Ziel, Lots für 500 $. In IQ beide Schalter an.
 5. **Order löschen**, wenn
    - eine M5-Kerze mit dem Körper unter der IFVG schließt (die IFVG ist ungültig),
    - der Kurs das Ziel ohne Rücklauf erreicht (Chance vorbei),

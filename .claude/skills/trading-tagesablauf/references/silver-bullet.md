@@ -81,7 +81,7 @@ Zeitrahmen: Fenster und FVG auf **M5** (wie im Beitrag), Zonen und Ziel aus 30 M
 5. **SMT** prüfen (GBPUSD 15 Min., OANDA): Hat der Partner den Sweep nicht mitgemacht?
 6. **Einstieg**: Limit-Order an der Kante der FVG (bzw. in der FVG). Stop nach seiner Regel hinter das Sweep-Extrem
    (Variante: 1–2 Pips hinter die FVG, nur auf seinen Wunsch). Ziel knapp vor der Gegen-Liquidität. Lots mit
-   `scripts/rechner.py` für 250 $.
+   `scripts/rechner.py` für 500 $.
 7. **Zeitgrenze**: Wird die Limit-Order bis zum Ende des Fensters (11:00 New York) nicht gefüllt, löschen.
 8. **Management**: wie immer. Breakeven bei 1R, Stop nie vergrößern, an Notenbank-Tagen spätestens 30 Min. vor dem
    Entscheid schließen.

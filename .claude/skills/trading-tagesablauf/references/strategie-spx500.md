@@ -32,8 +32,8 @@ war kurz im Plan und ist am 29.10. als Setup gestrichen. Zwei Dinge daraus bleib
 - **Handel**: CFD **SPX500** bei IQ Capital. In IQ ist ein Tick 0,01 Punkte (Spread 55 = 0,55 Punkte).
 - **1 Unit = 10 $ pro Punkt** (gemessen im IQ-Order-Panel am 29.10.2026: 0,5 Units mit Stop 10 Punkte = 50 $
   Risiko; die Symbol-Info zeigt keinen Punktwert).
-  - Positionsgröße: **Units = 25 ÷ Stop in Punkten**, genau mit `scripts/rechner.py --markt SPX500`.
-  - Beispiel: Stop 8 Punkte → **3,12 Units** für 250 $.
+  - Positionsgröße: **Units = 50 ÷ Stop in Punkten**, genau mit `scripts/rechner.py --markt SPX500`.
+  - Beispiel: Stop 8 Punkte → **6,25 Units** für 500 $.
   - Ändert IQ den Wert, zeigt das Panel bei „Risk“ den Betrag zum Gegenprüfen.
 - **Chart**: Levels auf dem Chart messen, dessen Kurse er handelt, also **SPX500 in IQ** (Quelle „INDEX“). Andere
   Charts (OANDA:SPX500USD, ES1!) weichen um einige Punkte ab; ES1! ist in kostenlosen TradingView-Konten meist
@@ -75,7 +75,7 @@ Normal / in den Zeitumstellungs-Wochen (z. B. 26.–31.10.2026) eine Stunde frü
   - Stop hinter dem Sweep-Extrem + Spread, ohne Liquidität direkt dahinter;
   - ≥ 2R bis zur vorigen Liquidität;
   - außerhalb der Sperrzeit;
-  - höchstens 2 Verluste pro Tag **über alle Märkte**.
+  - höchstens **1 Trade pro Tag** über alle Märkte.
 - **A (TJR-SPX500)** = alles erfüllt. **A+** = zusätzlich im Silver-Bullet-Fenster, oder mit SMT zum NAS100
   (Variante C). Sonst **„Lass es.“**
 - **Dafür/Dagegen** mit Anzahl:
@@ -103,7 +103,7 @@ Normal / in den Zeitumstellungs-Wochen (z. B. 26.–31.10.2026) eine Stunde frü
 1. **15:45**: Eröffnungsspanne als Level einzeichnen.
 2. **Nach einem Sweep**: 5-Min.-Bestätigung (BOS/IFVG/79 %)? EQ und FVG markieren, Alarm an der Zone.
 3. **In der Zone**: 1-Min.-Bestätigung, dann Einstieg.
-   - Units = 25 ÷ Stop (Rechner).
+   - Units = 50 ÷ Stop (Rechner).
    - Stop hinter dem Sweep + Spread.
    - Ziel = vorige Liquidität.
 4. **IFVG-Limit** (TJR-IF): Limit an der Kante der IFVG, Stop trotzdem hinter dem Sweep-Hoch/-Tief, wenn direkt

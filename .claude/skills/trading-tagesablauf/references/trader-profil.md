@@ -86,9 +86,17 @@ Typische Fragen von ihm: „wann long, wann short?“, „ist das ein gutes Setu
 Diese Regeln sind mit ihm besprochen und von ihm umgesetzt worden. Er kann sie jederzeit ändern, dann gelten seine
 neuen Werte (in den Notizen festhalten).
 
-- **Risiko pro Trade ca. 250 $** (≈ 0,5 % des 50K-Kontos). Lots = Risiko ÷ (Stop-Pips × 10), abgerundet.
+- **Risiko pro Trade 500 $** (≈ 1 % des 50K-Kontos, seit 2.11.2026 auf seinen Wunsch, vorher 250 $), damit er das
+  Gewinnziel schneller erreicht. Lots = Risiko ÷ (Stop-Pips × 10) = 50 ÷ Stop-Pips, abgerundet; Indizes Units = 50 ÷
+  Stop-Punkte.
+- **Puffer-Empfehlung** (Vorschlag vom 2.11., von ihm noch nicht bestätigt): Fällt der Puffer (Eq − MD) unter
+  1.500 $, wieder 250 $ riskieren. Grund: Die Verlustgrenze trailt am Tagesende 3.000 $ unter dem höchsten
+  Tagesschluss (laut Drittseiten, MD am 29.10. 47.131 $), bei ca. 2.400 $ Puffer beenden schon 5 Verluste à 500 $
+  die Challenge. Simulation (2R, Ziel 54.000 $, Start 49.500 $): bei 45 % Treffern bestanden 250 $ ≈ 92 % (Median
+  42 Trades), 500 $ ≈ 69 % (15 Trades), 500 $ mit Puffer-Regel ≈ 78 % (18 Trades).
 - **Mindestens 2R**. Einstieg nur in einer Zone, nie in der Mitte zwischen zwei Zonen.
-- **Höchstens 2 Verluste am Tag**, dann Schluss. Nach einem Verlust 15–30 Minuten Pause, kein Rache-Trade.
+- **Höchstens 1 Trade am Tag** (seit 2.11.2026, vorher 2 Verluste), danach Schluss, egal ob Gewinn oder Verlust.
+  Kein Rache-Trade, kein zweiter Markt am selben Tag. Nur Note A oder A+.
 - **Sperrzeiten**: ca. 15 Minuten vor bis 15 Minuten nach wichtigen US-Daten keine neuen Einstiege. Läuft ein
   Trade im Plus (ab 1R), vor den Daten den Stop auf den Einstieg ziehen (feste Breakeven-Regel), sonst nicht
   anfassen.

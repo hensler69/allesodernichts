@@ -56,6 +56,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-10-29: Test-Variante VE für NAS100 (references/strategie-nas100.md, Abschnitt 10), kein Setup: nach Premarket-Sweep von London-Hoch/-Tief mit 5-Min.-Bestätigung (BOS/IFVG), tieferem Hoch/Stillstand und ≥ 2R schon 10–15 Min. vor der Eröffnung einsteigen, Stop hinter dem Sweep-Extrem + Spread; bricht Box-Regel 2b, daher nur Papier oder halbes Risiko (125 $), Zeitstopp 15 Min. nach Eröffnung ohne 1R, Journal „VE-Test“, nach 20 Fällen auswerten; Foto 14:05–14:20 (Umstellungs-Woche) bzw. 15:05–15:20
 - 2026-10-31: Haarfarbe nur per weicher Farbmaske in Lab (Helligkeit und Gelbanteil senken, Haut über die Helligkeit, Wand über b* ausschließen); feine Strähnen über der Stirn nicht per Lokalkontrast-Maske (Stirn wurde fleckig)
 - 2026-10-31: Lippenschwellung: Unterkante über a* vermessen, glatte Zielkurve ca. 3 px (≈ 9 % der Lippenhöhe) nach innen, 0 an den Mundwinkeln, asymmetrischer Gauß, Jacobi ≥ 0,65
+- 2026-11-02: Risiko auf 500 $ pro Trade (≈ 1 %) und höchstens 1 Trade pro Tag über alle Märkte (Nutzer will das Gewinnziel schneller erreichen; ersetzt 250 $ / 2 Verluste vom 27.10.); EURUSD Lots = 50 ÷ Stop-Pips, Indizes Units = 50 ÷ Stop-Punkte, rechner.py Standard 500, VE-Test halbes Risiko 250 $; Puffer-Empfehlung (unter 1.500 $ Puffer wieder 250 $) vorgeschlagen, nicht bestätigt
 - 2026-10-28: Skill-Änderungen landen automatisch in der Repo-Fassung `.claude/skills/trading-tagesablauf` (Nutzer will nichts extra speichern); diese Fassung ist maßgeblich, auch wenn die Konto-Fassung älter ist
 - 2026-10-28: Screenshot-Protokoll (references/screenshot-protokoll.md): Morgen-Paket 08:30–09:00 (Daily mit Kopfzeile, 1H 3–5 Tage, 30 Min. mit Zonen, GBPUSD 15 Min., IQ-Kopfleiste), danach Bilder nur bei Ereignissen in fester Reihenfolge
 - 2026-10-28: Begrüßung: Auf „Guten Morgen“/„Guten Tag“ mit „Guten Tag, Manuel“ antworten und sagen, welche Screenshots er jetzt schicken soll (Uhrzeit, Termine, Marktlage)
@@ -87,6 +88,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] SPX500/NAS100: TJR erst einige Tage im Papierhandel/Replay testen (heute 29.10. nur zuschauen ab 14:30); Punktwert geklärt (1 Unit = 10 $ pro Punkt) (seit 2026-10-29)
 - [ ] VE-Test NAS100 (Einstieg vor der Eröffnung): Fälle sammeln, erstes Foto Fr 30.10. 14:05–14:20; LuxAlgo-Zeiten auf dem Handy-Layout noch auf Standard (seit 2026-10-29)
 - [ ] Aufzug-Foto (Haare dunkler/weniger gelb, Unterlippe des Kollegen minimal): Originalformat, Story 9:16, Feed 4:5 geliefert, Rückmeldung zu Haarton und Lippe abwarten (seit 2026-10-31, Details in notes/2026-10-31.md)
+- [ ] IQ-Konto prüfen (Nutzer): Plan Core oder Rapid (Rapid hat laut Drittseiten eine 40-%-Konsistenzregel), Gewinnziel (Drittseiten: 4.000 $), Verlustgrenze trailt am Tagesende 3.000 $, Zeitlimit; aktuelle Kopfleiste (Eq, MD) für den Puffer schicken; Puffer-Empfehlung bestätigen oder ablehnen (seit 2026-11-02)
 - [ ] Regeln von IQ Capital zu News-Trading und Halten über Notenbank-Termine prüfen (Nutzer)
 
 ## Laufende Themen

@@ -3,7 +3,7 @@
 
 Beispiele:
   python rechner.py --einstieg 1.11472 --stop 1.11570 --ziel 1.11160
-  python rechner.py --einstieg 1.1147 --stop 1.1157 --ziel 1.1116 --risiko 250
+  python rechner.py --einstieg 1.1147 --stop 1.1157 --ziel 1.1116 --risiko 500
   python rechner.py --einstieg 1.1147 --stop 1.1157 --ziel 1.1116 --lots 2.5
   python rechner.py --stop 1.1157 --ziel 1.1116            (nur: ab welchem Einstieg sind es 2R?)
   python rechner.py --einstieg 1.1147 --stop 1.1157 --ziel 1.1110 --teile 3
@@ -41,7 +41,7 @@ def main():
     ap.add_argument("--einstieg", type=float)
     ap.add_argument("--stop", type=float, required=True)
     ap.add_argument("--ziel", type=float, required=True)
-    ap.add_argument("--risiko", type=float, default=250.0, help="Risiko in $ (Standard 250)")
+    ap.add_argument("--risiko", type=float, default=500.0, help="Risiko in $ (Standard 500, seit 2.11.2026)")
     ap.add_argument("--lots", type=float, help="feste Positionsgröße statt Risiko")
     ap.add_argument("--min-r", type=float, default=2.0, help="Mindest-CRV (Standard 2)")
     ap.add_argument("--pip", type=float, default=0.0001)
@@ -79,8 +79,8 @@ def main():
     if short and not (a.ziel < e < a.stop) or (not short and not (a.stop < e < a.ziel)):
         print("Achtung: Der Einstieg liegt nicht zwischen Stop und Ziel. Werte prüfen.")
         return
-    stop_pips = abs(a.stop - e) / a.pip
-    ziel_pips = abs(e - a.ziel) / a.pip
+    stop_pips = round(abs(a.stop - e) / a.pip, 6)   # runden gegen Gleitkomma-Reste (10 Pips sonst 10,0000000001)
+    ziel_pips = round(abs(e - a.ziel) / a.pip, 6)
     r = ziel_pips / stop_pips
     if a.lots:
         lots = a.lots

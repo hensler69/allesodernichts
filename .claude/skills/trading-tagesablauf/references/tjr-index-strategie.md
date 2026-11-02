@@ -111,15 +111,15 @@ schon steht. Das Video zeigt nur Shorts. Long ist **genau gespiegelt**. Die TJR-
   1. Dieses Hoch bzw. Tief wird gesweept.
   2. Danach kommt eine 5-Min.-Bestätigung (BOS/IFVG).
   3. Dann folgt Schritt 3 (EQ/FVG) wie normal.
-- **Stop** über dem Sweep-Hoch plus Spread (0,55 Punkte). **Units = 25 ÷ Stop in Punkten** (1 Unit = 10 $ pro Punkt,
-  250 $ Risiko), genau mit `scripts/rechner.py --markt SPX500`.
+- **Stop** über dem Sweep-Hoch plus Spread (0,55 Punkte). **Units = 50 ÷ Stop in Punkten** (1 Unit = 10 $ pro Punkt,
+  500 $ Risiko), genau mit `scripts/rechner.py --markt SPX500`.
 - Ziel ≥ 2R, sonst „Lass es.“
 
 ## 4. Variante B: NAS100 allein
 
 - Wie Variante A, nur mit dem NAS100-Chart. SMT fällt weg.
 - Der Nasdaq schwankt stärker: Stops sind in Punkten größer, die Position kleiner, Spread 1,89 Punkte.
-  Units = 25 ÷ Stop in Punkten (z. B. Stop 35 Punkte → 0,71 Units).
+  Units = 50 ÷ Stop in Punkten (z. B. Stop 35 Punkte → 1,42 Units).
 - 1-Min.-Kerzen sind beim Nasdaq unruhiger. In Schritt 4 bevorzugt BOS oder IFVG mit kräftiger Kerze, nicht nur
   79 % (Ergänzung).
 
@@ -150,7 +150,7 @@ Datenquelle).
    - Stop hinter dem Sweep-Extrem plus Spread, ohne Liquidität direkt dahinter.
    - ≥ 2R bis zur Liquidität (Schritt 6).
    - Außerhalb der Sperrzeit.
-   - Tageslimit nicht erreicht (2 Verluste über alle Märkte).
+   - Tageslimit nicht erreicht (1 Trade pro Tag über alle Märkte).
 
 **Noten**:
 - **A (TJR)** = alles erfüllt.
@@ -209,7 +209,7 @@ TJR LONG – SPX500 (allein)
 6: Ziel: vorige Hochs / Liquidität oben
 IFVG-Limit: an der Oberkante, Stop hinter IFVG
 Verpasst? 1./2. FVG nach BOS: M1 höheres Tief + Hoch
-Units = 25 / Stop in Punkten (250 $)
+Units = 50 / Stop in Punkten (500 $)
 ```
 
 ```
@@ -226,7 +226,7 @@ TJR SHORT – SPX500 (allein)
 6: Ziel: vorige Tiefs / Liquidität unten
 IFVG-Limit: an der Unterkante, Stop hinter IFVG
 Verpasst? 1./2. FVG nach BOS: M1 tieferes Hoch + Tief
-Units = 25 / Stop in Punkten (250 $)
+Units = 50 / Stop in Punkten (500 $)
 ```
 
 **NAS100 allein**
@@ -245,7 +245,7 @@ TJR LONG – NAS100 (allein)
 6: Ziel: vorige Hochs / Liquidität oben
 IFVG-Limit: an der Oberkante, Stop hinter IFVG
 Verpasst? 1./2. FVG nach BOS: M1 höheres Tief + Hoch
-Units = 25 / Stop in Punkten (250 $)
+Units = 50 / Stop in Punkten (500 $)
 ```
 
 ```
@@ -262,7 +262,7 @@ TJR SHORT – NAS100 (allein)
 6: Ziel: vorige Tiefs / Liquidität unten
 IFVG-Limit: an der Unterkante, Stop hinter IFVG
 Verpasst? 1./2. FVG nach BOS: M1 tieferes Hoch + Tief
-Units = 25 / Stop in Punkten (250 $)
+Units = 50 / Stop in Punkten (500 $)
 ```
 
 **ES + NQ zusammen** (SPX500 und NAS100 nebeneinander)
@@ -282,7 +282,7 @@ TJR LONG – ES + NQ (zusammen, SMT)
 6: Ziel: vorige Hochs / Liquidität oben
 IFVG-Limit: an der Oberkante, Stop hinter IFVG
 Verpasst? 1./2. FVG nach BOS: M1 höheres Tief + Hoch
-Units = 25 / Stop in Punkten (250 $)
+Units = 50 / Stop in Punkten (500 $)
 ```
 
 ```
@@ -300,7 +300,7 @@ TJR SHORT – ES + NQ (zusammen, SMT)
 6: Ziel: vorige Tiefs / Liquidität unten
 IFVG-Limit: an der Unterkante, Stop hinter IFVG
 Verpasst? 1./2. FVG nach BOS: M1 tieferes Hoch + Tief
-Units = 25 / Stop in Punkten (250 $)
+Units = 50 / Stop in Punkten (500 $)
 ```
 
 ## 9. Risiken, Journal

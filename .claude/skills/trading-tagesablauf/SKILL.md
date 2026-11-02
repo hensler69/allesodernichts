@@ -85,11 +85,11 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   einem Risiko, das vorher zu wenig gewichtet wurde (Liquidität direkt hinter dem Stop). Nutze die Prüfliste unten.
 - **Nur vier Setups** (EURUSD): M, TJR, SB, PV. Für SPX500 und NAS100 gilt nur TJR (6-Schritte-Box mit der TJR-Familie)
   (`references/strategie-spx500.md`, `references/strategie-nas100.md`), mit denselben Noten, demselben
-  Risiko-Rahmen und demselben Tageslimit (2 Verluste pro Tag über alle Märkte). Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
+  Risiko-Rahmen und demselben Tageslimit (1 Trade pro Tag über alle Märkte, seit 2.11.2026). Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
   (Begründung in `references/screenshot-protokoll.md`, Abschnitt 1).
 - **Test-Variante VE (NAS100)**: Einstieg 10–15 Min. vor der Eröffnung nach Premarket-Sweep des London-Hochs/-Tiefs
   mit 5-Min.-Bestätigung (`references/strategie-nas100.md`, Abschnitt 10). Kein Setup, nur Papier oder halbes Risiko
-  (125 $), bis 20 Fälle ausgewertet sind. Sein Foto dafür kommt 14:05–14:20 (Umstellungs-Woche) bzw. 15:05–15:20.
+  (250 $), bis 20 Fälle ausgewertet sind. Sein Foto dafür kommt 14:05–14:20 (Umstellungs-Woche) bzw. 15:05–15:20.
 - **Jedes Setup steht für sich** (Wunsch vom 28.10., ersetzt die frühere 7-Punkte-Regel für alle Setups). Es gibt
   vier Setups mit eigenen Pflicht-Bedingungen. Sie gelten einzeln und werden kombiniert, wenn sie am selben Ort
   zusammentreffen:
@@ -193,7 +193,7 @@ Information steht in der Kopfzeile des Bildes.
    Kopfzeile, sonst aus dem Bild messen und so kennzeichnen), `scripts/pivots.py` mit seinen Zonen. Pivots in
    Tagesreichweite in die Zonen-Tabelle und ins Bild; nur Pivots mit Konfluenz (≤ 3 Pips zu seiner Zone) werden zu
    PV-Optionen, sonst „PV heute nicht im Spiel“.
-8. **Kein-Trade-Bereiche** benennen: die Mitte zwischen zwei Zonen, die Sperrzeiten, nach 2 Verlusten.
+8. **Kein-Trade-Bereiche** benennen: die Mitte zwischen zwei Zonen, die Sperrzeiten, nach dem Trade des Tages.
 9. **Bild zeichnen** nach `references/grafik.md` und ansehen, bevor es rausgeht.
 10. **Antwort** im Format unten, Bild per SendUserFile (`display: render`).
 11. **Notizen**: Morgenplan in `notes/JJJJ-MM-TT.md` (Bias, Termine, Zonen mit Preisen, Optionen, Messgrundlage),
@@ -230,7 +230,7 @@ Information steht in der Kopfzeile des Bildes.
 5. **Einstieg steht an**: Erst die Setup-Prüfung (Grundsätze): für jedes Setup, das an dieser Stelle in Frage
    kommt, die eigenen Pflicht-Bedingungen als kurze Liste mit ✓/✗, dann der Risiko-Rahmen, dann die Konfluenz-Bilanz.
    Ist kein Setup vollständig oder der Risiko-Rahmen verletzt → „Lass es.“ und keine Order-Werte. Nur bei A/A+ weiter: Wo sinnvoll, Volumenprofil prüfen (Einstieg auf LVN/VA-Kante statt mitten im HVN, Stop
-   hinter HVN bzw. VA-Kante, Ziel knapp vor dem nächsten POC). Werte mit `scripts/rechner.py` (Lots für 250 $ oder sein aktuelles Risiko, Stop/Ziel als
+   hinter HVN bzw. VA-Kante, Ziel knapp vor dem nächsten POC). Werte mit `scripts/rechner.py` (Lots für 500 $ oder sein aktuelles Risiko, Stop/Ziel als
    Preis und in Ticks, schlechtester Einstieg für 2R) und die IQ-Eingabe Schritt für Schritt
    (`references/trader-profil.md`, Abschnitt 3). Vor dem Klick: Units in Lots, beide Schalter an, Werte prüfen.
 6. **Im Trade**: Stop nie vergrößern, Breakeven nur nach der festen Regel, nicht aus Angst schließen, nicht
@@ -238,7 +238,7 @@ Information steht in der Kopfzeile des Bildes.
    in die erste Zeile, Stop bleibt, ab 1R im Plus Breakeven (`references/fvg-ifvg.md`, Abschnitt 4). Zeitgrenzen nennen (Daten, Tageswechsel, Notenbank). Anzeigefehler „−0.00 USD“ erklären, wenn er
    fragt.
 7. **Nach dem Trade**: Ursache ehrlich, Journal-Eintrag nach `references/journal.md`, Tagesbilanz in R und $, Puffer
-   bis zur Verlustgrenze, Tageslimit (2 Verluste). Nach einem Verlust Pause empfehlen.
+   bis zur Verlustgrenze, Tageslimit (1 Trade pro Tag, danach Schluss, auch nach einem Gewinn). Puffer-Empfehlung aus `references/trader-profil.md`, Abschnitt 4, nennen.
 8. **Notizen** kurz ergänzen (Uhrzeit, was passiert ist, was geraten wurde).
 
 ## Zonen finden
@@ -299,7 +299,7 @@ Jede Option bekommt einen Namen, der zu seinem Chart passt (Short 1, Short 2, Lo
 - **Einstieg**: Market beim CISD-Schluss oder Limit beim Rücklauf in die neue M5-Lücke. Nicht unter … (sonst
   unter 2R).
 - **Stop**: … (hinter der ganzen Zone bzw. dem Sweep-Hoch, + 1–2 Pips) · **Ziel**: … (nächste Gegen-Liquidität)
-- **CRV und Größe**: … R, … Lots bei 250 $ Risiko
+- **CRV und Größe**: … R, … Lots bei 500 $ Risiko
 - **Ungültig, wenn**: z. B. 30-Min-Schluss über …
 - **Zeitfenster**: z. B. nicht 13:15–13:45 (US-Daten)
 - **Risiken**: (aus der Prüfliste, nur die zutreffenden, aber alle geprüft)

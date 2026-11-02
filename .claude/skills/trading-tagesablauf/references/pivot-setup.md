@@ -127,7 +127,7 @@ GBPUSD 15 Min.
    nennt den schlechtesten Einstieg). Sonst Limit beim Rücklauf in die obere Hälfte der Engulfing-Kerze (Ergänzung)
    bis zum Schluss der nächsten 15-Min-Kerze, dann löschen.
 8. **Stop**: über dem Docht/Sweep-Hoch **und** über der ganzen Pivot-Zone, + 1–2 Pips. Liegen dahinter gleiche Hochs,
-   über diese. Lots für 250 $ mit `rechner.py`.
+   über diese. Lots für 500 $ mit `rechner.py`.
 9. **Ziel**: knapp vor der nächsten Nachfragezone: nächster Pivot darunter (P oder S1) oder seine Zone, was zuerst
    kommt. Teilgewinne nach Abschnitt 9.
 10. **Im Trade**: Breakeven nach Teil 1 (1R). Bricht der Kurs den 200er in Trade-Richtung, ist das laut Video eine
