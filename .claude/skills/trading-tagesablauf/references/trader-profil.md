@@ -65,6 +65,18 @@ Typische Fragen von ihm: „wann long, wann short?“, „ist das ein gutes Setu
   damnpropfirms, nicht offiziell geprüft): Gewinnziel 4.000 $ (Kontostand 54.000 $), Verlustgrenze trailt am
   Tagesende 3.000 $ unter dem höchsten Tagesschluss, kein Tageslimit bei CFD, keine Konsistenzregel in der
   Bewertung (im finanzierten Core-Konto evtl. 30 %).
+- **Auszahlungen im finanzierten Konto („Performance Reward“)**, laut IQ-Hilfeseite support.iqcapital.io
+  (Screenshots des Nutzers vom 5.11.2026, maßgeblich vor Drittseiten):
+  - frühestens nach dem **10. aktiven Handelstag** (aktiv = mindestens ein Trade, kein Mindestgewinn; der Handelstag
+    endet 23:15 Berlin); dazu Scalping-Regel und höchstens 2 Verstöße gegen die Maximaler-Positions-Verlust-Regel.
+  - **Konsistenz 30 %** im Funding: bester Tag ≤ 30 % des Gesamtgewinns (sonst steigt das Ziel); nach jeder
+    Auszahlung zurückgesetzt.
+  - pro Antrag **höchstens 50 % des Gesamtgewinns**, Obergrenze beim **50K: Reward 1–2 1.500 $, 3–4 2.000 $,
+    ab 5 2.500 $**; kein Mindestbetrag; Rest bleibt als Puffer.
+  - jede weitere Auszahlung braucht **neuen Gewinn von mindestens 50 % des neuen Auszahlungsbetrags** seit der letzten.
+  - **90/10-Split** auf den Auszahlungsbetrag (1.500 $ → 1.350 $ an ihn).
+  - nach der ersten Auszahlung liegt die **Verlustgrenze fest auf dem Startguthaben** (50.000 $).
+  - offen: ob jede weitere Auszahlung wieder 10 neue aktive Handelstage braucht.
   Kopfleiste: **Eq** = Kontostand, **DPL** = Tagesergebnis, **MD** = Verlustgrenze (47.000 $), **OPL** = offener
   Gewinn/Verlust. **Puffer = Eq − MD** (nach dem Verlust am 27.10. ca. 2.700 $). Den Puffer bei jeder
   Risikoplanung nennen.
