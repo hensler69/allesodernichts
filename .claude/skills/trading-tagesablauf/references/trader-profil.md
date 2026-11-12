@@ -106,8 +106,7 @@ Diese Regeln sind mit ihm besprochen und von ihm umgesetzt worden. Er kann sie j
 neuen Werte (in den Notizen festhalten).
 
 - **Risiko pro Trade 500 $** (≈ 1 % des 50K-Kontos, seit 2.11.2026 auf seinen Wunsch, vorher 250 $), damit er das
-  Gewinnziel schneller erreicht. Lots = Risiko ÷ (Stop-Pips × 10) = 50 ÷ Stop-Pips, abgerundet; Indizes Units = 50 ÷
-  Stop-Punkte.
+  Gewinnziel schneller erreicht. Lots = Risiko ÷ (Stop-Pips × 10) = 50 ÷ Stop-Pips, abgerundet.
 - **Puffer-Empfehlung** (Vorschlag vom 2.11., von ihm noch nicht bestätigt): Fällt der Puffer (Eq − MD) unter
   1.500 $, wieder 250 $ riskieren. Grund: Die Verlustgrenze trailt am Tagesende 3.000 $ unter dem höchsten
   Tagesschluss (laut Drittseiten, MD am 29.10. 47.131 $), bei ca. 2.400 $ Puffer beenden schon 5 Verluste à 500 $
@@ -184,9 +183,8 @@ neuen Werte (in den Notizen festhalten).
 - 28.10. (abends): IFVG-Video als Variante TJR-IF aufgenommen (Körper-Schluss durch FVG → Ziel festlegen → Rücklauf in
   die IFVG = Einstieg, Stop hinter der IFVG), jeden Morgen und live, vor und während des Trades; Gegen-IFVG im
   offenen Trade = Warnzeichen (`references/fvg-ifvg.md`).
-- 29.10.: Er handelt auch die Index-CFDs **SPX500** und **NAS100** bei IQ Capital (Spread ca. 0,55 bzw. 1,89 Punkte,
-  IQ-Tick 0,01). Wunsch: zwei getrennte Strategien (`references/strategie-spx500.md`, `references/strategie-nas100.md`,
-  seit 29.10. nur noch TJR, ORB gestrichen, Eröffnungsspanne als Level), ausgelöst über „Guten Morgen, heute …“. 1 Unit = 10 $ pro Punkt (IQ-Panel: 0,5 Units × 10 Punkte = 50 $).
-- 29.10.: TJRs eigene 6-Schritte-Box aus einem Video als TJR-Strategie für die Indizes: SPX500 allein, NAS100 allein,
-  zusammen mit SMT (`references/tjr-index-strategie.md`), mit kopierbarem Text für seine Layout-Box.
+- 29.10.–12.11.: Index-CFDs SPX500/NAS100 (eigene TJR-Strategien, TJR-Box, VE-Test) waren zeitweise im Skill;
+  am 12.11. auf seinen Wunsch gestrichen, der Skill ist nur noch für Forex (Setups M, TJR mit KL/IF/FE, SB, PV).
+- 12.11.: Jeden Tag Marktnachrichten aus den Medien vor London und vor New York (`references/wirtschaftstermine.md`,
+  Abschnitt 8), Beispiel: Rücktritt des Nvidia-Chefs.
 - 28.10.: Screenshot-Protokoll mit Uhrzeitplan; nur noch vier Setups (M, TJR, SB, PV), Handbuch nur Konfluenz.

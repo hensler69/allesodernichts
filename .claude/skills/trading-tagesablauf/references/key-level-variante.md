@@ -6,7 +6,8 @@ gekennzeichnet.
 
 **Nachtrag 29.10.**: Ein Video mit TJRs eigener Text-Box bestätigt dieses Modell und ergänzt Schritt 2b (Sweep im
 Premarket bzw. in einer anderen Session → auf eine 5-Min.-Manipulation nach der New-Yorker Eröffnung warten) und eine
-**1-Min.-Bestätigung** (BOS/IFVG/SMT/79 %) in der Fortsetzungs-Zone. Details in `references/tjr-index-strategie.md`.
+**1-Min.-Bestätigung** (BOS/IFVG/SMT/79 %) in der Fortsetzungs-Zone. Die eigene Index-Strategie mit dieser Box wurde
+am 12.11.2026 gestrichen; für EURUSD zählen 2b und die 1-Min.-Bestätigung als Dafür-Punkte.
 
 **Einordnung**: Kein fünftes Setup. Der Ablauf ist derselbe wie beim TJR-Setup (Sweep → Wende auf kleinem Zeitrahmen →
 Rücklauf → Einstieg), nur mit mehr erlaubten Varianten bei Wende, Rücklauf-Zone und Auslöser. Deshalb läuft es als

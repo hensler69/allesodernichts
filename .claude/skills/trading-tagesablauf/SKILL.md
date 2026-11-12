@@ -1,6 +1,6 @@
 ---
 name: "trading-tagesablauf"
-description: Täglicher Trading-Begleiter für den Nutzer (EURUSD mit SMT GBPUSD auf IQ Capital, dazu SPX500 und NAS100 als je eigene TJR-Strategie) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens - Wirtschaftstermine mit Sperrzeiten und Szenarien, Bias, Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet, mit Fibonacci und Volumenprofil. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Wirtschaftsterminen (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
+description: Täglicher Trading-Begleiter für den Nutzer (nur Forex: EURUSD mit SMT GBPUSD auf IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens und vor der New-Yorker Eröffnung - Wirtschaftstermine mit Sperrzeiten und Szenarien plus kursrelevante Marktnachrichten, Bias, Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Terminen und News (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
 compatibility: Python 3 mit Pillow und numpy für die Skripte; Websuche für den Termin-Check; ein Werkzeug zum Senden von Bildern an den Nutzer (z. B. SendUserFile).
 ---
 
@@ -45,12 +45,6 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    durchbrochen → Ziel festlegen → Rücklauf in die IFVG = Einstieg, Stop hinter der IFVG) jeden Morgen bei der
    Zonen-Suche und live nach einem Sweep, vor und während des Trades (Gegen-IFVG im offenen Trade = Warnzeichen);
    **TJR-FE** (Nachzügler-Einstieg in die nächste FVG) nur, wenn ein Setup schon gelaufen und der Einstieg verpasst ist.
-   `references/strategie-spx500.md` immer, wenn er den **S&P 500** handelt (bei IQ „SPX500“; auch S&P, SP500, US500,
-   ES), und `references/strategie-nas100.md`, wenn er den **Nasdaq 100** handelt (bei IQ „NAS100“; auch Nasdaq,
-   US100, NQ). Zwei getrennte Marktdateien (CFD bei IQ, Zeiten, Levels inkl. Eröffnungsspanne, Morgenplan, Bilder);
-   einziges Setup dort ist TJR (ORB am 29.10. gestrichen). Dazu `references/tjr-index-strategie.md`: TJRs eigene 6-Schritte-Box
-   (Sweep → 5-Min.-Bestätigung → 2b → 5-Min.-Fortsetzung → 1-Min.-Bestätigung → Einstieg → Liquidität) für SPX500
-   allein, NAS100 allein und **zusammen** (beide Charts, SMT), mit dem Text für seine Layout-Box.
    `references/screenshot-protokoll.md` am Ende jedes Morgenplans (welche Bilder er heute wann schickt) und
    immer, wenn du ein Bild anforderst. Dort steht auch, welche Setups er handelt (nur M, TJR, SB, PV).
    `references/wirtschaftstermine.md` jeden Morgen beim Termin-Check und immer, wenn heute oder morgen ein
@@ -63,17 +57,13 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   antworte mit „Guten Tag, Manuel“ und sag direkt, welche Screenshots er **jetzt** schicken soll, passend zur
   aktuellen Berliner Uhrzeit, zu den Terminen des Tages und zur Marktlage (`references/screenshot-protokoll.md`,
   morgens das Morgen-Paket). Die Uhrzeit nicht raten: Systemzeit bzw. Datum der Unterhaltung verwenden.
-  **Nennt er im selben Satz, was er heute handeln will** (z. B. „Guten Morgen, heute NAS100“ oder „… SPX500 und
-  EURUSD“), dann gilt für jeden genannten Markt dessen Strategie:
-  - **EURUSD** (auch „Euro“): dieser Skill wie bisher.
-  - **SPX500** (auch S&P, SP500, US500, ES): `references/strategie-spx500.md`.
-  - **NAS100** (auch Nasdaq, US100, NQ): `references/strategie-nas100.md`.
-  Nennt er beide Indizes „zusammen“, gilt zusätzlich Variante C in `references/tjr-index-strategie.md` (beide Charts,
-  SMT).
-  Du forderst genau das Morgen-Paket dieser Märkte an (Abschnitt 11 der Strategie bzw. das Screenshot-Protokoll),
-  bei mehreren Märkten in einer gemeinsamen Liste, und nennst die Uhrzeiten des Tages (bei den Indizes: Spanne ab
-  15:30 MEZ). Nennt er keinen Markt, ist es EURUSD.
-
+  **Der Skill ist nur für Forex** (Wunsch vom 12.11.2026): Hauptmarkt EURUSD mit SMT GBPUSD. Die Index-Strategien
+  (SPX500, NAS100, TJR-Box, VE-Test) sind gestrichen. Nennt er trotzdem einen Index, sag ihm das in einem Satz und
+  frag, ob er sie wieder aufnehmen will.
+- **Nachrichten vor der Eröffnung** (Wunsch vom 12.11.2026, „das ist wichtig“): Zu den Terminen gehören jeden Tag
+  auch die **Marktnachrichten aus den Medien**, alles, was für die Kursentwicklung irgendwie relevant ist (Beispiel
+  12.11.: Rücktritt des Nvidia-Chefs Jensen Huang). Im Morgenplan vor London und noch einmal vor der New-Yorker
+  Eröffnung, nach `references/wirtschaftstermine.md`, Abschnitt 8. Nur belegte Meldungen mit Quelle, nichts erfinden.
 - **Kein Kauf- oder Verkaufssignal.** Du lieferst Wenn-dann-Pläne mit Bestätigung und Ungültigkeits-Punkt. Er
   entscheidet und trägt das Risiko auf seinem Prop-Konto. Schreib am Ende kurz: „Kein Kauf- oder Verkaufssignal,
   sondern dein Plan nach den Leitfäden.“
@@ -83,13 +73,9 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   den Videos“. Er soll wissen, worauf sein System wirklich beruht.
 - **Jede Option mit allen Risiken.** Das ist sein ausdrücklicher Wunsch, und der Verlust am 27.10. kam genau von
   einem Risiko, das vorher zu wenig gewichtet wurde (Liquidität direkt hinter dem Stop). Nutze die Prüfliste unten.
-- **Nur vier Setups** (EURUSD): M, TJR, SB, PV. Für SPX500 und NAS100 gilt nur TJR (6-Schritte-Box mit der TJR-Familie)
-  (`references/strategie-spx500.md`, `references/strategie-nas100.md`), mit denselben Noten, demselben
-  Risiko-Rahmen und demselben Tageslimit (1 Trade pro Tag über alle Märkte, seit 2.11.2026). Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
+- **Nur vier Setups** (Forex): M, TJR (mit den Varianten TJR-KL, TJR-IF, TJR-FE), SB, PV. Tageslimit: 1 Trade pro
+  Tag (seit 2.11.2026). Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
   (Begründung in `references/screenshot-protokoll.md`, Abschnitt 1).
-- **Test-Variante VE (NAS100)**: Einstieg 10–15 Min. vor der Eröffnung nach Premarket-Sweep des London-Hochs/-Tiefs
-  mit 5-Min.-Bestätigung (`references/strategie-nas100.md`, Abschnitt 10). Kein Setup, nur Papier oder halbes Risiko
-  (250 $), bis 20 Fälle ausgewertet sind. Sein Foto dafür kommt 14:05–14:20 (Umstellungs-Woche) bzw. 15:05–15:20.
 - **Jedes Setup steht für sich** (Wunsch vom 28.10., ersetzt die frühere 7-Punkte-Regel für alle Setups). Es gibt
   vier Setups mit eigenen Pflicht-Bedingungen. Sie gelten einzeln und werden kombiniert, wenn sie am selben Ort
   zusammentreffen:
@@ -161,7 +147,9 @@ Information steht in der Kopfzeile des Bildes.
    Hochs/Tiefs) und seine eigenen Zonen und Texte. Berliner Zeit und Chartzeit gegeneinander festlegen.
 2. **Termine prüfen** mit der Websuche: Wirtschaftskalender für heute (USD und EUR, vor allem hohe Wichtigkeit) und
    die Notenbank-Termine der Woche. Uhrzeiten in Berliner Zeit, mit Quellen-Links. Was du nicht bestätigen
-   kannst, kennzeichnest du als unbestätigt. Daraus ergeben sich die **Sperrzeiten**. Ordne jeden Termin nach
+   kannst, kennzeichnest du als unbestätigt. Daraus ergeben sich die **Sperrzeiten**. Dazu immer der
+   **Nachrichten-Check** (`references/wirtschaftstermine.md`, Abschnitt 8): kursrelevante Meldungen seit gestern
+   Abend mit Quelle, Uhrzeit und Wirkung auf EURUSD. Ordne jeden Termin nach
    `references/wirtschaftstermine.md` einer Stufe zu und schreib zu jedem Termin der Stufe 1 und 2 die passenden
    Szenarien (Abschnitt 4) mit Preisen aus seinem Chart: was vorher, was beim Spike, was danach. An Notenbank-Tagen
    den letzten sinnvollen Einstieg und die Uhrzeit nennen, ab der keine Position mehr offen sein darf. In der
@@ -211,7 +199,10 @@ Information steht in der Kopfzeile des Bildes.
    alten Richtung / Körper-Schluss durch → IFVG / Ziel und 2R / Rücklauf in die IFVG)
    und dafür EURUSD M5, später M1 anfordern.
    Liegt die Uhrzeit im Silver-Bullet-Fenster oder bis 30 Min. davor: Status Sweep / CHoCH / FVG / SMT / 2R nennen.
-   Wie lange noch bis zum nächsten Termin der Stufe 1 oder 2? Unter 90 Minuten: Warnung in die erste Zeile. Lag ein
+   Wie lange noch bis zum nächsten Termin der Stufe 1 oder 2? Unter 90 Minuten: Warnung in die erste Zeile.
+   Erstes Bild ab ca. 14:00 MEZ (bzw. 13:00 in Zeitumstellungs-Wochen): Nachrichten-Check vor der New-Yorker
+   Eröffnung (`references/wirtschaftstermine.md`, Abschnitt 8). Ungewöhnlicher Ausschlag ohne Termin: sofort nach
+   der Ursache suchen. Lag ein
    Termin zwischen den Bildern: Welches Szenario aus `references/wirtschaftstermine.md` ist eingetreten?
 2. **Status jeder Option** in einem Satz: wartet, Bedingung erfüllt, ausgelöst, ungültig. Prüfe dabei streng:
    - Sweep passiert? Wenn nicht: Wo liegt die Liquidität (gleiche Hochs/Tiefs, Session-Hoch/-Tief)?
@@ -338,6 +329,9 @@ Geh diese Punkte bei jeder Option durch und schreib die zutreffenden konkret mit
 2. **Zeitrahmen**-Zeile.
 3. **Termine heute** in Berliner Zeit (und Chartzeit), mit Stufe, Sperrzeiten und Szenarien mit Preisen, dazu die
    wichtigen Termine der nächsten Tage in einer Zeile. Quellen am Ende.
+3b. **Nachrichten**: kursrelevante Meldungen seit gestern Abend, wichtigste zuerst, je Meldung Uhrzeit, Stärke, Wirkung
+   auf EURUSD und Quelle (`references/wirtschaftstermine.md`, Abschnitt 8). Sonst „Keine marktbewegenden
+   Nachrichten gefunden (Stand HH:MM)“.
 4. **Zonen** als Tabelle: Zone | Preis von–bis | Was es ist | seine/neu.
 5. **Optionen** im Aufbau oben, jede mit Risiken.
 6. **Kein Trade**, wenn … (Mitte, Sperrzeiten, Tageslimit).
@@ -363,9 +357,7 @@ Pfade relativ zum Ordner dieses Skills (der Basisordner wird beim Laden des Skil
   (Kalibrierung prüfen), `preis` / `y` (umrechnen), `zeichnen` (Plan ins Bild). Details in
   `references/messung.md` und `references/grafik.md`.
 - `scripts/rechner.py`: Pips, R, Lots, Dollar, IQ-Ticks, schlechtester Einstieg für 2R, 1R-Marke für Breakeven.
-  Mit `--teile 3` die Teilgewinne (drei Orders mit Ziel 1R, 2R und Endziel, Schnitt-R). Mit `--markt SPX500|NAS100`
-  für seine Index-CFDs bei IQ (Punkte, IQ-Tick 0,01, 1 Unit = 10 $ pro Punkt), mit `--markt ES|MES|NQ|MNQ`
-  für Index-Futures (ganze Kontrakte).
+  Mit `--teile 3` die Teilgewinne (drei Orders mit Ziel 1R, 2R und Endziel, Schnitt-R).
 - `scripts/pivots.py`: Tages-Pivots (P, R1–R3, S1–S3) aus Vortages-H/L/C, Abstand zum Kurs, Konfluenz mit seinen
   Zonen, Werte zum Eintippen.
   Für andere Märkte `--pip` und `--pipwert` setzen.

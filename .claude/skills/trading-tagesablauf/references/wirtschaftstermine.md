@@ -17,6 +17,7 @@ Richtungslogik) ist **Ergänzung, nicht aus den Videos**, außer den Regeln, die
 5. Was eine Zahl für EURUSD bedeutet
 6. Ankündigen: wann und wie du ihn informierst
 7. Quellen für den Termin-Check
+8. Marktnachrichten aus den Medien (vor London und vor New York)
 
 ## 1. Wichtige Termine nach Stufen
 
@@ -168,3 +169,54 @@ Websuche nach „economic calendar [Datum]“ und „Wirtschaftskalender [Datum]
 (forexfactory.com/calendar), Investing.com, die Fed-Seite (federalreserve.gov, FOMC-Kalender) und die EZB-Seite
 (ecb.europa.eu, geldpolitische Sitzungen). Zwei Quellen vergleichen, Uhrzeiten umrechnen, Links in der Antwort
 nennen. Was sich nicht bestätigen lässt, als „unbestätigt“ kennzeichnen.
+
+## 8. Marktnachrichten aus den Medien (vor London und vor New York)
+
+Wunsch des Nutzers (12.11.2026): Neben den festen Terminen soll er **jeden Tag vor der Eröffnung** auch über
+Nachrichten aus den Medien informiert werden, also über **alles, was irgendwie für die Kursentwicklung relevant ist**.
+Sein Beispiel vom 12.11.2026: Nvidia-Chef Jensen Huang tritt mit sofortiger Wirkung zurück (8-K bei der SEC,
+Finanzchefin Colette Kress übernimmt übergangsweise), die Aktie fiel zeitweise über 10 %. „Das ist wichtig.“
+
+**Wann**
+- **Morgenplan** (vor London, ca. 08:30–09:00): alles seit dem US-Schluss am Vorabend.
+- **Vor der New-Yorker Eröffnung**: bei seinem ersten Bild ab ca. 14:00 MEZ (Zeitumstellungs-Wochen 13:00) bzw.
+  spätestens um 15:15 MEZ ein zweiter Check, nur Neues seit dem Morgen.
+- **Live**: Macht der Kurs einen ungewöhnlichen Ausschlag ohne Termin, sofort nach der Ursache suchen.
+
+**Was suchen** (Websuche, bei frischen Meldungen gründlich; Suchbegriffe mit Datum, z. B. „markets news [Datum]“,
+„stock futures today“, „dollar euro news today“, „Fed speaker today“):
+- **Notenbanken**: Reden und Interviews (Fed, EZB, BoE), Zitate zu Zinsen, Berichte über Uneinigkeit, Personalien
+  (z. B. Fed-Vorsitz).
+- **Politik**: Zölle und Handelsstreit, Haushalt und Shutdown, Wahlen, Regierungskrisen in Europa, Sanktionen.
+- **Geopolitik**: Kriege, Angriffe, Waffenruhen, Krisen um Öl- und Gasversorgung.
+- **Große Firmen**: Chefwechsel, Skandale, Gewinnwarnungen, Quartalszahlen über Nacht, Übernahmen, Kartellverfahren,
+  vor allem bei den größten US-Werten (Nvidia, Apple, Microsoft, Amazon, Alphabet, Meta, Tesla) und großen Banken.
+- **Märkte**: Stimmung der US-Futures, Anleihe-Renditen, Dollar-Index, Öl, Gold; Stress bei Banken oder Krediten;
+  Rating-Änderungen von Staaten.
+- **Daten aus China und Europa**, die nicht im Kalender standen, und Revisionen.
+
+**Einordnen** (jede Meldung kurz):
+- **Was** in einem Satz, **wann** (Uhrzeit MEZ), **Quelle** (Link).
+- **Stärke**: hoch (bewegt Dollar oder Risikostimmung deutlich), mittel, niedrig.
+- **Wirkung auf EURUSD** (Ergänzung, nicht aus den Videos): über die Risikostimmung (Angst → oft Dollar gefragt,
+  EURUSD eher schwächer; Entspannung → umgekehrt), über die Zinserwartung (Fed falkenhafter → Dollar stärker) und über
+  Europa-Nachrichten (EZB, Politik in der Eurozone → Euro). Einzelne Firmen wie Nvidia wirken auf EURUSD nur über die
+  Risikostimmung. Immer als „eher“ formulieren, nie als sicher.
+- **Was er tun soll**: z. B. „Plan gilt, nichts Neues“, „erste 15 Min. nach der Eröffnung nur zuschauen“,
+  „Stop des offenen Trades prüfen“.
+
+**Regeln**
+- **Nur belegte Meldungen**, mit Link. Gerüchte und Einzelquellen als „unbestätigt“ kennzeichnen. Nichts erfinden;
+  findet die Suche nichts: „Keine marktbewegenden Nachrichten gefunden (Stand HH:MM).“
+- **Kein Kauf- oder Verkaufssignal** aus Nachrichten. Sie ändern Risiko, Sperrzeiten und Bias, nicht die
+  Pflicht-Bedingungen der Setups.
+- **Stärke hoch in den letzten 60 Minuten oder gleich erwartet** (z. B. Rede, Pressekonferenz): Warnung in die erste
+  Zeile wie bei Terminen. Empfehlung (Ergänzung): nach einer überraschenden Meldung der Stärke hoch wie nach Daten
+  15 Minuten keinen neuen Einstieg.
+- **Kurz halten**: höchstens 5 Meldungen, wichtigste zuerst, je 1–2 Zeilen.
+- **Grenze**: Du kannst ihn nur informieren, wenn er schreibt oder eine geplante Aufgabe bzw. Erinnerung läuft. Gibt es
+  ein Erinnerungs-Werkzeug (z. B. `send_later`), die Nachrichten-Erinnerung vor New York zusammen mit den
+  Termin-Erinnerungen anlegen.
+- **Quellen**: Agenturen und Wirtschaftsmedien (Reuters, AP, Bloomberg, CNBC, CNN Business, Yahoo Finance,
+  Handelsblatt, FAZ), Unternehmensmeldungen (SEC-Formular 8-K) und Notenbank-Seiten. Manche Seiten sind in der
+  Cloud-Umgebung gesperrt; dann die Suchergebnisse mit Link nutzen.
