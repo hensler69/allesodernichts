@@ -61,6 +61,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-11-04: Haaransatz/Geheimratsecken: Haar-Ebene nach vorn/unten verschieben und über die unveränderte Haut legen (Vereinigung, Maske aus Dunkelheit, Braue und Himmel ausgeschlossen), nicht die Stirn stauchen (Jacobi 0,39); Volumen oben per sanfter Verformung der Haar/Himmel-Kontur
 - 2026-11-04: Rest einer Geheimratsecke mit wenigen feinen, locker fallenden Strähnen (Bezier, Farbe/Glanz aus seinem Haar, Deckkraft 0,65–0,85) plus schwachen Härchen am Ansatz abdecken; nicht flächig füllen, nicht über den Himmel
 - 2026-11-05: IQ-Regeln nur aus IQ-eigenen Quellen (Nutzer-Wunsch); iqcapital.io ist in der Cloud-Umgebung gesperrt, daher seine Screenshots der Hilfeseite support.iqcapital.io nutzen
+- 2026-11-12 (Runde 2): Gesicht nur am Kieferwinkel ca. 1,3 % schmaler, Mundbereich geschützt, keine Wangenmulden-Schatten (wirkte wie Duckface); Bart nur über die Haare dunkler (ca. −12 %) plus Strähnen-Feinkontrast, kein Farbton auf der Haut (wirkte aufgemalt)
 - 2026-11-12: Gesicht/Bart per Gesichts-Landmarken (MediaPipe Face Landmarker, lokal) statt Handvermessung; Kiefer ca. 3 % der Gesichtsbreite je Seite nach innen (Kontur auf den Bartrand versetzt), gerade Linien direkt neben dem Kiefer per Seitenfaktor schonen; Bart dunkler nur mit Grundton im Gesichtsoval und Haar-Gewichtung außen (sonst dunkelt die Wand)
 - 2026-10-28: Skill-Änderungen landen automatisch in der Repo-Fassung `.claude/skills/trading-tagesablauf` (Nutzer will nichts extra speichern); diese Fassung ist maßgeblich, auch wenn die Konto-Fassung älter ist
 - 2026-10-28: Screenshot-Protokoll (references/screenshot-protokoll.md): Morgen-Paket 08:30–09:00 (Daily mit Kopfzeile, 1H 3–5 Tage, 30 Min. mit Zonen, GBPUSD 15 Min., IQ-Kopfleiste), danach Bilder nur bei Ereignissen in fester Reihenfolge
@@ -96,7 +97,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] IQ-Konto: Plan Core (bestätigt 2.11.; laut Drittseiten Ziel 4.000 $, Verlustgrenze trailt am Tagesende 3.000 $, keine Konsistenzregel in der Bewertung); Auszahlungsregeln im Funding aus IQ-Hilfeseite im Profil (5.11.); Zeitlimit und „10 Tage je Auszahlung?“ noch offen; Kopfleiste 2.11.: Eq 49.866,46 $, MD 47.131,12 $, Puffer 2.735 $; Puffer-Empfehlung bestätigen oder ablehnen (seit 2026-11-02)
 - [ ] Alanya-Foto (Holzsteg): Körper aufgerichtet, Arme +3,3 px, Bauchrelief ×1,4, Originalformat geliefert; Rückmeldung abwarten (seit 2026-11-04, Details in notes/2026-11-04.md)
 - [ ] Restaurant-Foto für Hinge (Haare: Schläfe 34 px nach vorn, Locke 16 px tiefer, Volumen +12 px, feine Strähnen über der Ecke), Originalformat geliefert; Rückmeldung abwarten (seit 2026-11-04)
-- [ ] 5 Selfies (Gesicht markanter, weniger füllig, Bart dunkler), Originalformat, Feed 4:5, Story 9:16 geliefert; Rückmeldung zu Stärke abwarten (seit 2026-11-12, Details in notes/2026-11-12.md)
+- [ ] 5 Selfies Runde 2 (dezent: Kieferwinkel 1,3 %, Bart nur Haare dunkler), Originalformat, Feed 4:5, Story 9:16 geliefert; Rückmeldung abwarten (seit 2026-11-12, Details in notes/2026-11-12.md)
 - [ ] Regeln von IQ Capital zu News-Trading und Halten über Notenbank-Termine prüfen (Nutzer)
 
 ## Laufende Themen
