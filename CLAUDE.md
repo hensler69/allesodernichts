@@ -65,6 +65,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - 2026-11-12: Gesicht/Bart per Gesichts-Landmarken (MediaPipe Face Landmarker, lokal) statt Handvermessung; Kiefer ca. 3 % der Gesichtsbreite je Seite nach innen (Kontur auf den Bartrand versetzt), gerade Linien direkt neben dem Kiefer per Seitenfaktor schonen; Bart dunkler nur mit Grundton im Gesichtsoval und Haar-Gewichtung außen (sonst dunkelt die Wand)
 - 2026-11-12: Trading-Skill nur noch Forex: Index-Strategien gelöscht (strategie-spx500.md, strategie-nas100.md, tjr-index-strategie.md, VE-Test, rechner.py --markt); bleiben, weil für EURUSD genutzt: M, TJR mit TJR-KL/IF/FE, Silver Bullet, Pivots, Handbuch als Konfluenz; ersetzt die Index-Entscheidungen vom 29.10.
 - 2026-11-12: Täglich Marktnachrichten aus den Medien zusätzlich zu den Terminen (references/wirtschaftstermine.md, Abschnitt 8): Morgenplan vor London und zweiter Check vor der NY-Eröffnung, alles Kursrelevante (Notenbank, Politik, Geopolitik, große Firmen wie der Rücktritt des Nvidia-Chefs am 12.11.), je Meldung Uhrzeit, Stärke, Wirkung auf EURUSD und Quelle, nur belegt
+- 2026-11-13: Bild nach unten erweitern (z. B. Jacke): Stoff per Patch-Quilting aus dem eigenen Stoff, Grundhelligkeit je Spalte angleichen, Reißverschluss als gekachelter Streifen entlang der gemessenen Linie; Schultern breiter über die Kontur gegen die Wand, Gauß außen ≥ ca. 1,8 × Verschiebung (sonst Faltung), Jacobi ≥ 0,65
 - 2026-10-28: Skill-Änderungen landen automatisch in der Repo-Fassung `.claude/skills/trading-tagesablauf` (Nutzer will nichts extra speichern); diese Fassung ist maßgeblich, auch wenn die Konto-Fassung älter ist
 - 2026-10-28: Screenshot-Protokoll (references/screenshot-protokoll.md): Morgen-Paket 08:30–09:00 (Daily mit Kopfzeile, 1H 3–5 Tage, 30 Min. mit Zonen, GBPUSD 15 Min., IQ-Kopfleiste), danach Bilder nur bei Ereignissen in fester Reihenfolge
 - 2026-10-28: Begrüßung: Auf „Guten Morgen“/„Guten Tag“ mit „Guten Tag, Manuel“ antworten und sagen, welche Screenshots er jetzt schicken soll (Uhrzeit, Termine, Marktlage)
@@ -100,6 +101,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] Alanya-Foto (Holzsteg): Körper aufgerichtet, Arme +3,3 px, Bauchrelief ×1,4, Originalformat geliefert; Rückmeldung abwarten (seit 2026-11-04, Details in notes/2026-11-04.md)
 - [ ] Restaurant-Foto für Hinge (Haare: Schläfe 34 px nach vorn, Locke 16 px tiefer, Volumen +12 px, feine Strähnen über der Ecke), Originalformat geliefert; Rückmeldung abwarten (seit 2026-11-04)
 - [ ] 5 Selfies Runde 2 (dezent: Kieferwinkel 1,3 %, Bart nur Haare dunkler), Originalformat, Feed 4:5, Story 9:16 geliefert; Rückmeldung abwarten (seit 2026-11-12, Details in notes/2026-11-12.md)
+- [ ] Tinder-Bild (Ausschnitt tiefer, Jacke verlängert, Schultern breiter, Reißverschluss-Streifen abgedunkelt): tinder_final_v2.jpg geliefert, Rückmeldung abwarten (seit 2026-11-13)
 - [ ] Regeln von IQ Capital zu News-Trading und Halten über Notenbank-Termine prüfen (Nutzer)
 
 ## Laufende Themen
