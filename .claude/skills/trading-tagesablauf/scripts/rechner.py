@@ -8,6 +8,8 @@ Beispiele:
   python rechner.py --stop 1.1157 --ziel 1.1116            (nur: ab welchem Einstieg sind es 2R?)
   python rechner.py --einstieg 1.1147 --stop 1.1157 --ziel 1.1110 --teile 3
                                           (Teilgewinne: drei Positionen mit Ziel 1R, 2R und dem Endziel)
+  python rechner.py --einstieg 160.10 --stop 160.55 --ziel 158.42 --pip 0.01 --pipwert 6.25 --tick 0.001
+                                          (JPY-Paare: 1 Pip = 0,01, Pipwert = 1.000 JPY ÷ USDJPY-Kurs)
 
 Richtung ergibt sich aus Stop und Ziel (Stop über dem Ziel = Short). Standard: EURUSD-artige Paare
 (1 Pip = 0,0001, 10 $ pro Pip und Lot, 1 IQ-Tick = 0,00001). Für andere Märkte --pip und --pipwert setzen.
@@ -37,7 +39,7 @@ def main():
     ap.add_argument("--tick", type=float, default=0.00001, help="Tickgröße der Plattform (IQ: 0,00001)")
     ap.add_argument("--teile", type=int, choices=[3], help="3 = Position dritteln: Ziele 1R, 2R und --ziel")
     a = ap.parse_args()
-    a.einheit, a.groesse, a.stellen = "Pips", "Lots", 5
+    a.einheit, a.groesse, a.stellen = "Pips", "Lots", (3 if a.pip >= 0.01 else 5)   # JPY-Paare: 3 Nachkommastellen
 
     short = a.stop > a.ziel
     richtung = "Short" if short else "Long"

@@ -96,6 +96,10 @@ Typische Fragen von ihm: „wann long, wann short?“, „ist das ein gutes Setu
   Am 2.11. ließ sich das **Order-Panel** am Handy (Safari, Hochformat) nicht öffnen („Trading panel“ nicht
   antippbar, auch nicht quer/Desktop-Ansicht/Zoom). Neue Orders also nur am PC planen oder die Limit-Order vor dem
   Weggehen am PC anlegen; Handy-Bedienung in Ruhe testen bzw. den IQ-Support (Chat) fragen.
+- **JPY-Paare** (USDJPY, GBPJPY, EURJPY): 1 Pip = 0,01, IQ-Tick 0,001; Pipwert pro Lot = 1.000 JPY ÷ USDJPY-Kurs
+  (bei 160 ≈ 6,25 $, also weniger als bei EURUSD). Lots = Risiko ÷ (Stop-Pips × 6,25), bei 500 $ ≈ 80 ÷ Stop-Pips.
+  Rechner: `--pip 0.01 --pipwert 6.25 --tick 0.001`. Wegen Interventionsgefahr (Sprünge über den Stop) mit etwas
+  Abstand zur IQ-Positionsverlust-Grenze planen.
 - **Kosten**: EURUSD 10 $ pro Pip und Lot. Das Tagesergebnis −286,38 $ passte exakt zu 3,33 Lots × 8,6 Pips, also
   war keine Kommission sichtbar. Die Regeln von IQ Capital zum Halten über Nacht und zum Handeln um Nachrichten
   sind noch nicht geprüft. Darauf hinweisen, wenn es relevant wird.
