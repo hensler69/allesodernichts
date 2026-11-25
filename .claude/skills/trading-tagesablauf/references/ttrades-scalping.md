@@ -67,6 +67,11 @@ in L3. **Status: Lernmodell im Backtest**, kein fünftes Live-Setup. Live erst, 
   expansion. Within the candle 3 expansion candle, find the 15 minute and 1 minute fractal model with a protected
   swing to trade the expansion.“
 - **Ohne Bias kein Trade**: „Without this bias, lower time frame setups lose their reliability.“
+- **Lehre aus Backtest-Fall 1 (12.10.2026, MNQ, Ergänzung)**: Eine C2 zählt nur **an Liquidität oder einer FVG**
+  (Artikel: „after liquidity interaction or fair value gap displacement“). Die 08:00-Kerze holte nur das Tief der
+  07:00-Kerze mitten in einem H1-Abwärtstrend, ohne POI, und schloss knapp steigend: Die 09:00-Kerze fiel trotzdem
+  −109 Punkte bis unter das Freitagstief. Kleine Gegen-C2 ohne POI im laufenden Trend = **kein Bias-Wechsel**; dann
+  gilt die Trendrichtung, bis eine C2 an einem echten Level kommt.
 - C2-Schluss wie in L3·5: Die Kerze holt das Tief (bullisch) bzw. Hoch (bärisch) der vorigen Kerze und schließt
   wieder in deren Range, möglichst in Bias-Richtung.
 
