@@ -2,7 +2,7 @@
 
 Wunsch des Nutzers (25.11.2026): das Video „TTrades Scalping Model - Simple Day Trading Strategy“ (TTrades,
 YouTube-ID eywpZT3z6GQ, 7.2.2026, 14 Min.) in den Skill aufnehmen und ihm das Modell über **Backtest-Simulationen**
-auf dem richtigen Chart beibringen. Der Ablauf des Trainings steht in `references/backtest-training.md`.
+auf dem richtigen Chart beibringen, für **MNQ-Futures** (Abschnitt 8). Der Ablauf des Trainings steht in `references/backtest-training.md`.
 
 **Quellen** (nur diese, nichts erfunden):
 - **Artikel** zum Video auf ttrades.com („TTrades Scalping Model – Simple Day Trading Strategy“, vom Kanal unter
@@ -28,7 +28,7 @@ in L3. **Status: Lernmodell im Backtest**, kein fünftes Live-Setup. Live erst, 
 5. Schritt 3: M1-Einstieg (15m > 1m Fractal Model)
 6. Stop und Ziel
 7. Pflicht-Bedingungen (Checkliste)
-8. Übertrag auf EURUSD und seine Regeln (Ergänzung)
+8. Übertrag auf MNQ-Futures und seine Regeln (Ergänzung)
 9. Offene Punkte aus dem Video
 
 ## 1. Die Kernidee
@@ -105,7 +105,7 @@ geschützten Tief → Einstieg.**
 > „Stops are placed at logical protected swings, and targets are based on higher time frame objectives rather than
 > arbitrary scalping exits.“
 
-- **Stop**: hinter dem **geschützten M1-Swing** (Folie 5: das Rücklauf-Tief), plus Spread. Konservativer: hinter dem
+- **Stop**: hinter dem **geschützten M1-Swing** (Folie 5: das Rücklauf-Tief), plus 1–2 Ticks. Konservativer: hinter dem
   M15-Swing-Tief (dem H1-Docht). Welches das Video in den Beispielen nutzt, ist offen (Abschnitt 9).
 - **Ziel**: das Ziel des **höheren Zeitrahmens**, also wohin die H1-Kerze expandieren soll (Folie 1: das vorige
   H1-Hoch; allgemein H1-Liquidität, FVG, Vortageshoch/-tief).
@@ -124,22 +124,39 @@ Alle müssen erfüllt sein. Jede Zeile wird im Backtest einzeln mit ✓/✗ bewe
 | 3 | In der H1-Kerze C3: **M15-Swing** gegen die Richtung (Docht unter bzw. über der H1-Eröffnung) mit **M15-C2-Schluss** | M15 |
 | 4 | In der M15-Kerze C3: **M1-Rücklauf** an die M15-C3-Eröffnung bzw. in eine M1-FVG | M1 |
 | 5 | **M1-CISD** vom Rücklauf → geschützter Swing steht | M1 |
-| 6 | Stop hinter dem geschützten Swing + Spread, Ziel aus H1, **≥ 2R**, Lots mit `scripts/rechner.py` | – |
+| 6 | Stop hinter dem geschützten Swing + 1–2 Ticks, Ziel aus H1, **≥ 2R**, Kontrakte mit `scripts/rechner.py --markt MNQ` | – |
 | 7 | Seine Rahmenregeln: keine Sperrzeit, Tageslimit, Session (Abschnitt 8) | – |
 
 **Ungültig**: Die H1-Kerze C3 schließt gegen den Bias, oder M1/M15 schließt mit dem Körper hinter den geschützten
 Swing.
 
-## 8. Übertrag auf EURUSD und seine Regeln (Ergänzung)
+## 8. Übertrag auf MNQ-Futures und seine Regeln (Ergänzung)
 
-- **Markt**: Artikel-Beispiel ist NQ, das Video nennt „forex“ und „futures“. Er übt es auf **OANDA:EURUSD**, dem
-  Chart, auf dem er handelt (sein Skill ist nur Forex). GBPUSD als SMT nur als Dafür-Punkt, nicht Pflicht.
-- **Zeiten** (Ergänzung, nicht aus dem Video): Scalping braucht Bewegung. Am sinnvollsten in London (09:00–12:00 MEZ)
-  und New York (15:30–17:30 MEZ, in Zeitumstellungs-Wochen eine Stunde früher). Sperrzeiten um Daten wie immer.
-- **Spread**: EURUSD ca. 0,2 Pip bei IQ. Bei M1-Stops von 3–6 Pips ist das ein spürbarer Teil des Risikos; im
-  Backtest immer mitrechnen.
-- **Lots**: wie gewohnt, Lots = Risiko ÷ (Stop-Pips × 10); kleine Stops ergeben große Lots, deshalb den Rechner nutzen
-  und vor dem Klick „Risk“ im IQ-Panel prüfen.
+Wunsch des Nutzers (25.11.2026): das Modell für **MNQ-Futures** (Micro E-mini Nasdaq-100, CME), nicht für EURUSD.
+Das passt zum Video: Das Artikel-Beispiel ist NQ.
+
+- **Chart**: **CME_MINI:MNQ1!** (Dauerkontrakt) in TradingView. **NQ1!** hat dieselben Kurse und kann gleichwertig
+  genutzt werden. Zeitzone Europe/Berlin.
+  - Ohne Daten-Abo sind CME-Kurse in TradingView ca. 10 Min. verzögert („D“). Für den Backtest im Replay egal, für
+    Live-Trades wichtig: dann den Chart der Handelsplattform nehmen.
+  - **Kontraktwechsel**: MNQ läuft quartalsweise aus (März, Juni, September, Dezember). Am Wechseltag kann der
+    Dauerkontrakt springen. Im Backtest Tage direkt am Wechsel meiden oder in den Chart-Einstellungen die
+    Rückwärtsanpassung der Kontrakte einschalten.
+- **Kontraktwerte** (CME): 1 Tick = 0,25 Punkte = **0,50 $**, 1 Punkt = **2 $** je MNQ-Kontrakt (NQ: 20 $ je Punkt,
+  also das Zehnfache).
+  - **Kontrakte = Risiko ÷ (Stop in Punkten × 2)**, immer ganze Kontrakte, abrunden. Beispiel: 500 $ Risiko, Stop
+    25 Punkte → 10 MNQ. Genau mit `scripts/rechner.py --markt MNQ`.
+  - Gebühren und Schlupf: pro Kontrakt und Seite einige Cent bis ca. 1 $ je nach Anbieter. Bei kleinen M1-Stops
+    spürbar, im Backtest mit ca. 1–2 Ticks Schlupf rechnen.
+- **Zeiten** (Ergänzung, nicht aus dem Video): Der Nasdaq bewegt sich vor allem in New York.
+  - **Kassa-Eröffnung 09:30 NY = 15:30 MEZ** (in Zeitumstellungs-Wochen 14:30). Erste Stunde oft die beste
+    Scalping-Zeit, ebenso das Fenster 10:00–11:00 NY (16:00–17:00 MEZ).
+  - US-Daten um 08:30 NY (14:30 MEZ) und 10:00 NY (16:00 MEZ): Sperrzeit ±15 Min. wie immer.
+  - Große Tech-Quartalszahlen am Abend (Nvidia, Apple, Microsoft …): nichts darüber halten.
+  - London (09:00–12:00 MEZ) bewegt MNQ meist weniger; dort eher nur die H1-Struktur lesen.
+- **SMT**: MNQ gegen **MES/ES** (S&P 500), wie in L1 und L2 (NQ, ES, YM). Nur Dafür-Punkt, nicht Pflicht.
+- **Konto**: Sein IQ-Konto (Core 50K) ist für CFDs/Forex. Auf welchem Futures-Konto bzw. bei welcher Firma er MNQ
+  handeln will, ist noch offen. Bis dahin rechnet der Backtest in **R**; Kontrakte erst, wenn Konto und Risiko feststehen.
 - **Kein Live-Trade** mit diesem Modell, solange es im Backtest ist (`references/backtest-training.md`, Abschnitt 6).
 
 ## 9. Offene Punkte aus dem Video

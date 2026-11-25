@@ -2,7 +2,7 @@
 
 Wunsch des Nutzers (25.11.2026): Modelle wie das TTrades Scalping Model (`references/ttrades-scalping.md`) soll er
 über **Backtest-Simulationen** lernen, die er selbst im TradingView-Replay macht, und zwar auf dem Chart, den er auch
-handelt (OANDA:EURUSD). Du bist dabei sein **Trainer**: Er entscheidet zuerst, du prüfst danach. Der Ablauf gilt für
+handeln will (TTFM-Scalp: **CME_MINI:MNQ1!**, MNQ-Futures). Du bist dabei sein **Trainer**: Er entscheidet zuerst, du prüfst danach. Der Ablauf gilt für
 jedes Modell; Beispiele hier beziehen sich auf TTFM-Scalp.
 
 ## Inhalt
@@ -30,7 +30,7 @@ jedes Modell; Beispiele hier beziehen sich auf TTFM-Scalp.
 
 ## 2. Einrichtung in TradingView
 
-- **Chart**: OANDA:EURUSD, Zeitzone **Europe/Berlin** (Chart-Einstellungen → Symbol → Zeitzone), damit Uhrzeiten mit
+- **Chart**: der Markt des Modells, für TTFM-Scalp **CME_MINI:MNQ1!** (oder NQ1!, gleiche Kurse), Zeitzone **Europe/Berlin** (Chart-Einstellungen → Symbol → Zeitzone), damit Uhrzeiten mit
   seinen Sperrzeiten übereinstimmen. LuxAlgo-Sessions wie im Live-Layout.
 - **Zeitrahmen**: H1, M15, M1. Am besten ein Layout mit drei Charts nebeneinander (Mehrfach-Layout); sonst
   umschalten.
@@ -40,7 +40,7 @@ jedes Modell; Beispiele hier beziehen sich auf TTFM-Scalp.
     kostenlosen Paket nach Drittseiten nur Tageskerzen. Hat er kein 1-Min.-Replay: M1-Schritt auf **M5** üben und im
     Journal als „Variante M5“ kennzeichnen (Ergänzung).
 - **Tag wählen**: zufällig, keine Tage, die er schon kennt. Montag bis Freitag, möglichst ohne große Datentermine,
-  später gezielt auch Datentage.
+  später gezielt auch Datentage. Bei MNQ keine Tage direkt am Kontraktwechsel (März, Juni, September, Dezember).
 - **Bilder**: TradingView-Screenshot (Kamera-Symbol → Bild herunterladen) statt Handyfoto, damit Preise und Uhrzeiten
   genau sind. Preisachse, Datum und Uhrzeit sichtbar.
 
@@ -52,7 +52,7 @@ Er schickt zu jedem Schritt ein Bild und seine Antwort. Du bewertest und sagst, 
 |---|---|---|---|
 | **A · H1** | H1 nach einem Kerzenschluss | Bias? Welche Kerze ist C2 (oder C3)? Liquidität bzw. FVG davor? Ziel der Expansion? | Bedingungen 0–2 (`ttrades-scalping.md`, Abschnitt 7). Kein Bias → „kein Setup, weiter bis zum nächsten H1-Schluss“. |
 | **B · M15** | M15 in der H1-Kerze C3 | Wo bildet sich der Swing (Docht)? Ist der M15-C2-Schluss da? | Bedingung 3. Swing auf der richtigen Seite der H1-Eröffnung? |
-| **C · M1** | M1 in der M15-Kerze C3 | Rücklauf wohin? Wo ist die CISD? Einstieg, Stop, Ziel, R? | Bedingungen 4–7, R mit `scripts/rechner.py`, Spread. Stop-Variante (M1- oder M15-Swing) festhalten. |
+| **C · M1** | M1 in der M15-Kerze C3 | Rücklauf wohin? Wo ist die CISD? Einstieg, Stop, Ziel, R? | Bedingungen 4–7, R mit `scripts/rechner.py --markt MNQ`, 1–2 Ticks Schlupf. Stop-Variante (M1- oder M15-Swing) festhalten. |
 | **D · Auflösung** | Bild nach Ziel oder Stop | Ergebnis in R, was ist passiert? | Ergebnis gegen den Plan, Fehler benennen. |
 | **E · Journal** | – | – | Fall eintragen (Abschnitt 7), Zwischenstand nennen. |
 
@@ -69,7 +69,7 @@ bewerten.
   - `swing`: M15-Swing auf der falschen Seite der H1-Eröffnung oder ohne C2-Schluss
   - `ruecklauf`: Einstieg ohne Rücklauf, hinterhergelaufen
   - `cisd`: CISD falsch (Docht statt Körper, falsche Serie)
-  - `stop`: Stop nicht hinter dem geschützten Swing oder ohne Spread
+  - `stop`: Stop nicht hinter dem geschützten Swing oder ohne Puffer (Spread bzw. 1–2 Ticks)
   - `ziel`: Ziel nicht aus H1, unter 2R
   - `zeit`: Sperrzeit, außerhalb der Session
   - `zukunft`: Ausgang war schon sichtbar
@@ -92,8 +92,8 @@ Ergänzung, als Vorschlag. Er kann sie überspringen, wenn er eine Stufe sicher 
 - **Kennzahlen** mit `scripts/backtest_stats.py notes/backtest-<modell>.md`: Anzahl Fälle, Trades, Trefferquote,
   Ø Gewinn und Ø Verlust in R, **Erwartungswert pro Trade in R**, längste Verlustserie, Anteil regelkonform,
   häufigste Fehler, Werte je Variante (z. B. Stop M1 gegen Stop M15).
-- **Einordnung**: Bei 2R reicht eine Trefferquote über ca. 34 % (L3·8). Mit seinem Risiko von 500 $ und ca.
-  2.700 $ Puffer darf die längste Verlustserie nicht an den Puffer heranreichen.
+- **Einordnung**: Bei 2R reicht eine Trefferquote über ca. 34 % (L3·8). Die längste Verlustserie muss zum Puffer
+  des Kontos passen, auf dem er das Modell später handelt (bei MNQ noch offen).
 - **Freigabe-Vorschlag** (Ergänzung, er entscheidet): mindestens 30 regelkonforme Trades, Erwartungswert ≥ +0,3R,
   längste Verlustserie ≤ 5, Regeltreue ≥ 90 %. Erst dann fragen, ob das Modell als **eigenes Setup** in den Live-Plan
   soll (bisher: M, TJR, SB, PV).

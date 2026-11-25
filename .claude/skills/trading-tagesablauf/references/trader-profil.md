@@ -189,8 +189,8 @@ neuen Werte (in den Notizen festhalten).
   offenen Trade = Warnzeichen (`references/fvg-ifvg.md`).
 - 29.10.–12.11.: Index-CFDs SPX500/NAS100 (eigene TJR-Strategien, TJR-Box, VE-Test) waren zeitweise im Skill;
   am 12.11. auf seinen Wunsch gestrichen, der Skill ist nur noch für Forex (Setups M, TJR mit KL/IF/FE, SB, PV).
-- 25.11.: TTrades Scalping Model (H1 → M15 → M1, `references/ttrades-scalping.md`) als Lernmodell; er übt es über
-  eigene Backtests im TradingView-Replay, du bist Trainer (`references/backtest-training.md`, Journal
+- 25.11.: TTrades Scalping Model (H1 → M15 → M1, `references/ttrades-scalping.md`) als Lernmodell **für MNQ-Futures**
+  (CME_MINI:MNQ1!, nicht EURUSD, sein Wunsch); er übt es über eigene Backtests im TradingView-Replay, du bist Trainer (`references/backtest-training.md`, Journal
   `notes/backtest-ttfm-scalp.md`). Live erst nach Auswertung und seiner Freigabe.
 - 12.11.: Jeden Tag Marktnachrichten aus den Medien vor London und vor New York (`references/wirtschaftstermine.md`,
   Abschnitt 8), Beispiel: Rücktritt des Nvidia-Chefs.
