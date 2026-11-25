@@ -83,9 +83,10 @@ def main():
         print("Noch keine Fälle im Journal.")
         return
     auswerten(fälle, "Alle Fälle" + (f" (Stufe {a.stufe})" if a.stufe else ""))
-    varianten = sorted({f.get("Variante", "").strip() for f in fälle if f.get("Variante", "").strip() not in ("", "-")})
-    for v in varianten:
-        auswerten([f for f in fälle if f.get("Variante", "").strip() == v], f"Variante {v}")
+    for spalte in ("Session", "Variante"):
+        werte = sorted({f.get(spalte, "").strip() for f in fälle if f.get(spalte, "").strip() not in ("", "-")})
+        for v in werte:
+            auswerten([f for f in fälle if f.get(spalte, "").strip() == v], f"{spalte} {v}")
 
 
 if __name__ == "__main__":

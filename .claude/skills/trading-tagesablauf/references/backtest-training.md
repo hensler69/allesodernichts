@@ -40,7 +40,10 @@ Der Ablauf gilt für jedes Replay-Programm, auch für TradingView. Was das Progr
   M1-Schritt auf **M5** üben und im Journal als „Variante M5“ kennzeichnen (Ergänzung).
 - **Zeitzone**: Europe/Berlin einstellen (oder die Zeitzone des Programms nennen), damit die Uhrzeiten zu
   Eröffnung (15:30 MEZ) und Sperrzeiten passen.
-- **Startpunkt**: Replay auf H1 starten, dann auf M15/M1 wechseln, ohne vorzuspulen.
+- **Startpunkt**: Replay auf H1 starten, ca. 1–2 Stunden **vor** seinem Fenster (NY: ca. 08:00 NY, Asia: ca. 18:00
+  NY), damit er den Bias aus der letzten H1-Kerze vor dem Fenster liest. Dann auf M15/M1 wechseln, ohne vorzuspulen.
+  Einstiege nur in seinen Fenstern: **NY ab 09:30 NY** und **Asia ab 20:00 NY** (`references/ttrades-scalping.md`,
+  Abschnitt 8).
 - **Tag wählen**: zufällig, keine Tage, die er schon kennt. Montag bis Freitag, möglichst ohne große Datentermine,
   später gezielt auch Datentage. Bei MNQ keine Tage direkt am Kontraktwechsel (März, Juni, September, Dezember).
 - **Bilder**: Screenshot aus dem Programm statt Handyfoto, damit Preise und Uhrzeiten genau sind. Preisachse,
@@ -75,7 +78,7 @@ bewerten.
   - `cisd`: CISD falsch (Docht statt Körper, falsche Serie)
   - `stop`: Stop nicht hinter dem geschützten Swing oder ohne Puffer (Spread bzw. 1–2 Ticks)
   - `ziel`: Ziel nicht aus H1, unter 2R
-  - `zeit`: Sperrzeit, außerhalb der Session
+  - `zeit`: Sperrzeit, außerhalb seiner Fenster (NY ab 09:30 NY, Asia ab 20:00 NY)
   - `zukunft`: Ausgang war schon sichtbar
 - **Punkte je Fall** (Ergänzung): 1 Punkt je richtig gelesener Bedingung, Höchstwert 8. Zeigt den Lernfortschritt
   unabhängig vom Ergebnis.
@@ -95,7 +98,7 @@ Ergänzung, als Vorschlag. Er kann sie überspringen, wenn er eine Stufe sicher 
 
 - **Kennzahlen** mit `scripts/backtest_stats.py notes/backtest-<modell>.md`: Anzahl Fälle, Trades, Trefferquote,
   Ø Gewinn und Ø Verlust in R, **Erwartungswert pro Trade in R**, längste Verlustserie, Anteil regelkonform,
-  häufigste Fehler, Werte je Variante (z. B. Stop M1 gegen Stop M15).
+  häufigste Fehler, Werte je Variante (z. B. Stop M1 gegen Stop M15) und je Session (NY gegen Asia).
 - **Einordnung**: Bei 2R reicht eine Trefferquote über ca. 34 % (L3·8). Die längste Verlustserie muss zum Puffer
   des Kontos passen, auf dem er das Modell später handelt (bei MNQ noch offen).
 - **Freigabe-Vorschlag** (Ergänzung, er entscheidet): mindestens 30 regelkonforme Trades, Erwartungswert ≥ +0,3R,
@@ -108,9 +111,10 @@ Ergänzung, als Vorschlag. Er kann sie überspringen, wenn er eine Stufe sicher 
 Datei `notes/backtest-<modell>.md` im Repo (nur Text, keine Bilder). Für TTFM-Scalp: `notes/backtest-ttfm-scalp.md`.
 Eine Zeile je Fall:
 
-| Nr | Datum Chart | Uhrzeit | Stufe | Richtung | Trade | Einstieg | Stop | Ziel | R geplant | Ergebnis R | Regelkonform | Fehler | Variante | Punkte | Notiz |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Nr | Datum Chart | Uhrzeit | Session | Stufe | Richtung | Trade | Einstieg | Stop | Ziel | R geplant | Ergebnis R | Regelkonform | Fehler | Variante | Punkte | Notiz |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 
+- **Session**: `NY` oder `Asia`.
 - **Trade**: `ja` oder `nein` (bewusst verzichtet bzw. kein Setup).
 - **Ergebnis R**: z. B. `+2,4`, `-1`, `0` (Breakeven); leer bei `Trade = nein`.
 - **Regelkonform**: `ja` / `nein`.

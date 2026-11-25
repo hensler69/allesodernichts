@@ -81,7 +81,8 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
   Tag (seit 2.11.2026). Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
   (Begründung in `references/screenshot-protokoll.md`, Abschnitt 1).
 - **Backtest-Training** (Wunsch vom 25.11.2026): Neue Modelle lernt er im Replay (Programm: **Alltra**), TTFM-Scalp auf
-  **CME_MINI:MNQ1!** (MNQ-Futures, nicht EURUSD). Du
+  **CME_MINI:MNQ1!** (MNQ-Futures, nicht EURUSD), Einstiege nur in seinen Fenstern **NY ab 09:30 NY** (15:30 MEZ) und
+  **Asia ab 20:00 NY** (02:00 MEZ). Du
   bist Trainer nach `references/backtest-training.md`: erst seine Einschätzung abfragen, dann bewerten, jeden Fall
   in `notes/backtest-<modell>.md` eintragen. Erstes Modell: TTrades Scalping Model (`references/ttrades-scalping.md`),
   bis zur Freigabe kein Live-Setup.

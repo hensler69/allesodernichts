@@ -148,12 +148,20 @@ Das passt zum Video: Das Artikel-Beispiel ist NQ.
     25 Punkte → 10 MNQ. Genau mit `scripts/rechner.py --markt MNQ`.
   - Gebühren und Schlupf: pro Kontrakt und Seite einige Cent bis ca. 1 $ je nach Anbieter. Bei kleinen M1-Stops
     spürbar, im Backtest mit ca. 1–2 Ticks Schlupf rechnen.
-- **Zeiten** (Ergänzung, nicht aus dem Video): Der Nasdaq bewegt sich vor allem in New York.
-  - **Kassa-Eröffnung 09:30 NY = 15:30 MEZ** (in Zeitumstellungs-Wochen 14:30). Erste Stunde oft die beste
-    Scalping-Zeit, ebenso das Fenster 10:00–11:00 NY (16:00–17:00 MEZ).
-  - US-Daten um 08:30 NY (14:30 MEZ) und 10:00 NY (16:00 MEZ): Sperrzeit ±15 Min. wie immer.
-  - Große Tech-Quartalszahlen am Abend (Nvidia, Apple, Microsoft …): nichts darüber halten.
-  - London (09:00–12:00 MEZ) bewegt MNQ meist weniger; dort eher nur die H1-Struktur lesen.
+- **Seine Handelszeiten** (sein Wunsch vom 25.11.2026): **nur zwei Fenster**, Einstiege erst ab dem Start:
+  - **New York ab 09:30 NY** (Kassa-Eröffnung) = **15:30 MEZ**, in Zeitumstellungs-Wochen 14:30.
+  - **Asia ab 20:00 NY** = **02:00 MEZ** (Asia-Box wie in seinen LuxAlgo-Einstellungen, 20:00–00:00 NY), in
+    Zeitumstellungs-Wochen 01:00 bzw. 03:00. Zum Vergleich: Die Tokioter Börse öffnet 19:00 NY (01:00 MEZ), der
+    CME-Handel nach der Tagespause 18:00 NY (00:00 MEZ). Meint er einen dieser Zeitpunkte, hier anpassen.
+  - **H1-Bias vor dem Fenster lesen**: die letzte geschlossene H1-Kerze vor 09:30 bzw. 20:00 NY (C2-Schluss?), dazu
+    die Liquidität der vorigen Session (für NY: Asia, London, Premarket; für Asia: NY-Hoch/-Tief, Vortag).
+  - **Ende der Fenster** (Ergänzung): Er hat nur den Start genannt. Bis zur Auswertung als Vorschlag NY bis 11:00 NY
+    (17:00 MEZ), Asia bis 00:00 NY (06:00 MEZ). Im Journal die Einstiegszeit mitschreiben; die Auswertung zeigt, welche
+    Stunden wirklich funktionieren.
+  - **Termine**: US-Daten um 10:00 NY (16:00 MEZ, z. B. ISM, Verbrauchervertrauen) liegen mitten im NY-Fenster,
+    Sperrzeit 09:45–10:15 NY. Daten um 08:30 NY sind vor dem Fenster, beeinflussen aber den Bias. Im Asia-Fenster
+    auf Japan- und China-Daten und BoJ achten (z. B. China-Einkaufsmanager, Japan-BIP). Große Tech-Quartalszahlen
+    kommen nach US-Schluss (16:00–16:30 NY) und bewegen das Asia-Fenster stark: dann dort nur zuschauen (Ergänzung).
 - **SMT**: MNQ gegen **MES/ES** (S&P 500), wie in L1 und L2 (NQ, ES, YM). Nur Dafür-Punkt, nicht Pflicht.
 - **Konto**: Sein IQ-Konto (Core 50K) ist für CFDs/Forex. Auf welchem Futures-Konto bzw. bei welcher Firma er MNQ
   handeln will, ist noch offen. Bis dahin rechnet der Backtest in **R**; Kontrakte erst, wenn Konto und Risiko feststehen.
