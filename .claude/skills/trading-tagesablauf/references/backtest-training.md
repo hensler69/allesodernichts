@@ -1,14 +1,14 @@
-# Backtest-Training: ein Modell im TradingView-Replay lernen
+# Backtest-Training: ein Modell im Replay lernen (Alltra oder TradingView)
 
 Wunsch des Nutzers (25.11.2026): Modelle wie das TTrades Scalping Model (`references/ttrades-scalping.md`) soll er
-über **Backtest-Simulationen** lernen, die er selbst im TradingView-Replay macht, und zwar auf dem Chart, den er auch
+über **Backtest-Simulationen** lernen, die er selbst im Replay macht (sein Programm: **Alltra**), und zwar auf dem Chart, den er auch
 handeln will (TTFM-Scalp: **CME_MINI:MNQ1!**, MNQ-Futures). Du bist dabei sein **Trainer**: Er entscheidet zuerst, du prüfst danach. Der Ablauf gilt für
 jedes Modell; Beispiele hier beziehen sich auf TTFM-Scalp.
 
 ## Inhalt
 
 1. Grundsätze
-2. Einrichtung in TradingView
+2. Einrichtung des Backtest-Programms
 3. Ablauf eines Falls (Runde)
 4. Bewertung
 5. Lernstufen
@@ -28,21 +28,25 @@ jedes Modell; Beispiele hier beziehen sich auf TTFM-Scalp.
 - **Ehrlich und konkret.** Jeder Fehler mit Preis, Uhrzeit und Abschnitt der Modelldatei (z. B. „ttrades-scalping·5“).
 - **Nicht live handeln**, solange das Modell im Training ist (Abschnitt 6).
 
-## 2. Einrichtung in TradingView
+## 2. Einrichtung des Backtest-Programms
 
-- **Chart**: der Markt des Modells, für TTFM-Scalp **CME_MINI:MNQ1!** (oder NQ1!, gleiche Kurse), Zeitzone **Europe/Berlin** (Chart-Einstellungen → Symbol → Zeitzone), damit Uhrzeiten mit
-  seinen Sperrzeiten übereinstimmen. LuxAlgo-Sessions wie im Live-Layout.
-- **Zeitrahmen**: H1, M15, M1. Am besten ein Layout mit drei Charts nebeneinander (Mehrfach-Layout); sonst
-  umschalten.
-- **Bar Replay** (Symbol „Wiedergabe“ oben): Startpunkt auf **H1** wählen, dann auf M15/M1 wechseln. Das ist laut
-  TradingView-Hilfe so vorgesehen.
-  - **1-Minuten-Replay** gibt es laut TradingView-Hilfe ab dem Paket **Essential** (ca. 6 Monate 1-Min.-Daten), im
-    kostenlosen Paket nach Drittseiten nur Tageskerzen. Hat er kein 1-Min.-Replay: M1-Schritt auf **M5** üben und im
-    Journal als „Variante M5“ kennzeichnen (Ergänzung).
+Er backtestet in **Alltra** (sein Programm, Stand 25.11.2026). Wie Alltra im Detail aussieht (Symbolname für MNQ,
+Zeitrahmen, Zeitzone, Replay-Steuerung), ist noch nicht bekannt; sobald er ein Bild davon schickt, hier ergänzen.
+Der Ablauf gilt für jedes Replay-Programm, auch für TradingView. Was das Programm können muss:
+
+- **Markt**: für TTFM-Scalp **MNQ** (Micro E-mini Nasdaq-100, CME) oder NQ, gleiche Kurse. Prüfen, dass es wirklich
+  der CME-Future ist und nicht ein Krypto-„Nasdaq“-Kontrakt oder ein CFD mit anderen Preisen.
+- **Zeitrahmen**: H1, M15, M1, Kerze für Kerze abspielbar, ohne dass die Zukunft sichtbar ist. Gibt es kein M1:
+  M1-Schritt auf **M5** üben und im Journal als „Variante M5“ kennzeichnen (Ergänzung).
+- **Zeitzone**: Europe/Berlin einstellen (oder die Zeitzone des Programms nennen), damit die Uhrzeiten zu
+  Eröffnung (15:30 MEZ) und Sperrzeiten passen.
+- **Startpunkt**: Replay auf H1 starten, dann auf M15/M1 wechseln, ohne vorzuspulen.
 - **Tag wählen**: zufällig, keine Tage, die er schon kennt. Montag bis Freitag, möglichst ohne große Datentermine,
   später gezielt auch Datentage. Bei MNQ keine Tage direkt am Kontraktwechsel (März, Juni, September, Dezember).
-- **Bilder**: TradingView-Screenshot (Kamera-Symbol → Bild herunterladen) statt Handyfoto, damit Preise und Uhrzeiten
-  genau sind. Preisachse, Datum und Uhrzeit sichtbar.
+- **Bilder**: Screenshot aus dem Programm statt Handyfoto, damit Preise und Uhrzeiten genau sind. Preisachse,
+  Datum, Uhrzeit und Zeitrahmen sichtbar.
+- **Falls er doch TradingView nutzt**: Bar Replay ab H1 starten; 1-Min.-Replay laut TradingView-Hilfe erst ab dem
+  Paket Essential.
 
 ## 3. Ablauf eines Falls (Runde)
 

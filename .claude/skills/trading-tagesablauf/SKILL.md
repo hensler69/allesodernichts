@@ -1,6 +1,6 @@
 ---
 name: "trading-tagesablauf"
-description: Täglicher Trading-Begleiter für den Nutzer (EURUSD, SMT GBPUSD, IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens und vor der New-Yorker Eröffnung - Wirtschaftstermine mit Sperrzeiten und Szenarien plus kursrelevante Marktnachrichten, Bias, Zonen von heute und vom Vortag, Long- und Short-Optionen mit Bedingungen, Einstieg, Stop, Ziel, R, Lots und Risiken, in sein Chartbild gezeichnet. Tagsüber jedes Foto auswerten - was passiert ist, welche Option aktiv oder ungültig ist, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Terminwarnungen. Trainer für Backtests im TradingView-Replay (TTrades Scalping auf MNQ-Futures). Verwende diesen Skill bei jedem Chartbild, Handyfoto oder Replay-Bild und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Terminen und News (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
+description: Täglicher Trading-Begleiter für den Nutzer (EURUSD, SMT GBPUSD, IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens und vor der New-Yorker Eröffnung - Wirtschaftstermine mit Sperrzeiten und Szenarien plus kursrelevante Marktnachrichten, Bias, Zonen von heute und vom Vortag, Long- und Short-Optionen mit Bedingungen, Einstieg, Stop, Ziel, R, Lots und Risiken, in sein Chartbild gezeichnet. Tagsüber jedes Foto auswerten - was passiert ist, welche Option aktiv oder ungültig ist, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Terminwarnungen. Trainer für Backtests im Replay (Alltra; TTrades Scalping auf MNQ-Futures). Verwende diesen Skill bei jedem Chartbild, Handyfoto oder Replay-Bild und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Terminen und News (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
 compatibility: Python 3 mit Pillow und numpy für die Skripte; Websuche für den Termin-Check; ein Werkzeug zum Senden von Bildern an den Nutzer (z. B. SendUserFile).
 ---
 
@@ -46,7 +46,7 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    Zonen-Suche und live nach einem Sweep, vor und während des Trades (Gegen-IFVG im offenen Trade = Warnzeichen);
    **TJR-FE** (Nachzügler-Einstieg in die nächste FVG) nur, wenn ein Setup schon gelaufen und der Einstieg verpasst ist.
    `references/ttrades-scalping.md` (TTFM-Scalp auf MNQ: H1-C2-Schluss → M15-Swing als H1-Docht → M1-CISD, Lernmodell) und
-   `references/backtest-training.md` (Trainer-Ablauf im TradingView-Replay, Bewertung, Lernstufen, Journal), sobald
+   `references/backtest-training.md` (Trainer-Ablauf im Replay, sein Programm: Alltra, Bewertung, Lernstufen, Journal), sobald
    er Backtest- oder Replay-Bilder schickt oder nach dem Scalping-Modell fragt.
    `references/screenshot-protokoll.md` am Ende jedes Morgenplans (welche Bilder er heute wann schickt) und
    immer, wenn du ein Bild anforderst. Dort steht auch, welche Setups er handelt (nur M, TJR, SB, PV).
@@ -80,7 +80,7 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
 - **Nur vier Setups** (Forex): M, TJR (mit den Varianten TJR-KL, TJR-IF, TJR-FE), SB, PV. Tageslimit: 1 Trade pro
   Tag (seit 2.11.2026). Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
   (Begründung in `references/screenshot-protokoll.md`, Abschnitt 1).
-- **Backtest-Training** (Wunsch vom 25.11.2026): Neue Modelle lernt er im TradingView-Replay, TTFM-Scalp auf
+- **Backtest-Training** (Wunsch vom 25.11.2026): Neue Modelle lernt er im Replay (Programm: **Alltra**), TTFM-Scalp auf
   **CME_MINI:MNQ1!** (MNQ-Futures, nicht EURUSD). Du
   bist Trainer nach `references/backtest-training.md`: erst seine Einschätzung abfragen, dann bewerten, jeden Fall
   in `notes/backtest-<modell>.md` eintragen. Erstes Modell: TTrades Scalping Model (`references/ttrades-scalping.md`),
