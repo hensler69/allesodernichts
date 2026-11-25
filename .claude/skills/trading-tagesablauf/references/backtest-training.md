@@ -30,8 +30,13 @@ jedes Modell; Beispiele hier beziehen sich auf TTFM-Scalp.
 
 ## 2. Einrichtung des Backtest-Programms
 
-Er backtestet in **Alltra** (sein Programm, Stand 25.11.2026). Wie Alltra im Detail aussieht (Symbolname für MNQ,
-Zeitrahmen, Zeitzone, Replay-Steuerung), ist noch nicht bekannt; sobald er ein Bild davon schickt, hier ergänzen.
+Er backtestet in **Alltra** (alltra.app → Optimizer → Studio, Stand 25.11.2026; Bild vom 25.11. geprüft):
+- Symbol **MNQ** „Micro E-mini Nasdaq-100 · CME“ (echter CME-Future ✓), Zeitrahmen 1m/2m/3m/5m/15m/1h/4h/1D ✓.
+- Zeitzone unten rechts **UTC−4 = New Yorker Zeit** (Sommerzeit; im US-Winter UTC−5). Alle Uhrzeiten im Chart
+  sind damit NY-Zeit, die Fenster 09:30 und 20:00 stehen direkt auf der Achse.
+- Steuerung: „Select bar“ (Startpunkt), Play, Einzelschritt, „Bar“-Modus, „Day x of 28“; simuliertes Konto
+  50.000 $ (BAL, NET, RP&L, UP&L); „Trade“ für simulierte Orders.
+- Kopfzeile zeigt O/H/L/C der aktuellen Kerze: Werte daraus statt aus dem Bild messen.
 Der Ablauf gilt für jedes Replay-Programm, auch für TradingView. Was das Programm können muss:
 
 - **Markt**: für TTFM-Scalp **MNQ** (Micro E-mini Nasdaq-100, CME) oder NQ, gleiche Kurse. Prüfen, dass es wirklich

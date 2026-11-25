@@ -104,7 +104,7 @@ Hier steht, woran wir arbeiten und was entschieden wurde.
 - [ ] Restaurant-Foto für Hinge (Haare: Schläfe 34 px nach vorn, Locke 16 px tiefer, Volumen +12 px, feine Strähnen über der Ecke), Originalformat geliefert; Rückmeldung abwarten (seit 2026-11-04)
 - [ ] 5 Selfies Runde 2 (dezent: Kieferwinkel 1,3 %, Bart nur Haare dunkler), Originalformat, Feed 4:5, Story 9:16 geliefert; Rückmeldung abwarten (seit 2026-11-12, Details in notes/2026-11-12.md)
 - [ ] Tinder-Bild (Ausschnitt tiefer, Jacke verlängert, Schultern breiter, Reißverschluss-Streifen abgedunkelt): tinder_final_v2.jpg geliefert, Rückmeldung abwarten (seit 2026-11-13)
-- [ ] TTrades Scalping Model: Backtest-Training starten (Stufe 1, 10 H1-Fälle); offen: Transkript oder Aufnahmen der 4 Video-Beispiele (1:49–14:18) für Stop-Variante, Einstiegsart, C3-Fall, Uhrzeiten; prüfen, ob sein TradingView-Paket 1-Min.-Replay hat; offen, auf welchem Futures-Konto/bei welcher Firma er MNQ handeln will; Alltra-Oberfläche (MNQ-Symbol, Zeitrahmen, Zeitzone) per Screenshot klären (seit 2026-11-25)
+- [ ] TTrades Scalping Model: Backtest-Training starten (Stufe 1, 10 H1-Fälle); offen: Transkript oder Aufnahmen der 4 Video-Beispiele (1:49–14:18) für Stop-Variante, Einstiegsart, C3-Fall, Uhrzeiten; prüfen, ob sein TradingView-Paket 1-Min.-Replay hat; offen, auf welchem Futures-Konto/bei welcher Firma er MNQ handeln will; Alltra geprüft (MNQ CME, 1m–1D, UTC−4 = NY-Zeit); erster Fall 12.10.2026 ab 08:00 NY gestartet (seit 2026-11-25)
 - [ ] Regeln von IQ Capital zu News-Trading und Halten über Notenbank-Termine prüfen (Nutzer)
 
 ## Laufende Themen
