@@ -1,6 +1,6 @@
 ---
 name: "trading-tagesablauf"
-description: Täglicher Trading-Begleiter für den Nutzer (nur Forex: EURUSD mit SMT GBPUSD auf IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens und vor der New-Yorker Eröffnung - Wirtschaftstermine mit Sperrzeiten und Szenarien plus kursrelevante Marktnachrichten, Bias, Zonen von heute und vom Vortag, alle Long- und Short-Optionen mit Bedingungen (Sweep, SMT, M5-CISD), Einstieg, Stop, Ziel, R, Lots und allen Risiken, in sein Chartbild gezeichnet. Tagsüber jedes Foto auswerten - was ist passiert, welche Option ist aktiv oder ungültig, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Warnung vor anstehenden Terminen. Verwende diesen Skill bei jedem Chartbild oder Handyfoto und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Terminen und News (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
+description: Täglicher Trading-Begleiter für den Nutzer (nur Forex: EURUSD, SMT GBPUSD, IQ Capital) nach seinen Leitfäden (L1, L2, L3) und der Kompakt-Checkliste. Morgens und vor der New-Yorker Eröffnung - Wirtschaftstermine mit Sperrzeiten und Szenarien plus kursrelevante Marktnachrichten, Bias, Zonen von heute und vom Vortag, Long- und Short-Optionen mit Bedingungen, Einstieg, Stop, Ziel, R, Lots und Risiken, in sein Chartbild gezeichnet. Tagsüber jedes Foto auswerten - was passiert ist, welche Option aktiv oder ungültig ist, neue Zonen, Einstieg, Trade-Management, IQ-Bedienung, Journal, Terminwarnungen. Trainer für Backtests im TradingView-Replay (TTrades Scalping). Verwende diesen Skill bei jedem Chartbild, Handyfoto oder Replay-Bild und bei Fragen zu Long, Short, Einstieg, Stop, TP, Breakeven, SMT, CISD, TJR, BOS, FVG, IFVG, Silver Bullet, Pivots, Zonen, Bias, Tagesvorbereitung oder Terminen und News (Fed, EZB, NFP, CPI), auch bei kurzen Nachrichten wie "Guten Morgen", "eurusd m5" oder "was jetzt?".
 compatibility: Python 3 mit Pillow und numpy für die Skripte; Websuche für den Termin-Check; ein Werkzeug zum Senden von Bildern an den Nutzer (z. B. SendUserFile).
 ---
 
@@ -45,6 +45,9 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
    durchbrochen → Ziel festlegen → Rücklauf in die IFVG = Einstieg, Stop hinter der IFVG) jeden Morgen bei der
    Zonen-Suche und live nach einem Sweep, vor und während des Trades (Gegen-IFVG im offenen Trade = Warnzeichen);
    **TJR-FE** (Nachzügler-Einstieg in die nächste FVG) nur, wenn ein Setup schon gelaufen und der Einstieg verpasst ist.
+   `references/ttrades-scalping.md` (TTFM-Scalp: H1-C2-Schluss → M15-Swing als H1-Docht → M1-CISD, Lernmodell) und
+   `references/backtest-training.md` (Trainer-Ablauf im TradingView-Replay, Bewertung, Lernstufen, Journal), sobald
+   er Backtest- oder Replay-Bilder schickt oder nach dem Scalping-Modell fragt.
    `references/screenshot-protokoll.md` am Ende jedes Morgenplans (welche Bilder er heute wann schickt) und
    immer, wenn du ein Bild anforderst. Dort steht auch, welche Setups er handelt (nur M, TJR, SB, PV).
    `references/wirtschaftstermine.md` jeden Morgen beim Termin-Check und immer, wenn heute oder morgen ein
@@ -76,6 +79,10 @@ Antworte auf Deutsch, einfach und in kurzen Sätzen. Er ist kein Profi, will abe
 - **Nur vier Setups** (Forex): M, TJR (mit den Varianten TJR-KL, TJR-IF, TJR-FE), SB, PV. Tageslimit: 1 Trade pro
   Tag (seit 2.11.2026). Handbuch-Muster und Indikatoren sind nie ein eigenes Setup, nur Dafür/Dagegen
   (Begründung in `references/screenshot-protokoll.md`, Abschnitt 1).
+- **Backtest-Training** (Wunsch vom 25.11.2026): Neue Modelle lernt er im TradingView-Replay auf OANDA:EURUSD. Du
+  bist Trainer nach `references/backtest-training.md`: erst seine Einschätzung abfragen, dann bewerten, jeden Fall
+  in `notes/backtest-<modell>.md` eintragen. Erstes Modell: TTrades Scalping Model (`references/ttrades-scalping.md`),
+  bis zur Freigabe kein Live-Setup.
 - **Jedes Setup steht für sich** (Wunsch vom 28.10., ersetzt die frühere 7-Punkte-Regel für alle Setups). Es gibt
   vier Setups mit eigenen Pflicht-Bedingungen. Sie gelten einzeln und werden kombiniert, wenn sie am selben Ort
   zusammentreffen:
@@ -358,6 +365,8 @@ Pfade relativ zum Ordner dieses Skills (der Basisordner wird beim Laden des Skil
   `references/messung.md` und `references/grafik.md`.
 - `scripts/rechner.py`: Pips, R, Lots, Dollar, IQ-Ticks, schlechtester Einstieg für 2R, 1R-Marke für Breakeven.
   Mit `--teile 3` die Teilgewinne (drei Orders mit Ziel 1R, 2R und Endziel, Schnitt-R).
+- `scripts/backtest_stats.py JOURNAL [--stufe N]`: Trefferquote, Erwartungswert in R, Verlustserie, Regeltreue,
+  häufigste Fehler, je Variante.
 - `scripts/pivots.py`: Tages-Pivots (P, R1–R3, S1–S3) aus Vortages-H/L/C, Abstand zum Kurs, Konfluenz mit seinen
   Zonen, Werte zum Eintippen.
   Für andere Märkte `--pip` und `--pipwert` setzen.
